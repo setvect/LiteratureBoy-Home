@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- PropertyConfigurator equivalent:
+log4j.rootCategory=, NULL
+log4j.category.A0123456789=INFO
+log4j.appender.NULL=org.apache.log4j.performance.NullAppender
+log4j.appender.NULL.layout=org.apache.log4j.SimpleLayout
+-->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+		<!--
+		<appender name="DEFAULT" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-3p %3x - %m%n"/>
+        </layout>
+    </appender>
+		-->
+
+    <!-- Developer Log Configuration Setting -->
+    <!-- In case of Backup Log File by Size -->
+    <!--appender name="DL" class="org.apache.log4j.RollingFileAppender"-->
+    <appender name="FILELOG" class="org.apache.log4j.DailyRollingFileAppender">
+
+    		<!-- Log File Location and Name -->
+        <param name="File"   value="J:/log/rolling_log_file.log" />
+    		<!-- Append or append - If true will append to fileName. Otherwise will truncate fileName. -->
+        <param name="Append" value="false" />
+
+				<!--이부분의 value 패턴을 수정 -->
+				<param name="DatePattern" value="'.'yyyy-MM-dd" />
+
+        <!-- The pattern of using logging -->
+        <!-- "YYYY-MM-DD hh:mm:ss Level - Message contents"-->
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <param name="ConversionPattern" value="[slf5s.start]%-5p%n%d[slf5s.DATE]%n%t[slf5s.THREAD]%n%c[slf5s.CATEGORY]%n%x%n%l%n%m[slf5s.MESSAGE]%n%n%n"/>
+        </layout>
+    </appender>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="debug" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+			       value="%d %-5p [%t] LOCATION:%l%n                              > %m%n"/>
+		</layout>
+	</appender>
+
+    <!-- Prioirty Level을 Log Messages에 지정. -->
+    <!-- Category name would be the same as ModuleName which pass Logger -->
+    <!-- Specified Prioirty Level to Log Messages -->
+    <!-- Level Priority : DEBUG < INFO < WARN < ERROR < FATAL -->
+
+	<category name="com.setvect" additivity="false">
+	    <priority value ="debug" />
+	    <appender-ref ref="FILELOG"/>
+	    <appender-ref ref="CONSOLE"/>
+	    <!--
+	    <appender-ref ref="EMAIL" />
+	    -->
+	</category>
+
+	<category name="org.hibernate" additivity="false">
+	    <priority value ="info" />
+	    <!-- <appender-ref ref="FILELOG"/> -->
+	    <appender-ref ref="CONSOLE"/>
+	    <!--
+	    <appender-ref ref="EMAIL" />
+	    -->
+	</category>
+	
+	<root>
+		<priority value ="WARN" />
+	  <appender-ref ref="FILELOG"/>
+		<appender-ref ref="CONSOLE"/>
+  </root>
+</log4j:configuration>
