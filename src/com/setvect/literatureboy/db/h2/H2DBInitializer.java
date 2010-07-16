@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.setvect.common.db.HibernateUtil;
 import com.setvect.common.db.TableCreateInfo;
 import com.setvect.common.log.LogPrinter;
+import com.setvect.literatureboy.config.EnvProperty;
 import com.setvect.literatureboy.db.DBInitializer;
 
 /**
@@ -29,8 +30,7 @@ public class H2DBInitializer extends DBInitializer {
 	@Override
 	public void init() throws SQLException {
 		if (System.getProperty("h2.baseDir") == null) {
-			// TODO ±¸Çö
-			// System.setProperty("h2.baseDir", ServerConfig.getDatabaseDir());
+			System.setProperty("h2.baseDir", EnvProperty.getString("com.setvect.literatureboy.db_path"));
 		}
 	}
 

@@ -3,12 +3,43 @@
 	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>literatureboy</display-name>
+	
+	<filter>
+  	<filter-name>encodingFilter</filter-name>
+    <filter-class>
+    	org.springframework.web.filter.CharacterEncodingFilter
+    </filter-class>
+    <init-param>
+	    <param-name>encoding</param-name>
+	    <param-value>UTF-8</param-value>
+    </init-param>
+	</filter>
+	<filter-mapping>
+     <filter-name>encodingFilter</filter-name>
+     <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	
+	<servlet>
+		<servlet-name>WebAppEnvInit</servlet-name>
+		<servlet-class>com.dq.gcms.web.WebAppEnvInit</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/config.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>bootClass</param-name>
+			<param-value>com.dq.project.demo.SystemBootUp</param-value>
+		</init-param>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	
+	
+	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	
 </web-app>
