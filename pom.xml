@@ -8,25 +8,19 @@
   <name>literatureboy Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <build>
-
 		<finalName>literature</finalName>
 		<directory>${basedir}/build</directory>
-		<sourceDirectory>${basedir}/src/</sourceDirectory>
+		<sourceDirectory>${basedir}/source/src/</sourceDirectory>
 		<outputDirectory>${basedir}/build/classes</outputDirectory>
-		<testSourceDirectory>${basedir}/test</testSourceDirectory>
+		<testSourceDirectory>${basedir}/source/test</testSourceDirectory>
 		<testOutputDirectory>${basedir}/build/test-classes</testOutputDirectory>
-		<resources>
-	    <resource>
-	    	<directory>${basedir}/src/res</directory>
-	    </resource>
-		</resources>
 		<testResources>
-   	<testResource>
-    	<directory>${basedir}/src/test</directory>
-      	<excludes>
-        	<exclude>*.java</exclude>
-       	</excludes>
-   		</testResource>
+	   	<testResource>
+	    	<directory>${basedir}/src/test</directory>
+	      	<excludes>
+	    	   	<exclude>*.java</exclude>
+	       </excludes>
+	   	</testResource>
 		</testResources>  
     
   	<plugins>
@@ -115,14 +109,16 @@
     	<version>2.7.1</version>
     </dependency>
     <dependency>
-    	<groupId>javax</groupId>
-    	<artifactId>javaee-api</artifactId>
-    	<version>6.0</version>
-    </dependency>
-    <dependency>
     	<groupId>org.hibernate</groupId>
     	<artifactId>hibernate-annotations</artifactId>
     	<version>3.4.0.GA</version>
+    </dependency>
+    <dependency>
+    	<groupId>javax.persistence</groupId>
+    	<artifactId>persistence-api</artifactId>
+    	<version>1.0</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

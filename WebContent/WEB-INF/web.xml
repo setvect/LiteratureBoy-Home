@@ -22,15 +22,11 @@
 	
 	
 	<servlet>
-		<servlet-name>WebAppEnvInit</servlet-name>
-		<servlet-class>com.dq.gcms.web.WebAppEnvInit</servlet-class>
+		<servlet-name>EnvirmentInit</servlet-name>
+		<servlet-class>com.setvect.literatureboy.boot.EnvirmentInit</servlet-class>
 		<init-param>
 			<param-name>config</param-name>
 			<param-value>/WEB-INF/config.properties</param-value>
-		</init-param>
-		<init-param>
-			<param-name>bootClass</param-name>
-			<param-value>com.dq.project.demo.SystemBootUp</param-value>
 		</init-param>
 		<load-on-startup>10</load-on-startup>
 	</servlet>
