@@ -4,11 +4,6 @@
 	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 <session-factory>
-	<!-- 
-	<property name="connection.driver_class">org.apache.derby.jdbc.AutoloadedDriver</property>
-	<property name="connection.url">jdbc:derby:sfj;create=true</property> 
-	<property name="dialect">org.hibernate.dialect.DerbyDialect</property> 
-	-->
 	<property name="hibernate.connection.driver_class">org.h2.Driver</property>
 	<property name="hibernate.connection.url">jdbc:h2:sfj</property>
 	<property name="hibernate.connection.username">sa</property>

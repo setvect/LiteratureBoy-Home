@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
@@ -16,8 +15,8 @@ import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
  * 
  * @version $Id$
  */
-public class EnvProperty {
-	private static Configuration config;
+public class EnvirmentProperty {
+	private static PropertiesConfiguration config;
 
 	/**
 	 * @param propertise
@@ -25,8 +24,7 @@ public class EnvProperty {
 	 */
 	public static void init(File propertise) {
 		try {
-			PropertiesConfiguration conf = new PropertiesConfiguration(
-					propertise);
+			PropertiesConfiguration conf = new PropertiesConfiguration(propertise);
 			// 파일 수정 자동 감지
 			conf.setReloadingStrategy(new FileChangedReloadingStrategy());
 			config = conf;
@@ -40,10 +38,12 @@ public class EnvProperty {
 		return config.containsKey(paramString);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Iterator getKeys(String paramString) {
 		return config.getKeys(paramString);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Iterator getKeys() {
 		return config.getKeys();
 	}
@@ -112,8 +112,7 @@ public class EnvProperty {
 		return config.getBigDecimal(paramString);
 	}
 
-	public static BigDecimal getBigDecimal(String paramString,
-			BigDecimal paramBigDecimal) {
+	public static BigDecimal getBigDecimal(String paramString, BigDecimal paramBigDecimal) {
 		return config.getBigDecimal(paramString, paramBigDecimal);
 	}
 
@@ -121,8 +120,7 @@ public class EnvProperty {
 		return config.getBigInteger(paramString);
 	}
 
-	public static BigInteger getBigInteger(String paramString,
-			BigInteger paramBigInteger) {
+	public static BigInteger getBigInteger(String paramString, BigInteger paramBigInteger) {
 		return config.getBigInteger(paramString, paramBigInteger);
 	}
 
@@ -138,10 +136,12 @@ public class EnvProperty {
 		return config.getStringArray(paramString);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static List getList(String paramString) {
 		return config.getList(paramString);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static List getList(String paramString, List paramList) {
 		return config.getList(paramString, paramList);
 	}

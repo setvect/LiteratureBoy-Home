@@ -1,5 +1,7 @@
 package com.setvect.common.log;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
@@ -22,13 +24,13 @@ public class LogPrinter {
 	 * @param logFilePath
 	 *            로그 파일 설정 경로
 	 */
-	public synchronized static void init(String logFilePath) {
+	public synchronized static void init(File logFilePath) {
 		if (init) {
 			throw new RuntimeException("configuration already setting");
 		}
 		out = Logger.getLogger(LogPrinter.class);
 		// Use a PropertyConfigurator to initialize from a property file.
-		DOMConfigurator.configure(logFilePath);
+		DOMConfigurator.configure(logFilePath.getPath());
 	}
 
 	// Delegate

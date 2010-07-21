@@ -24,7 +24,6 @@ import org.xml.sax.SAXException;
 /**
  * XML, XSD를 이용하여 Docuemnt 객체를 만들어줌
  * 
- * @author <a href="mailto:setvect@setvect.com">장정호 </a>
  * @version $Id$
  */
 public class XMLParser {
