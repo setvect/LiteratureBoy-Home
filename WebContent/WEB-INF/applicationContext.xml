@@ -19,9 +19,9 @@
        >
 
 	<aop:aspectj-autoproxy />
-	<bean class="com.ipms.sfj.db.DBTransitionAspect" />
+	<bean class="com.setvect.literatureboy.db.DBTransitionAspect" />
 
-	<context:component-scan  base-package="com.ipms.sfj"/>
+	<context:component-scan  base-package="com.setvect.literatureboy"/>
 	       
 	<!-- =============================== -->
 	<!-- ======  Bean Define		 ======= -->
@@ -29,9 +29,10 @@
 	
 	<!-- DataBase DAO -->
 	<bean id="db.initializer" class="com.setvect.literatureboy.db.h2.H2DBInitializer"/>
+	<bean id="db.memoDao" class="com.setvect.literatureboy.db.h2.H2MemoDao"/>
 	
 	<!-- Login Check Interceptor -->
-	<bean id="loginCheckInterceptor" class="com.ipms.sfj.web.etc.LoginCheckInterceptor"/>
+	<bean id="loginCheckInterceptor" class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>
 	
 	
 	<!-- =============================== -->

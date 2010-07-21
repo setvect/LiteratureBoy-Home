@@ -9,12 +9,14 @@
 	
 	<!-- create table and basic data -->
 
-	<table name="TBAC_MAPPING">
+	<table name="TBZZ_MEMO">
 		<creation>
-			CREATE TABLE TBAC_MAPPING
-			(GROUP_NO INTEGER NOT NULL,
-			AGENT_ID VARCHAR(20) NOT NULL,
-			PRIMARY KEY (GROUP_NO,AGENT_ID))		
+			CREATE TABLE TBZZ_MEMO
+			(
+				MEMO_NO INTEGER NOT NULL,
+				TITLE VARCHAR(200) NOT NULL,
+				PRIMARY KEY (MEMO_NO)
+			)		
 		</creation>
 		<defaultValue>
 			<query>	</query>

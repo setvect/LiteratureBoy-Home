@@ -1,7 +1,5 @@
 package com.setvect.literatureboy.vo;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,21 +14,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @version $Id$
  */
 @Entity
-@Table(name = "TBAA_AGENT")
+@Table(name = "TBZZ_MEMO")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Memo {
 	@Id
-	@Column(name = "AGENT_ID")
+	@Column(name = "MEMO_NO")
 	private int id;
 
 	@Column(name = "TITLE")
 	private String titile;
-
-	@Column(name = "CONTENT")
-	private String content;
-
-	@Column(name = "REG_DATE")
-	private Date regDate;
 
 	public int getId() {
 		return id;
@@ -47,21 +39,4 @@ public class Memo {
 	public void setTitile(String titile) {
 		this.titile = titile;
 	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Date getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-
 }

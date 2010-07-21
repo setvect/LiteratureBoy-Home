@@ -29,19 +29,19 @@
 		<priority value ="debug" />
 	  <appender-ref ref="FILELOG"/>
 	  <appender-ref ref="CONSOLE"/>
-	  <!--
-	  <appender-ref ref="EMAIL" />
-	  -->
 	</category>
 
 	<category name="org.hibernate" additivity="false">
-	  <priority value ="info" />
-	  <!-- <appender-ref ref="FILELOG"/> -->
+	  <priority value ="error" />
 	  <appender-ref ref="CONSOLE"/>
-	  <!--
-	  <appender-ref ref="EMAIL" />
-	  -->
 	</category>
+
+	<category name="net.sf.ehcache" additivity="false">
+	  <priority value ="error" />
+	  <appender-ref ref="CONSOLE"/>
+	</category>
+	
+	
 	
 	<root>
 		<priority value ="WARN" />

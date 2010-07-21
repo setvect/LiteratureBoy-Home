@@ -19,6 +19,9 @@ import com.setvect.literatureboy.db.DBInitializer;
  */
 @SuppressWarnings("serial")
 public class EnvirmentInit extends HttpServlet {
+	/** 초기화 여부 */
+	private static boolean initialize = false;
+
 	public EnvirmentInit() {
 	}
 
@@ -31,9 +34,26 @@ public class EnvirmentInit extends HttpServlet {
 		/*
 		 * OS입장에서 웹루트 디렉토리
 		 */
-		String webBase = sc.getRealPath("/");
+		File webBase = new File(sc.getRealPath("/"));
 		String conf = config.getInitParameter("config_file");
-		File configFile = new File(webBase, conf);
+		bootUp(webBase, conf);
+	}
+
+	/**
+	 * config propertity, log4j, spring, hibernate 설정 초기화
+	 * 
+	 * @param webBase
+	 *            웹루트 경로
+	 * @param configPath
+	 *            웹루트를 기준으로한 config 파일 path 경로
+	 */
+	public static void bootUp(File webBase, String configPath) {
+
+		if (initialize) {
+			throw new IllegalStateException("aready initialized!");
+		}
+
+		File configFile = new File(webBase, configPath);
 		EnvirmentProperty.init(configFile);
 
 		File logFilePath = new File(webBase, EnvirmentProperty.getString("com.setvect.literatureboy.log.config"));
@@ -55,6 +75,7 @@ public class EnvirmentInit extends HttpServlet {
 
 		conn.makeTable();
 		LogPrinter.info("DB Table Initialized completed");
+		initialize = true;
 	}
 
 	public void destroy() {
