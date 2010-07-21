@@ -1,7 +1,6 @@
 package com.setvect.literatureboy.db.h2;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
@@ -28,9 +27,9 @@ public class H2DBInitializer extends DBInitializer {
 	 * @see com.ipms.sfj.db.DBInitializer#init(java.io.File)
 	 */
 	@Override
-	public void init() throws SQLException {
+	public void init() {
 		if (System.getProperty("h2.baseDir") == null) {
-			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db_path"));
+			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db.path"));
 		}
 	}
 
@@ -40,17 +39,9 @@ public class H2DBInitializer extends DBInitializer {
 	 * @see com.ipms.sfj.db.DBInitializer#makeTable()
 	 */
 	public void makeTable() {
-		URL admScript = DBInitializer.class.getResource("adm-db-script.xml");
-		makeAdminTable(admScript);
-	}
-
-	/**
-	 * 
-	 * @param url
-	 *            Database sql script file path
-	 */
-	private void makeAdminTable(URL url) {
-		List<TableCreateInfo> tableCreate = tableScript(url);
+		
+		URL script = DBInitializer.class.getResource("db-script.xml");
+		List<TableCreateInfo> tableCreate = tableScript(script);
 		// HibernateUtil.beginTransaction();
 
 		HibernateUtil.beginTransaction();

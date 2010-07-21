@@ -12,7 +12,7 @@
     <param name="Append" value="false" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
     <layout class="org.apache.log4j.PatternLayout"> 
-    	<param name="ConversionPattern" value="[slf5s.start]%-5p%n%d[slf5s.DATE]%n%t[slf5s.THREAD]%n%c[slf5s.CATEGORY]%n%x%n%l%n%m[slf5s.MESSAGE]%n%n%n"/>
+    	<param name="ConversionPattern" value="%d %-5p [%t] %l | %m%n"/>
     </layout>
 	</appender>
 
@@ -20,7 +20,7 @@
 		<param name="Threshold" value="debug" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
-					value="%d %-5p [%t] LOCATION:%l%n                              > %m%n"/>
+					value="%d %-5p [%t] %l%n                        > %m%n"/>
 		</layout>
 	</appender>
 

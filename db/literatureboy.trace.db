@@ -1,0 +1,3 @@
+07-21 15:39:54 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: Table "TBAB_GROUP" not found; SQL statement:
+	ALTER TABLE TBAC_MAPPING ADD FOREIGN KEY (GROUP_NO)	REFERENCES TBAB_GROUP(GROUP_NO)  [42102-139]

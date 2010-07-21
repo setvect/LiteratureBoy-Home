@@ -17,8 +17,7 @@
 			PRIMARY KEY (GROUP_NO,AGENT_ID))		
 		</creation>
 		<defaultValue>
-			<query>	ALTER TABLE TBAC_MAPPING ADD FOREIGN KEY (GROUP_NO)	REFERENCES TBAB_GROUP(GROUP_NO) </query>
-			<query>	ALTER TABLE TBAC_MAPPING ADD FOREIGN KEY (AGENT_ID)	REFERENCES TBAA_AGENT(AGENT_ID)	</query>		
+			<query>	</query>
 		</defaultValue>		
 	</table>
 

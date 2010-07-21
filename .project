@@ -3,7 +3,6 @@
 	<name>literatureboy</name>
 	<comment></comment>
 	<projects>
-		<project>literatureboy</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

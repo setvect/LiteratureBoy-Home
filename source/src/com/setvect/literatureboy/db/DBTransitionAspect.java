@@ -7,6 +7,9 @@ import org.aspectj.lang.annotation.Aspect;
 import com.setvect.common.db.HibernateUtil;
 import com.setvect.common.log.LogPrinter;
 
+/**
+ * @version $Id$
+ */
 @Aspect
 public class DBTransitionAspect {
 

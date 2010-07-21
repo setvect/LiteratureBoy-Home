@@ -1,7 +1,6 @@
 package com.setvect.literatureboy.db;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +11,12 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 import com.setvect.common.db.TableCreateInfo;
 import com.setvect.common.xml.XMLParser;
 
 /**
- * 데이터 베이스 초기화 및 커넥션 객체를 제공 및 회수를 담당함
+ * 데이터 베이스 초기화 및 커넥션 객체를 제공 및 회수를 담당함 $Id$
  */
 public abstract class DBInitializer {
 	/**
@@ -24,9 +24,8 @@ public abstract class DBInitializer {
 	 * 
 	 * DB 설정 초기화. 데이터베이스 생성될 위치 지정 등
 	 * 
-	 * @throws SQLException
 	 */
-	public abstract void init() throws SQLException;
+	public abstract void init();
 
 	/**
 	 * 테이블 스키마를 검사하여 스키마가 없으면 <br>
@@ -42,7 +41,7 @@ public abstract class DBInitializer {
 	public List<TableCreateInfo> tableScript(URL dbScript) {
 
 		// XML 파일에서 만들 테이블 생성 스크립트를 가저옴
-		URL schema = DBInitializer.class.getResource("dbscript.xsd");
+		URL schema = DBInitializer.class.getResource("db-script.xsd");
 
 		Document d = null;
 		List<TableCreateInfo> tableCreate = new ArrayList<TableCreateInfo>();

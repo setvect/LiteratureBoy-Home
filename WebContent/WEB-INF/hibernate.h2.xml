@@ -5,12 +5,11 @@
 <hibernate-configuration>
 <session-factory>
 	<property name="hibernate.connection.driver_class">org.h2.Driver</property>
-	<property name="hibernate.connection.url">jdbc:h2:sfj</property>
+	<property name="hibernate.connection.url">jdbc:h2:literatureboy</property>
 	<property name="hibernate.connection.username">sa</property>
 	<property name="hibernate.connection.password"></property>
 	<property name="hibernate.connection.poolsize">20</property>
 	
-	<!-- <property name="hibernate.connection.datasource">java:/comp/env/jdbc/SFJAdm</property> -->
 	<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
 	<property name="hibernate.cache.use_query_cache">true</property>
 	<property name="dialect">org.hibernate.dialect.H2Dialect</property>

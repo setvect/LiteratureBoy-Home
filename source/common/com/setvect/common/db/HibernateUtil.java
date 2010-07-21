@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 import com.setvect.common.log.LogPrinter;
@@ -29,12 +30,18 @@ public class HibernateUtil {
 	 * 
 	 * @param configFile
 	 *            설정 정보 xml 파일
+	 * @param annotation
+	 *            어노테이션을 이용하여 entity와 class를 매핑 했다면 true, 아니면 false
 	 */
-	public static void init(File configFile) {
+	public static void init(File configFile, boolean annotation) {
 		try {
 			// 하이버네이트 새션 생성
-			sf = new Configuration().configure(configFile)
-					.buildSessionFactory();
+			if (annotation) {
+				sf = new AnnotationConfiguration().configure(configFile).buildSessionFactory();
+			} else {
+				sf = new Configuration().configure(configFile).buildSessionFactory();
+			}
+
 		} catch (Throwable ex) {
 			LogPrinter.fatal("fail to initialize Hibernate SessionFactory", ex);
 			throw new ExceptionInInitializerError(ex);
