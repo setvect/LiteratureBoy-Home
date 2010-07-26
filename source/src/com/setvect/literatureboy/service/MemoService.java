@@ -18,7 +18,13 @@ public class MemoService {
 	 * @return 아이디에 맞는 회원정보 없으면 null
 	 */
 	public Memo getUser(int no) {
-		return memoDao.getMemo(no);
+		try {
+			return memoDao.get(no);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	/**
 	 * 회원 정보 삭제
@@ -27,7 +33,12 @@ public class MemoService {
 	 *            회원 아이디
 	 */
 	public void addMemo(Memo memo) {
-		memoDao.insMemo(memo);
+		try {
+			memoDao.create(memo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

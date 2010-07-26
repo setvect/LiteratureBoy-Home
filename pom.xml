@@ -183,5 +183,19 @@
     	<artifactId>spring-webmvc</artifactId>
     	<version>2.5.6</version>
     </dependency>
+    <dependency>
+    	<groupId>anyframe</groupId>
+    	<artifactId>anyframe.generic</artifactId>
+    	<version>4.2.0</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>anyframe</groupId>
+    	<artifactId>anyframe.hibernate</artifactId>
+    	<version>4.2.0</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>
