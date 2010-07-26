@@ -39,20 +39,15 @@ public class H2DBInitializer extends DBInitializer {
 	 * @see com.ipms.sfj.db.DBInitializer#makeTable()
 	 */
 	public void makeTable() {
-		
+
 		URL script = DBInitializer.class.getResource("db-script.xml");
 		List<TableCreateInfo> tableCreate = tableScript(script);
 		// HibernateUtil.beginTransaction();
 
-		HibernateUtil.beginTransaction();
-		try {
-			for (TableCreateInfo t : tableCreate) {
-				createTable(t);
-			}
-			HibernateUtil.commitTransaction();
-		} finally {
-			HibernateUtil.closeSession();
+		for (TableCreateInfo t : tableCreate) {
+			createTable(t);
 		}
+
 	}
 
 	/**
@@ -64,7 +59,6 @@ public class H2DBInitializer extends DBInitializer {
 	 */
 	private void createTable(TableCreateInfo tableInfo) {
 
-		// Session session = HibernateUtil.getCurrentSession();
 		Session session = HibernateUtil.getCurrentSession();
 		SQLQuery query = session
 				.createSQLQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES where table_name = ? and table_type = ?");

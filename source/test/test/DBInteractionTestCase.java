@@ -2,7 +2,6 @@ package test;
 
 import org.junit.Test;
 
-import com.setvect.common.db.HibernateUtil;
 import com.setvect.common.spring.SpringBeanFactory;
 import com.setvect.literatureboy.service.MemoService;
 import com.setvect.literatureboy.vo.Memo;
@@ -17,21 +16,18 @@ public class DBInteractionTestCase extends TestSystem {
 
 	/**
 	 * CRUD Å×½ºÆ®
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	public void testCRUD() {
-		HibernateUtil.beginTransaction();
-		try {
-			Memo m1 = new Memo();
-			m1.setId(1);
-			m1.setTitile("hi ¾È³ç");
-			service.addMemo(m1);
+	public void testCRUD() throws Exception {
+		Memo m1 = new Memo();
+		m1.setId(1);
+		m1.setTitile("hi ¾È³ç");
+		service.addMemo(m1);
 
-			Memo m2 = service.getUser(1);
-			System.out.println(m2.getId() + ", " + m2.getTitile());
-		} finally {
-			HibernateUtil.rollbackTransaction();
-			HibernateUtil.closeSession();
-		}
+		Memo m2 = service.getUser(1);
+		System.out.println(m2.getId() + ", " + m2.getTitile());
+
 	}
 }
