@@ -9,6 +9,88 @@
 	
 	<!-- create table and basic data -->
 
+	<table name="TBBA_BOARD_MANAGER">
+		<creation>
+			CREATE TABLE TBBA_BOARD_MANAGER (
+			  BOARD_CODE varchar(20) NOT NULL,
+			  NAME varchar(50) NOT NULL,
+			  HEAD text,
+			  TAIL text,
+			  UPLOAD_LIMIT int NOT NULL,
+			  EXP_COUNT int NOT NULL,
+			  LEVEL_SET varchar(5) NOT NULL,
+			  REPLY_F varchar(1) NOT NULL,
+			  COMMENT_F varchar(1) NOT NULL,
+			  PDS_F varchar(1) NOT NULL,
+			  ENCODE_F varchar(1) NOT NULL,
+			  PRIMARY KEY  (BOARD_CODE)
+			)
+		</creation>
+	</table>
+
+	<table name="TBBB_BOARD_ARTICLE">
+		<creation>
+			CREATE TABLE TBBB_BOARD_ARTICLE (
+			  ARTICLE_SEQ int NOT NULL,
+			  BOARD_CODE varchar(20) NOT NULL,
+			  MEMBER_ID varchar(20),
+			  IDX1 int NOT NULL,
+			  IDX2 int NOT NULL,
+			  IDX3 int NOT NULL,
+			  DEPTH_LEVEL int NOT NULL,
+			  TITLE varchar(200) NOT NULL,
+			  NAME varchar(50) NOT NULL,
+			  EMAIL varchar(100),
+			  PASSWD varchar(10),
+			  CONTENT text NOT NULL,
+			  IP varchar(20) NOT NULL,
+			  HIT_COUNT int NOT NULL,
+			  ENCODE_F varchar(1) NOT NULL,
+			  REG_DATE datetime NOT NULL,
+			  PRIMARY KEY  (ARTICLE_SEQ)
+			)		
+		</creation>
+		<defaultValue>
+			<query>ALTER TABLE TBBB_BOARD_ARTICLE	ADD FOREIGN KEY (BOARD_CODE) REFERENCES TBBA_BOARD_MANAGER(BOARD_CODE)</query>
+		</defaultValue>		
+	</table>
+	
+	<table name="TBBC_BOARD_COMMENT">
+		<creation>
+			CREATE TABLE TBBC_BOARD_COMMENT (
+			  COMMENT_SEQ int NOT NULL,
+			  ARTICLE_SEQ int NOT NULL,
+			  MEMBER_ID varchar(20) NULL,
+			  NAME varchar(50) NOT NULL,
+			  PASSWD varchar(10) NULL,
+			  CONTENT text NOT NULL,
+			  IP varchar(20) NOT NULL,
+			  REG_DATE datetime NOT NULL,
+			  PRIMARY KEY  (COMMENT_SEQ)
+			)				
+		</creation>
+		<defaultValue>
+			<query>ALTER TABLE TBBC_BOARD_COMMENT	ADD FOREIGN KEY (ARTICLE_SEQ) REFERENCES TBBB_BOARD_ARTICLE(ARTICLE_SEQ)</query>
+		</defaultValue>		
+	</table>
+
+	<table name="TBBD_BOARD_FILE">
+		<creation>
+			CREATE TABLE TBBD_BOARD_FILE (
+			  FILE_SEQ int NOT NULL,
+			  ARTICLE_SEQ int NOT NULL,
+			  ORIGINAL_NAME varchar(250) NOT NULL,
+			  SAVE_NAME varchar(250) NOT NULL,
+			  SIZE int NOT NULL,
+			  PRIMARY KEY  (FILE_SEQ)
+			)		
+		</creation>
+		<defaultValue>
+			<query>ALTER TABLE TBBD_BOARD_FILE ADD FOREIGN KEY (ARTICLE_SEQ) REFERENCES TBBB_BOARD_ARTICLE(ARTICLE_SEQ)</query>
+		</defaultValue>		
+	</table>
+
+
 	<table name="TBZZ_MEMO">
 		<creation>
 			CREATE TABLE TBZZ_MEMO
