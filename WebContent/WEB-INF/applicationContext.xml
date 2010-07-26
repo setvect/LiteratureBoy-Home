@@ -26,10 +26,42 @@
 	<!-- =============================== -->
 	<!-- ======  Bean Define		 ======= -->
 	<!-- =============================== -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		lazy-init="true">
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.connection.driver_class">org.h2.Driver</prop>
+				<prop key="hibernate.connection.url">jdbc:h2:literatureboy</prop>
+				<prop key="hibernate.connection.username">sa</prop>
+				<prop key="hibernate.connection.password"></prop>
+				<prop key="hibernate.connection.poolsize">20</prop>
+				
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="dialect">org.hibernate.dialect.H2Dialect</prop>
+				<prop key="current_session_context_class">thread</prop>  
+				<prop key="show_sql">false</prop>
+				<prop key="format_sql">true</prop>
+				<prop key="connection.shutdown">true</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.setvect.literatureboy.vo.Memo</value>
+			</list>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<!-- Add new Packages to scan here -->
+			</list>
+		</property>
+	</bean>
+	
+	
 	
 	<!-- DataBase DAO -->
 	<bean id="db.initializer" class="com.setvect.literatureboy.db.h2.H2DBInitializer"/>
-	<bean id="db.memoDao" class="com.setvect.literatureboy.db.h2.H2MemoDao"/>
+	<bean id="db.memoDao" class="com.setvect.literatureboy.db.impl.MemoDaoImpl"/>
 	
 	<!-- Login Check Interceptor -->
 	<bean id="loginCheckInterceptor" class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>
