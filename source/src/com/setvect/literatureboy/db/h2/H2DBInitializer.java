@@ -3,10 +3,13 @@ package com.setvect.literatureboy.db.h2;
 import java.net.URL;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.setvect.common.db.HibernateUtil;
 import com.setvect.common.db.TableCreateInfo;
 import com.setvect.common.log.LogPrinter;
 import com.setvect.literatureboy.config.EnvirmentProperty;
@@ -15,8 +18,9 @@ import com.setvect.literatureboy.db.DBInitializer;
 /**
  * H2 DB 초기화 하는 것과 같음.
  */
-
 public class H2DBInitializer extends DBInitializer {
+	@Resource
+	private SessionFactory sessionFactory;
 
 	/** 사용자 테이블을 의미하는 타입 값 */
 	private static final String DEFAULT_TABLE_TYPE = "TABLE";
@@ -38,16 +42,15 @@ public class H2DBInitializer extends DBInitializer {
 	 * 
 	 * @see com.ipms.sfj.db.DBInitializer#makeTable()
 	 */
+	@Transactional(noRollbackFor={Exception.class})
 	public void makeTable() {
 
 		URL script = DBInitializer.class.getResource("db-script.xml");
 		List<TableCreateInfo> tableCreate = tableScript(script);
-		// HibernateUtil.beginTransaction();
 
 		for (TableCreateInfo t : tableCreate) {
 			createTable(t);
 		}
-
 	}
 
 	/**
@@ -59,11 +62,13 @@ public class H2DBInitializer extends DBInitializer {
 	 */
 	private void createTable(TableCreateInfo tableInfo) {
 
-		Session session = HibernateUtil.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session
 				.createSQLQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES where table_name = ? and table_type = ?");
 		query.setParameter(0, tableInfo.getTableName());
 		query.setParameter(1, DEFAULT_TABLE_TYPE);
+
+		@SuppressWarnings("rawtypes")
 		List resultTable = query.list();
 
 		if (resultTable.size() != 0) {

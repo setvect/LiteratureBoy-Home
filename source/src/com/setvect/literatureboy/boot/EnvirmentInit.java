@@ -69,10 +69,6 @@ public class EnvirmentInit extends HttpServlet {
 		conn.init();
 		LogPrinter.info("DB Initialized");
 
-//		File hibernatePath = new File(webBase,
-//				EnvirmentProperty.getString("com.setvect.literatureboy.db.hibernate.config"));
-//		HibernateUtil.init(hibernatePath, true);
-
 		conn.makeTable();
 		LogPrinter.info("DB Table Initialized completed");
 		initialize = true;

@@ -23,7 +23,7 @@ public class DBInteractionTestCase extends TestSystem {
 	public void testCRUD() throws Exception {
 		Memo m1 = new Memo();
 		m1.setId(1);
-		m1.setTitile("hi ¾È³ç");
+		m1.setTitile("hi ");
 		service.addMemo(m1);
 
 		Memo m2 = service.getUser(1);
