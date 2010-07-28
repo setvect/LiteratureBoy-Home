@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 
 import com.setvect.common.db.TableCreateInfo;
 import com.setvect.common.log.LogPrinter;
-import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.db.DBInitializer;
 
 /**
@@ -57,7 +56,6 @@ public class H2DBInitializer extends DBInitializer {
 	 *            테이블 생성 정보
 	 */
 	private void createTable(TableCreateInfo tableInfo) {
-
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session
 				.createSQLQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES where table_name = ? and table_type = ?");
