@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.setvect.common.db.TableCreateInfo;
 import com.setvect.common.log.LogPrinter;
@@ -32,9 +31,7 @@ public class H2DBInitializer extends DBInitializer {
 	 */
 	@Override
 	public void init() {
-		if (System.getProperty("h2.baseDir") == null) {
-			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db.path"));
-		}
+
 	}
 
 	/*
@@ -42,7 +39,6 @@ public class H2DBInitializer extends DBInitializer {
 	 * 
 	 * @see com.ipms.sfj.db.DBInitializer#makeTable()
 	 */
-	@Transactional(noRollbackFor={Exception.class})
 	public void makeTable() {
 
 		URL script = DBInitializer.class.getResource("db-script.xml");

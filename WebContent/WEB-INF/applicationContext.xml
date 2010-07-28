@@ -61,10 +61,7 @@
 	</bean>
 	
 	
-	<!-- Transaction -->
-	
-	<tx:annotation-driven transaction-manager="hibernateTxManager"/>
-	
+	<!-- Transaction -->	
 	<bean id="hibernateTxManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -76,12 +73,15 @@
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut id="genericManagerRequiredTx" expression="execution(* *..GenericManager+.*(..))"/>
-		<aop:pointcut id="dynamicRequiredTx" expression="execution(* *..*DynamicHibernateService.*(..))"/>
+		<aop:pointcut id="anyframe" expression="execution(* anyframe..*GenericDao.*(..))"/>
+		<aop:pointcut id="appDao" expression="execution(* com.setvect.literatureboy.db..*DaoImpl.*(..))"/>
+		<aop:pointcut id="serivce" expression="execution(* com.setvect.literatureboy.db..*DBInitializer.*(..))"/>
 		
-		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="genericManagerRequiredTx" />
-		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="dynamicRequiredTx" />
+		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="anyframe" />
+		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="appDao" />
+		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="serivce" />
 	</aop:config>	
+
 	
 	<!-- DataBase DAO -->
 	<bean id="db.initializer" class="com.setvect.literatureboy.db.h2.H2DBInitializer"/>

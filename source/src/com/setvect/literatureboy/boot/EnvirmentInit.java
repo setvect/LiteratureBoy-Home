@@ -7,7 +7,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import com.setvect.common.db.HibernateUtil;
 import com.setvect.common.log.LogPrinter;
 import com.setvect.common.spring.SpringBeanFactory;
 import com.setvect.literatureboy.config.EnvirmentProperty;
@@ -65,6 +64,11 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.info("Spring Initialized");
 
 		// DB init
+		// H2 데이터 베이스 파일 생성 경로 지정. Spring Initialized 전에 해야됨
+		if (System.getProperty("h2.baseDir") == null) {
+			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db.path"));
+		}
+
 		DBInitializer conn = (DBInitializer) SpringBeanFactory.getGeneralFactory().getBean("db.initializer");
 		conn.init();
 		LogPrinter.info("DB Initialized");
