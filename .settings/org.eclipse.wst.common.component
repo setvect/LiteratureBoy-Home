@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/test"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/common"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
         <dependent-module archiveName="org.eclipse.jst.j2ee.componentcore.util.ClasspathDependencies.war" deploy-path="/" handle="org.eclipse.jst.j2ee.componentcore.util.ClasspathDependencies">
             <dependency-type>consumes</dependency-type>
         </dependent-module>
