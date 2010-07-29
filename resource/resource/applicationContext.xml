@@ -22,8 +22,6 @@
        >
 
 	<aop:aspectj-autoproxy />
-	<bean class="com.setvect.literatureboy.db.DBTransitionAspect" />
-
 	<context:component-scan  base-package="com.setvect.literatureboy"/>
 	       
 	<!-- DB Connection -->
