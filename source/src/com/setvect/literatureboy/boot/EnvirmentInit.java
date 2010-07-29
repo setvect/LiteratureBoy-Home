@@ -69,7 +69,7 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.info("Log Manager Initialized");
 
 		springContext = new ClassPathXmlApplicationContext(
-				new String[] { "classpath:resource/applicationContext.xml" }, false);
+				new String[] { "classpath:spring/applicationContext.xml" }, false);
 		springContext.refresh();
 
 		LogPrinter.info("Spring Initialized");

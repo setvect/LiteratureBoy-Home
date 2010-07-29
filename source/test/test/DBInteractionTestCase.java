@@ -2,6 +2,8 @@ package test;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.NotTransactional;
+import org.springframework.test.annotation.Rollback;
 
 import com.setvect.literatureboy.service.MemoService;
 import com.setvect.literatureboy.vo.Memo;
@@ -21,6 +23,7 @@ public class DBInteractionTestCase extends TestSystem {
 	 * @throws Exception
 	 */
 	@Test
+	//@Rollback(false)
 	public void testCRUD() throws Exception {
 		Memo m1 = new Memo();
 		m1.setId(1);

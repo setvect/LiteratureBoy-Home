@@ -19,7 +19,7 @@ import com.setvect.literatureboy.boot.EnvirmentInit;
  * @version $Id$
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:resource/applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:spring/applicationContext.xml" })
 @TransactionConfiguration(transactionManager = "hibernateTxManager", defaultRollback = true)
 @Transactional
 public class TestSystem {
@@ -31,6 +31,7 @@ public class TestSystem {
 		URL a = TestSystem.class.getResource("");
 		File currentPath = new File(a.getFile());
 
+		// 현재 클래스 경로를 추적해 웹루트 디렉토리를 찾음. 꼼수임
 		File projectRoot = currentPath.getParentFile().getParentFile().getParentFile();
 		File webRoot = new File(projectRoot, WEB_ROOT_NAME);
 		EnvirmentInit.bootUp(webRoot, CONFIG_PROPERTIES);
