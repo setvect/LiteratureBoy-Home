@@ -83,7 +83,7 @@
 
 	<!-- DataBase DAO -->
 	<bean id="db.initializer" class="com.setvect.literatureboy.db.h2.H2DBInitializer"/>
-	<bean id="db.memoDao" class="com.setvect.literatureboy.db.impl.MemoDaoImpl"/>
+	<bean id="db.memoDao" class="com.setvect.literatureboy.db.h2.H2MemoDao"/>
 	
 	<!-- Login Check Interceptor -->
 	<bean id="loginCheckInterceptor" class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>

@@ -2,8 +2,6 @@ package test;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.NotTransactional;
-import org.springframework.test.annotation.Rollback;
 
 import com.setvect.literatureboy.service.MemoService;
 import com.setvect.literatureboy.vo.Memo;
@@ -15,7 +13,7 @@ import com.setvect.literatureboy.vo.Memo;
  */
 public class DBInteractionTestCase extends TestSystem {
 	@Autowired
-	private MemoService service;
+	public MemoService service;
 
 	/**
 	 * CRUD Å×½ºÆ®
