@@ -5,6 +5,11 @@ import java.net.URL;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.setvect.literatureboy.boot.EnvirmentInit;
 
@@ -13,6 +18,10 @@ import com.setvect.literatureboy.boot.EnvirmentInit;
  * 
  * @version $Id$
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:resource/applicationContext.xml" })
+@TransactionConfiguration(transactionManager = "hibernateTxManager", defaultRollback = true)
+@Transactional
 public class TestSystem {
 	private static final String WEB_ROOT_NAME = "WebContent";
 	private static final String CONFIG_PROPERTIES = "WEB-INF/config.properties";

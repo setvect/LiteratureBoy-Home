@@ -7,8 +7,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.setvect.common.log.LogPrinter;
-import com.setvect.common.spring.SpringBeanFactory;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.db.DBInitializer;
 
@@ -20,6 +21,7 @@ import com.setvect.literatureboy.db.DBInitializer;
 public class EnvirmentInit extends HttpServlet {
 	/** 초기화 여부 */
 	private static boolean initialize = false;
+	private static ClassPathXmlApplicationContext springContext;
 
 	public EnvirmentInit() {
 	}
@@ -36,6 +38,13 @@ public class EnvirmentInit extends HttpServlet {
 		File webBase = new File(sc.getRealPath("/"));
 		String conf = config.getInitParameter("config_file");
 		bootUp(webBase, conf);
+	}
+
+	/**
+	 * @return the springContext
+	 */
+	public static ClassPathXmlApplicationContext getSpringContext() {
+		return springContext;
 	}
 
 	/**
@@ -59,8 +68,10 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.init(logFilePath);
 		LogPrinter.info("Log Manager Initialized");
 
-		File springFilePath = new File(webBase, EnvirmentProperty.getString("com.setvect.literatureboy.spring.config"));
-		SpringBeanFactory.init(springFilePath);
+		springContext = new ClassPathXmlApplicationContext(
+				new String[] { "classpath:resource/applicationContext.xml" }, false);
+		springContext.refresh();
+
 		LogPrinter.info("Spring Initialized");
 
 		// DB init
@@ -69,7 +80,7 @@ public class EnvirmentInit extends HttpServlet {
 			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db.path"));
 		}
 
-		DBInitializer conn = (DBInitializer) SpringBeanFactory.getGeneralFactory().getBean("db.initializer");
+		DBInitializer conn = (DBInitializer) springContext.getBean("db.initializer");
 		conn.init();
 		LogPrinter.info("DB Initialized");
 
