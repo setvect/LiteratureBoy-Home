@@ -2,6 +2,9 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -9,6 +12,7 @@ import org.junit.Test;
 import anyframe.common.Page;
 
 import com.setvect.common.util.PagingCondition;
+import com.setvect.common.util.GenericPage;
 import com.setvect.literatureboy.service.memo.MemoService;
 import com.setvect.literatureboy.vo.Memo;
 
@@ -45,11 +49,16 @@ public class DBInteractionTestCase extends TestSystem {
 		service.addMemo(m);
 
 		PagingCondition searchVo = new PagingCondition(2, 2);
-		Page page = service.getPageList(searchVo);
+		GenericPage<Memo> page = service.getPageList(searchVo);
 		assertEquals(3, page.getTotalCount());
 		assertEquals(2, page.getPagesize());
 		assertEquals(1, page.getSize());
 		assertEquals(2, page.getMaxPage());
+		Collection<Memo> c = page.getList();
+		for(Memo mm : c){
+			System.out.println(mm.getTitile());
+		}
+		
 
 		Memo m2 = service.getUser(3);
 		assertEquals(m.getId(), m2.getId());

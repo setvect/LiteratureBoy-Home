@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import anyframe.common.Page;
 
 import com.setvect.common.util.PagingCondition;
+import com.setvect.common.util.GenericPage;
 import com.setvect.literatureboy.db.MemoDao;
 import com.setvect.literatureboy.vo.Memo;
 
@@ -41,7 +42,7 @@ public class MemoService {
 		memoDao.create(memo);
 	}
 
-	public Page getPageList(PagingCondition searchVo) throws Exception {
+	public GenericPage<Memo> getPageList(PagingCondition searchVo) throws Exception {
 		return memoDao.getPagingList(searchVo);
 	}
 
