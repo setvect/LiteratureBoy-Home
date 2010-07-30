@@ -1,8 +1,8 @@
 package test;
 
-import javax.annotation.Resource;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.Assert;
+import javax.annotation.Resource;
 
 import org.junit.Test;
 
@@ -46,12 +46,13 @@ public class DBInteractionTestCase extends TestSystem {
 
 		PagingCondition searchVo = new PagingCondition(2, 2);
 		Page page = service.getPageList(searchVo);
-		Assert.assertEquals(3, page.getTotalCount());
-		Assert.assertEquals(2, page.getPagesize());
-		Assert.assertEquals(1, page.getSize());
-		Assert.assertEquals(2, page.getMaxPage());
+		assertEquals(3, page.getTotalCount());
+		assertEquals(2, page.getPagesize());
+		assertEquals(1, page.getSize());
+		assertEquals(2, page.getMaxPage());
 
-		Memo m2 = service.getUser(1);
-		System.out.println(m2.getId() + ", " + m2.getTitile());
+		Memo m2 = service.getUser(3);
+		assertEquals(m.getId(), m2.getId());
+		assertEquals(m.getTitile(), m2.getTitile());
 	}
 }
