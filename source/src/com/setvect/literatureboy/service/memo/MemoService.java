@@ -1,10 +1,14 @@
-package com.setvect.literatureboy.service;
+package com.setvect.literatureboy.service.memo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import anyframe.common.Page;
+
+import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.db.MemoDao;
 import com.setvect.literatureboy.vo.Memo;
 
@@ -12,7 +16,7 @@ import com.setvect.literatureboy.vo.Memo;
 @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class MemoService {
 	/** DB 컨트롤 인스턴스 */
-	@Autowired
+	@Resource
 	private MemoDao memoDao;
 
 	/**
@@ -35,6 +39,10 @@ public class MemoService {
 	 */
 	public void addMemo(Memo memo) throws Exception {
 		memoDao.create(memo);
+	}
+
+	public Page getPageList(PagingCondition searchVo) throws Exception {
+		return memoDao.getPagingList(searchVo);
 	}
 
 }

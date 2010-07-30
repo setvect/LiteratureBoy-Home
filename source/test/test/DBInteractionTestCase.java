@@ -1,9 +1,15 @@
 package test;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 
-import com.setvect.literatureboy.service.MemoService;
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import anyframe.common.Page;
+
+import com.setvect.common.util.PagingCondition;
+import com.setvect.literatureboy.service.memo.MemoService;
 import com.setvect.literatureboy.vo.Memo;
 
 /**
@@ -12,7 +18,7 @@ import com.setvect.literatureboy.vo.Memo;
  * @version $Id$
  */
 public class DBInteractionTestCase extends TestSystem {
-	@Autowired
+	@Resource
 	public MemoService service;
 
 	/**
@@ -21,12 +27,29 @@ public class DBInteractionTestCase extends TestSystem {
 	 * @throws Exception
 	 */
 	@Test
-	//@Rollback(false)
+	// @Rollback(false)
 	public void testCRUD() throws Exception {
-		Memo m1 = new Memo();
-		m1.setId(1);
-		m1.setTitile("hi ");
-		service.addMemo(m1);
+		Memo m = new Memo();
+		m.setId(1);
+		m.setTitile("hi 1 ");
+		service.addMemo(m);
+
+		m = new Memo();
+		m.setId(2);
+		m.setTitile("hi 2");
+		service.addMemo(m);
+
+		m = new Memo();
+		m.setId(3);
+		m.setTitile("hi 3");
+		service.addMemo(m);
+
+		PagingCondition searchVo = new PagingCondition(2, 2);
+		Page page = service.getPageList(searchVo);
+		Assert.assertEquals(3, page.getTotalCount());
+		Assert.assertEquals(2, page.getPagesize());
+		Assert.assertEquals(1, page.getSize());
+		Assert.assertEquals(2, page.getMaxPage());
 
 		Memo m2 = service.getUser(1);
 		System.out.println(m2.getId() + ", " + m2.getTitile());
