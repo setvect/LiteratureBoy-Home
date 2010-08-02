@@ -14,34 +14,34 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  * 
  * @version $Id$
  */
-public interface BoardArticleDao {
+public interface BoardDao {
 
 	// --------------- 관리
 
-	public Board getManager(String code);
+	public Board getBoard(String code);
 
 	/**
 	 * @param searchVO
 	 * @return 게시판생성 정보 항목
 	 * @throws Exception
 	 */
-	public GenericPage<Board> getManagerPagingList(PagingCondition searchVO) throws Exception;
+	public GenericPage<Board> getBoardPagingList(PagingCondition searchVO) throws Exception;
 
 	/**
 	 * @param board
 	 * @throws Exception
 	 */
-	public void createManager(Board board) throws Exception;
+	public void createBoard(Board board) throws Exception;
 
 	/**
 	 * @param article
 	 */
-	public void updateManager(Board board);
+	public void updateBoard(Board board);
 
 	/**
 	 * @param articleSeq
 	 */
-	public void removeManager(String code);
+	public void removeBoard(String code);
 
 	// --------------- 게시물
 	/**

@@ -8,10 +8,10 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
-import com.setvect.common.util.AdvanceStringUtil;
+import com.setvect.common.util.StringUtilAd;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.PagingCondition;
-import com.setvect.literatureboy.db.BoardArticleDao;
+import com.setvect.literatureboy.db.BoardDao;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -23,12 +23,12 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  * 
  * @version $Id$
  */
-public abstract class AbstractBoardArticleDao implements BoardArticleDao {
+public abstract class AbstractBoardArticleDao implements BoardDao {
 	@Resource
 	SessionFactory sessionFactory;
 
 	// --------------- 관리
-	public Board getManager(String code) {
+	public Board getBoard(String code) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Board) session.get(Board.class, code);
 	}
@@ -38,7 +38,7 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	 * 
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
-	public GenericPage<Board> getManagerPagingList(PagingCondition paging) throws Exception {
+	public GenericPage<Board> getBoardPagingList(PagingCondition paging) throws Exception {
 
 		Session session = sessionFactory.getCurrentSession();
 
@@ -46,7 +46,7 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from Board " + getManagerWhereClause(paging) + " order by code ";
+		q = " from Board " + getManagerWhereClause(paging) + " order by boardCode ";
 		query = session.createQuery(q);
 		query.setFirstResult(paging.getStartNumber());
 		query.setMaxResults(paging.getPagePerItemCount());
@@ -71,11 +71,11 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 		String name = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME);
 
 		// 두개가 동새에 검색 조건에 포함 될 수 없음
-		if (!AdvanceStringUtil.isEmpty(code)) {
-			where = " where boardCode like " + AdvanceStringUtil.getSqlStringLike(code);
+		if (!StringUtilAd.isEmpty(code)) {
+			where = " where boardCode like " + StringUtilAd.getSqlStringLike(code);
 		}
-		else if (!AdvanceStringUtil.isEmpty(name)) {
-			where = " where name like " + AdvanceStringUtil.getSqlStringLike(name);
+		else if (!StringUtilAd.isEmpty(name)) {
+			where = " where name like " + StringUtilAd.getSqlStringLike(name);
 		}
 		return where;
 	}
@@ -84,7 +84,7 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	 * @param board
 	 * @throws Exception
 	 */
-	public void createManager(Board board) throws Exception {
+	public void createBoard(Board board) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(board);
 		session.flush();
@@ -93,7 +93,7 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	/**
 	 * @param article
 	 */
-	public void updateManager(Board board) {
+	public void updateBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(board);
 		session.flush();
@@ -102,9 +102,10 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	/**
 	 * @param articleSeq
 	 */
-	public void removeManager(String code) {
+	public void removeBoard(String code) {
+		// TODO 플래그 형태로 삭제 
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(getManager(code));
+		session.delete(getBoard(code));
 		session.flush();
 	}
 
@@ -128,11 +129,11 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition paging) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = "select count(*) from BoardArticle " + getWhereClause(paging);
+		String q = "select count(*) from BoardArticle " + getArticleWhereClause(paging);
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from BoardArticle " + getWhereClause(paging) + " order by IDX2 desc, IDX3 ASC ";
+		q = " from BoardArticle " + getArticleWhereClause(paging) + " order by IDX2 desc, IDX3 ASC ";
 		query = session.createQuery(q);
 		query.setFirstResult(paging.getStartNumber());
 		query.setMaxResults(paging.getPagePerItemCount());
@@ -150,23 +151,23 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	 *            검색 조건
 	 * @return select where 절 조건
 	 */
-	private String getWhereClause(PagingCondition paging) {
+	private String getArticleWhereClause(PagingCondition paging) {
 		String code = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE);
 		String name = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.NAME);
 		String title = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.TITLE);
 		String content = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CONTENT);
 
-		String where = " where boardCode = " + AdvanceStringUtil.getSqlString(code);
+		String where = " where boardCode = " + StringUtilAd.getSqlString(code);
 
 		// 두개 이상 동시에 검색 조건에 포함 될 수 없음
-		if (!AdvanceStringUtil.isEmpty(code)) {
-			where += " and name = " + AdvanceStringUtil.getSqlStringLike(name);
+		if (!StringUtilAd.isEmpty(name)) {
+			where += " and name like " + StringUtilAd.getSqlStringLike(name);
 		}
-		else if (!AdvanceStringUtil.isEmpty(name)) {
-			where += " and title = " + AdvanceStringUtil.getSqlStringLike(title);
+		else if (!StringUtilAd.isEmpty(title)) {
+			where += " and title like " + StringUtilAd.getSqlStringLike(title);
 		}
-		else if (!AdvanceStringUtil.isEmpty(name)) {
-			where += " and content = " + AdvanceStringUtil.getSqlStringLike(content);
+		else if (!StringUtilAd.isEmpty(content)) {
+			where += " and content like " + StringUtilAd.getSqlStringLike(content);
 		}
 		return where;
 	}
@@ -181,15 +182,17 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 		String q;
 
 		// 인덱스 순서
-		q = "select nvl(max(idx1) + 1, 1)  from BoardArticle WHERE boardCode = ?";
+		q = "select COALESCE(max(idx1) + 1, 1)  from BoardArticle WHERE boardCode = ?";
 		Query query = session.createQuery(q);
 		query.setParameter(0, article.getBoardCode());
-		article.setIdx1(((Integer) query.uniqueResult()).intValue());
+		int idx1 = ((Integer) query.uniqueResult()).intValue();
+		article.setIdx1(idx1);
 
-		q = "select nvl(max(idx2) + 1, 1) from BoardArticle WHERE boardCode = ?";
+		q = "select COALESCE(max(idx2) + 1, 1) from BoardArticle WHERE boardCode = ?";
 		query = session.createQuery(q);
 		query.setParameter(0, article.getBoardCode());
-		article.setIdx2(((Integer) query.uniqueResult()).intValue());
+		int idx2 = ((Integer) query.uniqueResult()).intValue();
+		article.setIdx2(idx2);
 
 		// 기본 값
 		article.setIdx3(1);
@@ -209,7 +212,7 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 		Session session = sessionFactory.getCurrentSession();
 
 		// IDX1
-		String q = "select nvl(max(IDX1) + 1, 1) AS CNT from BoardArticle WHERE boardCode = ?";
+		String q = "select COALESCE(max(IDX1) + 1, 1) AS CNT from BoardArticle WHERE boardCode = ?";
 		Query query = session.createQuery(q);
 		query.setParameter(0, article.getBoardCode());
 		article.setIdx1(((Integer) query.uniqueResult()).intValue());

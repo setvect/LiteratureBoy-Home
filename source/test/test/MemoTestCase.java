@@ -18,9 +18,9 @@ import com.setvect.literatureboy.vo.Memo;
  * 
  * @version $Id$
  */
-public class DBInteractionTestCase extends TestSystem {
+public class MemoTestCase extends TestSystem {
 	@Resource
-	public MemoService service;
+	private MemoService service;
 
 	/**
 	 * CRUD Å×½ºÆ®
@@ -52,10 +52,9 @@ public class DBInteractionTestCase extends TestSystem {
 		assertEquals(1, page.getSize());
 		assertEquals(2, page.getMaxPage());
 		Collection<Memo> c = page.getList();
-		for(Memo mm : c){
+		for (Memo mm : c) {
 			System.out.println(mm.getTitile());
 		}
-		
 
 		Memo m2 = service.getUser(3);
 		assertEquals(m.getId(), m2.getId());

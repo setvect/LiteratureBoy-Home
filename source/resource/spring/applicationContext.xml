@@ -54,6 +54,10 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.setvect.literatureboy.vo.Memo</value>
+				<value>com.setvect.literatureboy.vo.board.Board</value>
+				<value>com.setvect.literatureboy.vo.board.BoardArticle</value>
+				<value>com.setvect.literatureboy.vo.board.BoardAttachFile</value>
+				<value>com.setvect.literatureboy.vo.board.BoardComment</value>
 			</list>
 		</property>
 		<property name="packagesToScan">

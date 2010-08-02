@@ -17,10 +17,10 @@ public class PagingCondition implements Serializable {
 	private static final int DEFAULT_PAGE_UNIT = 10;
 
 	/** 현재 페이지 */
-	private int currentPageNo = DEFAULT_PAGE_VIEW_COUNT;
+	private int currentPageNo;
 
 	/** 한페이지당 표시 항목 수 */
-	private int pagePerItemCount;
+	private int pagePerItemCount = DEFAULT_PAGE_VIEW_COUNT;
 
 	/** 페이지 묶음 갯수 */
 	private int pageUnit = DEFAULT_PAGE_UNIT;
@@ -33,7 +33,7 @@ public class PagingCondition implements Serializable {
 	 *            현 페이지. 1부터 시작
 	 */
 	public PagingCondition(int currentPageNo) {
-		this.pagePerItemCount = currentPageNo;
+		this.currentPageNo = currentPageNo;
 	}
 
 	/**

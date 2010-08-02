@@ -11,10 +11,11 @@ import anyframe.common.util.StringUtil;
  * 
  * @version $Id$
  */
-public class AdvanceStringUtil extends StringUtils {
+public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param word
+	 * 
 	 * @return sql String 값에 들어가도록 변경
 	 */
 	public static String getSqlString(String word) {
