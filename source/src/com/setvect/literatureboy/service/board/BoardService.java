@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.setvect.literatureboy.db.BoardDao;
+import com.setvect.literatureboy.db.BoardArticleDao;
 
 /**
  * @version $Id$
@@ -29,9 +29,8 @@ public class BoardService {
 		CODE, TITLE, CONTENT, NAME
 	}
 
-	/** DB 컨트롤 인스턴스 */
+	/**  */
 	@Resource
-	private BoardDao boardDao;
-	
-	
+	private BoardArticleDao boardArticleDao;
+
 }

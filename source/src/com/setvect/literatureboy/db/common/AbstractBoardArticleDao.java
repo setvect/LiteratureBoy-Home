@@ -13,6 +13,7 @@ import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.db.BoardArticleDao;
 import com.setvect.literatureboy.service.board.BoardService;
+import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
@@ -25,6 +26,87 @@ import com.setvect.literatureboy.vo.board.BoardComment;
 public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	@Resource
 	SessionFactory sessionFactory;
+
+	// --------------- 관리
+	public Board getManager(String code) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Board) session.get(Board.class, code);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
+	 */
+	public GenericPage<Board> getManagerPagingList(PagingCondition paging) throws Exception {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		String q = "select count(*) from Board " + getManagerWhereClause(paging);
+		Query query = session.createQuery(q);
+		int totalCount = ((Long) query.uniqueResult()).intValue();
+
+		q = " from Board " + getManagerWhereClause(paging) + " order by code ";
+		query = session.createQuery(q);
+		query.setFirstResult(paging.getStartNumber());
+		query.setMaxResults(paging.getPagePerItemCount());
+
+		@SuppressWarnings("unchecked")
+		List<Board> resultList = query.list();
+
+		GenericPage<Board> resultPage = new GenericPage<Board>(resultList, paging.getCurrentPageNo(), totalCount,
+				paging.getPageUnit(), paging.getPagePerItemCount());
+		return resultPage;
+	}
+
+	/**
+	 * @param paging
+	 *            검색 조건
+	 * @return select where 절 조건
+	 */
+	private String getManagerWhereClause(PagingCondition paging) {
+		String where = "";
+
+		String code = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE);
+		String name = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME);
+
+		// 두개가 동새에 검색 조건에 포함 될 수 없음
+		if (!AdvanceStringUtil.isEmpty(code)) {
+			where = " where boardCode like " + AdvanceStringUtil.getSqlStringLike(code);
+		}
+		else if (!AdvanceStringUtil.isEmpty(name)) {
+			where = " where name like " + AdvanceStringUtil.getSqlStringLike(name);
+		}
+		return where;
+	}
+
+	/**
+	 * @param board
+	 * @throws Exception
+	 */
+	public void createManager(Board board) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(board);
+		session.flush();
+	}
+
+	/**
+	 * @param article
+	 */
+	public void updateManager(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(board);
+		session.flush();
+	}
+
+	/**
+	 * @param articleSeq
+	 */
+	public void removeManager(String code) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(getManager(code));
+		session.flush();
+	}
 
 	// --------------- 게시물
 	/*
@@ -43,7 +125,7 @@ public abstract class AbstractBoardArticleDao implements BoardArticleDao {
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
 	// TODO 목록 검색시 불필요한 항목(내용 TEXT)까지 가져오는 경우 발생. 성능 문제 발생시 수정
-	public GenericPage<BoardArticle> getPagingList(PagingCondition paging) throws Exception {
+	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition paging) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
 		String q = "select count(*) from BoardArticle " + getWhereClause(paging);

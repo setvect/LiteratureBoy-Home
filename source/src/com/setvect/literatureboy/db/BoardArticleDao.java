@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.PagingCondition;
+import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
@@ -14,7 +15,35 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  * @version $Id$
  */
 public interface BoardArticleDao {
-	// --------------- 게시물 
+
+	// --------------- 관리
+
+	public Board getManager(String code);
+
+	/**
+	 * @param searchVO
+	 * @return 게시판생성 정보 항목
+	 * @throws Exception
+	 */
+	public GenericPage<Board> getManagerPagingList(PagingCondition searchVO) throws Exception;
+
+	/**
+	 * @param board
+	 * @throws Exception
+	 */
+	public void createManager(Board board) throws Exception;
+
+	/**
+	 * @param article
+	 */
+	public void updateManager(Board board);
+
+	/**
+	 * @param articleSeq
+	 */
+	public void removeManager(String code);
+
+	// --------------- 게시물
 	/**
 	 * @param articleSeq
 	 * @return
@@ -27,7 +56,7 @@ public interface BoardArticleDao {
 	 * @return 게시물 페이지 값
 	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getPagingList(PagingCondition searchVO) throws Exception;
+	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition searchVO) throws Exception;
 
 	/**
 	 * 게시물 등록
