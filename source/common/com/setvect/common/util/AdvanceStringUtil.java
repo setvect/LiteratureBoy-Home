@@ -25,6 +25,42 @@ public class AdvanceStringUtil extends StringUtils {
 	}
 
 	/**
+	 * @param word
+	 * @return sql String 값에 like 형식으로 검색 되도록 변경<br>
+	 *         예) '%단어%'
+	 */
+	public static String getSqlStringLike(String word) {
+		word = null2str(word);
+		word = replace(word, "'", "''");
+		word = word.trim();
+		return new String("'%" + word + "%'");
+	}
+
+	/**
+	 * @param word
+	 * @return sql String 값에 like 형식으로 검색 되도록 변경<br>
+	 *         예) '%단어'
+	 */
+	public static String getSqlStringLikeLeft(String word) {
+		word = null2str(word);
+		word = replace(word, "'", "''");
+		word = word.trim();
+		return new String("'%" + word + "'");
+	}
+
+	/**
+	 * @param word
+	 * @return sql String 값에 like 형식으로 검색 되도록 변경<br>
+	 *         예) '단어%'
+	 */
+	public static String getSqlStringLikeRight(String word) {
+		word = null2str(word);
+		word = replace(word, "'", "''");
+		word = word.trim();
+		return new String("'" + word + "%'");
+	}
+
+	/**
 	 * @param password
 	 * @param algorithm
 	 * @return
