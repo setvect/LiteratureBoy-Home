@@ -15,6 +15,8 @@ import com.setvect.literatureboy.db.DBInitializer;
 
 /**
  * H2 DB 초기화 하는 것과 같음.
+ * 
+ * @version $Id$
  */
 public class H2DBInitializer extends DBInitializer {
 	@Resource

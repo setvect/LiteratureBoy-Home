@@ -4,10 +4,9 @@ import com.setvect.literatureboy.db.common.AbstractMemoDao;
 import com.setvect.literatureboy.vo.Memo;
 
 /**
- * 메모장 DAO
+ * H2 DB용 메모장 DAO
+ * 
+ * @version $Id$
  */
 public class H2MemoDao extends AbstractMemoDao<Memo, Integer> {
-	public H2MemoDao() {
-
-	}
 }

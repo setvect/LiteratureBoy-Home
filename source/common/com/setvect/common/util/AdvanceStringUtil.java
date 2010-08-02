@@ -62,16 +62,6 @@ public class AdvanceStringUtil extends StringUtils {
 	}
 
 	/**
-	 * @param origString
-	 * @param trimString
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#trim(java.lang.String, java.lang.String)
-	 */
-	public static String trim(String origString, String trimString) {
-		return StringUtil.trim(origString, trimString);
-	}
-
-	/**
 	 * @param origStr
 	 * @param strToken
 	 * @return
