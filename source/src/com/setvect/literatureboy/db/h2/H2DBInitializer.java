@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
 
 import com.setvect.common.db.TableCreateInfo;
 import com.setvect.common.log.LogPrinter;
@@ -18,7 +19,9 @@ import com.setvect.literatureboy.db.DBInitializer;
  * 
  * @version $Id$
  */
+@Service(value = "db.initializer")
 public class H2DBInitializer extends DBInitializer {
+
 	@Resource
 	private SessionFactory sessionFactory;
 

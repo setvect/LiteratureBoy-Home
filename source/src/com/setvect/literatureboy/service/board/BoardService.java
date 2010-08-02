@@ -32,4 +32,6 @@ public class BoardService {
 	/** DB 컨트롤 인스턴스 */
 	@Resource
 	private BoardDao boardDao;
+	
+	
 }

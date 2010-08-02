@@ -26,7 +26,10 @@
        >
 
 	<aop:aspectj-autoproxy />
-	<context:component-scan  base-package="com.setvect.literatureboy"/>
+	<context:component-scan  base-package="com.setvect.literatureboy">
+		<!-- DB가 2가지 이상 사용시 사용 안할 DB DAO 패스 지정  -->
+		<!-- <context:exclude-filter type="aspectj" expression="com.setvect.literatureboy.db.h2.*"/> -->
+	</context:component-scan>
 	       
 	<!-- DB Connection -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
@@ -97,10 +100,6 @@
 	</aop:config>	
 
 	<!-- DataBase DAO -->
-	<bean id="db.initializer" class="com.setvect.literatureboy.db.h2.H2DBInitializer"/>
-	<bean id="db.memoDao" class="com.setvect.literatureboy.db.h2.H2MemoDao">
-		<property name="dynamicHibernateService" ref="dynamicHibernateService" />
-	</bean>
 	
 	<!-- Login Check Interceptor -->
 	<bean id="loginCheckInterceptor" class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>

@@ -14,7 +14,7 @@ import com.setvect.literatureboy.vo.Memo;
 /**
  * @version $Id$
  */
-@Service("service.memo")
+@Service
 @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class MemoService {
 	/** DB 컨트롤 인스턴스 */
