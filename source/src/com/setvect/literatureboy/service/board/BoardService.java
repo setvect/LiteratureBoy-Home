@@ -22,6 +22,13 @@ public class BoardService {
 		NAME, CODE
 	}
 
+	/**
+	 * 게시물 검색 항목
+	 */
+	public enum BOARD_ARTICLE_SEARCH_ITEM {
+		CODE, TITLE, CONTENT, NAME
+	}
+
 	/** DB 컨트롤 인스턴스 */
 	@Resource
 	private BoardDao boardDao;

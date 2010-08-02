@@ -2,8 +2,6 @@ package com.setvect.literatureboy.db;
 
 import java.util.List;
 
-import anyframe.core.generic.dao.GenericDao;
-
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -15,7 +13,14 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  * 
  * @version $Id$
  */
-public interface BoardArticleDao extends GenericDao<BoardArticle, Integer> {
+public interface BoardArticleDao {
+	// --------------- 게시물 
+	/**
+	 * @param articleSeq
+	 * @return
+	 */
+	public BoardArticle getArticle(int articleSeq);
+
 	/**
 	 * @param searchVO
 	 *            게시물 검색 정보
@@ -23,6 +28,36 @@ public interface BoardArticleDao extends GenericDao<BoardArticle, Integer> {
 	 * @throws Exception
 	 */
 	public GenericPage<BoardArticle> getPagingList(PagingCondition searchVO) throws Exception;
+
+	/**
+	 * 게시물 등록
+	 * 
+	 * @param article
+	 *            게시물
+	 * @throws Exception
+	 */
+	public void createArticle(BoardArticle article) throws Exception;
+
+	/**
+	 * 답변 등록
+	 * 
+	 * @param article
+	 *            게시물
+	 * @param parentId
+	 *            부모 게시물
+	 * @throws Exception
+	 */
+	public void createArticleReply(BoardArticle article, int parentId) throws Exception;
+
+	/**
+	 * @param article
+	 */
+	public void updateArticle(BoardArticle article);
+
+	/**
+	 * @param articleSeq
+	 */
+	public void removeArticle(int articleSeq);
 
 	// ----- comment
 	/**
@@ -43,7 +78,7 @@ public interface BoardArticleDao extends GenericDao<BoardArticle, Integer> {
 	 * @param comment
 	 *            코멘트 정보
 	 */
-	public void saveComment(BoardComment comment);
+	public void createComment(BoardComment comment);
 
 	/**
 	 * @param comment
@@ -64,13 +99,13 @@ public interface BoardArticleDao extends GenericDao<BoardArticle, Integer> {
 	 *            게시물 번호
 	 * @return 게시물에 등록된 첨부파일 목록
 	 */
-	public List<BoardAttachFile> listAttach(int boardItemSeq);
+	public List<BoardAttachFile> listAttachFile(int boardItemSeq);
 
 	/**
 	 * @param attachFile
 	 *            첨부파일 저장
 	 */
-	public void saveAttachFile(BoardAttachFile attachFile);
+	public void createAttachFile(BoardAttachFile attachFile);
 
 	/**
 	 * @param seq

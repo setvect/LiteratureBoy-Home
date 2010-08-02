@@ -4,11 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 게시물 코멘트
@@ -22,6 +25,8 @@ public class BoardComment {
 	/** */
 	@Id
 	@Column(name = "COMMENT_SEQ")
+	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
 	private int commectSeq;
 	/** */
 	@Column(name = "ARTICLE_SEQ")

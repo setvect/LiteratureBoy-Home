@@ -4,11 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 /**
@@ -23,6 +26,8 @@ public class BoardArticle {
 	/** */
 	@Id
 	@Column(name = "ARTICLE_SEQ")
+	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
 	private int articleSeq;
 
 	/** */
@@ -45,7 +50,7 @@ public class BoardArticle {
 	@Column(name = "IDX3")
 	private int idx3;
 
-	/** */
+	/** 깊이 1부터 시작  */
 	@Column(name = "DEPTH_LEVEL")
 	private int depthLevel;
 

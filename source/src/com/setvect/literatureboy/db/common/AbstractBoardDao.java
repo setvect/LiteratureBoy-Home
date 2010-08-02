@@ -67,10 +67,10 @@ public abstract class AbstractBoardDao<T, PK extends Serializable> extends Gener
 
 		// 두개가 동새에 검색 조건에 포함 될 수 없음
 		if (!AdvanceStringUtil.isEmpty(code)) {
-			where = " where boardCode = " + AdvanceStringUtil.getSqlString(code);
+			where = " where boardCode like " + AdvanceStringUtil.getSqlStringLike(code);
 		}
 		else if (!AdvanceStringUtil.isEmpty(name)) {
-			where = " where name = " + AdvanceStringUtil.getSqlString(name);
+			where = " where name like " + AdvanceStringUtil.getSqlStringLike(name);
 		}
 		return where;
 	}

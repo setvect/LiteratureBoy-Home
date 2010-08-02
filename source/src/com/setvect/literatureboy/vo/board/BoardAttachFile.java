@@ -2,11 +2,14 @@ package com.setvect.literatureboy.vo.board;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Ã·ºÎÆÄÀÏ
@@ -19,6 +22,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class BoardAttachFile {
 	@Id
 	@Column(name = "FILE_SEQ")
+	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
 	private int fileSeq;
 
 	@Column(name = "ARTICLE_SEQ")
