@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import anyframe.common.Page;
-
-import com.setvect.common.util.PagingCondition;
 import com.setvect.common.util.GenericPage;
+import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.db.MemoDao;
 import com.setvect.literatureboy.vo.Memo;
 

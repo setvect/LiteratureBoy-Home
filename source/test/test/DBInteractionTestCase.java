@@ -3,16 +3,13 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import javax.annotation.Resource;
 
 import org.junit.Test;
 
-import anyframe.common.Page;
-
-import com.setvect.common.util.PagingCondition;
 import com.setvect.common.util.GenericPage;
+import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.service.memo.MemoService;
 import com.setvect.literatureboy.vo.Memo;
 

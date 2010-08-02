@@ -149,4 +149,20 @@ public class BoardComment {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+
+	/**
+	 * @return the ip
+	 */
+	public String getIp() {
+		return ip;
+	}
+
+	/**
+	 * @param ip
+	 *            the ip to set
+	 */
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 }
