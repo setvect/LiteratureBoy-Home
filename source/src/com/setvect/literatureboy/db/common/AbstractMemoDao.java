@@ -18,6 +18,8 @@ import com.setvect.literatureboy.vo.Memo;
 
 /**
  * ¸Þ¸ðÀå DAO
+ * 
+ * @version $Id$
  */
 public abstract class AbstractMemoDao<T, PK extends Serializable> extends GenericDaoHibernate<Memo, Integer> implements
 		MemoDao {

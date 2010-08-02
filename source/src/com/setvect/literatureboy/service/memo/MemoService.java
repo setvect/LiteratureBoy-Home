@@ -11,6 +11,9 @@ import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.db.MemoDao;
 import com.setvect.literatureboy.vo.Memo;
 
+/**
+ * @version $Id$
+ */
 @Service("service.memo")
 @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class MemoService {
