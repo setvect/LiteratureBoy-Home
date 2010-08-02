@@ -4,7 +4,6 @@ import anyframe.core.generic.dao.GenericDao;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.PagingCondition;
-import com.setvect.literatureboy.vo.Memo;
 import com.setvect.literatureboy.vo.board.Board;
 
 /**
