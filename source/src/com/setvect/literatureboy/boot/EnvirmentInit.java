@@ -58,7 +58,8 @@ public class EnvirmentInit extends HttpServlet {
 	public static void bootUp(File webBase, String configPath) {
 
 		if (initialize) {
-			throw new IllegalStateException("aready initialized!");
+			return;
+//			throw new IllegalStateException("aready initialized!");
 		}
 
 		File configFile = new File(webBase, configPath);

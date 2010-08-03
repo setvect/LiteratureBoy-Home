@@ -19,7 +19,7 @@ import com.setvect.literatureboy.vo.board.BoardComment;
 /**
  * @version $Id$
  */
-@Service("service.board")
+@Service
 @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class BoardService {
 
