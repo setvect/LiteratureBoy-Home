@@ -1,6 +1,7 @@
 package test;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -14,6 +15,8 @@ import com.setvect.common.util.PagingCondition;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
+import com.setvect.literatureboy.vo.board.BoardAttachFile;
+import com.setvect.literatureboy.vo.board.BoardComment;
 
 /**
  * DB연동 테스트
@@ -76,8 +79,6 @@ public class BoardTestCase extends TestSystem {
 
 		service.createArticle(article);
 
-		System.out.println(article.getArticleSeq());
-
 		BoardArticle article2 = (BoardArticle) BeanUtils.cloneBean(article);
 		article2.setTitle("hi~");
 
@@ -85,12 +86,38 @@ public class BoardTestCase extends TestSystem {
 
 		article.setTitle("메렁");
 		service.updateArticle(article);
-		
+
 		PagingCondition articleSearch = new PagingCondition(1);
 		articleSearch.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE, CODE);
 
-		GenericPage<BoardArticle> articleList = service.getArticlePagingList(articleSearch) ;
+		GenericPage<BoardArticle> articleList = service.getArticlePagingList(articleSearch);
 		Assert.assertEquals(2, articleList.getSize());
+
+		BoardComment cmt = new BoardComment();
+		cmt.setArticleSeq(article.getArticleSeq());
+		cmt.setContent("AAA");
+		cmt.setIp("127.0.0.1");
+		cmt.setName("Hi");
+		cmt.setRegDate(new Date());
+		service.createComment(cmt);
+
+		BoardComment cmt2 = (BoardComment) BeanUtils.cloneBean(cmt);
+		cmt2.setMemberId("jjh");
+		service.createComment(cmt2);
+
+		List<BoardComment> cmtList = service.listComment(article.getArticleSeq());
+		Assert.assertEquals(2, cmtList.size());
 		
+		BoardAttachFile file = new BoardAttachFile();
+		file.setArticleSeq(article.getArticleSeq());
+		file.setOriginalName("hi.gif");
+		file.setSaveName("2123.tmp");
+		file.setSize(565656);
+		
+		service.createAttachFile(file);
+		
+		List<BoardAttachFile> fileList = service.listAttachFile(article.getArticleSeq());
+		
+		Assert.assertEquals(1, fileList.size());
 	}
 }

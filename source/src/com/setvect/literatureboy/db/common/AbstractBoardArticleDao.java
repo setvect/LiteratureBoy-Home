@@ -284,7 +284,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	public List<BoardComment> listComment(int boardItemSeq) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = " from BoardComment where articleSeq = ? order commectSeq ";
+		String q = " from BoardComment where articleSeq = ? order by commectSeq ";
 		Query query = session.createQuery(q);
 
 		query.setInteger(0, boardItemSeq);
@@ -338,7 +338,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	public List<BoardAttachFile> listAttachFile(int boardItemSeq) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = " from BoardAttachFile where articleSeq = ? order fileSeq ";
+		String q = " from BoardAttachFile where articleSeq = ? order by fileSeq ";
 		Query query = session.createQuery(q);
 
 		query.setInteger(0, boardItemSeq);
