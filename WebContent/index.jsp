@@ -24,7 +24,7 @@
 	</div>
 	<div class="container" >
 		<div class="left">
-			menu2
+			menu2a
 		</div>
 		<div class="content">
 			<jsp:include page="<%=incPage%>"></jsp:include>
