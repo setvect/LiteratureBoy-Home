@@ -25,12 +25,6 @@ public class Board {
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "HEAD")
-	private String head;
-
-	@Column(name = "TAIL")
-	private String tail;
-
 	/** 총 게시물 파일 업로드 제한 */
 	@Column(name = "UPLOAD_LIMIT")
 	private int uploadLimit;
@@ -38,9 +32,6 @@ public class Board {
 	/** 한페이지당 표시 게시물 수 */
 	@Column(name = "EXP_COUNT")
 	private int expCount;
-
-	@Column(name = "LEVEL_SET")
-	private String levelSet;
 
 	@Column(name = "REPLY_F")
 	@Type(type = "yes_no")
@@ -90,36 +81,6 @@ public class Board {
 	}
 
 	/**
-	 * @return the head
-	 */
-	public String getHead() {
-		return head;
-	}
-
-	/**
-	 * @param head
-	 *            the head to set
-	 */
-	public void setHead(String head) {
-		this.head = head;
-	}
-
-	/**
-	 * @return the tail
-	 */
-	public String getTail() {
-		return tail;
-	}
-
-	/**
-	 * @param tail
-	 *            the tail to set
-	 */
-	public void setTail(String tail) {
-		this.tail = tail;
-	}
-
-	/**
 	 * @return the uploadLimit
 	 */
 	public int getUploadLimit() {
@@ -147,21 +108,6 @@ public class Board {
 	 */
 	public void setExpCount(int expCount) {
 		this.expCount = expCount;
-	}
-
-	/**
-	 * @return the levelSet
-	 */
-	public String getLevelSet() {
-		return levelSet;
-	}
-
-	/**
-	 * @param levelSet
-	 *            the levelSet to set
-	 */
-	public void setLevelSet(String levelSet) {
-		this.levelSet = levelSet;
 	}
 
 	/**

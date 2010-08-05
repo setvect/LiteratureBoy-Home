@@ -32,8 +32,8 @@ public class BoardManagerController {
 	 */
 	public static enum SendKey {
 		/** ¸®½ºÆ® */
-		BOARD_LIST, 
-	
+		BOARD_LIST,
+
 	}
 
 	@Resource
@@ -62,9 +62,10 @@ public class BoardManagerController {
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
 
-		// ¸ñ·ÏÆû 
+		// ¸ñ·ÏÆû
 		if (Mode.LIST_FORM == m) {
 			mav.addObject(SendKey.BOARD_LIST.name(), "hi");
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
 		}
 
 		return mav;

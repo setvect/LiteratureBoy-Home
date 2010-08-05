@@ -14,11 +14,8 @@
 			CREATE TABLE TBBA_BOARD_MANAGER (
 			  BOARD_CODE varchar(20) NOT NULL,
 			  NAME varchar(50) NOT NULL,
-			  HEAD text,
-			  TAIL text,
 			  UPLOAD_LIMIT int NOT NULL,
 			  EXP_COUNT int NOT NULL,
-			  LEVEL_SET varchar(5) NOT NULL,
 			  REPLY_F varchar(1) NOT NULL,
 			  COMMENT_F varchar(1) NOT NULL,
 			  PDS_F varchar(1) NOT NULL,

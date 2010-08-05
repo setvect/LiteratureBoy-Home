@@ -41,17 +41,14 @@ public class BoardTestCase extends TestSystem {
 		bd.setCommentF(false);
 		bd.setEncodeF(false);
 		bd.setExpCount(15);
-		bd.setLevelSet("AAAAA");
 		bd.setName("¿¬½À");
 		bd.setPdsF(false);
 		bd.setReplyF(false);
-		bd.setTail("AAAAAA");
 		bd.setUploadLimit(500000);
 		service.createBoard(bd);
 
 		Board bd1 = (Board) BeanUtils.cloneBean(service.getBoard(bd.getBoardCode()));
 		Assert.assertEquals(bd.getBoardCode(), bd1.getBoardCode());
-		Assert.assertNull(bd1.getHead());
 
 		bd.setName("Hi");
 		service.updateBoard(bd);
