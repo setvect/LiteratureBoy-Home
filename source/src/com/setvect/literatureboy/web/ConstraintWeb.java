@@ -11,4 +11,7 @@ public class ConstraintWeb {
 
 	/** jsp에 전달할 인쿨루드 페이지 정보를 답는 attribute key */
 	public final static String INCLUDE_PAGE = "__include_page";
+
+	/** 서비스 주소 저장 Attribute Key */
+	public static final String SERVLET_URL = "__controller_url";
 }

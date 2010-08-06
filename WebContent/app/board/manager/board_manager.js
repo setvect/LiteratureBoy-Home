@@ -1,3 +1,3 @@
 function createFrom(){
-	
+	createForm.submit();
 }

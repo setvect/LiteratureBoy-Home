@@ -29,10 +29,6 @@ public class Board {
 	@Column(name = "UPLOAD_LIMIT")
 	private int uploadLimit;
 
-	/** 한페이지당 표시 게시물 수 */
-	@Column(name = "EXP_COUNT")
-	private int expCount;
-
 	@Column(name = "REPLY_F")
 	@Type(type = "yes_no")
 	private boolean replyF;
@@ -41,9 +37,9 @@ public class Board {
 	@Type(type = "yes_no")
 	private boolean commentF;
 
-	@Column(name = "PDS_F")
+	@Column(name = "ATTACH_F")
 	@Type(type = "yes_no")
-	private boolean pdsF;
+	private boolean attachF;
 
 	/** 암호화 게시물 허용 여부 */
 	@Column(name = "ENCODE_F")
@@ -96,21 +92,6 @@ public class Board {
 	}
 
 	/**
-	 * @return the expCount
-	 */
-	public int getExpCount() {
-		return expCount;
-	}
-
-	/**
-	 * @param expCount
-	 *            the expCount to set
-	 */
-	public void setExpCount(int expCount) {
-		this.expCount = expCount;
-	}
-
-	/**
 	 * @return the replyF
 	 */
 	public boolean isReplyF() {
@@ -143,16 +124,16 @@ public class Board {
 	/**
 	 * @return the pdsF
 	 */
-	public boolean isPdsF() {
-		return pdsF;
+	public boolean isAttachF() {
+		return attachF;
 	}
 
 	/**
 	 * @param pdsF
 	 *            the pdsF to set
 	 */
-	public void setPdsF(boolean pdsF) {
-		this.pdsF = pdsF;
+	public void setAttachF(boolean pdsF) {
+		this.attachF = pdsF;
 	}
 
 	/**

@@ -25,12 +25,7 @@ public class BoardManagerController {
 	 */
 	public static enum Mode {
 		/** USER,AGEN,Menu 리스트 보기 */
-		LIST_FORM,
-		CREATE_FROM, 
-		UPDATE_FROM,
-		CREATE_ACTION,
-		DELETE_ACTION
-		
+		LIST_FORM, CREATE_FROM, UPDATE_FROM, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION
 	}
 
 	/**
@@ -38,7 +33,7 @@ public class BoardManagerController {
 	 */
 	public static enum AttributeKey {
 		/** 리스트 */
-		BOARD_LIST,
+		BOARD_LIST, MODE, BOARD_ITEM,
 	}
 
 	@Resource
@@ -72,7 +67,7 @@ public class BoardManagerController {
 			int currentPage = Integer.parseInt(StringUtilAd.null2str(request.getParameter("currentPage"), "1"));
 			PagingCondition searchVO = new PagingCondition(currentPage);
 
-			// 검색 
+			// 검색
 			String searchName = request.getParameter("searchName");
 			String searchCode = request.getParameter("searchCode");
 			if (StringUtilAd.isEmpty(searchName)) {
@@ -85,6 +80,10 @@ public class BoardManagerController {
 			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(searchVO);
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
+		}
+		else if (Mode.CREATE_FROM == m) {
+			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_create.jsp");
 		}
 
 		return mav;

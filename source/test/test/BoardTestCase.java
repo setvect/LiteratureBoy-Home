@@ -40,9 +40,8 @@ public class BoardTestCase extends TestSystem {
 		bd.setBoardCode(CODE);
 		bd.setCommentF(false);
 		bd.setEncodeF(false);
-		bd.setExpCount(15);
 		bd.setName("¿¬½À");
-		bd.setPdsF(false);
+		bd.setAttachF(false);
 		bd.setReplyF(false);
 		bd.setUploadLimit(500000);
 		service.createBoard(bd);
@@ -55,7 +54,7 @@ public class BoardTestCase extends TestSystem {
 		bd1 = (Board) BeanUtils.cloneBean(service.getBoard(bd.getBoardCode()));
 		Assert.assertEquals(bd.getName(), bd1.getName());
 
-		PagingCondition boardSearch = new PagingCondition(1, bd.getExpCount());
+		PagingCondition boardSearch = new PagingCondition(1, 10);
 
 		GenericPage<Board> list = service.getBoardPagingList(boardSearch);
 		Assert.assertEquals(1, list.getSize());
@@ -104,17 +103,17 @@ public class BoardTestCase extends TestSystem {
 
 		List<BoardComment> cmtList = service.listComment(article.getArticleSeq());
 		Assert.assertEquals(2, cmtList.size());
-		
+
 		BoardAttachFile file = new BoardAttachFile();
 		file.setArticleSeq(article.getArticleSeq());
 		file.setOriginalName("hi.gif");
 		file.setSaveName("2123.tmp");
 		file.setSize(565656);
-		
+
 		service.createAttachFile(file);
-		
+
 		List<BoardAttachFile> fileList = service.listAttachFile(article.getArticleSeq());
-		
+
 		Assert.assertEquals(1, fileList.size());
 	}
 }

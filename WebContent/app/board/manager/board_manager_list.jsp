@@ -4,10 +4,12 @@
 <%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
 GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardManagerController.AttributeKey.BOARD_LIST.name());
 %>
-
+<script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
 	<table>
 		<thead>
@@ -49,3 +51,6 @@ GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardM
 <div>
 	<input type="button" value="생성" onclick="createFrom();">
 </div>
+<form name="createForm" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString()%>">
+	<input type="hidden" name="mode" value="<%=BoardManagerController.Mode.CREATE_FROM%>"/> 
+</form>

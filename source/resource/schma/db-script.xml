@@ -15,10 +15,9 @@
 			  BOARD_CODE varchar(20) NOT NULL,
 			  NAME varchar(50) NOT NULL,
 			  UPLOAD_LIMIT int NOT NULL,
-			  EXP_COUNT int NOT NULL,
 			  REPLY_F varchar(1) NOT NULL,
 			  COMMENT_F varchar(1) NOT NULL,
-			  PDS_F varchar(1) NOT NULL,
+			  ATTACH_F varchar(1) NOT NULL,
 			  ENCODE_F varchar(1) NOT NULL,
 			  PRIMARY KEY  (BOARD_CODE)
 			)
