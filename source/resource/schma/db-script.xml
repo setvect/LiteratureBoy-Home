@@ -19,6 +19,7 @@
 			  COMMENT_F varchar(1) NOT NULL,
 			  ATTACH_F varchar(1) NOT NULL,
 			  ENCODE_F varchar(1) NOT NULL,
+				DELETE_F varchar(1) NOT NULL,	  
 			  PRIMARY KEY  (BOARD_CODE)
 			)
 		</creation>

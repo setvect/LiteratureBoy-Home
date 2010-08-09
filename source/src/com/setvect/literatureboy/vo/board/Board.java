@@ -46,6 +46,11 @@ public class Board {
 	@Type(type = "yes_no")
 	private boolean encodeF;
 
+	/** 게시판 삭제 여부 */
+	@Column(name = "DELETE_F")
+	@Type(type = "yes_no")
+	private boolean deleteF;
+
 	/**
 	 * @return the boardCode
 	 */
@@ -149,6 +154,21 @@ public class Board {
 	 */
 	public void setEncodeF(boolean encodeF) {
 		this.encodeF = encodeF;
+	}
+
+	/**
+	 * @return the deleteF
+	 */
+	public boolean isDeleteF() {
+		return deleteF;
+	}
+
+	/**
+	 * @param deleteF
+	 *            the deleteF to set
+	 */
+	public void setDeleteF(boolean deleteF) {
+		this.deleteF = deleteF;
 	}
 
 }

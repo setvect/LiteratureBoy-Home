@@ -1,29 +1,49 @@
+<%@page import="com.setvect.common.util.PagingCondition"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
 <%@page import="com.setvect.literatureboy.vo.board.Board"%>
 <%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
+<%@page import="com.setvect.common.util.StringUtilAd"%>
+<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
 	BoardManagerController.Mode mode = (BoardManagerController.Mode)request.getAttribute(BoardManagerController.AttributeKey.MODE.name());
+	PagingCondition pageingVO = (PagingCondition)request.getAttribute(BoardManagerController.AttributeKey.PAGE_SEARCH.name());
 	Board board = (Board) request.getAttribute(BoardManagerController.AttributeKey.BOARD_ITEM.name());
 	if(board == null){
 		board = new Board();
 	}
 	request.setAttribute("createForm", board);
 %>
-<script type="text/javascript" src="/common/js/jquery-1.3.2.js"></script>
-<script type="text/javascript" src="/common/js/util_class.js"></script>
+<jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
-	<form:form commandName="createForm" id="createForm" method="post" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString() %>">
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString() %>">
 		<input type="hidden" name="mode" value="<%=mode%>"/>
+		<input type="hidden" name="searchName" value="<%=StringUtilAd.toForm(pageingVO.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME))%>">
+		<input type="hidden" name="searchCode" value="<%=StringUtilAd.toForm(pageingVO.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE))%>">
+		<input type="hidden" name="currentPageNo" value="<%=pageingVO.getCurrentPageNo()%>">	
 		<table>
 			<tr>
 				<td>코드</td>
-				<td><form:input id="boardCode" path="boardCode" size="15" maxlength="8"/></td>
+				<td>
+<%
+	if(mode == BoardManagerController.Mode.CREATE_ACTION){
+%>				
+					<form:input id="boardCode" path="boardCode" size="15" maxlength="8"/>
+<%
+	}
+	// 수정 처리시 
+	else{
+%>				<%=board.getBoardCode()%>
+					<form:hidden id="boardCode" path="boardCode"/>
+<%
+	}
+%>					
+				</td>
 			</tr>
 			<tr>
 				<td>이름</td>
@@ -65,5 +85,6 @@
 	</form:form>
 </div>
 <div>
-	<input type="button" value="확인" onclick="createOrUpdate()">
+	<input type="button" value="확인" onclick="BoardManager.createOrUpdate()">
 </div>
+<jsp:include page="board_manager_form.inc.jsp"></jsp:include>

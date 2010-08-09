@@ -32,7 +32,7 @@ public class TestSystem {
 		File currentPath = new File(a.getFile());
 
 		// 현재 클래스 경로를 추적해 웹루트 디렉토리를 찾음. 꼼수임
-		File projectRoot = currentPath.getParentFile().getParentFile().getParentFile();
+		File projectRoot = currentPath.getParentFile().getParentFile().getParentFile().getParentFile();
 		File webRoot = new File(projectRoot, WEB_ROOT_NAME);
 		EnvirmentInit.bootUp(webRoot, CONFIG_PROPERTIES);
 	}

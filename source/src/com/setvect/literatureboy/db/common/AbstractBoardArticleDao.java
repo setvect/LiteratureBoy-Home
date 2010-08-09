@@ -65,17 +65,17 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 * @return select where 절 조건
 	 */
 	private String getManagerWhereClause(PagingCondition paging) {
-		String where = "";
+		String where = "where deleteF = 'N'";
 
 		String code = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE);
 		String name = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME);
 
 		// 두개가 동새에 검색 조건에 포함 될 수 없음
 		if (!StringUtilAd.isEmpty(code)) {
-			where = " where boardCode like " + StringUtilAd.getSqlStringLike(code);
+			where += " and boardCode like " + StringUtilAd.getSqlStringLike(code);
 		}
 		else if (!StringUtilAd.isEmpty(name)) {
-			where = " where name like " + StringUtilAd.getSqlStringLike(name);
+			where += " and name like " + StringUtilAd.getSqlStringLike(name);
 		}
 		return where;
 	}

@@ -60,6 +60,27 @@ public class StringUtilAd extends StringUtils {
 		word = word.trim();
 		return new String("'" + word + "%'");
 	}
+	
+	/**
+	 * 폼에 맞게 문자를 바꾸어 준다.
+	 * 
+	 * @param src
+	 *            source String
+	 * @return 변환된 String
+	 */
+	public static String toForm(String src) {
+		String strBuffer = src;
+		if (src == null)
+			return EMPTY;
+		strBuffer = replace(strBuffer, "<", "&lt;");
+		strBuffer = replace(strBuffer, ">", "&gt;");
+		strBuffer = replace(strBuffer, "\"", "&quot;");
+		strBuffer = replace(strBuffer, "\'", "&#039;");
+
+		// &#33324의 글자를 보존 하기 위해서
+		strBuffer = replace(strBuffer, "&amp;#", "&#");
+		return strBuffer;
+	}
 
 	/**
 	 * @param password

@@ -4,11 +4,16 @@
 <%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
+<%@page import="com.setvect.common.util.PagingCondition"%>
+<%@page import="com.setvect.common.util.StringUtilAd"%>
+<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
-GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardManagerController.AttributeKey.BOARD_LIST.name());
+	GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardManagerController.AttributeKey.BOARD_LIST.name());
+	PagingCondition pageingVO = (PagingCondition)request.getAttribute(BoardManagerController.AttributeKey.PAGE_SEARCH.name());
 %>
+<jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
 	<table>
@@ -31,9 +36,9 @@ GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardM
 			<tr>
 				<td><%=c%></td>
 				<td><%=b.getBoardCode() %></td>
-				<td><%=b.getName() %></td>
-				<td><input type="button" value="수정" onclick="updateFrom('<%=b.getBoardCode()%>')"></td>
-				<td><input type="button" value="삭제" onclick="deleteProc('<%=b.getBoardCode()%>')"></td>																
+				<td><a href="javascript:BoardManager.readForm('<%=b.getBoardCode()%>')"><%=b.getName() %></a></td>
+				<td><input type="button" value="수정" onclick="BoardManager.updateFrom('<%=b.getBoardCode()%>')"></td>
+				<td><input type="button" value="삭제" onclick="BoardManager.deleteAction('<%=b.getBoardCode()%>')"></td>																
 			</tr>
 <%
 	}
@@ -49,8 +54,6 @@ GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardM
 	</table>
 </div>
 <div>
-	<input type="button" value="생성" onclick="createFrom();">
+	<input type="button" value="생성" onclick="BoardManager.createFrom();">
 </div>
-<form name="createForm" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString()%>">
-	<input type="hidden" name="mode" value="<%=BoardManagerController.Mode.CREATE_FROM%>"/> 
-</form>
+<jsp:include page="board_manager_form.inc.jsp"></jsp:include>
