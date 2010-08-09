@@ -135,11 +135,13 @@ public class XMLParser {
 
 			// DOM 파서 생성
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
 			factory.setIgnoringElementContentWhitespace(true);
 			factory.setSchema(schema);
 
 			builder = factory.newDocumentBuilder();
-
+			System.out.println(factory);
+			System.out.println(builder);
 			bis = new BufferedInputStream(openStream);
 			return builder.parse(bis);
 		} finally {
