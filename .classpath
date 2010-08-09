@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="build/classes" path="source/src"/>
-	<classpathentry kind="src" output="build/classes" path="source/common"/>
-	<classpathentry kind="src" output="build/test-classes" path="source/test"/>
+	<classpathentry kind="src" path="source/src"/>
+	<classpathentry kind="src" path="source/common"/>
+	<classpathentry kind="src" path="source/test"/>
 	<classpathentry kind="src" path="source/resource"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER">
@@ -16,5 +16,5 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="output" path="build/classes"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

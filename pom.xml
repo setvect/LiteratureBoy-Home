@@ -11,7 +11,7 @@
 		<finalName>literature</finalName>
 		<directory>${basedir}/build</directory>
 		<sourceDirectory>${basedir}/source/src/</sourceDirectory>
-		<outputDirectory>${basedir}/build/classes</outputDirectory>
+		<outputDirectory>${basedir}/WebContent/WEB-INF/classes</outputDirectory>
 		<testSourceDirectory>${basedir}/source/test</testSourceDirectory>
 		<testOutputDirectory>${basedir}/build/test-classes</testOutputDirectory>
 		<testResources>
