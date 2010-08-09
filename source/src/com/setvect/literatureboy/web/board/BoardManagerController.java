@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -62,8 +63,21 @@ public class BoardManagerController {
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
 
+		if (m == Mode.CREATE_FROM) {
+			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_create.jsp");
+		}
+		else if (m == Mode.CREATE_ACTION) {
+			Board bd = new Board();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(bd);
+			binder.bind(request);
+			binder.closeNoCatch();
+			boardService.createBoard(bd);
+			m = Mode.LIST_FORM;
+		}
+
 		// ¸ñ·ÏÆû
-		if (Mode.LIST_FORM == m) {
+		if (m == Mode.LIST_FORM) {
 			int currentPage = Integer.parseInt(StringUtilAd.null2str(request.getParameter("currentPage"), "1"));
 			PagingCondition searchVO = new PagingCondition(currentPage);
 
@@ -81,11 +95,6 @@ public class BoardManagerController {
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
 		}
-		else if (Mode.CREATE_FROM == m) {
-			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_create.jsp");
-		}
-
 		return mav;
 	}
 }
