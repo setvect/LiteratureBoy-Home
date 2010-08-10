@@ -83,10 +83,10 @@ public class BoardTestCase extends TestSystem {
 		article.setTitle("¸Þ··");
 		service.updateArticle(article);
 
-		PagingCondition articleSearch = new PagingCondition(1);
-		articleSearch.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE, CODE);
+		PagingCondition pageCondition = new PagingCondition(1);
+		pageCondition.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE, CODE);
 
-		GenericPage<BoardArticle> articleList = service.getArticlePagingList(articleSearch);
+		GenericPage<BoardArticle> articleList = service.getArticlePagingList(pageCondition);
 		Assert.assertEquals(2, articleList.getSize());
 
 		BoardComment cmt = new BoardComment();

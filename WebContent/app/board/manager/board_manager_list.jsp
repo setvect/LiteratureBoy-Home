@@ -20,61 +20,22 @@
 %>
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
-
-
-<display:table name="productList" class="table" id="productList" requestURI="" export="false" partialList="true" size="${size}" pagesize="${pagesize}"  style="margin-top:10px;">
-	<display:column sortable="true" media="html" title="No.">
-		${productList.boardCode}
-	</display:column>
-	<display:column property="boardCode" sortable="true" href="${ctx}/foundationProduct.do?method=get" media="html" title="Code"/>
-
-</display:table>
-
-
-
-
-
-
-
-
 <div>
-	<table>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>코드</th>
-				<th>이름</th>
-				<th>수정</th>
-				<th>삭제</th>
-			</tr>
-		</thead>
-		<tbody>
-<%
-	Collection<Board> list = boardPaging.getList();
-	int c=0;
-	for(Board b : list){
-		c++;
-%>		
-			<tr>
-				<td><%=c%></td>
-				<td><%=b.getBoardCode() %></td>
-				<td><a href="javascript:BoardManager.readForm('<%=b.getBoardCode()%>')"><%=b.getName() %></a></td>
-				<td><input type="button" value="수정" onclick="BoardManager.updateFrom('<%=b.getBoardCode()%>')"></td>
-				<td><input type="button" value="삭제" onclick="BoardManager.deleteAction('<%=b.getBoardCode()%>')"></td>																
-			</tr>
-<%
-	}
-	if(c == 0){
-%>
-			<tr>
-				<td colspan="5">자료가 없습니다.</td>
-			</tr>
-<%		
-	}
-%>			
-		</tbody>
-	</table>
+	<display:table name="boardList" class="table" id="boardList" requestURI="" export="false" partialList="true" size="${size}" pagesize="${pagesize}"  style="margin-top:10px;">
+		<display:column sortable="true" title="No.">
+			0
+		</display:column>
+		<display:column property="boardCode" sortable="true" href="${controller_url}" titleKey="Code"/>
+		<display:column property="name" sortable="true" title="Name"/>
+		<display:column title="Update">
+			<input type="button" value="수정" onclick="BoardManager.updateFrom('${boardList.boardCode}')">
+		</display:column>
+		<display:column title="Delete">
+			<input type="button" value="삭제" onclick="BoardManager.deleteAction('${boardList.boardCode}')">
+		</display:column>
+	</display:table>
 </div>
+
 <div>
 	<input type="button" value="생성" onclick="BoardManager.createFrom();">
 </div>

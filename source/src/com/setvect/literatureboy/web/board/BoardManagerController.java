@@ -65,8 +65,8 @@ public class BoardManagerController {
 			m = Mode.valueOf(mode);
 		}
 
-		PagingCondition searchVO = bindSearch(request);
-		mav.addObject(AttributeKey.PAGE_SEARCH.name(), searchVO);
+		PagingCondition pageCondition = bindSearch(request);
+		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
 		if(m == Mode.READ_FORM){
@@ -109,11 +109,11 @@ public class BoardManagerController {
 		}
 		// ¸ñ·ÏÆû
 		if (m == Mode.LIST_FORM) {
-			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(searchVO);
+			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(pageCondition);
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
 			
-			request.setAttribute("productList", boardPagingList.getList());
+			request.setAttribute("boardList", boardPagingList.getList());
 			request.setAttribute("size", boardPagingList.getTotalCount());
 			request.setAttribute("pagesize", boardPagingList.getPagesize());
 			request.setAttribute("pageunit", boardPagingList.getPageunit());
@@ -130,7 +130,7 @@ public class BoardManagerController {
 	 */
 	private PagingCondition bindSearch(HttpServletRequest request) {
 		int currentPage = Integer.parseInt(StringUtilAd.null2str(request.getParameter("currentPage"), "1"));
-		PagingCondition searchVO = new PagingCondition(currentPage);
+		PagingCondition searchVO = new PagingCondition(currentPage, 2);
 
 		// °Ë»ö
 		String searchName = request.getParameter("searchName");

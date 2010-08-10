@@ -38,37 +38,37 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 * 
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
-	public GenericPage<Board> getBoardPagingList(PagingCondition paging) throws Exception {
+	public GenericPage<Board> getBoardPagingList(PagingCondition pageCondition) throws Exception {
 
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = "select count(*) from Board " + getManagerWhereClause(paging);
+		String q = "select count(*) from Board " + getManagerWhereClause(pageCondition);
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from Board " + getManagerWhereClause(paging) + " order by boardCode ";
+		q = " from Board " + getManagerWhereClause(pageCondition) + " order by boardCode ";
 		query = session.createQuery(q);
-		query.setFirstResult(paging.getStartNumber());
-		query.setMaxResults(paging.getPagePerItemCount());
+		query.setFirstResult(pageCondition.getStartNumber());
+		query.setMaxResults(pageCondition.getPagePerItemCount());
 
 		@SuppressWarnings("unchecked")
 		List<Board> resultList = query.list();
 
-		GenericPage<Board> resultPage = new GenericPage<Board>(resultList, paging.getCurrentPageNo(), totalCount,
-				paging.getPageUnit(), paging.getPagePerItemCount());
+		GenericPage<Board> resultPage = new GenericPage<Board>(resultList, pageCondition.getCurrentPageNo(), totalCount,
+				pageCondition.getPageUnit(), pageCondition.getPagePerItemCount());
 		return resultPage;
 	}
 
 	/**
-	 * @param paging
+	 * @param pageCondition
 	 *            검색 조건
 	 * @return select where 절 조건
 	 */
-	private String getManagerWhereClause(PagingCondition paging) {
+	private String getManagerWhereClause(PagingCondition pageCondition) {
 		String where = "where deleteF = 'N'";
 
-		String code = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE);
-		String name = paging.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME);
+		String code = pageCondition.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE);
+		String name = pageCondition.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME);
 
 		// 두개가 동새에 검색 조건에 포함 될 수 없음
 		if (!StringUtilAd.isEmpty(code)) {
@@ -126,23 +126,23 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
 	// TODO 목록 검색시 불필요한 항목(내용 TEXT)까지 가져오는 경우 발생. 성능 문제 발생시 수정
-	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition paging) throws Exception {
+	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition pageCondtion) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = "select count(*) from BoardArticle " + getArticleWhereClause(paging);
+		String q = "select count(*) from BoardArticle " + getArticleWhereClause(pageCondtion);
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from BoardArticle " + getArticleWhereClause(paging) + " order by IDX2 desc, IDX3 ASC ";
+		q = " from BoardArticle " + getArticleWhereClause(pageCondtion) + " order by IDX2 desc, IDX3 ASC ";
 		query = session.createQuery(q);
-		query.setFirstResult(paging.getStartNumber());
-		query.setMaxResults(paging.getPagePerItemCount());
+		query.setFirstResult(pageCondtion.getStartNumber());
+		query.setMaxResults(pageCondtion.getPagePerItemCount());
 
 		@SuppressWarnings("unchecked")
 		List<BoardArticle> resultList = query.list();
 
-		GenericPage<BoardArticle> resultPage = new GenericPage<BoardArticle>(resultList, paging.getCurrentPageNo(),
-				totalCount, paging.getPageUnit(), paging.getPagePerItemCount());
+		GenericPage<BoardArticle> resultPage = new GenericPage<BoardArticle>(resultList, pageCondtion.getCurrentPageNo(),
+				totalCount, pageCondtion.getPageUnit(), pageCondtion.getPagePerItemCount());
 		return resultPage;
 	}
 

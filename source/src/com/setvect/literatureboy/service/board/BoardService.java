@@ -52,12 +52,12 @@ public class BoardService {
 	}
 
 	/**
-	 * @param searchVO
+	 * @param pageCondition
 	 * @return 정보 항목
 	 * @throws Exception
 	 */
-	public GenericPage<Board> getBoardPagingList(PagingCondition searchVO) throws Exception {
-		return boardDao.getBoardPagingList(searchVO);
+	public GenericPage<Board> getBoardPagingList(PagingCondition pageCondition) throws Exception {
+		return boardDao.getBoardPagingList(pageCondition);
 	}
 
 	/**
@@ -94,13 +94,13 @@ public class BoardService {
 	}
 
 	/**
-	 * @param searchVO
+	 * @param pageCondition
 	 *            게시물 검색 정보
 	 * @return 게시물 페이지 값
 	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition searchVO) throws Exception {
-		return boardDao.getArticlePagingList(searchVO);
+	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition pageCondition) throws Exception {
+		return boardDao.getArticlePagingList(pageCondition);
 	}
 
 	/**

@@ -21,11 +21,11 @@ public interface BoardDao {
 	public Board getBoard(String code);
 
 	/**
-	 * @param searchVO
+	 * @param pageCondition
 	 * @return 게시판생성 정보 항목
 	 * @throws Exception
 	 */
-	public GenericPage<Board> getBoardPagingList(PagingCondition searchVO) throws Exception;
+	public GenericPage<Board> getBoardPagingList(PagingCondition pageCondition) throws Exception;
 
 	/**
 	 * @param board
@@ -51,12 +51,12 @@ public interface BoardDao {
 	public BoardArticle getArticle(int articleSeq);
 
 	/**
-	 * @param searchVO
+	 * @param pageCondition
 	 *            게시물 검색 정보
 	 * @return 게시물 페이지 값
 	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition searchVO) throws Exception;
+	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition pageCondition) throws Exception;
 
 	/**
 	 * 게시물 등록
