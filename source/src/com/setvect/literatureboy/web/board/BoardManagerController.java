@@ -112,6 +112,11 @@ public class BoardManagerController {
 			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(searchVO);
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
+			
+			request.setAttribute("productList", boardPagingList.getList());
+			request.setAttribute("size", boardPagingList.getTotalCount());
+			request.setAttribute("pagesize", boardPagingList.getPagesize());
+			request.setAttribute("pageunit", boardPagingList.getPageunit());
 		}
 
 		return mav;

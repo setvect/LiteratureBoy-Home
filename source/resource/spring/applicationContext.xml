@@ -31,6 +31,16 @@
 		<!-- <context:exclude-filter type="aspectj" expression="com.setvect.literatureboy.db.h2.*"/> -->
 	</context:component-scan>
 	       
+	<!--  Message Resources -->
+	<bean id="messageSource" 
+		class="org.springframework.context.support.ResourceBundleMessageSource">	
+		<property name="basenames">
+			<list>
+				<value>message/message</value>
+			</list>
+		</property>
+	</bean>	       
+	       
 	<!-- DB Connection -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 		lazy-init="true">

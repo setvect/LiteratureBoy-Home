@@ -9,12 +9,34 @@
 <%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <%
 	GenericPage<Board> boardPaging = (GenericPage<Board>)request.getAttribute(BoardManagerController.AttributeKey.BOARD_LIST.name());
 	PagingCondition pageingVO = (PagingCondition)request.getAttribute(BoardManagerController.AttributeKey.PAGE_SEARCH.name());
 %>
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
+
+
+<display:table name="productList" class="table" id="productList" requestURI="" export="false" partialList="true" size="${size}" pagesize="${pagesize}"  style="margin-top:10px;">
+	<display:column sortable="true" media="html" title="No.">
+		${productList.boardCode}
+	</display:column>
+	<display:column property="boardCode" sortable="true" href="${ctx}/foundationProduct.do?method=get" media="html" title="Code"/>
+
+</display:table>
+
+
+
+
+
+
+
+
 <div>
 	<table>
 		<thead>
