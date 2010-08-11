@@ -22,9 +22,10 @@
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
 	<display:table name="boardList" class="table" id="boardList" requestURI="" export="false" partialList="true" size="${size}" pagesize="${pagesize}"  style="margin-top:10px;">
-		<display:column sortable="true" title="No.">
-			0
-		</display:column>
+    <display:column title="row number" >
+      <c:out value="${boardList_rowNum}"/>
+    </display:column>
+
 		<display:column property="boardCode" sortable="true" href="${controller_url}" titleKey="Code"/>
 		<display:column property="name" sortable="true" title="Name"/>
 		<display:column title="Update">
