@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.displaytag.tags.TableTagParameters;
+import org.displaytag.util.ParamEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,7 +71,7 @@ public class BoardManagerController {
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
-		if(m == Mode.READ_FORM){
+		if (m == Mode.READ_FORM) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
 			mav.addObject(BoardManagerController.AttributeKey.BOARD_ITEM.name(), b);
@@ -85,8 +87,8 @@ public class BoardManagerController {
 			boardService.createBoard(bd);
 			m = Mode.LIST_FORM;
 		}
-		// 수정 폼 
-		else if(m == Mode.UPDATE_FORM){
+		// 수정 폼
+		else if (m == Mode.UPDATE_FORM) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
 			mav.addObject(BoardManagerController.AttributeKey.BOARD_ITEM.name(), b);
@@ -112,7 +114,7 @@ public class BoardManagerController {
 			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(pageCondition);
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
-			
+
 			request.setAttribute("boardList", boardPagingList.getList());
 			request.setAttribute("size", boardPagingList.getTotalCount());
 			request.setAttribute("pagesize", boardPagingList.getPagesize());
@@ -129,7 +131,9 @@ public class BoardManagerController {
 	 * @return 페이징 및 검색 정보
 	 */
 	private PagingCondition bindSearch(HttpServletRequest request) {
-		int currentPage = Integer.parseInt(StringUtilAd.null2str(request.getParameter("currentPage"), "1"));
+		String pageParam = (new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE));
+		String pageParamValue = request.getParameter(pageParam);
+		int currentPage = Integer.parseInt(StringUtilAd.null2str(request.getParameter("currentPage"), pageParamValue));
 		PagingCondition searchVO = new PagingCondition(currentPage, 2);
 
 		// 검색

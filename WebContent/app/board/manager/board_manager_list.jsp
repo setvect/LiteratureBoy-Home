@@ -26,7 +26,7 @@
       <c:out value="${boardList_rowNum}"/>
     </display:column>
 
-		<display:column property="boardCode" sortable="true" href="${controller_url}" titleKey="Code"/>
+		<display:column property="boardCode" sortable="true" href="" titleKey="Code"/>
 		<display:column property="name" sortable="true" title="Name"/>
 		<display:column title="Update">
 			<input type="button" value="수정" onclick="BoardManager.updateFrom('${boardList.boardCode}')">
