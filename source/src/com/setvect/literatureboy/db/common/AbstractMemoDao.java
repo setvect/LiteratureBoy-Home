@@ -47,7 +47,7 @@ public abstract class AbstractMemoDao<T, PK extends Serializable> extends Generi
 		@SuppressWarnings("unchecked")
 		List<Memo> resultList = query.list();
 
-		GenericPage<Memo> resultPage = new GenericPage<Memo>(resultList, paging.getCurrentPageNo(), totalCount,
+		GenericPage<Memo> resultPage = new GenericPage<Memo>(resultList, paging.getCurrentPage(), totalCount,
 				paging.getPageUnit(), paging.getPagePerItemCount());
 		return resultPage;
 	}

@@ -54,7 +54,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 		@SuppressWarnings("unchecked")
 		List<Board> resultList = query.list();
 
-		GenericPage<Board> resultPage = new GenericPage<Board>(resultList, pageCondition.getCurrentPageNo(), totalCount,
+		GenericPage<Board> resultPage = new GenericPage<Board>(resultList, pageCondition.getCurrentPage(), totalCount,
 				pageCondition.getPageUnit(), pageCondition.getPagePerItemCount());
 		return resultPage;
 	}
@@ -141,7 +141,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 		@SuppressWarnings("unchecked")
 		List<BoardArticle> resultList = query.list();
 
-		GenericPage<BoardArticle> resultPage = new GenericPage<BoardArticle>(resultList, pageCondtion.getCurrentPageNo(),
+		GenericPage<BoardArticle> resultPage = new GenericPage<BoardArticle>(resultList, pageCondtion.getCurrentPage(),
 				totalCount, pageCondtion.getPageUnit(), pageCondtion.getPagePerItemCount());
 		return resultPage;
 	}

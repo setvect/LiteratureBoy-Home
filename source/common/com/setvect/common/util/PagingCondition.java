@@ -1,7 +1,11 @@
 package com.setvect.common.util;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 각종 검색 조건을 표현함
@@ -17,7 +21,7 @@ public class PagingCondition implements Serializable {
 	private static final int DEFAULT_PAGE_UNIT = 10;
 
 	/** 현재 페이지 */
-	private int currentPageNo;
+	private int currentPage;
 
 	/** 한페이지당 표시 항목 수 */
 	private int pagePerItemCount = DEFAULT_PAGE_VIEW_COUNT;
@@ -29,26 +33,26 @@ public class PagingCondition implements Serializable {
 	private HashMap<Object, Object> searchData = new HashMap<Object, Object>();
 
 	/**
-	 * @param currentPageNo
+	 * @param currentPage
 	 *            현 페이지. 1부터 시작
 	 */
-	public PagingCondition(int currentPageNo) {
-		this.currentPageNo = currentPageNo;
+	public PagingCondition(int currentPage) {
+		this.currentPage = currentPage;
 	}
 
 	/**
-	 * @param currentPageNo
+	 * @param currentPage
 	 *            현 페이지. 1부터 시작
 	 * @param pagePerItemCount
 	 *            한페이지당 표시 항목 수
 	 */
-	public PagingCondition(int currentPageNo, int pagePerItemCount) {
-		this.currentPageNo = currentPageNo;
+	public PagingCondition(int currentPage, int pagePerItemCount) {
+		this.currentPage = currentPage;
 		this.pagePerItemCount = pagePerItemCount;
 	}
 
 	/**
-	 * @param currentPageNo
+	 * @param currentPage
 	 *            현 페이지. 1부터 시작
 	 * @param pagePerItemCount
 	 *            한페이지당 표시 항목 수
@@ -56,8 +60,8 @@ public class PagingCondition implements Serializable {
 	 *            페이지 묶음 크기
 	 * 
 	 */
-	public PagingCondition(int currentPageNo, int pagePerItemCount, int pageUnit) {
-		this.currentPageNo = currentPageNo;
+	public PagingCondition(int currentPage, int pagePerItemCount, int pageUnit) {
+		this.currentPage = currentPage;
 		this.pagePerItemCount = pagePerItemCount;
 		this.pageUnit = pageUnit;
 	}
@@ -65,8 +69,8 @@ public class PagingCondition implements Serializable {
 	/**
 	 * @return 현 페이지. 1부터 시작
 	 */
-	public int getCurrentPageNo() {
-		return this.currentPageNo;
+	public int getCurrentPage() {
+		return this.currentPage;
 	}
 
 	/**
@@ -95,7 +99,7 @@ public class PagingCondition implements Serializable {
 	 * @return 가져 와야 될 항목 시작 번호(0부터 시작)
 	 */
 	public int getStartNumber() {
-		return (getCurrentPageNo() - 1) * getPagePerItemCount();
+		return (getCurrentPage() - 1) * getPagePerItemCount();
 	}
 
 	/**
@@ -137,5 +141,43 @@ public class PagingCondition implements Serializable {
 	 */
 	public HashMap<Object, Object> getCondition() {
 		return this.searchData;
+	}
+
+	/**
+	 * 페이지 정보 및 검색 관련 URL 파라미터<br>
+	 * 파리미터 인코딩 타입: utf-8
+	 * 
+	 * @param keyMap
+	 *            항목에 대한 파라미터 이름
+	 * @return '?' 이후 URL 파라미터 전송
+	 * @throws UnsupportedEncodingException
+	 */
+	public String getUrlParam(Map<Object, String> keyMap) throws UnsupportedEncodingException {
+		return getUrlParam(keyMap, "utf-8");
+	}
+
+	/**
+	 * 페이지 정보 및 검색 관련 URL 파라미터
+	 * 
+	 * @param keyMap
+	 *            항목에 대한 파라미터 이름
+	 * @param charset
+	 *            파라미터 인코딩
+	 * @return '?' 이후 URL 파라미터 전송
+	 * @throws UnsupportedEncodingException
+	 */
+	public String getUrlParam(Map<Object, String> keyMap, String charset) throws UnsupportedEncodingException {
+		StringBuffer param = new StringBuffer();
+		param.append("currentPage=" + getCurrentPage());
+		Set<Object> keys = keyMap.keySet();
+		for (Object key : keys) {
+			String paramName = keyMap.get(key);
+			String c = getConditionString(key);
+			if (c == null) {
+				continue;
+			}
+			param.append("&" + paramName + "=" + URLEncoder.encode(c, charset));
+		}
+		return param.toString();
 	}
 }

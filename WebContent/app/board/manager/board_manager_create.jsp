@@ -7,8 +7,7 @@
 <%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
 <%@page import="com.setvect.common.util.StringUtilAd"%>
 <%@page import="com.setvect.literatureboy.service.board.BoardService"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@include file="/common/taglib.inc.jsp"%>
 <%
 	BoardManagerController.Mode mode = (BoardManagerController.Mode)request.getAttribute(BoardManagerController.AttributeKey.MODE.name());
 	PagingCondition pageingVO = (PagingCondition)request.getAttribute(BoardManagerController.AttributeKey.PAGE_SEARCH.name());
@@ -22,10 +21,10 @@
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
 	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString() %>">
-		<input type="hidden" name="mode" value="<%=mode%>"/>
+		<input type="hidden" name="mode" value="${MODE}"/>
 		<input type="hidden" name="searchName" value="<%=StringUtilAd.toForm(pageingVO.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME))%>">
 		<input type="hidden" name="searchCode" value="<%=StringUtilAd.toForm(pageingVO.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE))%>">
-		<input type="hidden" name="currentPageNo" value="<%=pageingVO.getCurrentPageNo()%>">	
+		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}">	
 		<table>
 			<tr>
 				<td>코드</td>
@@ -38,7 +37,7 @@
 	}
 	// 수정 처리시 
 	else{
-%>				<%=board.getBoardCode()%>
+%>				${createForm.boardCode}
 					<form:hidden id="boardCode" path="boardCode"/>
 <%
 	}
@@ -86,5 +85,6 @@
 </div>
 <div>
 	<input type="button" value="확인" onclick="BoardManager.createOrUpdate()">
+	<input type="button" value="취소" onclick="history.back();">
 </div>
 <jsp:include page="board_manager_form.inc.jsp"></jsp:include>

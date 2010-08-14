@@ -1,5 +1,8 @@
 package com.setvect.literatureboy.web.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +49,13 @@ public class BoardManagerController {
 	@Resource
 	private BoardService boardService;
 
+	/** 검색 항목에 대한 파라미터 이름 맵핑 */
+	private final static Map<Object, String> search = new HashMap<Object, String>();
+	static {
+		search.put(BoardService.BOARD_SEARCH_ITEM.NAME, "searchName");
+		search.put(BoardService.BOARD_SEARCH_ITEM.CODE, "searchCode");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -54,7 +64,7 @@ public class BoardManagerController {
 	 * .http.HttpServletRequest, com.ipms.sfj.pt.setup.user.User)
 	 */
 	@RequestMapping("/board/manager.do")
-	public ModelAndView userTranscation(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		response.setCharacterEncoding(request.getCharacterEncoding());
 		String mode = request.getParameter("mode");
@@ -100,6 +110,8 @@ public class BoardManagerController {
 			Binder.bind(request, bd);
 			boardService.updateBoard(bd);
 			m = Mode.LIST_FORM;
+			mav.setViewName("redirect:" + request.getRequestURI() + "?" + pageCondition.getUrlParam(search));
+			return mav;
 		}
 		// 삭제 처리
 		else if (m == Mode.DELETE_ACTION) {
@@ -115,10 +127,7 @@ public class BoardManagerController {
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
 
-			request.setAttribute("boardList", boardPagingList.getList());
-			request.setAttribute("size", boardPagingList.getTotalCount());
-			request.setAttribute("pagesize", boardPagingList.getPagesize());
-			request.setAttribute("pageunit", boardPagingList.getPageunit());
+			request.setAttribute("pageList", boardPagingList);
 		}
 
 		return mav;
@@ -133,7 +142,11 @@ public class BoardManagerController {
 	private PagingCondition bindSearch(HttpServletRequest request) {
 		String pageParam = (new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE));
 		String pageParamValue = request.getParameter(pageParam);
-		int currentPage = Integer.parseInt(StringUtilAd.null2str(request.getParameter("currentPage"), pageParamValue));
+
+		if (StringUtilAd.isEmpty(pageParamValue)) {
+			pageParamValue = request.getParameter("currentPage");
+		}
+		int currentPage = Integer.parseInt(StringUtilAd.null2str(pageParamValue, "1"));
 		PagingCondition searchVO = new PagingCondition(currentPage, 2);
 
 		// 검색
