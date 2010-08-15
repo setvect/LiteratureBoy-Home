@@ -29,7 +29,7 @@ public class PagingCondition implements Serializable {
 	private int pageUnit = DEFAULT_PAGE_UNIT;
 
 	/** 검색 정보 키:값 형태로 구성 */
-	private HashMap<Object, Object> searchData = new HashMap<Object, Object>();
+	private Map<Object, Object> searchData = new HashMap<Object, Object>();
 
 	/**
 	 * @param currentPage
@@ -138,7 +138,7 @@ public class PagingCondition implements Serializable {
 	/**
 	 * @return 검색 맵 정보
 	 */
-	public HashMap<Object, Object> getCondition() {
+	public Map<Object, Object> getCondition() {
 		return this.searchData;
 	}
 
@@ -166,6 +166,20 @@ public class PagingCondition implements Serializable {
 			param.put(paramName, c);
 		}
 		return param;
+	}
+
+	/**
+	 * @return 검색 단어중 값이 있는 하나를 반환. 아무도 없으면 null. 2개 이상 값이 있을 경우 어떤걸 반환 할지 모름
+	 */
+	public String getSearchWord() {
+		Set<Object> keys = searchData.keySet();
+		for (Object key : keys) {
+			String s = getConditionString(key);
+			if (!StringUtilAd.isEmpty(s)) {
+				return s;
+			}
+		}
+		return null;
 	}
 
 }

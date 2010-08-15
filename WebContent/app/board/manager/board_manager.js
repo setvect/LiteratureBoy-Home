@@ -1,7 +1,21 @@
 
 var BoardManager = new Object();
 
-BoardManager.listForm = function(code){
+BoardManager.searchForm = function(){
+	if($.FORM.isEmptyRtnMsg(searchForm.searchWord, "검색단어를 입력해 주세요")){
+		return;
+	}
+	searchForm.submit();
+};
+
+BoardManager.searchStopForm = function(){
+	listForm.searchName.value="";
+	listForm.searchCode.value="";
+	listForm.submit();
+};
+
+
+BoardManager.listForm = function(){
 	listForm.submit();
 };
 

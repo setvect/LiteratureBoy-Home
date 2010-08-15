@@ -33,7 +33,7 @@ public class BoardManagerController {
 	 */
 	public static enum Mode {
 		/** USER,AGEN,Menu 리스트 보기 */
-		LIST_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION
+		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION
 	}
 
 	/**
@@ -83,7 +83,19 @@ public class BoardManagerController {
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
-		if (m == Mode.READ_FORM) {
+		if (m == Mode.SEARCH_FORM) {
+			String type = request.getParameter("searchType");
+			String word = request.getParameter("searchWord");
+			if (type.equals("code")) {
+				pageCondition.addCondition(BoardService.BOARD_SEARCH_ITEM.CODE, word);
+			}
+			else if (type.equals("name")) {
+				pageCondition.addCondition(BoardService.BOARD_SEARCH_ITEM.NAME, word);
+			}
+			mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
+			m = Mode.LIST_FORM;
+		}
+		else if (m == Mode.READ_FORM) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
 			mav.addObject(BoardManagerController.AttributeKey.BOARD_ITEM.name(), b);
@@ -176,10 +188,10 @@ public class BoardManagerController {
 		// 검색
 		String searchName = request.getParameter("searchName");
 		String searchCode = request.getParameter("searchCode");
-		if (StringUtilAd.isEmpty(searchName)) {
+		if (!StringUtilAd.isEmpty(searchName)) {
 			searchVO.addCondition(BoardService.BOARD_SEARCH_ITEM.NAME, searchName);
 		}
-		if (StringUtilAd.isEmpty(searchCode)) {
+		if (!StringUtilAd.isEmpty(searchCode)) {
 			searchVO.addCondition(BoardService.BOARD_SEARCH_ITEM.CODE, searchCode);
 		}
 		return searchVO;
