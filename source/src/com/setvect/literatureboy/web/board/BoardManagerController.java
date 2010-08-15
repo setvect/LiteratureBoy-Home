@@ -1,5 +1,6 @@
 package com.setvect.literatureboy.web.board;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.PagingCondition;
@@ -95,7 +97,8 @@ public class BoardManagerController {
 			Board bd = new Board();
 			Binder.bind(request, bd);
 			boardService.createBoard(bd);
-			m = Mode.LIST_FORM;
+			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
+			return mav;
 		}
 		// 수정 폼
 		else if (m == Mode.UPDATE_FORM) {
@@ -109,8 +112,7 @@ public class BoardManagerController {
 			Board bd = new Board();
 			Binder.bind(request, bd);
 			boardService.updateBoard(bd);
-			m = Mode.LIST_FORM;
-			mav.setViewName("redirect:" + request.getRequestURI() + "?" + pageCondition.getUrlParam(search));
+			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
 		// 삭제 처리
@@ -119,7 +121,8 @@ public class BoardManagerController {
 			Board b = boardService.getBoard(code);
 			b.setDeleteF(true);
 			boardService.updateBoard(b);
-			m = Mode.LIST_FORM;
+			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
+			return mav;
 		}
 		// 목록폼
 		if (m == Mode.LIST_FORM) {
@@ -134,13 +137,34 @@ public class BoardManagerController {
 	}
 
 	/**
+	 * 새로고침을 통한 재 업로드 방지를 하기위해 정해진 페이지로 redirection 하기 위한 주소를 제공
+	 * 
+	 * @param request
+	 * @param pageCondition
+	 * @return redirection 주소
+	 * @throws UnsupportedEncodingException
+	 */
+	private String getRedirectionUrl(HttpServletRequest request, PagingCondition pageCondition)
+			throws UnsupportedEncodingException {
+		UrlParameter param = new UrlParameter();
+		Map<String, Object> searchParam = pageCondition.getUrlParam(search);
+		param.putAll(searchParam);
+
+		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
+		param.put(pageParam, pageCondition.getCurrentPage());
+
+		String url = request.getRequestURI() + "?" + param.getParameter();
+		return url;
+	}
+
+	/**
 	 * request parameter에서 페이징 및 검색 정보를 추출 함
 	 * 
 	 * @param request
 	 * @return 페이징 및 검색 정보
 	 */
 	private PagingCondition bindSearch(HttpServletRequest request) {
-		String pageParam = (new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE));
+		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
 		String pageParamValue = request.getParameter(pageParam);
 
 		if (StringUtilAd.isEmpty(pageParamValue)) {

@@ -11,7 +11,7 @@
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
-	<display:table name="pageList.list" class="table" id="boardList" requestURI="" export="false" partialList="true" size="${pageList.total}" pagesize="${pageList.pagesize}"  style="margin-top:10px;">
+	<display:table name="pageList.list" class="table" id="boardList" requestURI="${controller_url}" export="false" partialList="true" size="${pageList.total}" pagesize="${pageList.pagesize}"  style="margin-top:10px;">
     <display:column title="row number" >
       <c:out value="${pageList.rowNumDesc - boardList_rowNum + 1}"/>
     </display:column>

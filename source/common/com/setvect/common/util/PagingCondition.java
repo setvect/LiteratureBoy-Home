@@ -2,7 +2,6 @@ package com.setvect.common.util;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -149,26 +148,14 @@ public class PagingCondition implements Serializable {
 	 * 
 	 * @param keyMap
 	 *            항목에 대한 파라미터 이름
-	 * @return '?' 이후 URL 파라미터 전송
+	 * @return 파라미터 맵핑 정보
 	 * @throws UnsupportedEncodingException
 	 */
-	public String getUrlParam(Map<Object, String> keyMap) throws UnsupportedEncodingException {
-		return getUrlParam(keyMap, "utf-8");
-	}
+	public Map<String, Object> getUrlParam(Map<Object, String> keyMap) throws UnsupportedEncodingException {
+		Map<String, Object> param = new HashMap<String, Object>();
 
-	/**
-	 * 페이지 정보 및 검색 관련 URL 파라미터
-	 * 
-	 * @param keyMap
-	 *            항목에 대한 파라미터 이름
-	 * @param charset
-	 *            파라미터 인코딩
-	 * @return '?' 이후 URL 파라미터 전송
-	 * @throws UnsupportedEncodingException
-	 */
-	public String getUrlParam(Map<Object, String> keyMap, String charset) throws UnsupportedEncodingException {
-		StringBuffer param = new StringBuffer();
-		param.append("currentPage=" + getCurrentPage());
+		// "currentPage" 이름은 고정. Html 상에서도 또 같이 사용해야 됨
+		param.put("currentPage", getCurrentPage());
 		Set<Object> keys = keyMap.keySet();
 		for (Object key : keys) {
 			String paramName = keyMap.get(key);
@@ -176,8 +163,9 @@ public class PagingCondition implements Serializable {
 			if (c == null) {
 				continue;
 			}
-			param.append("&" + paramName + "=" + URLEncoder.encode(c, charset));
+			param.put(paramName, c);
 		}
-		return param.toString();
+		return param;
 	}
+
 }
