@@ -3,7 +3,8 @@ package com.setvect.literatureboy.db;
 import java.util.List;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
+import com.setvect.literatureboy.service.board.BoardArticleSearch;
+import com.setvect.literatureboy.service.board.BoardManagerSearch;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
@@ -25,7 +26,7 @@ public interface BoardDao {
 	 * @return 게시판생성 정보 항목
 	 * @throws Exception
 	 */
-	public GenericPage<Board> getBoardPagingList(PagingCondition pageCondition) throws Exception;
+	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) throws Exception;
 
 	/**
 	 * @param board
@@ -56,7 +57,7 @@ public interface BoardDao {
 	 * @return 게시물 페이지 값
 	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition pageCondition) throws Exception;
+	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition) throws Exception;
 
 	/**
 	 * 게시물 등록

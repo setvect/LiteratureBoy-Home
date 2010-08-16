@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
+import com.setvect.common.util.SearchListVo;
 import com.setvect.literatureboy.db.BoardDao;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -22,20 +22,6 @@ import com.setvect.literatureboy.vo.board.BoardComment;
 @Service
 @Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class BoardService {
-
-	/**
-	 * 게시판 설정 정보 검색 항목
-	 */
-	public enum BOARD_SEARCH_ITEM {
-		NAME, CODE
-	}
-
-	/**
-	 * 게시물 검색 항목
-	 */
-	public enum BOARD_ARTICLE_SEARCH_ITEM {
-		CODE, TITLE, CONTENT, NAME
-	}
 
 	@Resource
 	private BoardDao boardDao;
@@ -56,7 +42,7 @@ public class BoardService {
 	 * @return 정보 항목
 	 * @throws Exception
 	 */
-	public GenericPage<Board> getBoardPagingList(PagingCondition pageCondition) throws Exception {
+	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) throws Exception {
 		return boardDao.getBoardPagingList(pageCondition);
 	}
 
@@ -99,7 +85,7 @@ public class BoardService {
 	 * @return 게시물 페이지 값
 	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition pageCondition) throws Exception {
+	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition) throws Exception {
 		return boardDao.getArticlePagingList(pageCondition);
 	}
 

@@ -1,10 +1,16 @@
 package com.setvect.literatureboy.web;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 
+import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
 
 /**
@@ -13,6 +19,8 @@ import com.setvect.common.util.StringUtilAd;
  * @version $Id$
  */
 public class CommonUtil {
+	private static final String GET_SEARCH = "getSearch";
+
 	/**
 	 * @param request
 	 * @param listName
@@ -28,5 +36,29 @@ public class CommonUtil {
 		}
 		int currentPage = Integer.parseInt(StringUtilAd.null2str(pageParamValue, "1"));
 		return currentPage;
+	}
+
+	/**
+	 * search로 시작되는 메소드를 분석하여 해당 이름과 값을 맵으로 만듬
+	 * 
+	 * @param pageCondition
+	 * @return 검색 맵
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 */
+	public static Map<String, Object> getSearchMap(SearchListVo pageCondition) throws Exception {
+		Method[] methods = pageCondition.getClass().getMethods();
+		Map<String, Object> param = new HashMap<String, Object>();
+		for (Method m : methods) {
+			String name = m.getName();
+			if (!name.startsWith(GET_SEARCH)) {
+				continue;
+			}
+			Object v = m.invoke(pageCondition, new Object[0]);
+			String key = "search" + name.substring(GET_SEARCH.length());
+			param.put(key, v);
+		}
+		return param;
 	}
 }

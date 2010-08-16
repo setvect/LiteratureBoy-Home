@@ -1,5 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
+<%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
+<%@page import="com.setvect.literatureboy.service.board.BoardArticleSearch"%>
 <%@page import="com.setvect.literatureboy.service.board.BoardManagerSearch"%>
 <%@page import="com.setvect.literatureboy.vo.board.Board"%>
 <%@page import="com.setvect.common.util.GenericPage"%>
@@ -9,17 +11,21 @@
 <%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <jsp:include page="/common/script.inc.jsp"/>
-<script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
+<%
+	BoardArticleSearch searchVo = (BoardArticleSearch)request.getAttribute(BoardArticleController.AttributeKey.PAGE_SEARCH.name()); 
+%>
+<script type="text/javascript" src="/app/board/board_article.js"></script>
 <div>
 	<div>
 		<form:form name="searchForm" method="get" action="${controller_url}">
 			<input type="hidden" name="mode" value="<%=BoardManagerController.Mode.SEARCH_FORM%>"/>
 			Search: 
 			<select name="searchType">
-				<option value="code" ${empty PAGE_SEARCH.searchCode ? "" : "selected='selected'"}>code</option>
-				<option value="name" ${empty PAGE_SEARCH.searchName ? "" : "selected='selected'"}>name</option>
+				<option value="title" <%=StringUtilAd.isEmpty(searchVo.getSearchName()) ? "" : "selected='selected'"%>>name</option>
+				<option value="content" <%=StringUtilAd.isEmpty(searchVo.getSearchName()) ? "" : "selected='selected'"%>>name</option>
+				<option value="name" <%=StringUtilAd.isEmpty(searchVo.getSearchName()) ? "" : "selected='selected'"%>>name</option>
 			</select>
-			<input type="text" name="searchWord" value="${PAGE_SEARCH.word}">
+			<input type="text" name="searchWord" value="<%=StringUtilAd.toForm(searchVo.getWord())%>">
 			<input type="button" value="Search" onclick="BoardManager.searchForm()">
 			<c:if test="${! empty PAGE_SEARCH.word}">
 				<input type="button" value="Search Stop"  onclick="BoardManager.searchStopForm()">
@@ -48,4 +54,4 @@
 <div>
 	<input type="button" value="생성" onclick="BoardManager.createFrom();">
 </div>
-<jsp:include page="board_manager_form.inc.jsp"></jsp:include>
+<jsp:include page="board_article_form.inc.jsp"></jsp:include>

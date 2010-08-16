@@ -1,6 +1,6 @@
-<%@page import="com.setvect.common.util.PagingCondition"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
+<%@page import="com.setvect.literatureboy.service.board.BoardManagerSearch"%>
 <%@page import="com.setvect.literatureboy.vo.board.Board"%>
 <%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
@@ -9,8 +9,6 @@
 <%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <%
-	BoardManagerController.Mode mode = (BoardManagerController.Mode)request.getAttribute(BoardManagerController.AttributeKey.MODE.name());
-	PagingCondition pageingVO = (PagingCondition)request.getAttribute(BoardManagerController.AttributeKey.PAGE_SEARCH.name());
 	Board board = (Board) request.getAttribute(BoardManagerController.AttributeKey.BOARD_ITEM.name());
 	if(board == null){
 		board = new Board();
@@ -22,26 +20,22 @@
 <div>
 	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString() %>">
 		<input type="hidden" name="mode" value="${MODE}"/>
-		<input type="hidden" name="searchName" value="<%=StringUtilAd.toForm(pageingVO.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME))%>">
-		<input type="hidden" name="searchCode" value="<%=StringUtilAd.toForm(pageingVO.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE))%>">
+		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}">
+		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}">
 		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}">	
 		<table>
 			<tr>
 				<td>코드</td>
 				<td>
-<%
-	if(mode == BoardManagerController.Mode.CREATE_ACTION){
-%>				
-					<form:input id="boardCode" path="boardCode" size="15" maxlength="8"/>
-<%
-	}
-	// 수정 처리시 
-	else{
-%>				${createForm.boardCode}
-					<form:hidden id="boardCode" path="boardCode"/>
-<%
-	}
-%>					
+					<c:choose>
+						<c:when test="${MODE == 'CREATE_ACTION'}">
+							<form:input id="boardCode" path="boardCode" size="15" maxlength="8"/>
+						</c:when>
+						<c:otherwise>
+							${createForm.boardCode}
+							<form:hidden id="boardCode" path="boardCode"/>
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 			<tr>

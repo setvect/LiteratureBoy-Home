@@ -11,7 +11,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
+import com.setvect.common.util.SearchListVo;
+import com.setvect.literatureboy.service.board.BoardArticleSearch;
+import com.setvect.literatureboy.service.board.BoardManagerSearch;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -54,7 +56,7 @@ public class BoardTestCase extends TestSystem {
 		bd1 = (Board) BeanUtils.cloneBean(service.getBoard(bd.getBoardCode()));
 		Assert.assertEquals(bd.getName(), bd1.getName());
 
-		PagingCondition boardSearch = new PagingCondition(1, 10);
+		BoardManagerSearch boardSearch = new BoardManagerSearch(1);
 
 		GenericPage<Board> list = service.getBoardPagingList(boardSearch);
 		Assert.assertEquals(1, list.getSize());
@@ -83,8 +85,7 @@ public class BoardTestCase extends TestSystem {
 		article.setTitle("¸Þ··");
 		service.updateArticle(article);
 
-		PagingCondition pageCondition = new PagingCondition(1);
-		pageCondition.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE, CODE);
+		BoardArticleSearch pageCondition = new BoardArticleSearch(1);
 
 		GenericPage<BoardArticle> articleList = service.getArticlePagingList(pageCondition);
 		Assert.assertEquals(2, articleList.getSize());

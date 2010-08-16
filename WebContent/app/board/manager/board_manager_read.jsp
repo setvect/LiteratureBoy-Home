@@ -1,4 +1,3 @@
-<%@page import="com.setvect.common.util.PagingCondition"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
 <%@page import="com.setvect.literatureboy.vo.board.Board"%>

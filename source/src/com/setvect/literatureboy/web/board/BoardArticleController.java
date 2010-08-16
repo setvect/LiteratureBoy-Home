@@ -1,7 +1,5 @@
 package com.setvect.literatureboy.web.board;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.service.board.BoardArticleSearch;
 import com.setvect.literatureboy.service.board.BoardService;
-import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardComment;
 import com.setvect.literatureboy.web.CommonUtil;
@@ -56,15 +54,6 @@ public class BoardArticleController {
 	@Resource
 	private BoardService boardService;
 
-	/** 검색 항목에 대한 파라미터 이름 맵핑 */
-	private final static Map<Object, String> searchParamMap = new HashMap<Object, String>();
-	static {
-		searchParamMap.put(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE, "searchCode");
-		searchParamMap.put(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CONTENT, "searchContent");
-		searchParamMap.put(BoardService.BOARD_ARTICLE_SEARCH_ITEM.NAME, "searchName");
-		searchParamMap.put(BoardService.BOARD_ARTICLE_SEARCH_ITEM.TITLE, "searchTitle");
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -86,7 +75,7 @@ public class BoardArticleController {
 			m = Mode.valueOf(mode);
 		}
 
-		PagingCondition pageCondition = bindSearch(request);
+		BoardArticleSearch pageCondition = bindSearch(request);
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
@@ -94,13 +83,13 @@ public class BoardArticleController {
 			String type = request.getParameter("searchType");
 			String word = request.getParameter("searchWord");
 			if (type.equals("title")) {
-				pageCondition.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.TITLE, word);
+				pageCondition.setSearchTitle(word);
 			}
 			else if (type.equals("name")) {
-				pageCondition.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.NAME, word);
+				pageCondition.setSearchName(word);
 			}
 			else if (type.equals("content")) {
-				pageCondition.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CONTENT, word);
+				pageCondition.setSearchContent(word);
 			}
 			m = Mode.LIST_FORM;
 		}
@@ -115,7 +104,7 @@ public class BoardArticleController {
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_create.jsp");
 		}
 		else if (m == Mode.CREATE_ACTION) {
-			// XXX 파일 처리 
+			// XXX 파일 처리
 			BoardArticle bd = new BoardArticle();
 			Binder.bind(request, bd);
 			boardService.createArticle(bd);
@@ -158,7 +147,7 @@ public class BoardArticleController {
 		}
 
 		if (m == Mode.LIST_FORM) {
-			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(pageCondition);
+			GenericPage<BoardArticle> boardPagingList = boardService.getArticlePagingList(pageCondition);
 			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_list.jsp");
 
@@ -174,13 +163,13 @@ public class BoardArticleController {
 	 * @param request
 	 * @param pageCondition
 	 * @return redirection 주소
-	 * @throws UnsupportedEncodingException
+	 * @throws Exception
 	 */
-	private String getRedirectionUrl(HttpServletRequest request, PagingCondition pageCondition)
-			throws UnsupportedEncodingException {
+	private String getRedirectionUrl(HttpServletRequest request, BoardArticleSearch pageCondition)
+			throws Exception {
 
 		UrlParameter param = new UrlParameter();
-		Map<String, Object> searchParam = pageCondition.getUrlParam(searchParamMap);
+		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
 		param.putAll(searchParam);
 
 		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
@@ -188,7 +177,7 @@ public class BoardArticleController {
 
 		String mode = request.getParameter("mode");
 		Mode m = Mode.valueOf(mode);
-		// 코멘트 관련 액션이면 읽기 페이지로 이동 
+		// 코멘트 관련 액션이면 읽기 페이지로 이동
 		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_DELETE_ACTION) {
 			param.put("mode", Mode.READ_FORM);
 			param.put("articleSeq", request.getParameter("articleSeq"));
@@ -203,27 +192,12 @@ public class BoardArticleController {
 	 * 
 	 * @param request
 	 * @return 페이징 및 검색 정보
+	 * @throws ServletRequestBindingException
 	 */
-	private PagingCondition bindSearch(HttpServletRequest request) {
+	private BoardArticleSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {
 		int currentPage = CommonUtil.getCurrentPage(request, "boardList");
-		PagingCondition searchVO = new PagingCondition(currentPage);
-
-		// 검색
-		String searchCode = request.getParameter("searchBoardCode");
-		String searchName = request.getParameter("searchName");
-		String searchTitle = request.getParameter("searchTitle");
-		String searchContent = request.getParameter("searchContent");
-		searchVO.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE, searchCode);
-
-		if (!StringUtilAd.isEmpty(searchName)) {
-			searchVO.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.NAME, searchName);
-		}
-		if (!StringUtilAd.isEmpty(searchTitle)) {
-			searchVO.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.TITLE, searchTitle);
-		}
-		if (!StringUtilAd.isEmpty(searchContent)) {
-			searchVO.addCondition(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CONTENT, searchContent);
-		}
+		BoardArticleSearch searchVO = new BoardArticleSearch(currentPage);
+		Binder.bind(request, searchVO);
 		return searchVO;
 	}
 

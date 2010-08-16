@@ -12,7 +12,7 @@ import org.hibernate.classic.Session;
 import anyframe.core.generic.dao.hibernate.GenericDaoHibernate;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
+import com.setvect.common.util.SearchListVo;
 import com.setvect.literatureboy.db.MemoDao;
 import com.setvect.literatureboy.vo.Memo;
 
@@ -31,7 +31,7 @@ public abstract class AbstractMemoDao<T, PK extends Serializable> extends Generi
 	 * 
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
-	public GenericPage<Memo> getPagingList(PagingCondition paging) throws Exception {
+	public GenericPage<Memo> getPagingList(SearchListVo paging) throws Exception {
 
 		Session session = sessionFactory.getCurrentSession();
 

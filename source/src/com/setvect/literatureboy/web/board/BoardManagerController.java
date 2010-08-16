@@ -1,7 +1,5 @@
 package com.setvect.literatureboy.web.board;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,14 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.service.board.BoardManagerSearch;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.web.CommonUtil;
@@ -52,13 +51,6 @@ public class BoardManagerController {
 	@Resource
 	private BoardService boardService;
 
-	/** 검색 항목에 대한 파라미터 이름 맵핑 */
-	private final static Map<Object, String> searchParamMap = new HashMap<Object, String>();
-	static {
-		searchParamMap.put(BoardService.BOARD_SEARCH_ITEM.NAME, "searchName");
-		searchParamMap.put(BoardService.BOARD_SEARCH_ITEM.CODE, "searchCode");
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -80,7 +72,7 @@ public class BoardManagerController {
 			m = Mode.valueOf(mode);
 		}
 
-		PagingCondition pageCondition = bindSearch(request);
+		BoardManagerSearch pageCondition = bindSearch(request);
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
@@ -88,10 +80,10 @@ public class BoardManagerController {
 			String type = request.getParameter("searchType");
 			String word = request.getParameter("searchWord");
 			if (type.equals("code")) {
-				pageCondition.addCondition(BoardService.BOARD_SEARCH_ITEM.CODE, word);
+				pageCondition.setSearchCode(word);
 			}
 			else if (type.equals("name")) {
-				pageCondition.addCondition(BoardService.BOARD_SEARCH_ITEM.NAME, word);
+				pageCondition.setSearchName(word);
 			}
 			m = Mode.LIST_FORM;
 		}
@@ -154,12 +146,12 @@ public class BoardManagerController {
 	 * @param request
 	 * @param pageCondition
 	 * @return redirection 주소
-	 * @throws UnsupportedEncodingException
+	 * @throws Exception
 	 */
-	private String getRedirectionUrl(HttpServletRequest request, PagingCondition pageCondition)
-			throws UnsupportedEncodingException {
+	private String getRedirectionUrl(HttpServletRequest request, BoardManagerSearch pageCondition)
+			throws Exception {
 		UrlParameter param = new UrlParameter();
-		Map<String, Object> searchParam = pageCondition.getUrlParam(searchParamMap);
+		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
 		param.putAll(searchParam);
 
 		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
@@ -174,20 +166,12 @@ public class BoardManagerController {
 	 * 
 	 * @param request
 	 * @return 페이징 및 검색 정보
+	 * @throws ServletRequestBindingException
 	 */
-	private PagingCondition bindSearch(HttpServletRequest request) {
+	private BoardManagerSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {
 		int currentPage = CommonUtil.getCurrentPage(request, "boardList");
-		PagingCondition searchVO = new PagingCondition(currentPage);
-
-		// 검색
-		String searchName = request.getParameter("searchName");
-		String searchCode = request.getParameter("searchCode");
-		if (!StringUtilAd.isEmpty(searchName)) {
-			searchVO.addCondition(BoardService.BOARD_SEARCH_ITEM.NAME, searchName);
-		}
-		if (!StringUtilAd.isEmpty(searchCode)) {
-			searchVO.addCondition(BoardService.BOARD_SEARCH_ITEM.CODE, searchCode);
-		}
+		BoardManagerSearch searchVO = new BoardManagerSearch(currentPage);
+		Binder.bind(request, searchVO);
 		return searchVO;
 	}
 }

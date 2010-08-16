@@ -8,11 +8,11 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
-import com.setvect.common.util.StringUtilAd;
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.PagingCondition;
+import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.db.BoardDao;
-import com.setvect.literatureboy.service.board.BoardService;
+import com.setvect.literatureboy.service.board.BoardArticleSearch;
+import com.setvect.literatureboy.service.board.BoardManagerSearch;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
@@ -38,7 +38,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 * 
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
-	public GenericPage<Board> getBoardPagingList(PagingCondition pageCondition) throws Exception {
+	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) throws Exception {
 
 		Session session = sessionFactory.getCurrentSession();
 
@@ -64,18 +64,15 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 *            검색 조건
 	 * @return select where 절 조건
 	 */
-	private String getManagerWhereClause(PagingCondition pageCondition) {
+	private String getManagerWhereClause(BoardManagerSearch pageCondition) {
 		String where = "where deleteF = 'N'";
 
-		String code = pageCondition.getConditionString(BoardService.BOARD_SEARCH_ITEM.CODE);
-		String name = pageCondition.getConditionString(BoardService.BOARD_SEARCH_ITEM.NAME);
-
 		// 두개가 동새에 검색 조건에 포함 될 수 없음
-		if (!StringUtilAd.isEmpty(code)) {
-			where += " and boardCode like " + StringUtilAd.getSqlStringLike(code);
+		if (!StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
+			where += " and boardCode like " + StringUtilAd.getSqlStringLike(pageCondition.getSearchCode());
 		}
-		else if (!StringUtilAd.isEmpty(name)) {
-			where += " and name like " + StringUtilAd.getSqlStringLike(name);
+		else if (!StringUtilAd.isEmpty(pageCondition.getSearchName())) {
+			where += " and name like " + StringUtilAd.getSqlStringLike(pageCondition.getSearchName());
 		}
 		return where;
 	}
@@ -103,7 +100,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 * @param articleSeq
 	 */
 	public void removeBoard(String code) {
-		// TODO 플래그 형태로 삭제 
+		// TODO 플래그 형태로 삭제
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(getBoard(code));
 		session.flush();
@@ -126,7 +123,7 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
 	// TODO 목록 검색시 불필요한 항목(내용 TEXT)까지 가져오는 경우 발생. 성능 문제 발생시 수정
-	public GenericPage<BoardArticle> getArticlePagingList(PagingCondition pageCondtion) throws Exception {
+	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondtion) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
 		String q = "select count(*) from BoardArticle " + getArticleWhereClause(pageCondtion);
@@ -151,23 +148,19 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	 *            검색 조건
 	 * @return select where 절 조건
 	 */
-	private String getArticleWhereClause(PagingCondition paging) {
-		String code = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CODE);
-		String name = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.NAME);
-		String title = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.TITLE);
-		String content = paging.getConditionString(BoardService.BOARD_ARTICLE_SEARCH_ITEM.CONTENT);
+	private String getArticleWhereClause(BoardArticleSearch paging) {
 
-		String where = " where boardCode = " + StringUtilAd.getSqlString(code);
+		String where = " where boardCode = " + StringUtilAd.getSqlString(paging.getSearchCode());
 
 		// 두개 이상 동시에 검색 조건에 포함 될 수 없음
-		if (!StringUtilAd.isEmpty(name)) {
-			where += " and name like " + StringUtilAd.getSqlStringLike(name);
+		if (!StringUtilAd.isEmpty(paging.getSearchName())) {
+			where += " and name like " + StringUtilAd.getSqlStringLike(paging.getSearchName());
 		}
-		else if (!StringUtilAd.isEmpty(title)) {
-			where += " and title like " + StringUtilAd.getSqlStringLike(title);
+		else if (!StringUtilAd.isEmpty(paging.getSearchTitle())) {
+			where += " and title like " + StringUtilAd.getSqlStringLike(paging.getSearchTitle());
 		}
-		else if (!StringUtilAd.isEmpty(content)) {
-			where += " and content like " + StringUtilAd.getSqlStringLike(content);
+		else if (!StringUtilAd.isEmpty(paging.getSearchContent())) {
+			where += " and content like " + StringUtilAd.getSqlStringLike(paging.getSearchContent());
 		}
 		return where;
 	}
