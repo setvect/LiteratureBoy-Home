@@ -91,6 +91,12 @@ public class BoardArticle {
 	@Column(name = "REG_DATE")
 	private Date regDate;
 
+	/** 게시물 삭제 여부 */
+	@Column(name = "DELETE_F")
+	@Type(type = "yes_no")
+	private boolean deleteF;
+
+	
 	/**
 	 * @return the articleSeq
 	 */
@@ -330,5 +336,21 @@ public class BoardArticle {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+
+	/**
+	 * @return the deleteF
+	 */
+	public boolean isDeleteF() {
+		return deleteF;
+	}
+
+	/**
+	 * @param deleteF the deleteF to set
+	 */
+	public void setDeleteF(boolean deleteF) {
+		this.deleteF = deleteF;
+	}
+	
+	
 
 }

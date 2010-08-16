@@ -44,6 +44,7 @@
 			  HIT_COUNT int NOT NULL,
 			  ENCODE_F varchar(1) NOT NULL,
 			  REG_DATE datetime NOT NULL,
+				DELETE_F varchar(1) NOT NULL,	 			  
 			  PRIMARY KEY  (ARTICLE_SEQ)
 			)		
 		</creation>

@@ -21,6 +21,7 @@ import com.setvect.common.util.PagingCondition;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.Board;
+import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
@@ -52,10 +53,10 @@ public class BoardManagerController {
 	private BoardService boardService;
 
 	/** 검색 항목에 대한 파라미터 이름 맵핑 */
-	private final static Map<Object, String> search = new HashMap<Object, String>();
+	private final static Map<Object, String> searchParamMap = new HashMap<Object, String>();
 	static {
-		search.put(BoardService.BOARD_SEARCH_ITEM.NAME, "searchName");
-		search.put(BoardService.BOARD_SEARCH_ITEM.CODE, "searchCode");
+		searchParamMap.put(BoardService.BOARD_SEARCH_ITEM.NAME, "searchName");
+		searchParamMap.put(BoardService.BOARD_SEARCH_ITEM.CODE, "searchCode");
 	}
 
 	/*
@@ -92,7 +93,6 @@ public class BoardManagerController {
 			else if (type.equals("name")) {
 				pageCondition.addCondition(BoardService.BOARD_SEARCH_ITEM.NAME, word);
 			}
-			mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 			m = Mode.LIST_FORM;
 		}
 		else if (m == Mode.READ_FORM) {
@@ -159,7 +159,7 @@ public class BoardManagerController {
 	private String getRedirectionUrl(HttpServletRequest request, PagingCondition pageCondition)
 			throws UnsupportedEncodingException {
 		UrlParameter param = new UrlParameter();
-		Map<String, Object> searchParam = pageCondition.getUrlParam(search);
+		Map<String, Object> searchParam = pageCondition.getUrlParam(searchParamMap);
 		param.putAll(searchParam);
 
 		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
@@ -176,14 +176,8 @@ public class BoardManagerController {
 	 * @return 페이징 및 검색 정보
 	 */
 	private PagingCondition bindSearch(HttpServletRequest request) {
-		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
-		String pageParamValue = request.getParameter(pageParam);
-
-		if (StringUtilAd.isEmpty(pageParamValue)) {
-			pageParamValue = request.getParameter("currentPage");
-		}
-		int currentPage = Integer.parseInt(StringUtilAd.null2str(pageParamValue, "1"));
-		PagingCondition searchVO = new PagingCondition(currentPage, 2);
+		int currentPage = CommonUtil.getCurrentPage(request, "boardList");
+		PagingCondition searchVO = new PagingCondition(currentPage);
 
 		// 검색
 		String searchName = request.getParameter("searchName");
@@ -196,5 +190,4 @@ public class BoardManagerController {
 		}
 		return searchVO;
 	}
-
 }
