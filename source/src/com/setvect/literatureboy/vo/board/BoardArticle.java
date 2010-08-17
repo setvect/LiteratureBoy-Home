@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 게시물 VO
@@ -50,7 +52,7 @@ public class BoardArticle {
 	@Column(name = "IDX3")
 	private int idx3;
 
-	/** 깊이 1부터 시작  */
+	/** 깊이 1부터 시작 */
 	@Column(name = "DEPTH_LEVEL")
 	private int depthLevel;
 
@@ -96,7 +98,9 @@ public class BoardArticle {
 	@Type(type = "yes_no")
 	private boolean deleteF;
 
-	
+	@Transient
+	private MultipartFile[] attachFile;
+
 	/**
 	 * @return the articleSeq
 	 */
@@ -345,12 +349,26 @@ public class BoardArticle {
 	}
 
 	/**
-	 * @param deleteF the deleteF to set
+	 * @param deleteF
+	 *            the deleteF to set
 	 */
 	public void setDeleteF(boolean deleteF) {
 		this.deleteF = deleteF;
 	}
-	
-	
+
+	/**
+	 * @return the attachFile
+	 */
+	public MultipartFile[] getAttachFile() {
+		return attachFile;
+	}
+
+	/**
+	 * @param attachFile
+	 *            the attachFile to set
+	 */
+	public void setAttachFile(MultipartFile[] attachFile) {
+		this.attachFile = attachFile;
+	}
 
 }

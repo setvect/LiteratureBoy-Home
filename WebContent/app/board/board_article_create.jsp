@@ -20,7 +20,7 @@
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${controller_url}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
 		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>
@@ -32,21 +32,34 @@
 		<form:hidden path="articleSeq"/>	
 		<table>
 			<tr>
-				<td>Title</td>
+				<th>Title</th>
 				<td><form:input id="title" path="title" size="50" maxlength="50"/></td>
 			</tr>
 			<tr>
-				<td>Name</td>
+				<th>Name</th>
 				<td><form:input id="name" path="name" size="10" maxlength="10"/></td>
 			</tr>
 			<tr>
-				<td>Email</td>
+				<th>Email</th>
 				<td><form:input id="email" path="email" size="30" maxlength="50"/></td>
 			</tr>
 			<tr>
-				<td>Content</td>
+				<th>Content</th>
 				<td><form:textarea id="content" path="content"/></td>
 			</tr>
+			<tr>
+				<th>Attach</th>
+				<td>
+					<div>
+						<ul>
+          		<c:set var="attachIndex" value="<%=new int[] {1,2,3}%>" />
+							<c:forEach var="id" items="${attachIndex}">
+								<li>Attach #${id}: <input type="file" name="attachFile"/></li>
+							</c:forEach>
+						</ul>
+					</div>
+				</td>
+			</tr>			
 		</table>
 	</form:form>
 </div>

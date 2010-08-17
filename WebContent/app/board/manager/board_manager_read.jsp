@@ -12,31 +12,31 @@
 <div>
 	<table>
 		<tr>
-			<td>코드</td>
+			<th>코드</th>
 			<td>${ITEM.boardCode}</td>
 		</tr>
 		<tr>
-			<td>이름</td>
+			<th>이름</th>
 			<td>${ITEM.name}</td>
 		</tr>
 		<tr>
-			<td>업로드용량 제한</td>
+			<th>업로드용량 제한</th>
 			<td>${ITEM.uploadLimit}</td>
 		</tr>
 		<tr>
-			<td>답글 사용</td>
+			<th>답글 사용</th>
 			<td>${ITEM.replyF}</td>
 		</tr>
 		<tr>
-			<td>짧은 리플 사용</td>
+			<th>짧은 리플 사용</th>
 			<td>${ITEM.commentF}</td>
 		</tr>
 		<tr>
-			<td>파일 업로드</td>
+			<th>파일 업로드</th>
 			<td>${ITEM.attachF}</td>
 		</tr>
 		<tr>
-			<td>암호화글 등록</td>
+			<th>암호화글 등록</th>
 			<td>${ITEM.encodeF}</td>
 		</tr>
 	</table>

@@ -25,7 +25,7 @@
 		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}"/>	
 		<table>
 			<tr>
-				<td>코드</td>
+				<th>코드</th>
 				<td>
 					<c:choose>
 						<c:when test="${MODE == 'CREATE_ACTION'}">
@@ -39,36 +39,36 @@
 				</td>
 			</tr>
 			<tr>
-				<td>이름</td>
+				<th>이름</th>
 				<td><form:input id="name" path="name" size="15" maxlength="8"/></td>
 			</tr>
 			<tr>
-				<td>업로드용량 제한</td>
+				<th>업로드용량 제한</th>
 				<td><form:input id="uploadLimit" path="uploadLimit" size="15" maxlength="8"/></td>
 			</tr>
 			<tr>
-				<td>답글 사용</td>
+				<th>답글 사용</th>
 				<td>
 					<form:radiobutton path="replyF" value="true"/>예
 					<form:radiobutton path="replyF" value="false"/>아니오
 				</td>
 			</tr>
 			<tr>
-				<td>짧은 리플 사용</td>
+				<th>짧은 리플 사용</th>
 				<td>
 					<form:radiobutton path="commentF" value="true"/>예
 					<form:radiobutton path="commentF" value="false"/>아니오
 				</td>
 			</tr>
 			<tr>
-				<td>파일 업로드</td>
+				<th>파일 업로드</th>
 				<td>
 					<form:radiobutton path="attachF" value="true"/>예
 					<form:radiobutton path="attachF" value="false"/>아니오
 				</td>
 			</tr>
 			<tr>
-				<td>암호화글 등록</td>
+				<th>암호화글 등록</th>
 				<td>
 					<form:radiobutton path="encodeF" value="true"/>예
 					<form:radiobutton path="encodeF" value="false"/>아니오

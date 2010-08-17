@@ -19,8 +19,8 @@ BoardArticle.listForm = function(){
 	listForm.submit();
 };
 
-BoardArticle.readForm = function(code){
-	readForm.boardCode.value = code;
+BoardArticle.readForm = function(seq){
+	readForm.articleSeq.value = seq;
 	readForm.submit();
 };
 
@@ -46,14 +46,14 @@ BoardArticle.createOrUpdate = function(){
 	createAction.submit();
 };
 
-BoardArticle.updateFrom = function(code){
-	updateForm.boardCode.value = code;
+BoardArticle.updateFrom = function(seq){
+	updateForm.articleSeq.value = seq;
 	updateForm.submit();
 };
 
 BoardArticle.deleteAction = function(code){
 	if(confirm("삭제 하시겠습니까?")){
-		deleteAction.boardCode.value = code;
+		deleteAction.articleSeq.value = seq;
 		deleteAction.submit();
 	}
 };

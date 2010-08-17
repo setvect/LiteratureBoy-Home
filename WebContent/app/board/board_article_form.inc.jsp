@@ -45,7 +45,7 @@
 	<form:hidden path="searchName"/>
 	<form:hidden path="searchTitle"/>
 	<form:hidden path="searchContent"/>
-	<form:hidden path="currentPage"/>	>	
+	<form:hidden path="currentPage"/>
 	<input type="hidden" name="articleSeq"/>		
 </form:form>
 	
