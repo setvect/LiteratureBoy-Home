@@ -10,10 +10,10 @@ BoardArticle.searchForm = function(){
 
 BoardArticle.searchStopForm = function(){
 	listForm.searchName.value="";
-	listForm.searchCode.value="";
+	listForm.searchTitle.value="";
+	listForm.searchContent.value="";
 	listForm.submit();
 };
-
 
 BoardArticle.listForm = function(){
 	listForm.submit();
@@ -29,17 +29,20 @@ BoardArticle.createFrom = function(){
 };
 
 BoardArticle.createOrUpdate = function(){
-	if($.FORM.isEmptyRtnMsg(createAction.boardCode, "코드를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(createAction.title, "제목을 입력해 주세요")){
 		return;
 	}
 	if($.FORM.isEmptyRtnMsg(createAction.name, "이름을 입력해 주세요")){
 		return;
 	}	
-	
-	if(!$.STR.isNumber(createAction.uploadLimit.value)){
-		$.FORM.selectMsg(createAction.uploadLimit, "숫자로 입력해 주세요");
-		return;
+	if(createAction.email.value !=""){
+		if(!$.FORM.isValidEmail(createAction.email)){
+			return;
+		}
 	}
+	if($.FORM.isEmptyRtnMsg(createAction.content, "내용을  입력해 주세요")){
+		return;
+	}	
 	createAction.submit();
 };
 

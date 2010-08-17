@@ -9,7 +9,7 @@
 <%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <%
-	Board board = (Board) request.getAttribute(BoardManagerController.AttributeKey.BOARD_ITEM.name());
+	Board board = (Board) request.getAttribute(BoardManagerController.AttributeKey.ITEM.name());
 	if(board == null){
 		board = new Board();
 	}
@@ -18,11 +18,11 @@
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="<%=request.getAttribute(ConstraintWeb.SERVLET_URL).toString() %>">
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">
 		<input type="hidden" name="mode" value="${MODE}"/>
-		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}">
-		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}">
-		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}">	
+		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>
+		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
+		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}"/>	
 		<table>
 			<tr>
 				<td>코드</td>

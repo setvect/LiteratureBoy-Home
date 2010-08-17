@@ -40,10 +40,11 @@ public class BoardManagerController {
 	 * 뷰에 전달할 객체를 가르키는 키
 	 */
 	public static enum AttributeKey {
+		MODE,
 		/** 리스트 */
-		BOARD_LIST,
+		LIST,
 		//
-		MODE, BOARD_ITEM,
+		ITEM,
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH
 	}
@@ -90,7 +91,7 @@ public class BoardManagerController {
 		else if (m == Mode.READ_FORM) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
-			mav.addObject(BoardManagerController.AttributeKey.BOARD_ITEM.name(), b);
+			mav.addObject(BoardManagerController.AttributeKey.ITEM.name(), b);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
@@ -108,7 +109,7 @@ public class BoardManagerController {
 		else if (m == Mode.UPDATE_FORM) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
-			mav.addObject(BoardManagerController.AttributeKey.BOARD_ITEM.name(), b);
+			mav.addObject(BoardManagerController.AttributeKey.ITEM.name(), b);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_create.jsp");
 		}
@@ -131,10 +132,10 @@ public class BoardManagerController {
 		// 목록폼
 		if (m == Mode.LIST_FORM) {
 			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(pageCondition);
-			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
+			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/manager/board_manager_list.jsp");
 
-			request.setAttribute("pageList", boardPagingList);
+			request.setAttribute(AttributeKey.LIST.name(), boardPagingList);
 		}
 
 		return mav;
@@ -148,8 +149,7 @@ public class BoardManagerController {
 	 * @return redirection 주소
 	 * @throws Exception
 	 */
-	private String getRedirectionUrl(HttpServletRequest request, BoardManagerSearch pageCondition)
-			throws Exception {
+	private String getRedirectionUrl(HttpServletRequest request, BoardManagerSearch pageCondition) throws Exception {
 		UrlParameter param = new UrlParameter();
 		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
 		param.putAll(searchParam);

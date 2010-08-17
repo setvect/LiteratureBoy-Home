@@ -1,5 +1,6 @@
 package com.setvect.literatureboy.web.board;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.boot.ApplicationException;
 import com.setvect.literatureboy.service.board.BoardArticleSearch;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -43,10 +45,11 @@ public class BoardArticleController {
 	 * 뷰에 전달할 객체를 가르키는 키
 	 */
 	public static enum AttributeKey {
+		MODE,
 		/** 리스트 */
-		BOARD_LIST,
+		LIST,
 		//
-		MODE, BOARD_ARTICLE,
+		ARTICLE,
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH
 	}
@@ -76,6 +79,9 @@ public class BoardArticleController {
 		}
 
 		BoardArticleSearch pageCondition = bindSearch(request);
+		if (StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
+			throw new ApplicationException("not setting to 'searchCode'");
+		}
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
@@ -96,7 +102,7 @@ public class BoardArticleController {
 		else if (m == Mode.READ_FORM) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
 			BoardArticle b = boardService.getArticle(articleSeq);
-			mav.addObject(BoardArticleController.AttributeKey.BOARD_ARTICLE.name(), b);
+			mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), b);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
@@ -104,17 +110,19 @@ public class BoardArticleController {
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_create.jsp");
 		}
 		else if (m == Mode.CREATE_ACTION) {
-			// XXX 파일 처리
-			BoardArticle bd = new BoardArticle();
-			Binder.bind(request, bd);
-			boardService.createArticle(bd);
+			BoardArticle article = new BoardArticle();
+			Binder.bind(request, article);
+			article.setDepthLevel(1);
+			article.setRegDate(new Date());
+			article.setIp(request.getRemoteAddr());
+			boardService.createArticle(article);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
 		else if (m == Mode.UPDATE_FORM) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
 			BoardArticle b = boardService.getArticle(articleSeq);
-			mav.addObject(BoardArticleController.AttributeKey.BOARD_ARTICLE.name(), b);
+			mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), b);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_create.jsp");
 		}
@@ -148,7 +156,7 @@ public class BoardArticleController {
 
 		if (m == Mode.LIST_FORM) {
 			GenericPage<BoardArticle> boardPagingList = boardService.getArticlePagingList(pageCondition);
-			mav.addObject(AttributeKey.BOARD_LIST.name(), boardPagingList);
+			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_list.jsp");
 
 			request.setAttribute("pageList", boardPagingList);
@@ -165,8 +173,7 @@ public class BoardArticleController {
 	 * @return redirection 주소
 	 * @throws Exception
 	 */
-	private String getRedirectionUrl(HttpServletRequest request, BoardArticleSearch pageCondition)
-			throws Exception {
+	private String getRedirectionUrl(HttpServletRequest request, BoardArticleSearch pageCondition) throws Exception {
 
 		UrlParameter param = new UrlParameter();
 		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);

@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.SearchListVo;
 import com.setvect.literatureboy.db.BoardDao;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;

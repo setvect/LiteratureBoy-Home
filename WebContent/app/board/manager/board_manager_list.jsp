@@ -27,21 +27,21 @@
 		</form:form>
 	</div>
 	<div>
-		Total: ${pageList.total},  Page: ${pageList.currentPage }/${pageList.maxPage}
+		Total: ${LIST.total},  Page: ${LIST.currentPage }/${LIST.maxPage}
 	</div>
 </div>
 <div>
-	<display:table name="pageList.list" class="table" id="boardList" requestURI="${controller_url}" export="false" partialList="true" size="${pageList.total}" pagesize="${pageList.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="table" id="article" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column title="No." >
-      ${pageList.rowNumDesc - boardList_rowNum + 1}
+      ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
-		<display:column property="boardCode" href="javascript:BoardManager.readForm('${boardList.boardCode}')" title="Code"/>
-		<display:column property="name" title="Name"/>
+		<display:column property="boardCode" href="/board/article.do?searchCode=${article.boardCode}" title="Code"/>
+		<display:column property="name" href="javascript:BoardManager.readForm('${article.boardCode}')" title="Name"/>
 		<display:column title="Update">
-			<input type="button" value="수정" onclick="BoardManager.updateFrom('${boardList.boardCode}')">
+			<input type="button" value="수정" onclick="BoardManager.updateFrom('${article.boardCode}')">
 		</display:column>
 		<display:column title="Delete">
-			<input type="button" value="삭제" onclick="BoardManager.deleteAction('${boardList.boardCode}')">
+			<input type="button" value="삭제" onclick="BoardManager.deleteAction('${article.boardCode}')">
 		</display:column>
 	</display:table>
 </div>

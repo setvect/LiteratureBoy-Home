@@ -1,0 +1,57 @@
+<%@page import="com.setvect.literatureboy.vo.board.BoardArticle"%>
+<%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
+<%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
+<%@page import="java.util.Collection"%>
+<%@page import="com.setvect.literatureboy.service.board.BoardManagerSearch"%>
+<%@page import="com.setvect.literatureboy.vo.board.Board"%>
+<%@page import="com.setvect.common.util.GenericPage"%>
+<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
+<%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
+<%@page import="com.setvect.common.util.StringUtilAd"%>
+<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
+<%@include file="/common/taglib.inc.jsp"%>
+<%
+	BoardArticle board = (BoardArticle) request.getAttribute(BoardArticleController.AttributeKey.ARTICLE.name());
+	if(board == null){
+		board = new BoardArticle();
+	}
+	request.setAttribute("createForm", board);
+%>
+<jsp:include page="/common/script.inc.jsp"/>
+<script type="text/javascript" src="/app/board/board_article.js"></script>
+<div>
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">
+		<input type="hidden" name="mode" value="${MODE}"/>
+		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
+		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>
+		<input type="hidden" name="searchTitle" value="${PAGE_SEARCH.searchTitle}"/>
+		<input type="hidden" name="searchContent" value="${PAGE_SEARCH.searchContent}"/>
+		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}"/>
+			
+		<input type="hidden" name="boardCode" value="${PAGE_SEARCH.searchCode}"/>	
+		<form:hidden path="articleSeq"/>	
+		<table>
+			<tr>
+				<td>Title</td>
+				<td><form:input id="title" path="title" size="50" maxlength="50"/></td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td><form:input id="name" path="name" size="10" maxlength="10"/></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><form:input id="email" path="email" size="30" maxlength="50"/></td>
+			</tr>
+			<tr>
+				<td>Content</td>
+				<td><form:textarea id="content" path="content"/></td>
+			</tr>
+		</table>
+	</form:form>
+</div>
+<div>
+	<input type="button" value="확인" onclick="BoardArticle.createOrUpdate()">
+	<input type="button" value="취소" onclick="history.back();">
+</div>
+<jsp:include page="board_article_form.inc.jsp"></jsp:include>
