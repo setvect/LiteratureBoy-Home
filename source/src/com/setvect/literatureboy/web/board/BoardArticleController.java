@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -40,6 +41,10 @@ import com.setvect.literatureboy.web.ConstraintWeb;
  */
 @Controller
 public class BoardArticleController {
+	/** 웹 루트를 기준으로 저장 경로 */
+	private static final String SAVE_PATH = EnvirmentProperty
+			.getString("com.setvect.literatureboy.board.file_upload_dir");
+
 	/**
 	 * 서브 명령어 정의
 	 */
@@ -58,7 +63,7 @@ public class BoardArticleController {
 		/** 리스트 */
 		LIST,
 		//
-		ARTICLE,
+		ARTICLE, ATTACH,
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH
 	}
@@ -111,7 +116,12 @@ public class BoardArticleController {
 		else if (m == Mode.READ_FORM) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
 			BoardArticle b = boardService.getArticle(articleSeq);
-			mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), b);
+			mav.addObject(AttributeKey.ARTICLE.name(), b);
+			List<BoardAttachFile> attach = boardService.listAttachFile(articleSeq);
+			for (BoardAttachFile f : attach) {
+				f.setBasePath(new File(SAVE_PATH,  b.getBoardCode()));
+			}
+			mav.addObject(AttributeKey.ATTACH.name(), attach);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
@@ -140,9 +150,11 @@ public class BoardArticleController {
 		}
 		else if (m == Mode.UPDATE_ACTION) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
-			BoardArticle b = boardService.getArticle(articleSeq);
-			Binder.bind(request, b);
-			boardService.updateArticle(b);
+			BoardArticle article = boardService.getArticle(articleSeq);
+			Binder.bind(request, article);
+			boardService.updateArticle(article);
+			saveAttachFile(request, article);
+
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
@@ -189,8 +201,7 @@ public class BoardArticleController {
 	 */
 	private void saveAttachFile(HttpServletRequest request, BoardArticle article) throws IOException,
 			FileNotFoundException {
-		String destDir = request.getSession().getServletContext()
-				.getRealPath(EnvirmentProperty.getString("com.setvect.literatureboy.board.file_upload_dir"));
+		String destDir = request.getSession().getServletContext().getRealPath(SAVE_PATH);
 
 		File saveDir = new File(destDir, article.getBoardCode());
 		if (!saveDir.exists()) {

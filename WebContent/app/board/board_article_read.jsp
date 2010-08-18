@@ -27,7 +27,16 @@
 			<th>본문</th>
 			<td>${ARTICLE.content}</td>
 		</tr>
-
+		<tr>
+			<th>첨부파일</th>
+			<td>
+				<ul>
+					<c:forEach var="file" items="${ATTACH}">
+						<li>Attach: <a href="/download.do?s=${file.savePathEncode}&amp;d=${file.originalNameEncode}">${file.originalName}</a></li>
+					</c:forEach>
+				</ul>			
+			</td>
+		</tr>
 	</table>
 </div>
 <div>

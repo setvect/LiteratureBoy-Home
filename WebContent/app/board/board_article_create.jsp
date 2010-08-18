@@ -50,14 +50,12 @@
 			<tr>
 				<th>Attach</th>
 				<td>
-					<div>
-						<ul>
-          		<c:set var="attachIndex" value="<%=new int[] {1,2,3}%>" />
-							<c:forEach var="id" items="${attachIndex}">
-								<li>Attach #${id}: <input type="file" name="attachFile"/></li>
-							</c:forEach>
-						</ul>
-					</div>
+					<ul>
+         		<c:set var="attachIndex" value="<%=new int[] {1,2,3}%>" />
+						<c:forEach var="id" items="${attachIndex}">
+							<li>Attach #${id}: <input type="file" name="attachFile"/></li>
+						</c:forEach>
+					</ul>
 				</td>
 			</tr>			
 		</table>

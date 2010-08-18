@@ -1,15 +1,20 @@
 package com.setvect.literatureboy.vo.board;
 
+import java.io.File;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.setvect.common.util.StringUtilAd;
 
 /**
  * 첨부파일
@@ -37,6 +42,10 @@ public class BoardAttachFile {
 
 	@Column(name = "SIZE")
 	private int size;
+
+	@Transient
+	/** 첨부파일 저장 디렉토리 */
+	private File basePath;
 
 	/**
 	 * @return the fileSeq
@@ -76,6 +85,13 @@ public class BoardAttachFile {
 	}
 
 	/**
+	 * @return Base64로 변환 된 첨부파일 실제 이름
+	 */
+	public String getOriginalNameEncode() {
+		return StringUtilAd.encodeString(originalName);
+	}
+
+	/**
 	 * @param originalName
 	 *            the originalName to set
 	 */
@@ -88,6 +104,21 @@ public class BoardAttachFile {
 	 */
 	public String getSaveName() {
 		return saveName;
+	}
+
+	/**
+	 * @return 웹루트를 기준으로 첨부파일 경로.(파일명 포함)
+	 */
+	public String getSavePath() {
+		File f = new File(basePath, saveName);
+		return f.getPath();
+	}
+
+	/**
+	 * @return Base64로 변환 된 첨부파일 경로
+	 */
+	public String getSavePathEncode() {
+		return StringUtilAd.encodeString(getSavePath());
 	}
 
 	/**
@@ -111,5 +142,14 @@ public class BoardAttachFile {
 	 */
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	/**
+	 * @param file
+	 *            웹 루트를 기준으로 파일 저장 디렉토리
+	 */
+	public void setBasePath(File file) {
+		this.basePath = file;
+
 	}
 }
