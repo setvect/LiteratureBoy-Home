@@ -282,7 +282,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	public List<BoardComment> listComment(int boardItemSeq) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = " from BoardComment where articleSeq = ? order by commectSeq ";
+		String q = " from BoardComment where articleSeq = ? order by commentSeq ";
 		Query query = session.createQuery(q);
 
 		query.setInteger(0, boardItemSeq);
@@ -322,7 +322,8 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 */
 	public void removeComment(int seq) {
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(getComment(seq));
+		BoardComment comment = getComment(seq);
+		session.delete(comment);
 		session.flush();
 	}
 

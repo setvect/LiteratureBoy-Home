@@ -1,6 +1,6 @@
-<%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
+<%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 <%@page import="com.setvect.literatureboy.service.board.BoardArticleSearch"%>
 <%@page import="com.setvect.literatureboy.vo.board.Board"%>
 <%@page import="com.setvect.common.util.GenericPage"%>
@@ -58,3 +58,4 @@
 	<form:hidden path="currentPage"/>
 	<input type="hidden" name="articleSeq"/>				
 </form:form>
+

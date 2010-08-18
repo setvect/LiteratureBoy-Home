@@ -63,7 +63,7 @@ public class BoardArticleController {
 		/** 리스트 */
 		LIST,
 		//
-		ARTICLE, ATTACH,
+		ARTICLE, ATTACH, COMMENT,
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH
 	}
@@ -123,6 +123,10 @@ public class BoardArticleController {
 				f.setBasePath(new File(SAVE_PATH, b.getBoardCode()));
 			}
 			mav.addObject(AttributeKey.ATTACH.name(), attach);
+			
+			List<BoardComment> comments = boardService.listComment(articleSeq);
+			mav.addObject(AttributeKey.COMMENT.name(), comments);
+			
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
@@ -178,7 +182,9 @@ public class BoardArticleController {
 		else if (m == Mode.COMMENT_CREATE_ACTION) {
 			BoardComment comment = new BoardComment();
 			Binder.bind(request, comment);
-			boardService.updateComment(comment);
+			comment.setIp(request.getRemoteAddr());
+			comment.setRegDate(new Date());
+			boardService.createComment(comment);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}

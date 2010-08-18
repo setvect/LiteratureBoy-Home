@@ -27,7 +27,7 @@ public class BoardComment {
 	@Column(name = "COMMENT_SEQ")
 	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
-	private int commectSeq;
+	private int commentSeq;
 	/** */
 	@Column(name = "ARTICLE_SEQ")
 	private int articleSeq;
@@ -51,18 +51,18 @@ public class BoardComment {
 	private Date regDate;
 
 	/**
-	 * @return the commectSeq
+	 * @return the commentSeq
 	 */
-	public int getCommectSeq() {
-		return commectSeq;
+	public int getCommentSeq() {
+		return commentSeq;
 	}
 
 	/**
-	 * @param commectSeq
-	 *            the commectSeq to set
+	 * @param commentSeq
+	 *            the commentSeq to set
 	 */
-	public void setCommectSeq(int commectSeq) {
-		this.commectSeq = commectSeq;
+	public void setCommentSeq(int commentSeq) {
+		this.commentSeq = commentSeq;
 	}
 
 	/**

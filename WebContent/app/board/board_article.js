@@ -57,3 +57,23 @@ BoardArticle.removeAction = function(seq){
 		removeAction.submit();
 	}
 };
+
+BoardArticle.commentCreateAction = function(seq){
+	if($.FORM.isEmptyRtnMsg(commentCreateAction.name, "이름을 입력해 주세요")){
+		return;
+	}
+	if($.FORM.isEmptyRtnMsg(commentCreateAction.passwd, "비밀번호를 입력해 주세요")){
+		return;
+	}	
+	if($.FORM.isEmptyRtnMsg(commentCreateAction.content, "내용을 입력해 주세요")){
+		return;
+	}	
+	commentCreateAction.submit();
+};
+
+BoardArticle.commentRemoveAction = function(commentSeq){
+	if(confirm("삭제 하시겠습니까?")){
+		commentRemoveAction.commentSeq.value = commentSeq;
+		commentRemoveAction.submit();
+	}
+};
