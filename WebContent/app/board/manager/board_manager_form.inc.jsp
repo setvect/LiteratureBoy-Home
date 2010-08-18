@@ -38,8 +38,8 @@
 	<input type="hidden" name="boardCode" value=""/> 
 </form:form>
 	
-<form:form commandName="PAGE_SEARCH" name="deleteAction" method="get" action="${controller_url}">
-	<input type="hidden" name="mode" value="<%=BoardManagerController.Mode.DELETE_ACTION%>"/> 
+<form:form commandName="PAGE_SEARCH" name="removeAction" method="get" action="${controller_url}">
+	<input type="hidden" name="mode" value="<%=BoardManagerController.Mode.REMOVE_ACTION%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
 	<form:hidden path="currentPage"/>

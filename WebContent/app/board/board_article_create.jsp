@@ -50,6 +50,12 @@
 			<tr>
 				<th>Attach</th>
 				<td>
+					<span>이전 첨부파일 삭제</span>
+					<ul>
+						<c:forEach var="file" items="${ATTACH}">
+							<li><input type="checkbox" name="deleteAttach" value="${file.fileSeq}"/> ${file.originalName} </li>
+						</c:forEach>
+					</ul>
 					<ul>
          		<c:set var="attachIndex" value="<%=new int[] {1,2,3}%>" />
 						<c:forEach var="id" items="${attachIndex}">

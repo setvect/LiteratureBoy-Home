@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.boot.ApplicationException;
 
 /**
  * 파일 다운로드 파라미터
@@ -33,7 +34,8 @@ public class DownloadController extends HttpServlet {
 		// 서버에 저장된 파일이름 풀 경로
 		String saveName = StringUtilAd.decodeString(request.getParameter("s"));
 
-		
+		CommonUtil.checkAllowUploadFile(saveName);
+
 		String downName;
 		// 별도의 디코드 파일이 없으면 저장파일 이름을 다운로드
 		if (StringUtilAd.isEmpty(request.getParameter("d"))) {
@@ -50,11 +52,13 @@ public class DownloadController extends HttpServlet {
 		}
 		String webBase = request.getSession().getServletContext().getRealPath("");
 		File attachFile = new File(webBase, saveName);
-		
+
 		try {
 			FileUtil.fileDown(attachFile, downName, request, response);
 		} catch (Exception e) {
 			throw new IOException(e.getMessage());
 		}
 	}
+
+
 }

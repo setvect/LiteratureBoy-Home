@@ -41,7 +41,7 @@
 			<input type="button" value="수정" onclick="BoardManager.updateFrom('${article.boardCode}')">
 		</display:column>
 		<display:column title="Delete">
-			<input type="button" value="삭제" onclick="BoardManager.deleteAction('${article.boardCode}')">
+			<input type="button" value="삭제" onclick="BoardManager.removeAction('${article.boardCode}')">
 		</display:column>
 	</display:table>
 </div>

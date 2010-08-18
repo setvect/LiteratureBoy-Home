@@ -49,7 +49,8 @@
 	<input type="hidden" name="articleSeq"/>		
 </form:form>
 	
-<form:form commandName="PAGE_SEARCH" name="deleteAction" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="removeAction" method="get" action="${controller_url}">
+	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.REMOVE_ACTION%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
 	<form:hidden path="searchTitle"/>

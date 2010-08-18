@@ -33,7 +33,7 @@ public class BoardManagerController {
 	 */
 	public static enum Mode {
 		/** USER,AGEN,Menu 리스트 보기 */
-		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, DELETE_ACTION
+		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, REMOVE_ACTION
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class BoardManagerController {
 			return mav;
 		}
 		// 삭제 처리
-		else if (m == Mode.DELETE_ACTION) {
+		else if (m == Mode.REMOVE_ACTION) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
 			b.setDeleteF(true);

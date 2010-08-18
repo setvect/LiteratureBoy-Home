@@ -41,7 +41,7 @@
 </div>
 <div>
 	<input type="button" value="수정" onclick="BoardArticle.updateFrom('${ARTICLE.articleSeq}')">
-	<input type="button" value="삭제" onclick="BoardArticle.deleteAction('${ARTICLE.articleSeq}')">
+	<input type="button" value="삭제" onclick="BoardArticle.removeAction('${ARTICLE.articleSeq}')">
 	<input type="button" value="목록" onclick="BoardArticle.listForm()">
 </div>
 <jsp:include page="board_article_form.inc.jsp"></jsp:include>

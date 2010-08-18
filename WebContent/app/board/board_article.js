@@ -51,9 +51,9 @@ BoardArticle.updateFrom = function(seq){
 	updateForm.submit();
 };
 
-BoardArticle.deleteAction = function(code){
+BoardArticle.removeAction = function(seq){
 	if(confirm("삭제 하시겠습니까?")){
-		deleteAction.articleSeq.value = seq;
-		deleteAction.submit();
+		removeAction.articleSeq.value = seq;
+		removeAction.submit();
 	}
 };

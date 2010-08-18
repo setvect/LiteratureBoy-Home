@@ -43,7 +43,7 @@
 </div>
 <div>
 	<input type="button" value="수정" onclick="BoardManager.updateFrom('${ITEM.boardCode}')">
-	<input type="button" value="삭제" onclick="BoardManager.deleteAction('${ITEM.boardCode}')">
+	<input type="button" value="삭제" onclick="BoardManager.removeAction('${ITEM.boardCode}')">
 	<input type="button" value="목록" onclick="BoardManager.listForm()">
 
 </div>

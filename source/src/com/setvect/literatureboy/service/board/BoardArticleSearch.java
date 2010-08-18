@@ -18,6 +18,9 @@ public class BoardArticleSearch extends SearchListVo {
 	private String searchTitle;
 	private String searchContent;
 
+	/** 삭제된 게시물도 보여 줄 것이지 */
+	private boolean deleteView;
+
 	public BoardArticleSearch(int currentPage) {
 		super(currentPage);
 	}
@@ -80,6 +83,25 @@ public class BoardArticleSearch extends SearchListVo {
 	 */
 	public void setSearchContent(String searchContent) {
 		this.searchContent = searchContent;
+	}
+
+	/**
+	 * 삭제된 게시물도 보여 줄 것이지. true 삭제 게시물도 보여줌.
+	 * 
+	 * @return the deleteView
+	 */
+	public boolean isDeleteView() {
+		return deleteView;
+	}
+
+	/**
+	 * 삭제된 게시물도 보여 줄 것이지. true 삭제 게시물도 보여줌.
+	 * 
+	 * @param deleteView
+	 *            the deleteView to set
+	 */
+	public void setDeleteView(boolean deleteView) {
+		this.deleteView = deleteView;
 	}
 
 	/**

@@ -13,6 +13,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.setvect.common.util.FileUtil;
+import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.web.CommonUtil;
+
 /**
  * Spring 2.5에서는 동일한 이름으로 첨부파일 등록 폼이 2개 이상이 경우 에러남
  * spring mvc 2.5.5 multipart multi file upload 지원<br>
@@ -60,20 +64,24 @@ public class MultiFileCommonsMultipartResolver extends CommonsMultipartResolver 
 				// + "] found - not supported by MultipartResolver");
 				// }
 
-				List list = (List) multipartFiles.get(file.getName());
-				if (list != null) {
-					list.add(file);
-				}
-				else {
-					List fileList = new ArrayList();
-					fileList.add(file);
-					multipartFiles.put(file.getName(), fileList);
-				}
+				if (!StringUtilAd.isEmpty(file.getOriginalFilename())) {
+					CommonUtil.checkAllowUploadFile(file.getOriginalFilename());
 
-				if (this.logger.isDebugEnabled()) {
-					this.logger.debug("Found multipart file [" + file.getName() + "] of size " + file.getSize()
-							+ " bytes with original filename [" + file.getOriginalFilename() + "], stored "
-							+ file.getStorageDescription());
+					List list = (List) multipartFiles.get(file.getName());
+					if (list != null) {
+						list.add(file);
+					}
+					else {
+						List fileList = new ArrayList();
+						fileList.add(file);
+						multipartFiles.put(file.getName(), fileList);
+					}
+
+					if (this.logger.isDebugEnabled()) {
+						this.logger.debug("Found multipart file [" + file.getName() + "] of size " + file.getSize()
+								+ " bytes with original filename [" + file.getOriginalFilename() + "], stored "
+								+ file.getStorageDescription());
+					}
 				}
 			}
 

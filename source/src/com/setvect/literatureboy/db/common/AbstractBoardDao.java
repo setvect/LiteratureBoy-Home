@@ -23,7 +23,7 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  * 
  * @version $Id$
  */
-public abstract class AbstractBoardArticleDao implements BoardDao {
+public abstract class AbstractBoardDao implements BoardDao {
 	@Resource
 	SessionFactory sessionFactory;
 
@@ -144,23 +144,28 @@ public abstract class AbstractBoardArticleDao implements BoardDao {
 	}
 
 	/**
-	 * @param paging
+	 * @param search
 	 *            검색 조건
 	 * @return select where 절 조건
 	 */
-	private String getArticleWhereClause(BoardArticleSearch paging) {
+	private String getArticleWhereClause(BoardArticleSearch search) {
 
-		String where = " where boardCode = " + StringUtilAd.getSqlString(paging.getSearchCode());
+		String where = " where boardCode = " + StringUtilAd.getSqlString(search.getSearchCode());
+
+		if (!search.isDeleteView()) {
+			// 삭제 게시물 보여 주지 않음
+			where += " and deleteF = 'N' ";
+		}
 
 		// 두개 이상 동시에 검색 조건에 포함 될 수 없음
-		if (!StringUtilAd.isEmpty(paging.getSearchName())) {
-			where += " and name like " + StringUtilAd.getSqlStringLike(paging.getSearchName());
+		if (!StringUtilAd.isEmpty(search.getSearchName())) {
+			where += " and name like " + StringUtilAd.getSqlStringLike(search.getSearchName());
 		}
-		else if (!StringUtilAd.isEmpty(paging.getSearchTitle())) {
-			where += " and title like " + StringUtilAd.getSqlStringLike(paging.getSearchTitle());
+		else if (!StringUtilAd.isEmpty(search.getSearchTitle())) {
+			where += " and title like " + StringUtilAd.getSqlStringLike(search.getSearchTitle());
 		}
-		else if (!StringUtilAd.isEmpty(paging.getSearchContent())) {
-			where += " and content like " + StringUtilAd.getSqlStringLike(paging.getSearchContent());
+		else if (!StringUtilAd.isEmpty(search.getSearchContent())) {
+			where += " and content like " + StringUtilAd.getSqlStringLike(search.getSearchContent());
 		}
 		return where;
 	}

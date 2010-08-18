@@ -50,9 +50,9 @@ public class BoardArticleController {
 	 */
 	public static enum Mode {
 		/** USER,AGEN,Menu 리스트 보기 */
-		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, CREATE_ACTION, UPDATE_FORM, UPDATE_ACTION, DELETE_ACTION,
+		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, CREATE_ACTION, UPDATE_FORM, UPDATE_ACTION, REMOVE_ACTION,
 		//
-		COMMENT_CREATE_ACTION, COMMENT_DELETE_ACTION
+		COMMENT_CREATE_ACTION, COMMENT_REMOVE_ACTION
 	}
 
 	/**
@@ -93,6 +93,7 @@ public class BoardArticleController {
 		}
 
 		BoardArticleSearch pageCondition = bindSearch(request);
+//		pageCondition.setDeleteView(true);
 		if (StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
 			throw new ApplicationException("not setting to 'searchCode'");
 		}
@@ -119,7 +120,7 @@ public class BoardArticleController {
 			mav.addObject(AttributeKey.ARTICLE.name(), b);
 			List<BoardAttachFile> attach = boardService.listAttachFile(articleSeq);
 			for (BoardAttachFile f : attach) {
-				f.setBasePath(new File(SAVE_PATH,  b.getBoardCode()));
+				f.setBasePath(new File(SAVE_PATH, b.getBoardCode()));
 			}
 			mav.addObject(AttributeKey.ATTACH.name(), attach);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_read.jsp");
@@ -146,6 +147,7 @@ public class BoardArticleController {
 			BoardArticle b = boardService.getArticle(articleSeq);
 			mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), b);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
+			mav.addObject(AttributeKey.ATTACH.name(), boardService.listAttachFile(articleSeq));
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_create.jsp");
 		}
 		else if (m == Mode.UPDATE_ACTION) {
@@ -155,10 +157,17 @@ public class BoardArticleController {
 			boardService.updateArticle(article);
 			saveAttachFile(request, article);
 
+			String[] deleteAttach = request.getParameterValues("deleteAttach");
+			if (deleteAttach != null) {
+				for (String attach : deleteAttach) {
+					boardService.removeAttachFile(Integer.parseInt(attach));
+				}
+			}
+
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
-		else if (m == Mode.DELETE_ACTION) {
+		else if (m == Mode.REMOVE_ACTION) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
 			BoardArticle b = boardService.getArticle(articleSeq);
 			b.setDeleteF(true);
@@ -173,7 +182,7 @@ public class BoardArticleController {
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
-		else if (m == Mode.COMMENT_DELETE_ACTION) {
+		else if (m == Mode.COMMENT_REMOVE_ACTION) {
 			int commentSeq = Integer.parseInt(request.getParameter("commentSeq"));
 			boardService.removeComment(commentSeq);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
@@ -209,7 +218,9 @@ public class BoardArticleController {
 		}
 
 		MultipartFile[] attachFiles = article.getAttachFile();
-
+		if (attachFiles == null) {
+			return;
+		}
 		for (MultipartFile file : attachFiles) {
 			if (StringUtilAd.isEmpty(file.getOriginalFilename())) {
 				continue;
@@ -241,13 +252,13 @@ public class BoardArticleController {
 		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
 		param.putAll(searchParam);
 
-		String pageParam = new ParamEncoder("boardList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
+		String pageParam = new ParamEncoder("articleList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
 		param.put(pageParam, pageCondition.getCurrentPage());
 
 		String mode = request.getParameter("mode");
 		Mode m = Mode.valueOf(mode);
 		// 코멘트 관련 액션이면 읽기 페이지로 이동
-		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_DELETE_ACTION) {
+		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_REMOVE_ACTION) {
 			param.put("mode", Mode.READ_FORM);
 			param.put("articleSeq", request.getParameter("articleSeq"));
 		}
@@ -264,7 +275,7 @@ public class BoardArticleController {
 	 * @throws ServletRequestBindingException
 	 */
 	private BoardArticleSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {
-		int currentPage = CommonUtil.getCurrentPage(request, "boardList");
+		int currentPage = CommonUtil.getCurrentPage(request, "articleList");
 		BoardArticleSearch searchVO = new BoardArticleSearch(currentPage);
 		Binder.bind(request, searchVO);
 		return searchVO;

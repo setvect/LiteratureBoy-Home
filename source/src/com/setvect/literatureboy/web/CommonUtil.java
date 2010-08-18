@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 
+import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.boot.ApplicationException;
 
 /**
  * 프로젝트 의존적인 공통 메소드 모음
@@ -60,5 +62,22 @@ public class CommonUtil {
 			param.put(key, v);
 		}
 		return param;
+	}
+
+	/**
+	 * 파일 업로드 및 다운로드 가능 여부를 체크함.
+	 * 
+	 * @param fileName
+	 *            체크할 파일 이름
+	 * @throws ApplicationException
+	 *             불가능 할 경우 예외 발생
+	 */
+	public static void checkAllowUploadFile(String fileName) throws ApplicationException {
+		String ext = FileUtil.getExt(fileName).toLowerCase().trim();
+
+		int a = StringUtilAd.indexOfAny(ext, ConstraintWeb.ALLOW_UPLOAD_FILE);
+		if (a == -1) {
+			throw new ApplicationException("[" + fileName + "] 은 허가된 파일이 아닙니다.");
+		}
 	}
 }

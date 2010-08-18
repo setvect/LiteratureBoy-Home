@@ -48,9 +48,9 @@ BoardManager.updateFrom = function(code){
 	updateForm.submit();
 };
 
-BoardManager.deleteAction = function(code){
+BoardManager.removeAction = function(code){
 	if(confirm("삭제 하시겠습니까?")){
-		deleteAction.boardCode.value = code;
-		deleteAction.submit();
+		removeAction.boardCode.value = code;
+		removeAction.submit();
 	}
 };
