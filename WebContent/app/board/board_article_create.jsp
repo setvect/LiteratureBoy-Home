@@ -19,6 +19,16 @@
 %>
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript" src="/app/board/board_article.js"></script>
+<script type="text/javascript" src="/app/webedit/fckeditor.js"></script>
+<script type="text/javascript">
+  window.onload = function()
+  {
+    var oFCKeditor = new FCKeditor( 'content' ) ;
+    oFCKeditor.ToolbarSet = 'Default';
+    oFCKeditor.BasePath = "/app/webedit/" ;
+    oFCKeditor.ReplaceTextarea() ;
+  }
+</script>
 <div>
 	<form:form commandName="createForm" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${controller_url}">
 		<input type="hidden" name="mode" value="${MODE}"/>

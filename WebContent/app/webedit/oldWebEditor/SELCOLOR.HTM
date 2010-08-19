@@ -1,0 +1,256 @@
+<!--
+#################################################################################
+##
+## HTML Text Editing Component for hosting in Web Pages
+## Copyright (C) 2001  Ramesys (Contracting Services) Limited
+## 
+## This library is free software; you can redistribute it and/or
+## modify it under the terms of the GNU Lesser General Public
+## License as published by the Free Software Foundation; either
+## version 2.1 of the License, or (at your option) any later version.
+##
+## This library is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+## Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU LesserGeneral Public License
+## along with this program; if not a copy can be obtained from 
+##
+##    http://www.gnu.org/copyleft/lesser.html
+##
+## or by writing to:
+##
+##    Free Software Foundation, Inc.
+##    59 Temple Place - Suite 330,
+##    Boston,
+##    MA  02111-1307,
+##    USA.
+## 
+## Original Developer:
+##
+##	Austin David France
+##	Ramesys (Contracting Services) Limited
+##	Mentor House
+##	Ainsworth Street
+##	Blackburn
+##	Lancashire
+##	BB1 6AY
+##	United Kingdom
+##  email: Austin.France@Ramesys.com
+##
+## Home Page:    http://richtext.sourceforge.net/
+## Support:      http://richtext.sourceforge.net/
+## 
+#################################################################################
+-->
+<html>
+<head>
+<title>색상 선택</title>
+<style type="text/css">
+BODY   {margin-left:13; font-family:Verdana; font-size:12; background:menu}
+TABLE.colorChooser { background-color: buttonface; border:0; }
+.colorChooser TD { border: 2px inset buttonface; cursor: hand; width:12px; height:15px;}
+.colorChooserLabel TD { width: 100%; border: 0;
+	font-family: "MS Sans Serif"; font-size: xx-small; vertical-align: middle;
+}
+
+TD.colorNone { font-family: "MS Sans Serif"; font-size: xx-small; 
+				text-align: center; border: 2px outset buttonface!important; }
+</style>
+</head>
+
+<body topmargin="0" leftmargin="0" style="border: 0; rightmargin: 0;">
+<SCRIPT LANGUAGE=JavaScript FOR=ColorTable EVENT=onclick>
+<!--
+  if (event.srcElement.title == null || event.srcElement.title == "") {
+  		
+  		window.returnValue = event.srcElement.bgColor;
+	} else{
+		window.returnValue = event.srcElement.title;
+	}
+  window.close();
+// -->
+</SCRIPT>
+
+<table ID=ColorTable class="colorChooser" cellpadding="0" cellspacing="1" >
+<tr class="colorChooserLabel"><td colspan="16">Standard Colors</td></tr>
+<tr>
+<td bgcolor="Green" title="Green"></td>
+<td bgcolor="Lime" title="Lime"></td>
+<td bgcolor="Teal" title="Teal"></td>
+<td bgcolor="Aqua" title="Aqua"></td>
+<td bgcolor="Navy" title="Navy"></td>
+<td bgcolor="Blue" title="Blue"></td>
+<td bgcolor="Purple" title="Purple"></td>
+<td bgcolor="Fuchsia" title="Fuchsia"></td>
+<td bgcolor="Maroon" title="Maroon"></td>
+<td bgcolor="Red" title="Red"></td>
+<td bgcolor="Olive" title="Olive"></td>
+<td bgcolor="Yellow" title="Yellow"></td>
+<td bgcolor="White" title="White"></td>
+<td bgcolor="Silver" title="Silver"></td>
+<td bgcolor="Gray" title="Gray"></td>
+<td bgcolor="Black" title="Black"></td>
+</tr>
+<tr class="colorChooserLabel"><td colspan="16">Gray Scale</td></tr>
+<tr>
+<td bgcolor="#101010"></td>
+<td bgcolor="#202020"></td>
+<td bgcolor="#303030"></td>
+<td bgcolor="#404040"></td>
+<td bgcolor="#505050"></td>
+<td bgcolor="#606060"></td>
+<td bgcolor="#707070"></td>
+<td bgcolor="#808080"></td>
+<td bgcolor="#909090"></td>
+<td bgcolor="#A0A0A0"></td>
+<td bgcolor="#B0B0B0"></td>
+<td bgcolor="#C0C0C0"></td>
+<td bgcolor="#D0D0D0"></td>
+<td bgcolor="#E0E0E0"></td>
+<td bgcolor="#F0F0F0"></td>
+</tr>
+<tr class="colorChooserLabel"><td colspan="16">Additional</td></tr>
+<tr>
+<td bgcolor="DarkOliveGreen" title="DarkOliveGreen"></td>
+<td bgcolor="DarkGreen" title="DarkGreen"></td>
+<td bgcolor="DarkSlateGray" title="DarkSlateGray"></td>
+<td bgcolor="SlateGray" title="SlateGray"></td>
+<td bgcolor="DarkBlue" title="DarkBlue"></td>
+<td bgcolor="MidnightBlue" title="MidnightBlue"></td>
+<td bgcolor="Indigo" title="Indigo"></td>
+<td bgcolor="DarkMagenta" title="DarkMagenta"></td>
+<td bgcolor="Brown" title="Brown"></td>
+<td bgcolor="DarkRed" title="DarkRed"></td>
+<td bgcolor="Sienna" title="Sienna"></td>
+<td bgcolor="SaddleBrown" title="SaddleBrown"></td>
+<td bgcolor="DarkGoldenrod" title="DarkGoldenrod"></td>
+<td bgcolor="Beige" title="Beige"></td>
+<td bgcolor="Honeydew" title="Honeydew"></td>
+<td bgcolor="DimGray" title="DimGray"></td>
+</tr>
+<tr>
+<td bgcolor="OliveDrab" title="OliveDrab"></td>
+<td bgcolor="ForestGreen" title="ForestGreen"></td>
+<td bgcolor="DarkCyan" title="DarkCyan"></td>
+<td bgcolor="LightSlateGray" title="LightSlateGray"></td>
+<td bgcolor="MediumBlue" title="MediumBlue"></td>
+<td bgcolor="DarkSlateBlue" title="DarkSlateBlue"></td>
+<td bgcolor="DarkViolet" title="DarkViolet"></td>
+<td bgcolor="MediumVioletRed" title="MediumVioletRed"></td>
+<td bgcolor="IndianRed" title="IndianRed"></td>
+<td bgcolor="Firebrick" title="Firebrick"></td>
+<td bgcolor="Chocolate" title="Chocolate"></td>
+<td bgcolor="Peru" title="Peru"></td>
+<td bgcolor="Goldenrod" title="Goldenrod"></td>
+<td bgcolor="LightGoldenrodYellow" title="LightGoldenrodYellow"></td>
+<td bgcolor="MintCream" title="MintCream"></td>
+<td bgcolor="DarkGray" title="DarkGray"></td>
+</tr>
+<tr>
+<td bgcolor="YellowGreen" title="YellowGreen"></td>
+<td bgcolor="SeaGreen" title="SeaGreen"></td>
+<td bgcolor="CadetBlue" title="CadetBlue"></td>
+<td bgcolor="SteelBlue" title="SteelBlue"></td>
+<td bgcolor="RoyalBlue" title="RoyalBlue"></td>
+<td bgcolor="BlueViolet" title="BlueViolet"></td>
+<td bgcolor="DarkOrchid" title="DarkOrchid"></td>
+<td bgcolor="DeepPink" title="DeepPink"></td>
+<td bgcolor="RosyBrown" title="RosyBrown"></td>
+<td bgcolor="Crimson" title="Crimson"></td>
+<td bgcolor="DarkOrange" title="DarkOrange"></td>
+<td bgcolor="Burlywood" title="Burlywood"></td>
+<td bgcolor="DarkKhaki" title="DarkKhaki"></td>
+<td bgcolor="LightYellow" title="LightYellow"></td>
+<td bgcolor="Azure" title="Azure"></td>
+<td bgcolor="LightGrey" title="LightGrey"></td>
+</tr>
+<tr>
+<td bgcolor="LawnGreen" title="LawnGreen"></td>
+<td bgcolor="MediumSeaGreen" title="MediumSeaGreen"></td>
+<td bgcolor="LightSeaGreen" title="LightSeaGreen"></td>
+<td bgcolor="DeepSkyBlue" title="DeepSkyBlue"></td>
+<td bgcolor="DodgerBlue" title="DodgerBlue"></td>
+<td bgcolor="SlateBlue" title="SlateBlue"></td>
+<td bgcolor="MediumOrchid" title="MediumOrchid"></td>
+<td bgcolor="PaleVioletRed" title="PaleVioletRed"></td>
+<td bgcolor="Salmon" title="Salmon"></td>
+<td bgcolor="OrangeRed" title="OrangeRed"></td>
+<td bgcolor="SandyBrown" title="SandyBrown"></td>
+<td bgcolor="Tan" title="Tan"></td>
+<td bgcolor="Gold" title="Gold"></td>
+<td bgcolor="Ivory" title="Ivory"></td>
+<td bgcolor="GhostWhite" title="GhostWhite"></td>
+<td bgcolor="Gainsboro" title="Gainsboro"></td>
+</tr>
+<tr>
+<td bgcolor="Chartreuse" title="Chartreuse"></td>
+<td bgcolor="LimeGreen" title="LimeGreen"></td>
+<td bgcolor="MediumAquamarine" title="MediumAquamarine"></td>
+<td bgcolor="DarkTurquoise" title="DarkTurquoise"></td>
+<td bgcolor="CornflowerBlue" title="CornflowerBlue"></td>
+<td bgcolor="MediumSlateBlue" title="MediumSlateBlue"></td>
+<td bgcolor="Orchid" title="Orchid"></td>
+<td bgcolor="HotPink" title="HotPink"></td>
+<td bgcolor="LightCoral" title="LightCoral"></td>
+<td bgcolor="Tomato" title="Tomato"></td>
+<td bgcolor="Orange" title="Orange"></td>
+<td bgcolor="Bisque" title="Bisque"></td>
+<td bgcolor="Khaki" title="Khaki"></td>
+<td bgcolor="Cornsilk" title="Cornsilk"></td>
+<td bgcolor="Linen" title="Linen"></td>
+<td bgcolor="WhiteSmoke" title="WhiteSmoke"></td>
+</tr>
+<tr>
+<td bgcolor="GreenYellow" title="GreenYellow"></td>
+<td bgcolor="DarkSeaGreen" title="DarkSeaGreen"></td>
+<td bgcolor="Turquoise" title="Turquoise"></td>
+<td bgcolor="MediumTurquoise" title="MediumTurquoise"></td>
+<td bgcolor="SkyBlue" title="SkyBlue"></td>
+<td bgcolor="MediumPurple" title="MediumPurple"></td>
+<td bgcolor="Violet" title="Violet"></td>
+<td bgcolor="LightPink" title="LightPink"></td>
+<td bgcolor="DarkSalmon" title="DarkSalmon"></td>
+<td bgcolor="Coral" title="Coral"></td>
+<td bgcolor="NavajoWhite" title="NavajoWhite"></td>
+<td bgcolor="BlanchedAlmond" title="BlanchedAlmond"></td>
+<td bgcolor="PaleGoldenrod" title="PaleGoldenrod"></td>
+<td bgcolor="Oldlace" title="Oldlace"></td>
+<td bgcolor="Seashell" title="Seashell"></td>
+<td bgcolor="GhostWhite" title="GhostWhite"></td>
+</tr>
+<tr>
+<td bgcolor="PaleGreen" title="PaleGreen"></td>
+<td bgcolor="SpringGreen" title="SpringGreen"></td>
+<td bgcolor="Aquamarine" title="Aquamarine"></td>
+<td bgcolor="PowderBlue" title="PowderBlue"></td>
+<td bgcolor="LightSkyBlue" title="LightSkyBlue"></td>
+<td bgcolor="LightSteelBlue" title="LightSteelBlue"></td>
+<td bgcolor="Plum" title="Plum"></td>
+<td bgcolor="Pink" title="Pink"></td>
+<td bgcolor="LightSalmon" title="LightSalmon"></td>
+<td bgcolor="Wheat" title="Wheat"></td>
+<td bgcolor="Moccasin" title="Moccasin"></td>
+<td bgcolor="AntiqueWhite" title="AntiqueWhite"></td>
+<td bgcolor="LemonChiffon" title="LemonChiffon"></td>
+<td bgcolor="FloralWhite" title="FloralWhite"></td>
+<td bgcolor="Snow" title="Snow"></td>
+<td bgcolor="AliceBlue" title="AliceBlue"></td>
+</tr>
+<tr>
+<td bgcolor="LightGreen" title="LightGreen"></td>
+<td bgcolor="MediumSpringGreen" title="MediumSpringGreen"></td>
+<td bgcolor="PaleTurquoise" title="PaleTurquoise"></td>
+<td bgcolor="LightCyan" title="LightCyan"></td>
+<td bgcolor="LightBlue" title="LightBlue"></td>
+<td bgcolor="Lavender" title="Lavender"></td>
+<td bgcolor="Thistle" title="Thistle"></td>
+<td bgcolor="MistyRose" title="MistyRose"></td>
+<td bgcolor="Peachpuff" title="Peachpuff"></td>
+<td bgcolor="PapayaWhip" title="PapayaWhip"></td>
+<td colspan="6" class="colorNone" title="None"></td>
+</tr>
+</table>
+</body>
+</html>

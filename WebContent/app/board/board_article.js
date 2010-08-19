@@ -40,9 +40,12 @@ BoardArticle.createOrUpdate = function(){
 			return;
 		}
 	}
-	if($.FORM.isEmptyRtnMsg(createAction.content, "내용을  입력해 주세요")){
+	var oEditor = FCKeditorAPI.GetInstance('content') ; 
+	var editorContent = oEditor.GetXHTML( true );
+	if(editorContent == ""){
+		alert("내용을  입력해 주세요");
 		return;
-	}	
+	}
 	createAction.submit();
 };
 
