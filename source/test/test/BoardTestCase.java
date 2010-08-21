@@ -11,7 +11,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.SearchListVo;
 import com.setvect.literatureboy.service.board.BoardArticleSearch;
 import com.setvect.literatureboy.service.board.BoardManagerSearch;
 import com.setvect.literatureboy.service.board.BoardService;
