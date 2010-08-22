@@ -8,6 +8,50 @@
 	 -->
 	
 	<!-- create table and basic data -->
+	<table name="TBAA_USER">
+		<creation>
+			CREATE TABLE TBAA_USER (
+			  USER_ID varchar(20) NOT NULL,
+			  NAME varchar(50) NOT NULL,
+			  PASSWD varchar(20) NOT NULL,
+			  EMAIL varchar(100),
+				DELETE_F varchar(1) NOT NULL,	 			  
+			  PRIMARY KEY  (USER_ID)
+			)
+		</creation>
+		<defaultValue>
+			<query>INSERT INTO TBAA_USER(USER_ID, NAME, PASSWD, EMAIL, DELETE_F) VALUES('admin', '관리자', '1234', '', 'N')</query>
+		</defaultValue>		
+	</table>
+
+	<table name="TBAB_AUTH">
+		<creation>
+			CREATE TABLE TBAB_AUTH (
+			 	AUTH_SEQ int NOT NULL,
+			 	NAME varchar(100) NOT NULL,
+			  URL varchar(200) NOT NULL,
+			  PARAMETER varchar(100) NOT NULL,
+			  PRIMARY KEY  (AUTH_SEQ)
+			)
+		</creation>		
+	</table>
+
+
+	<table name="TBAC_AUTH_MAP">
+		<creation>
+			CREATE TABLE TBAC_AUTH_MAP (
+			 	AUTH_SEQ int NOT NULL,
+			  USER_ID varchar(20) NOT NULL,
+			  PRIMARY KEY  (AUTH_SEQ, USER_ID)
+			)
+		</creation>
+
+		<defaultValue>
+			<query>ALTER TABLE TBAC_AUTH_MAP ADD FOREIGN KEY (AUTH_SEQ) REFERENCES TBAB_AUTH(AUTH_SEQ)</query>
+			<query>ALTER TABLE TBAC_AUTH_MAP ADD FOREIGN KEY (USER_ID) REFERENCES TBAA_USER(USER_ID)</query>
+		</defaultValue>							
+	</table>
+
 
 	<table name="TBBA_BOARD_MANAGER">
 		<creation>
@@ -30,7 +74,7 @@
 			CREATE TABLE TBBB_BOARD_ARTICLE (
 			  ARTICLE_SEQ int NOT NULL,
 			  BOARD_CODE varchar(20) NOT NULL,
-			  MEMBER_ID varchar(20),
+			  USER_ID varchar(20),
 			  IDX1 int NOT NULL,
 			  IDX2 int NOT NULL,
 			  IDX3 int NOT NULL,
@@ -58,7 +102,7 @@
 			CREATE TABLE TBBC_BOARD_COMMENT (
 			  COMMENT_SEQ int NOT NULL,
 			  ARTICLE_SEQ int NOT NULL,
-			  MEMBER_ID varchar(20) NULL,
+			  USER_ID varchar(20) NULL,
 			  NAME varchar(50) NOT NULL,
 			  PASSWD varchar(10) NULL,
 			  CONTENT text NOT NULL,

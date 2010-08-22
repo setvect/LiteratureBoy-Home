@@ -85,7 +85,7 @@ public class MigrationTestCase extends TestSystem {
 
 			BoardArticle article = new BoardArticle();
 			article.setBoardCode(rs.getString("BOARD_CODE"));
-			article.setMemberId(rs.getString("MEMBER_ID"));
+			article.setUserId(rs.getString("MEMBER_ID"));
 			article.setIdx1(rs.getInt("IDX1"));
 			article.setIdx2(rs.getInt("IDX2"));
 			article.setIdx3(rs.getInt("IDX3"));

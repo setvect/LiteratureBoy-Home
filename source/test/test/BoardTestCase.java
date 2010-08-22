@@ -98,7 +98,7 @@ public class BoardTestCase extends TestSystem {
 		service.createComment(cmt);
 
 		BoardComment cmt2 = (BoardComment) BeanUtils.cloneBean(cmt);
-		cmt2.setMemberId("jjh");
+		cmt2.setUserId("jjh");
 		service.createComment(cmt2);
 
 		List<BoardComment> cmtList = service.listComment(article.getArticleSeq());

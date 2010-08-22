@@ -38,7 +38,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * 
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
-	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) throws Exception {
+	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) {
 
 		Session session = sessionFactory.getCurrentSession();
 
@@ -81,7 +81,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * @param board
 	 * @throws Exception
 	 */
-	public void createBoard(Board board) throws Exception {
+	public void createBoard(Board board) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(board);
 		session.flush();
@@ -100,7 +100,6 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * @param articleSeq
 	 */
 	public void removeBoard(String code) {
-		// TODO 플래그 형태로 삭제
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(getBoard(code));
 		session.flush();
@@ -123,7 +122,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
 	// TODO 목록 검색시 불필요한 항목(내용 TEXT)까지 가져오는 경우 발생. 성능 문제 발생시 수정
-	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondtion) throws Exception {
+	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondtion) {
 		Session session = sessionFactory.getCurrentSession();
 
 		String q = "select count(*) from BoardArticle " + getArticleWhereClause(pageCondtion);
@@ -175,7 +174,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * 
 	 * @see anyframe.core.generic.dao.hibernate.GenericDaoHibernate#create(java.lang.Object)
 	 */
-	public void createArticle(BoardArticle article) throws Exception {
+	public void createArticle(BoardArticle article) {
 		Session session = sessionFactory.getCurrentSession();
 		String q;
 
@@ -206,7 +205,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * @see com.setvect.literatureboy.db.BoardArticleDao#createReply(com.setvect.literatureboy.vo.board.BoardArticle,
 	 * int)
 	 */
-	public void createArticleReply(BoardArticle article, int parentId) throws Exception {
+	public void createArticleReply(BoardArticle article, int parentId) {
 		Session session = sessionFactory.getCurrentSession();
 
 		// IDX1

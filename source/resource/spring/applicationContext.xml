@@ -68,6 +68,9 @@
 				<value>com.setvect.literatureboy.vo.board.BoardArticle</value>
 				<value>com.setvect.literatureboy.vo.board.BoardAttachFile</value>
 				<value>com.setvect.literatureboy.vo.board.BoardComment</value>
+				<value>com.setvect.literatureboy.vo.user.User</value>
+				<value>com.setvect.literatureboy.vo.user.Auth</value>
+				<value>com.setvect.literatureboy.vo.user.AuthMap</value>
 			</list>
 		</property>
 		<property name="packagesToScan">

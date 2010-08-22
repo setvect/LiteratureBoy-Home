@@ -32,8 +32,8 @@ public class BoardComment {
 	@Column(name = "ARTICLE_SEQ")
 	private int articleSeq;
 	/** */
-	@Column(name = "MEMBER_ID")
-	private String memberId;
+	@Column(name = "USER_ID")
+	private String userId;
 	/** */
 	@Column(name = "NAME")
 	private String name;
@@ -83,16 +83,16 @@ public class BoardComment {
 	/**
 	 * @return the memberId
 	 */
-	public String getMemberId() {
-		return memberId;
+	public String getUserId() {
+		return userId;
 	}
 
 	/**
 	 * @param memberId
 	 *            the memberId to set
 	 */
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setUserId(String memberId) {
+		this.userId = memberId;
 	}
 
 	/**

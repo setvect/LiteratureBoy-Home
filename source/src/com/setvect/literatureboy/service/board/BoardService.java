@@ -39,17 +39,15 @@ public class BoardService {
 	/**
 	 * @param pageCondition
 	 * @return 정보 항목
-	 * @throws Exception
 	 */
-	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) throws Exception {
+	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) {
 		return boardDao.getBoardPagingList(pageCondition);
 	}
 
 	/**
 	 * @param board
-	 * @throws Exception
 	 */
-	public void createBoard(Board board) throws Exception {
+	public void createBoard(Board board) {
 		boardDao.createBoard(board);
 	}
 
@@ -82,9 +80,8 @@ public class BoardService {
 	 * @param pageCondition
 	 *            게시물 검색 정보
 	 * @return 게시물 페이지 값
-	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition) throws Exception {
+	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition) {
 		return boardDao.getArticlePagingList(pageCondition);
 	}
 
@@ -93,9 +90,8 @@ public class BoardService {
 	 * 
 	 * @param article
 	 *            게시물
-	 * @throws Exception
 	 */
-	public void createArticle(BoardArticle article) throws Exception {
+	public void createArticle(BoardArticle article) {
 		boardDao.createArticle(article);
 	}
 
@@ -106,9 +102,8 @@ public class BoardService {
 	 *            게시물
 	 * @param parentId
 	 *            부모 게시물
-	 * @throws Exception
 	 */
-	public void createArticleReply(BoardArticle article, int parentId) throws Exception {
+	public void createArticleReply(BoardArticle article, int parentId) {
 		boardDao.createArticleReply(article, parentId);
 	}
 

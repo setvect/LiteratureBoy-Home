@@ -24,15 +24,13 @@ public interface BoardDao {
 	/**
 	 * @param pageCondition
 	 * @return 게시판생성 정보 항목
-	 * @throws Exception
 	 */
-	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) throws Exception;
+	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition);
 
 	/**
 	 * @param board
-	 * @throws Exception
 	 */
-	public void createBoard(Board board) throws Exception;
+	public void createBoard(Board board);
 
 	/**
 	 * @param article
@@ -55,18 +53,16 @@ public interface BoardDao {
 	 * @param pageCondition
 	 *            게시물 검색 정보
 	 * @return 게시물 페이지 값
-	 * @throws Exception
 	 */
-	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition) throws Exception;
+	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition);
 
 	/**
 	 * 게시물 등록
 	 * 
 	 * @param article
 	 *            게시물
-	 * @throws Exception
 	 */
-	public void createArticle(BoardArticle article) throws Exception;
+	public void createArticle(BoardArticle article);
 
 	/**
 	 * 답변 등록
@@ -75,9 +71,8 @@ public interface BoardDao {
 	 *            게시물
 	 * @param parentId
 	 *            부모 게시물
-	 * @throws Exception
 	 */
-	public void createArticleReply(BoardArticle article, int parentId) throws Exception;
+	public void createArticleReply(BoardArticle article, int parentId);
 
 	/**
 	 * @param article
