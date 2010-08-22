@@ -112,7 +112,7 @@
 		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="appDao" />
 		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="dao" />
 		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="serivce" />
-		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="controller" />
+		<!-- <aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="controller" /> -->
 	</aop:config>	
 
 	<!-- DataBase DAO -->

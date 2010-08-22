@@ -25,11 +25,13 @@ import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.GenericPage;
+import com.setvect.common.util.StringEncrypt;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.ApplicationException;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.board.BoardArticleSearch;
 import com.setvect.literatureboy.service.board.BoardService;
+import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
@@ -62,6 +64,8 @@ public class BoardArticleController {
 		MODE,
 		/** 리스트 */
 		LIST,
+		/** 게시물 정보 */
+		BOARD,
 		//
 		ARTICLE, ATTACH, COMMENT,
 		/** 페이지 및 검색 정보 */
@@ -93,11 +97,14 @@ public class BoardArticleController {
 		}
 
 		BoardArticleSearch pageCondition = bindSearch(request);
-//		pageCondition.setDeleteView(true);
+		// pageCondition.setDeleteView(true);
 		if (StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
 			throw new ApplicationException("not setting to 'searchCode'");
 		}
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
+
+		Board board = boardService.getBoard(pageCondition.getSearchCode());
+		mav.addObject(AttributeKey.BOARD.name(), board);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
 		if (m == Mode.SEARCH_FORM) {
@@ -116,18 +123,28 @@ public class BoardArticleController {
 		}
 		else if (m == Mode.READ_FORM) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
-			BoardArticle b = boardService.getArticle(articleSeq);
-			mav.addObject(AttributeKey.ARTICLE.name(), b);
-			List<BoardAttachFile> attach = boardService.listAttachFile(articleSeq);
-			for (BoardAttachFile f : attach) {
-				f.setBasePath(new File(SAVE_PATH, b.getBoardCode()));
+			BoardArticle article = boardService.getArticle(articleSeq);
+			mav.addObject(AttributeKey.ARTICLE.name(), article);
+
+			boolean encodePage = false;
+			encodePage = isEncodePage(request, article);
+
+			if (encodePage) {
+				mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_encode.jsp");
+				mav.addObject(AttributeKey.MODE.name(), m);
 			}
-			mav.addObject(AttributeKey.ATTACH.name(), attach);
-			
-			List<BoardComment> comments = boardService.listComment(articleSeq);
-			mav.addObject(AttributeKey.COMMENT.name(), comments);
-			
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_read.jsp");
+			else {
+				List<BoardAttachFile> attach = boardService.listAttachFile(articleSeq);
+				for (BoardAttachFile f : attach) {
+					f.setBasePath(new File(SAVE_PATH, article.getBoardCode()));
+				}
+				mav.addObject(AttributeKey.ATTACH.name(), attach);
+
+				List<BoardComment> comments = boardService.listComment(articleSeq);
+				mav.addObject(AttributeKey.COMMENT.name(), comments);
+
+				mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_read.jsp");
+			}
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
@@ -136,6 +153,8 @@ public class BoardArticleController {
 		else if (m == Mode.CREATE_ACTION) {
 			BoardArticle article = new BoardArticle();
 			Binder.bind(request, article);
+			processEncrypt(request, article);
+
 			article.setDepthLevel(1);
 			article.setRegDate(new Date());
 			article.setIp(request.getRemoteAddr());
@@ -148,16 +167,26 @@ public class BoardArticleController {
 		}
 		else if (m == Mode.UPDATE_FORM) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
-			BoardArticle b = boardService.getArticle(articleSeq);
-			mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), b);
-			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
-			mav.addObject(AttributeKey.ATTACH.name(), boardService.listAttachFile(articleSeq));
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_create.jsp");
+			BoardArticle article = boardService.getArticle(articleSeq);
+			boolean encodePage = isEncodePage(request, article);
+			
+			mav.addObject(AttributeKey.ARTICLE.name(), article);
+			if (encodePage) {
+				mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_encode.jsp");
+				mav.addObject(AttributeKey.MODE.name(), m);
+			}
+			else {
+				mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), article);
+				mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
+				mav.addObject(AttributeKey.ATTACH.name(), boardService.listAttachFile(articleSeq));
+				mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_create.jsp");
+			}
 		}
 		else if (m == Mode.UPDATE_ACTION) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
 			BoardArticle article = boardService.getArticle(articleSeq);
 			Binder.bind(request, article);
+			processEncrypt(request, article);
 			boardService.updateArticle(article);
 			saveAttachFile(request, article);
 
@@ -203,6 +232,40 @@ public class BoardArticleController {
 		}
 
 		return mav;
+	}
+
+	/**
+	 * @param request
+	 * @param article
+	 * @return
+	 */
+	private boolean isEncodePage(HttpServletRequest request, BoardArticle article) {
+		if (article.isEncodeF()) {
+			String encode = request.getParameter("encode");
+			if (encode == null) {
+				return true;
+			}
+			else {
+				article.setContent(StringEncrypt.decodeJ(article.getContent(), encode));
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 암호화 글 처리
+	 * 
+	 * @param request
+	 * @param article
+	 */
+	private void processEncrypt(HttpServletRequest request, BoardArticle article) {
+		String encode = request.getParameter("encode");
+
+		// 암호화 글
+		if (!StringUtilAd.isEmpty(encode)) {
+			article.setContent(StringEncrypt.encodeJ(article.getContent(), encode));
+			article.setEncodeF(true);
+		}
 	}
 
 	/**

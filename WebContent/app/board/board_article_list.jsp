@@ -36,7 +36,12 @@
 	<display:table name="LIST.list" class="table" id="articleList" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column property="articleSeq" title="No." />
  		<display:column title="Title">
- 			<span style="padding-left: ${(articleList.depthLevel -1) * 10}"><a href="javascript:BoardArticle.readForm(${articleList.articleSeq})">${articleList.title}</a></span>
+ 			<span style="padding-left: ${(articleList.depthLevel -1) * 10}">
+ 				<a href="javascript:BoardArticle.readForm(${articleList.articleSeq})">${articleList.title}</a>
+ 				<c:if test="${articleList.encodeF}">
+ 					(비공개)
+ 				</c:if>
+ 			</span>
  		</display:column>
 		<display:column property="name" title="Name"/>
 		<display:column property="hitCount" title="Hit Count"/>

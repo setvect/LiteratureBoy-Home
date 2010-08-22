@@ -57,23 +57,38 @@
 				<th>Content</th>
 				<td><form:textarea id="content" path="content"/></td>
 			</tr>
-			<tr>
-				<th>Attach</th>
-				<td>
-					<span>이전 첨부파일 삭제</span>
-					<ul>
-						<c:forEach var="file" items="${ATTACH}">
-							<li><input type="checkbox" name="deleteAttach" value="${file.fileSeq}"/> ${file.originalName} </li>
-						</c:forEach>
-					</ul>
-					<ul>
-         		<c:set var="attachIndex" value="<%=new int[] {1,2,3}%>" />
-						<c:forEach var="id" items="${attachIndex}">
-							<li>Attach #${id}: <input type="file" name="attachFile"/></li>
-						</c:forEach>
-					</ul>
-				</td>
-			</tr>			
+			<c:if test="${BOARD.encodeF}">
+				<tr>
+					<th>암호코드</th>
+					<td><input type="text" name="encode"/></td>
+				</tr>
+			</c:if>
+			<c:if test="${BOARD.attachF}">
+				<tr>
+					<th>Attach</th>
+					<td>
+						<span>이전 첨부파일 삭제</span>
+						<ul>
+							<c:forEach var="file" items="${ATTACH}">
+								<li><input type="checkbox" name="deleteAttach" value="${file.fileSeq}"/> ${file.originalName} </li>
+							</c:forEach>
+						</ul>
+						<ul>
+	         		<c:set var="attachIndex" value="<%=new int[] {1,2,3}%>" />
+							<c:forEach var="id" items="${attachIndex}">
+								<li>Attach #${id}: <input type="file" name="attachFile"/></li>
+							</c:forEach>
+						</ul>
+						업로드 제한: 
+						<c:if test="${BOARD.uploadLimit == 0}">
+							없음
+						</c:if>
+						<c:if test="${BOARD.uploadLimit != 0}">
+							${BOARD.uploadLimit}
+						</c:if>
+					</td>
+				</tr>			
+			</c:if>
 		</table>
 	</form:form>
 </div>

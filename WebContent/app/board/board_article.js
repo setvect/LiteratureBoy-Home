@@ -8,6 +8,13 @@ BoardArticle.searchForm = function(){
 	searchForm.submit();
 };
 
+BoardArticle.encodeForm = function(){
+	if($.FORM.isEmptyRtnMsg(encodeForm.encode, "단어를 입력하세요")){
+		return;
+	}
+	encodeForm.submit();
+};
+
 BoardArticle.searchStopForm = function(){
 	listForm.searchName.value="";
 	listForm.searchTitle.value="";
