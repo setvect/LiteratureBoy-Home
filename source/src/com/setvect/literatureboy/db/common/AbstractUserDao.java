@@ -10,9 +10,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import com.setvect.common.util.GenericPage;
+import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.db.UserDao;
+import com.setvect.literatureboy.service.user.AuthMapSearch;
 import com.setvect.literatureboy.service.user.UserSearch;
+import com.setvect.literatureboy.vo.user.Auth;
+import com.setvect.literatureboy.vo.user.AuthMap;
+import com.setvect.literatureboy.vo.user.AuthMapKey;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
@@ -24,6 +29,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	@Resource
 	SessionFactory sessionFactory;
 
+	// ---------------- 사용자
 	public User getUser(String userId) {
 		Session session = sessionFactory.getCurrentSession();
 		return (User) session.get(User.class, userId);
@@ -34,15 +40,14 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	 * 
 	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
 	 */
-	public GenericPage<User> getPagingList(UserSearch search) {
-
+	public GenericPage<User> getUserPagingList(UserSearch search) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = "select count(*) from User " + getWhere(search);
+		String q = "select count(*) from User " + getUserWhere(search);
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from User " + getWhere(search) + " order by userId ";
+		q = " from User " + getUserWhere(search) + " order by userId ";
 		query = session.createQuery(q);
 		query.setFirstResult(search.getStartNumber());
 		query.setMaxResults(search.getPagePerItemCount());
@@ -55,12 +60,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		return resultPage;
 	}
 
-	/**
-	 * @param search
-	 *            검색 정보
-	 * @return 검색 where
-	 */
-	private String getWhere(UserSearch search) {
+	private String getUserWhere(UserSearch search) {
 		String where = "where deleteF = 'N' ";
 
 		// 두개가 동새에 검색 조건에 포함 될 수 없음
@@ -73,31 +73,110 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		return where;
 	}
 
-	/**
-	 * @param user
-	 * @throws Exception
-	 */
 	public void createUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(user);
 		session.flush();
 	}
 
-	/**
-	 * @param user
-	 */
 	public void updateUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(user);
 		session.flush();
 	}
 
-	/**
-	 * @param userId
-	 */
 	public void removeUser(String userId) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(getUser(userId));
+		session.flush();
+	}
+
+	// ---------------- 권한
+	public Auth getAuth(int authSeq) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Auth) session.get(Auth.class, authSeq);
+	}
+
+	public GenericPage<Auth> getAuthPagingList(SearchListVo search) {
+		Session session = sessionFactory.getCurrentSession();
+
+		String q = "select count(*) from Auth ";
+		Query query = session.createQuery(q);
+		int totalCount = ((Long) query.uniqueResult()).intValue();
+
+		q = " from Auth order by authSeq ";
+		query = session.createQuery(q);
+		query.setFirstResult(search.getStartNumber());
+		query.setMaxResults(search.getPagePerItemCount());
+
+		@SuppressWarnings("unchecked")
+		List<Auth> resultList = query.list();
+
+		GenericPage<Auth> resultPage = new GenericPage<Auth>(resultList, search.getCurrentPage(), totalCount,
+				search.getPageUnit(), search.getPagePerItemCount());
+		return resultPage;
+
+	}
+
+	public void createAuth(Auth auth) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(auth);
+		session.flush();
+	}
+
+	public void updateAuth(Auth auth) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(auth);
+		session.flush();
+	}
+
+	public void removeAuth(int authSeq) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(getAuth(authSeq));
+		session.flush();
+	}
+
+	// ---------------- 권한 맵핑
+	public AuthMap getAuthMap(AuthMapKey key) {
+		Session session = sessionFactory.getCurrentSession();
+		return (AuthMap) session.get(AuthMap.class, key);
+	}
+
+	public GenericPage<AuthMap> getAuthMapPagingList(AuthMapSearch search) {
+		Session session = sessionFactory.getCurrentSession();
+
+		String q = "select count(*) from AuthMap " + getAuthMapWhere(search);
+		Query query = session.createQuery(q);
+		int totalCount = ((Long) query.uniqueResult()).intValue();
+
+		q = " from AuthMap " + getAuthMapWhere(search) + " order by userId ";
+		query = session.createQuery(q);
+		query.setFirstResult(search.getStartNumber());
+		query.setMaxResults(search.getPagePerItemCount());
+
+		@SuppressWarnings("unchecked")
+		List<AuthMap> resultList = query.list();
+
+		GenericPage<AuthMap> resultPage = new GenericPage<AuthMap>(resultList, search.getCurrentPage(), totalCount,
+				search.getPageUnit(), search.getPagePerItemCount());
+		return resultPage;
+	}
+
+	private String getAuthMapWhere(AuthMapSearch search) {
+		String where = "";
+
+		return where;
+	}
+
+	public void createAuthMap(AuthMap authMap) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(authMap);
+		session.flush();
+	}
+
+	public void removeAuthMap(AuthMapKey key) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(getAuthMap(key));
 		session.flush();
 	}
 

@@ -59,7 +59,7 @@ public class UserService {
 	}
 
 	public GenericPage<User> getPageList(UserSearch searchVo) throws Exception {
-		return userDao.getPagingList(searchVo);
+		return userDao.getUserPagingList(searchVo);
 	}
 
 }

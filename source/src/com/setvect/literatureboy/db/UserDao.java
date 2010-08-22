@@ -1,7 +1,12 @@
 package com.setvect.literatureboy.db;
 
 import com.setvect.common.util.GenericPage;
+import com.setvect.common.util.SearchListVo;
+import com.setvect.literatureboy.service.user.AuthMapSearch;
 import com.setvect.literatureboy.service.user.UserSearch;
+import com.setvect.literatureboy.vo.user.Auth;
+import com.setvect.literatureboy.vo.user.AuthMap;
+import com.setvect.literatureboy.vo.user.AuthMapKey;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
@@ -22,7 +27,7 @@ public interface UserDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public GenericPage<User> getPagingList(UserSearch paging);
+	public GenericPage<User> getUserPagingList(UserSearch paging);
 
 	/**
 	 * @param user
@@ -39,4 +44,60 @@ public interface UserDao {
 	 * @param userId
 	 */
 	public void removeUser(String userId);
+
+	// ---------------- 권한
+	/**
+	 * @param authSeq
+	 * @return
+	 */
+	public Auth getAuth(int authSeq);
+
+	/**
+	 * @param paging
+	 * @return
+	 * @throws Exception
+	 */
+	public GenericPage<Auth> getAuthPagingList(SearchListVo paging);
+
+	/**
+	 * @param auth
+	 * @throws Exception
+	 */
+	public void createAuth(Auth auth);
+
+	/**
+	 * @param auth
+	 */
+	public void updateAuth(Auth auth);
+
+	/**
+	 * @param authSeq
+	 */
+	public void removeAuth(int authSeq);
+
+	// ---------------- 권한 맵핑
+	/**
+	 * @param key
+	 * @return
+	 */
+	public AuthMap getAuthMap(AuthMapKey key);
+
+	/**
+	 * @param paging
+	 * @return
+	 * @throws Exception
+	 */
+	public GenericPage<AuthMap> getAuthMapPagingList(AuthMapSearch paging);
+
+	/**
+	 * @param auth
+	 * @throws Exception
+	 */
+	public void createAuthMap(AuthMap authMap);
+
+	/**
+	 * @param key
+	 */
+	public void removeAuthMap(AuthMapKey key);
+
 }
