@@ -39,7 +39,7 @@
 		<display:column property="url" title="Url"/>
 		<display:column property="parameter" title="Parameter"/>		
 		<display:column title="Update">
-			<input type="button" value="수정" onclick="Auth.updateFrom('${article.authSeq}')">
+			<input type="button" value="수정" onclick="Auth.updateForm('${article.authSeq}')">
 		</display:column>
 		<display:column title="Delete">
 			<input type="button" value="삭제" onclick="Auth.removeAction('${article.authSeq}')">

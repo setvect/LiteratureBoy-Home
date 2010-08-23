@@ -38,7 +38,7 @@
 		<display:column property="boardCode" href="/board/article.do" paramId="searchCode" paramProperty="boardCode"  title="Code"/>
 		<display:column property="name" href="javascript:BoardManager.readForm('${article.boardCode}')" title="Name"/>
 		<display:column title="Update">
-			<input type="button" value="수정" onclick="BoardManager.updateFrom('${article.boardCode}')">
+			<input type="button" value="수정" onclick="BoardManager.updateForm('${article.boardCode}')">
 		</display:column>
 		<display:column title="Delete">
 			<input type="button" value="삭제" onclick="BoardManager.removeAction('${article.boardCode}')">

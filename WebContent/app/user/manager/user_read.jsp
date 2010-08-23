@@ -25,7 +25,7 @@
 	</table>
 </div>
 <div>
-	<input type="button" value="수정" onclick="User.updateFrom('${ITEM.userId}')">
+	<input type="button" value="수정" onclick="User.updateForm('${ITEM.userId}')">
 	<input type="button" value="삭제" onclick="User.removeAction('${ITEM.userId}')">
 	<input type="button" value="목록" onclick="User.listForm()">
 </div>

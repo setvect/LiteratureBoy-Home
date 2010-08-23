@@ -43,7 +43,7 @@ Auth.createOrUpdate = function(){
 	createAction.submit();
 };
 
-Auth.updateFrom = function(seq){
+Auth.updateForm = function(seq){
 	updateForm.authSeq.value = seq;
 	updateForm.submit();
 };

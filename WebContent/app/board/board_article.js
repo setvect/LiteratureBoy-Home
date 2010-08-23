@@ -56,7 +56,7 @@ BoardArticle.createOrUpdate = function(){
 	createAction.submit();
 };
 
-BoardArticle.updateFrom = function(seq){
+BoardArticle.updateForm = function(seq){
 	updateForm.articleSeq.value = seq;
 	updateForm.submit();
 };

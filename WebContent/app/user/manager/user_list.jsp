@@ -37,8 +37,11 @@
     </display:column>
 		<display:column property="userId" href="javascript:User.readForm('${article.userId}')"  title="ID"/>
 		<display:column property="name" title="Name"/>
+		<display:column title="Auth">
+			<input type="button" value="권한" onclick="User.authMapForm('${article.userId}')">
+		</display:column>		
 		<display:column title="Update">
-			<input type="button" value="수정" onclick="User.updateFrom('${article.userId}')">
+			<input type="button" value="수정" onclick="User.updateForm('${article.userId}')">
 		</display:column>
 		<display:column title="Delete">
 			<input type="button" value="삭제" onclick="User.removeAction('${article.userId}')">

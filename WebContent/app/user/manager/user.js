@@ -19,8 +19,8 @@ User.listForm = function(){
 	listForm.submit();
 };
 
-User.readForm = function(code){
-	readForm.userId.value = code;
+User.readForm = function(userId){
+	readForm.userId.value = userId;
 	readForm.submit();
 };
 
@@ -48,14 +48,23 @@ User.createOrUpdate = function(){
 	createAction.submit();
 };
 
-User.updateFrom = function(code){
-	updateForm.userId.value = code;
+User.updateForm = function(userId){
+	updateForm.userId.value = userId;
 	updateForm.submit();
 };
 
-User.removeAction = function(code){
+User.removeAction = function(userId){
 	if(confirm("삭제 하시겠습니까?")){
-		removeAction.userId.value = code;
+		removeAction.userId.value = userId;
 		removeAction.submit();
 	}
 };
+
+User.authMapForm = function(userId){
+	authMapForm.userId.value = userId;
+	authMapForm.submit();
+};
+
+User.authMapAction = function(){
+	authMapAction.submit();
+}

@@ -16,6 +16,10 @@ public class AuthSearch extends SearchListVo {
 	private String searchUrl;
 	private String searchName;
 
+	/**
+	 * @param currentPage
+	 *            현 페이지. 1부터 시작
+	 */
 	public AuthSearch(int currentPage) {
 		super(currentPage);
 	}

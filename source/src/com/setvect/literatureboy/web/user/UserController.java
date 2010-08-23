@@ -17,8 +17,11 @@ import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.service.user.AuthSearch;
 import com.setvect.literatureboy.service.user.UserSearch;
 import com.setvect.literatureboy.service.user.UserService;
+import com.setvect.literatureboy.vo.user.Auth;
+import com.setvect.literatureboy.vo.user.AuthMap;
 import com.setvect.literatureboy.vo.user.User;
 import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
@@ -32,8 +35,9 @@ public class UserController {
 	 * 서브 명령어 정의
 	 */
 	public static enum Mode {
-		/** USER,AGEN,Menu 리스트 보기 */
-		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, REMOVE_ACTION
+		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, REMOVE_ACTION,
+		// Auth Mapping
+		AUTHMAP_FORM, AUTHMAP_ACTION
 	}
 
 	/**
@@ -46,7 +50,9 @@ public class UserController {
 		//
 		ITEM,
 		/** 페이지 및 검색 정보 */
-		PAGE_SEARCH
+		PAGE_SEARCH,
+		// 권한 정보 목록
+		AUTH_LIST
 	}
 
 	@Resource
@@ -91,7 +97,7 @@ public class UserController {
 		else if (m == Mode.READ_FORM) {
 			String userId = request.getParameter("userId");
 			User user = userService.getUser(userId);
-			mav.addObject(UserController.AttributeKey.ITEM.name(), user);
+			mav.addObject(AttributeKey.ITEM.name(), user);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
@@ -109,7 +115,7 @@ public class UserController {
 		else if (m == Mode.UPDATE_FORM) {
 			String userId = request.getParameter("userId");
 			User user = userService.getUser(userId);
-			mav.addObject(UserController.AttributeKey.ITEM.name(), user);
+			mav.addObject(AttributeKey.ITEM.name(), user);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_create.jsp");
 		}
@@ -129,6 +135,32 @@ public class UserController {
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
+		else if (m == Mode.AUTHMAP_FORM) {
+			String userId = request.getParameter("userId");
+			User user = userService.getUser(userId);
+			AuthSearch search = new AuthSearch(1);
+			search.setPagePerItemCount(Integer.MAX_VALUE);
+			GenericPage<Auth> authList = userService.getAuthPagingList(search);
+
+			mav.addObject(AttributeKey.ITEM.name(), user);
+			mav.addObject(AttributeKey.AUTH_LIST.name(), authList);
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_authmap.jsp");
+		}
+		else if (m == Mode.AUTHMAP_ACTION) {
+			String userId = request.getParameter("userId");
+			String[] authSeq = request.getParameterValues("authSeq");
+
+			for (String seq : authSeq) {
+				AuthMap map = new AuthMap();
+				map.setAuthSeq(Integer.parseInt(seq));
+				map.setUserId(userId);
+				userService.createAuthMap(map);
+			}
+
+			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
+			return mav;
+		}
+
 		if (m == Mode.LIST_FORM) {
 			GenericPage<User> boardPagingList = userService.getPageList(pageCondition);
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);

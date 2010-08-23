@@ -25,7 +25,7 @@
 	</table>
 </div>
 <div>
-	<input type="button" value="수정" onclick="Auth.updateFrom('${ITEM.authSeq}')">
+	<input type="button" value="수정" onclick="Auth.updateForm('${ITEM.authSeq}')">
 	<input type="button" value="삭제" onclick="Auth.removeAction('${ITEM.authSeq}')">
 	<input type="button" value="목록" onclick="Auth.listForm()">
 </div>

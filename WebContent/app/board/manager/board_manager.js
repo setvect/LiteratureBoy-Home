@@ -43,7 +43,7 @@ BoardManager.createOrUpdate = function(){
 	createAction.submit();
 };
 
-BoardManager.updateFrom = function(code){
+BoardManager.updateForm = function(code){
 	updateForm.boardCode.value = code;
 	updateForm.submit();
 };

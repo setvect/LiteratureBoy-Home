@@ -44,3 +44,11 @@
 	<form:hidden path="currentPage"/>
 	<input type="hidden" name="userId" value=""/> 
 </form:form>
+
+<form:form commandName="PAGE_SEARCH" name="authMapForm" method="get" action="${controller_url}">
+	<input type="hidden" name="mode" value="<%=UserController.Mode.AUTHMAP_FORM%>"/> 
+	<form:hidden path="searchId"/>
+	<form:hidden path="searchName"/>
+	<form:hidden path="currentPage"/>
+	<input type="hidden" name="userId" value=""/> 
+</form:form>
