@@ -94,7 +94,7 @@ public class CommonUtil {
 	public static User getLoginSession(HttpServletRequest request) throws Exception {
 		User user = null;
 		CookieProcess cookie = new CookieProcess(request);
-		String encode = cookie.get(ConstraintWeb.USER_SESSION);
+		String encode = cookie.get(ConstraintWeb.USER_COOKIE_KEY);
 		if (encode != null) {
 			encode = encode.replaceAll("  ", "\n");
 			user = (User) SerializerUtil.restoreBase64Decode(encode);

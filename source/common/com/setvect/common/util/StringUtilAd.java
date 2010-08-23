@@ -60,7 +60,7 @@ public class StringUtilAd extends StringUtils {
 		word = word.trim();
 		return new String("'" + word + "%'");
 	}
-	
+
 	/**
 	 * 폼에 맞게 문자를 바꾸어 준다.
 	 * 
@@ -80,6 +80,40 @@ public class StringUtilAd extends StringUtils {
 		// &#33324의 글자를 보존 하기 위해서
 		strBuffer = replace(strBuffer, "&amp;#", "&#");
 		return strBuffer;
+	}
+
+	/**
+	 * s2 배열에중에 s1과 같은 문장이 있는지 검사
+	 * 
+	 * @param s1
+	 *            원본값
+	 * @param s2
+	 *            비교데이터
+	 * @return 포함된 문장이 있으면 true
+	 */
+	public static boolean isInclude(String s1, String[] s2) {
+		return positionInclude(s1, s2) != -1;
+	}
+
+	/**
+	 * s2 배열에중에 s1과 같은 문장이 있는지 검사. 만약 있으면 존제하는 배열위치 리턴
+	 * 
+	 * @param s1
+	 *            원본값
+	 * @param s2
+	 *            비교데이터
+	 * @return 존제하는 배열이 있으면 위치 리턴/없으면 -1리턴
+	 */
+	public static int positionInclude(String s1, String[] s2) {
+
+		if (s2 == null) {
+			return -1;
+		}
+		for (int i = 0; i < s2.length; i++) {
+			if (s1.equals(s2[i]))
+				return i;
+		}
+		return -1;
 	}
 
 	/**

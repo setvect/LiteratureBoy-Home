@@ -34,5 +34,9 @@ public class ConstraintWeb {
 	public final static String PASSWD_ALGORITHM = "MD5";
 
 	/** 로그인 쿠키 키값 */
-	public static final String USER_SESSION = "_user_session_name";
+	public static final String USER_COOKIE_KEY = "_user_cookie_key";
+
+	/** 로그인 attribute 키값*/
+	public static final String USER_SESSION_KEY = "_user_session_key";
+
 }

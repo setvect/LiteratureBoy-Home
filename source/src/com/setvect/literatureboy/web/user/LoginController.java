@@ -82,7 +82,7 @@ public class LoginController {
 				cookieData = cookieData.replaceAll("\r", "");
 				cookieData = cookieData.replaceAll("\n", "");
 
-				Cookie loginCookie = new Cookie(ConstraintWeb.USER_SESSION, cookieData);
+				Cookie loginCookie = new Cookie(ConstraintWeb.USER_COOKIE_KEY, cookieData);
 				loginCookie.setPath("/");
 				response.addCookie(loginCookie);
 			}
