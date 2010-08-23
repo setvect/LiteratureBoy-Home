@@ -11,8 +11,8 @@
 
 <script type="text/javascript" src="/app/user/manager/user.js"></script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">
-		<input type="hidden" name="mode" value="${MODE}"/>
+	<form:form name="authMapAction" id="authMapAction" method="post" action="${controller_url}">
+		<input type="hidden" name="mode" value="<%=UserController.Mode.AUTHMAP_ACTION.name()%>"/>
 		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>
 		<input type="hidden" name="searchId" value="${PAGE_SEARCH.searchId}"/>
 		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}"/>	
@@ -21,11 +21,11 @@
 	    <display:column title="No." >
 	      ${article_rowNum }
 	    </display:column>
-			<display:column property="name" href="javascript:Auth.readForm('${article.authSeq}')"  title="Name"/>
+			<display:column property="name" title="Name"/>
 			<display:column property="url" title="Url"/>
 			<display:column property="parameter" title="Parameter"/>		
 			<display:column title="Select">
-				<input type="checkbox"" value="${article.authSeq}">
+				<input type="checkbox" name="authSeq" value="${article.authSeq}" ${article.authHave ? "checked='checked'" : ""}>
 			</display:column>
 		</display:table>
 	</form:form>

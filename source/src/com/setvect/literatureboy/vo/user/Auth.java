@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -36,6 +37,9 @@ public class Auth {
 	/** 총 게시물 파일 업로드 제한 */
 	@Column(name = "PARAMETER")
 	private String parameter;
+	/** 권한 부여 여부 */
+	@Transient
+	private boolean authHave;
 
 	/**
 	 * @return the authSeq
@@ -96,4 +100,20 @@ public class Auth {
 	public void setParameter(String parameter) {
 		this.parameter = parameter;
 	}
+
+	/**
+	 * @return the have
+	 */
+	public boolean isAuthHave() {
+		return authHave;
+	}
+
+	/**
+	 * @param have
+	 *            the have to set
+	 */
+	public void setAuthHave(boolean have) {
+		this.authHave = have;
+	}
+
 }

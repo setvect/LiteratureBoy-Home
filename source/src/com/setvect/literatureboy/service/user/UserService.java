@@ -104,4 +104,13 @@ public class UserService {
 		userDao.removeAuthMap(key);
 	}
 
+	/**
+	 * 회원이 가지고 있는 권한 맵핑 정보 삭제
+	 * 
+	 * @param userId
+	 */
+	public void removeAuthMapForUserId(String userId) {
+		userDao.removeAuthMapForUserId(userId);
+	}
+
 }

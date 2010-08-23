@@ -100,4 +100,9 @@ public interface UserDao {
 	 */
 	public void removeAuthMap(AuthMapKey key);
 
+	/**
+	 * @param userId
+	 */
+	public void removeAuthMapForUserId(String userId);
+
 }

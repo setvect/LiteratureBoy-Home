@@ -1,5 +1,6 @@
 package com.setvect.literatureboy.web.user;
 
+import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.service.user.AuthMapSearch;
 import com.setvect.literatureboy.service.user.AuthSearch;
 import com.setvect.literatureboy.service.user.UserSearch;
 import com.setvect.literatureboy.service.user.UserService;
@@ -52,7 +54,7 @@ public class UserController {
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH,
 		// 권한 정보 목록
-		AUTH_LIST
+		AUTH_LIST,
 	}
 
 	@Resource
@@ -141,6 +143,26 @@ public class UserController {
 			AuthSearch search = new AuthSearch(1);
 			search.setPagePerItemCount(Integer.MAX_VALUE);
 			GenericPage<Auth> authList = userService.getAuthPagingList(search);
+			Collection<Auth> auth = authList.getList();
+
+			AuthMapSearch authSearch = new AuthMapSearch(1);
+			authSearch.setPagePerItemCount(Integer.MAX_VALUE);
+			authSearch.setSearchUserId(userId);
+			GenericPage<AuthMap> authMap = userService.getAuthMapPagingList(authSearch);
+			Collection<AuthMap> map = authMap.getList();
+
+			for (Auth a : auth) {
+				boolean ishave = false;
+				for (AuthMap mm : map) {
+					if (a.getAuthSeq() == mm.getAuthSeq()) {
+						ishave = true;
+						continue;
+					}
+				}
+				if (ishave) {
+					a.setAuthHave(true);
+				}
+			}
 
 			mav.addObject(AttributeKey.ITEM.name(), user);
 			mav.addObject(AttributeKey.AUTH_LIST.name(), authList);
@@ -149,12 +171,15 @@ public class UserController {
 		else if (m == Mode.AUTHMAP_ACTION) {
 			String userId = request.getParameter("userId");
 			String[] authSeq = request.getParameterValues("authSeq");
-
-			for (String seq : authSeq) {
-				AuthMap map = new AuthMap();
-				map.setAuthSeq(Integer.parseInt(seq));
-				map.setUserId(userId);
-				userService.createAuthMap(map);
+			userService.removeAuthMapForUserId(userId);
+			if (authSeq != null) {
+				for (String seq : authSeq) {
+					AuthMap map = new AuthMap();
+					int authNum = Integer.parseInt(seq);
+					map.setAuthSeq(authNum);
+					map.setUserId(userId);
+					userService.createAuthMap(map);
+				}
 			}
 
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));

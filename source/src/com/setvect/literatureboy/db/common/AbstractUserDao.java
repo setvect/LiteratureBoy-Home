@@ -169,7 +169,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from AuthMap " + getAuthMapWhere(search) + " order by userId ";
+		q = " from AuthMap " + getAuthMapWhere(search) + " order by key.userId ";
 		query = session.createQuery(q);
 		query.setFirstResult(search.getStartNumber());
 		query.setMaxResults(search.getPagePerItemCount());
@@ -183,8 +183,15 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	}
 
 	private String getAuthMapWhere(AuthMapSearch search) {
-		String where = "";
+		String where = "where 1 = 1 ";
 
+		// 두개가 동새에 검색 조건에 포함 될 수 없음
+		if (!StringUtilAd.isEmpty(search.getSearchUserId())) {
+			where += " and key.userId = " + StringUtilAd.getSqlString(search.getSearchUserId());
+		}
+		else if (search.getSearchAuthSeq() != 0) {
+			where += " and key.authSeq = " + search.getSearchAuthSeq();
+		}
 		return where;
 	}
 
@@ -200,4 +207,14 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		session.flush();
 	}
 
+	public void removeAuthMapForUserId(String userId) {
+		Session session = sessionFactory.getCurrentSession();
+
+		// Map 정보 삭제
+		String q = "delete from AuthMap where key.userId = ?";
+		Query query = session.createQuery(q);
+		query.setParameter(0, userId);
+		query.executeUpdate();
+		session.flush();
+	}
 }

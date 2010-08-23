@@ -51,7 +51,7 @@ public class AuthMap {
 	 *            the userId to set
 	 */
 	public void setUserId(String userId) {
-		this.setUserId(userId);
+		key.setUserId(userId);
 	}
 
 	/**
