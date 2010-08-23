@@ -1,8 +1,8 @@
 package com.setvect.literatureboy.db;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.SearchListVo;
 import com.setvect.literatureboy.service.user.AuthMapSearch;
+import com.setvect.literatureboy.service.user.AuthSearch;
 import com.setvect.literatureboy.service.user.UserSearch;
 import com.setvect.literatureboy.vo.user.Auth;
 import com.setvect.literatureboy.vo.user.AuthMap;
@@ -57,7 +57,7 @@ public interface UserDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public GenericPage<Auth> getAuthPagingList(SearchListVo paging);
+	public GenericPage<Auth> getAuthPagingList(AuthSearch paging);
 
 	/**
 	 * @param auth

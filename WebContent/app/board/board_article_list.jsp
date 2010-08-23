@@ -21,7 +21,7 @@
 				<option value="name" ${empty PAGE_SEARCH.searchName ? "" : "selected='selected'"}>Name</option>
 				<option value="content" ${empty PAGE_SEARCH.searchContent ? "" : "selected='selected'"}>Content</option>
 			</select>
-			<input type="text" name="searchWord" value="${PAGE_SEARCH.word}">
+			<input type="text" name="searchWord" value="<c:out value="${PAGE_SEARCH.word}"/>">
 			<input type="button" value="Search" onclick="BoardArticle.searchForm()">
 			<c:if test="${! empty PAGE_SEARCH.word}">
 				<input type="button" value="Search Stop"  onclick="BoardArticle.searchStopForm()">

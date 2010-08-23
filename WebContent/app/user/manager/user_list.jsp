@@ -6,7 +6,6 @@
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="com.setvect.literatureboy.web.user.UserController"%>
 <%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.user.UserService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <jsp:include page="/common/script.inc.jsp"/>
 
@@ -20,7 +19,7 @@
 				<option value="id" ${empty PAGE_SEARCH.searchId ? "" : "selected='selected'"}>id</option>
 				<option value="name" ${empty PAGE_SEARCH.searchName ? "" : "selected='selected'"}>name</option>
 			</select>
-			<input type="text" name="searchWord" value="${PAGE_SEARCH.word}">
+			<input type="text" name="searchWord" value="<c:out value="${PAGE_SEARCH.word}"/>">
 			<input type="button" value="Search" onclick="User.searchForm()">
 			<c:if test="${! empty PAGE_SEARCH.word}">
 				<input type="button" value="Search Stop"  onclick="User.searchStopForm()">

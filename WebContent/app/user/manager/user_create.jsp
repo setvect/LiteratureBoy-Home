@@ -6,7 +6,6 @@
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="com.setvect.literatureboy.web.user.UserController"%>
 <%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.user.UserService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <%
 	User user = (User) request.getAttribute(UserController.AttributeKey.ITEM.name());

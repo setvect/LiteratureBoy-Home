@@ -54,4 +54,20 @@ public class AuthMap {
 		this.setUserId(userId);
 	}
 
+	/**
+	 * @return the key
+	 */
+	public AuthMapKey getKey() {
+		return key;
+	}
+
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(AuthMapKey key) {
+		this.key = key;
+	}
+	
+	
+
 }

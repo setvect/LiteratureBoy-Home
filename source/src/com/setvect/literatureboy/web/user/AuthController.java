@@ -17,9 +17,9 @@ import com.setvect.common.http.UrlParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
-import com.setvect.literatureboy.service.user.UserSearch;
+import com.setvect.literatureboy.service.user.AuthSearch;
 import com.setvect.literatureboy.service.user.UserService;
-import com.setvect.literatureboy.vo.user.User;
+import com.setvect.literatureboy.vo.user.Auth;
 import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
@@ -27,7 +27,7 @@ import com.setvect.literatureboy.web.ConstraintWeb;
  * 환경설정>운영자 관리 메뉴 컨트롤러
  */
 @Controller
-public class UserController {
+public class AuthController {
 	/**
 	 * 서브 명령어 정의
 	 */
@@ -50,16 +50,16 @@ public class UserController {
 	}
 
 	@Resource
-	private UserService userService;
+	private UserService authService;
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.ipms.sfj.pt.setup.user.IUserController#userTranscation(javax.servlet
-	 * .http.HttpServletRequest, com.ipms.sfj.pt.setup.user.User)
+	 * com.ipms.sfj.pt.setup.auth.IAuthController#authTranscation(javax.servlet
+	 * .http.HttpServletRequest, com.ipms.sfj.pt.setup.auth.Auth)
 	 */
-	@RequestMapping("/user/user.do")
+	@RequestMapping("/user/auth.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		response.setCharacterEncoding(request.getCharacterEncoding());
@@ -73,15 +73,15 @@ public class UserController {
 			m = Mode.valueOf(mode);
 		}
 
-		UserSearch pageCondition = bindSearch(request);
+		AuthSearch pageCondition = bindSearch(request);
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
 		if (m == Mode.SEARCH_FORM) {
 			String type = request.getParameter("searchType");
 			String word = request.getParameter("searchWord");
-			if (type.equals("id")) {
-				pageCondition.setSearchId(word);
+			if (type.equals("url")) {
+				pageCondition.setSearchUrl(word);
 			}
 			else if (type.equals("name")) {
 				pageCondition.setSearchName(word);
@@ -89,48 +89,46 @@ public class UserController {
 			m = Mode.LIST_FORM;
 		}
 		else if (m == Mode.READ_FORM) {
-			String userId = request.getParameter("userId");
-			User user = userService.getUser(userId);
-			mav.addObject(UserController.AttributeKey.ITEM.name(), user);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_read.jsp");
+			String authSeq = request.getParameter("authSeq");
+			Auth auth = authService.getAuth(Integer.parseInt(authSeq));
+			mav.addObject(AuthController.AttributeKey.ITEM.name(), auth);
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_create.jsp");
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_create.jsp");
 		}
 		else if (m == Mode.CREATE_ACTION) {
-			User user = new User();
-			Binder.bind(request, user);
-			userService.createUser(user);
+			Auth auth = new Auth();
+			Binder.bind(request, auth);
+			authService.createAuth(auth);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
 		else if (m == Mode.UPDATE_FORM) {
-			String userId = request.getParameter("userId");
-			User user = userService.getUser(userId);
-			mav.addObject(UserController.AttributeKey.ITEM.name(), user);
+			String authSeq = request.getParameter("authSeq");
+			Auth auth = authService.getAuth(Integer.parseInt(authSeq));
+			mav.addObject(AuthController.AttributeKey.ITEM.name(), auth);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_create.jsp");
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_create.jsp");
 		}
 		else if (m == Mode.UPDATE_ACTION) {
-			User user = new User();
-			Binder.bind(request, user);
-			userService.updateUser(user);
+			Auth auth = new Auth();
+			Binder.bind(request, auth);
+			authService.updateAuth(auth);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
 		else if (m == Mode.REMOVE_ACTION) {
-			String userId = request.getParameter("userId");
-			User user = userService.getUser(userId);
-			user.setDeleteF(true);
-			userService.updateUser(user);
+			String authSeq = request.getParameter("authSeq");
+			authService.removeAuth(Integer.parseInt(authSeq));
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
 		if (m == Mode.LIST_FORM) {
-			GenericPage<User> boardPagingList = userService.getPageList(pageCondition);
+			GenericPage<Auth> boardPagingList = authService.getAuthPagingList(pageCondition);
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/manager/user_list.jsp");
+			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_list.jsp");
 
 			request.setAttribute(AttributeKey.LIST.name(), boardPagingList);
 		}
@@ -146,7 +144,7 @@ public class UserController {
 	 * @return redirection 주소
 	 * @throws Exception
 	 */
-	private String getRedirectionUrl(HttpServletRequest request, UserSearch pageCondition) throws Exception {
+	private String getRedirectionUrl(HttpServletRequest request, AuthSearch pageCondition) throws Exception {
 		UrlParameter param = new UrlParameter();
 		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
 		param.putAll(searchParam);
@@ -165,9 +163,9 @@ public class UserController {
 	 * @return 페이징 및 검색 정보
 	 * @throws ServletRequestBindingException
 	 */
-	private UserSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {
+	private AuthSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {
 		int currentPage = CommonUtil.getCurrentPage(request, "articleList");
-		UserSearch searchVO = new UserSearch(currentPage);
+		AuthSearch searchVO = new AuthSearch(currentPage);
 		Binder.bind(request, searchVO);
 		return searchVO;
 	}

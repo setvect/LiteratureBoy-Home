@@ -10,10 +10,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.db.UserDao;
 import com.setvect.literatureboy.service.user.AuthMapSearch;
+import com.setvect.literatureboy.service.user.AuthSearch;
 import com.setvect.literatureboy.service.user.UserSearch;
 import com.setvect.literatureboy.vo.user.Auth;
 import com.setvect.literatureboy.vo.user.AuthMap;
@@ -97,14 +97,14 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		return (Auth) session.get(Auth.class, authSeq);
 	}
 
-	public GenericPage<Auth> getAuthPagingList(SearchListVo search) {
+	public GenericPage<Auth> getAuthPagingList(AuthSearch search) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = "select count(*) from Auth ";
+		String q = "select count(*) from Auth " + getAuthWhere(search);
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from Auth order by authSeq ";
+		q = " from Auth " + getAuthWhere(search) + " order by name";
 		query = session.createQuery(q);
 		query.setFirstResult(search.getStartNumber());
 		query.setMaxResults(search.getPagePerItemCount());
@@ -116,6 +116,19 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 				search.getPageUnit(), search.getPagePerItemCount());
 		return resultPage;
 
+	}
+
+	private String getAuthWhere(AuthSearch search) {
+		String where = "where 1 = 1 ";
+
+		// 두개가 동새에 검색 조건에 포함 될 수 없음
+		if (!StringUtilAd.isEmpty(search.getSearchUrl())) {
+			where += " and url like " + StringUtilAd.getSqlStringLike(search.getSearchUrl());
+		}
+		else if (!StringUtilAd.isEmpty(search.getSearchName())) {
+			where += " and name like " + StringUtilAd.getSqlStringLike(search.getSearchName());
+		}
+		return where;
 	}
 
 	public void createAuth(Auth auth) {
@@ -132,6 +145,13 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 
 	public void removeAuth(int authSeq) {
 		Session session = sessionFactory.getCurrentSession();
+
+		// Map 정보 삭제
+		String q = "delete from AuthMap where key.authSeq = ?";
+		Query query = session.createQuery(q);
+		query.setParameter(0, authSeq);
+		query.executeUpdate();
+
 		session.delete(getAuth(authSeq));
 		session.flush();
 	}

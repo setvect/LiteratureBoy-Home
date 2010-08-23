@@ -1,28 +1,28 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardManagerSearch"%>
-<%@page import="com.setvect.literatureboy.vo.board.Board"%>
+<%@page import="com.setvect.literatureboy.service.user.AuthSearch"%>
+<%@page import="com.setvect.literatureboy.vo.user.Auth"%>
 <%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
-<%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
+<%@page import="com.setvect.literatureboy.web.user.AuthController"%>
 <%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <jsp:include page="/common/script.inc.jsp"/>
-<script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
+
+<script type="text/javascript" src="/app/user/auth/auth.js"></script>
 <div>
 	<div>
 		<form:form name="searchForm" method="get" action="${controller_url}">
-			<input type="hidden" name="mode" value="<%=BoardManagerController.Mode.SEARCH_FORM%>"/>
+			<input type="hidden" name="mode" value="<%=AuthController.Mode.SEARCH_FORM%>"/>
 			Search: 
 			<select name="searchType">
-				<option value="code" ${empty PAGE_SEARCH.searchCode ? "" : "selected='selected'"}>code</option>
+				<option value="url" ${empty PAGE_SEARCH.searchUrl ? "" : "selected='selected'"}>url</option>
 				<option value="name" ${empty PAGE_SEARCH.searchName ? "" : "selected='selected'"}>name</option>
 			</select>
 			<input type="text" name="searchWord" value="<c:out value="${PAGE_SEARCH.word}"/>">
-			<input type="button" value="Search" onclick="BoardManager.searchForm()">
+			<input type="button" value="Search" onclick="Auth.searchForm()">
 			<c:if test="${! empty PAGE_SEARCH.word}">
-				<input type="button" value="Search Stop"  onclick="BoardManager.searchStopForm()">
+				<input type="button" value="Search Stop"  onclick="Auth.searchStopForm()">
 			</c:if>
 		</form:form>
 	</div>
@@ -35,17 +35,18 @@
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
-		<display:column property="boardCode" href="/board/article.do" paramId="searchCode" paramProperty="boardCode"  title="Code"/>
-		<display:column property="name" href="javascript:BoardManager.readForm('${article.boardCode}')" title="Name"/>
+		<display:column property="name" href="javascript:Auth.readForm('${article.authSeq}')"  title="Name"/>
+		<display:column property="url" title="Url"/>
+		<display:column property="parameter" title="Parameter"/>		
 		<display:column title="Update">
-			<input type="button" value="수정" onclick="BoardManager.updateFrom('${article.boardCode}')">
+			<input type="button" value="수정" onclick="Auth.updateFrom('${article.authSeq}')">
 		</display:column>
 		<display:column title="Delete">
-			<input type="button" value="삭제" onclick="BoardManager.removeAction('${article.boardCode}')">
+			<input type="button" value="삭제" onclick="Auth.removeAction('${article.authSeq}')">
 		</display:column>
 	</display:table>
 </div>
 <div>
-	<input type="button" value="생성" onclick="BoardManager.createFrom();">
+	<input type="button" value="생성" onclick="Auth.createFrom();">
 </div>
-<jsp:include page="board_manager_form.inc.jsp"></jsp:include>
+<jsp:include page="auth_form.inc.jsp"></jsp:include>

@@ -2,12 +2,14 @@ package com.setvect.literatureboy.vo.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 권한 정보
@@ -20,6 +22,8 @@ import org.hibernate.annotations.Type;
 public class Auth {
 	@Id
 	@Column(name = "AUTH_SEQ")
+	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
 	private int authSeq;
 
 	/** 권한 구분 이름 */
@@ -31,12 +35,7 @@ public class Auth {
 
 	/** 총 게시물 파일 업로드 제한 */
 	@Column(name = "PARAMETER")
-	private int parameter;
-
-	/** 게시판 삭제 여부 */
-	@Column(name = "DELETE_F")
-	@Type(type = "yes_no")
-	private boolean deleteF;
+	private String parameter;
 
 	/**
 	 * @return the authSeq
@@ -86,7 +85,7 @@ public class Auth {
 	/**
 	 * @return the parameter
 	 */
-	public int getParameter() {
+	public String getParameter() {
 		return parameter;
 	}
 
@@ -94,23 +93,7 @@ public class Auth {
 	 * @param parameter
 	 *            the parameter to set
 	 */
-	public void setParameter(int parameter) {
+	public void setParameter(String parameter) {
 		this.parameter = parameter;
 	}
-
-	/**
-	 * @return the deleteF
-	 */
-	public boolean isDeleteF() {
-		return deleteF;
-	}
-
-	/**
-	 * @param deleteF
-	 *            the deleteF to set
-	 */
-	public void setDeleteF(boolean deleteF) {
-		this.deleteF = deleteF;
-	}
-
 }
