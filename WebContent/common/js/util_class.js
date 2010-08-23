@@ -10,7 +10,7 @@
 		val = val.slice(val.lastIndexOf("\\") + 1);
 		ext = val.slice(val.lastIndexOf(".")).toLowerCase();
 		return ext;
-	}
+	};
 	
 	// 파일 이름(확장자 제외)
 	// val: 풀 경로 문자열
@@ -24,7 +24,7 @@
 		end = end > 0 ? end : val.length(); 
 		var name = val.substring(start, end);
 		return name ;
-	}
+	};
 
 	/**
 	 * @param val
@@ -40,14 +40,14 @@
 			url = url.substring(0, url.indexOf("?"));
 		}
 		return url;
-	}
+	};
 	// conditionStr 비교 하여 null면 nullStr 리턴
 	$.STR.nvl = function(conditionStr, nullStr){
 		if(conditionStr == null || conditionStr == ""){
 			return nullStr;
 		}
 		return conditionStr;
-	}
+	};
 	
 	
 	// 문자열이 비어 있는지 체크(스페이스만 있는 문자열도 비여 있다고 판단)
@@ -63,7 +63,7 @@
 		}
 
 		return is_Space;
-	}
+	};
 	
 	// 양쪽 공백을 제거
 	$.STR.trim = function(b) {
@@ -87,7 +87,7 @@
             break;
         }
      return b.substring(startIdx, endIdx);
-	}	
+	};
 	
 	//기능   : 영문자.한글 별로 length를 return ..IE4.0 이상
 	$.STR.strLeng = function(strIn) {
@@ -108,7 +108,7 @@
 			strOut = strIn.length ;
 		}
 		return (strOut);
-	}	
+	};
 	
 	//숫자인지를 체크
 	$.STR.isNumber = function(val, allowable) {
@@ -122,7 +122,7 @@
 			}
 		}
 		return valid;
-	}	
+	};
 	
 	$.STR.isInteger = function(st) {
 		if (!$.STR.isEmpty(st)) {
@@ -135,7 +135,7 @@
 				return false ;
 		}
 	  return true ;
-	}	
+	};
 	
 	//=============================================
 	//  inputValue값의 cnt에서 inputValue의 길이를
@@ -148,7 +148,7 @@
 		for(var i=0; i < (cnt-inputValue.length); i++)
 			tmpValue += padChar;
 		return (tmpValue + inputValue);
-	}	
+	};
 };
 
 
@@ -158,7 +158,7 @@
 	// 기본적인 크기와 위치 정보만으로 팝업창 띄우기
 	$.POPUP.popupWindow = function(url, name, width, height, left, top) {
 	  return this.popupWindowEx(url, name, width, height, left, top, 0, 0, 0);
-	}
+	};
 
 	// 창의 크기와 위치정보, 옵션들을 반영하여 팝업창 띄우기
 	$.POPUP.popupWindowEx = function(url, name, width, height, left, top, isResizable, isScrollable, useStatus) {
@@ -180,7 +180,7 @@
 	  }
 
 	  return window.open(url, name, opts);
-	}
+	};
 
 	// 화면 중앙에 팝업창 띄우기
 	$.POPUP.popupWindowCenter = function(url, name, width, height, isResizable, isScrollable, useStatus) {
@@ -189,34 +189,34 @@
 	  var y = (screen.availHeight / 2) - (height / 2);
 	  if (y < 0) y = 0;
 	  return this.popupWindowEx(url, name, width, height, x, y, isResizable, isScrollable, useStatus);
-	}
+	};
 
 	// 팝업창에 로그 값을 출력 
 	// alert 보다 유용하 점은 값을 복사 할 수 있다는 것
 	$.POPUP.popupLog = function(logVal){
 		var obj = this.popupWindowCenter("about:blank", "logWin", 100, 100, 1, 1, false);
 		obj.document.write(logVal);
-	}
+	};
 
 	// 모달로 창 띄우기
 	$.POPUP.modalOpen = function( url, args, width, height ){
 		var env_options = "dialogHeight: " + height + "px; dialogWidth: " + width 
 				+ "px;  edge: Raised; center: Yes; help: No; scroll: No; resizable: No; status: No;";
 	  return window.showModalDialog( url, args, env_options);
-	}
+	};
 	
 	$.POPUP.modalOpenEx = function( url, args, width, height, scroll, resizable, status )
 	{
 		var env_options = "dialogHeight: " + height + "px; dialogWidth: " + width 
 				+ "px;  edge: Raised; center: Yes; help: No; scroll: "+scroll+"; resizable: "+resizable+"; status: "+status+";";
 	 	return window.showModalDialog( url, args, env_options);
-	}
+	};
 	
 	$.POPUP.modalessOpen = function( url, args, width, height ){
 		var env_options = "dialogHeight: " + height + "px; dialogWidth: " + width 
 				+ "px;  edge: Raised; center: Yes; unadorned: Yes ; help: No; scroll: No; resizable: No; status: No;";
 		return window.showModelessDialog( url, args, env_options);
-	}
+	};
 }	
 
 // object dump용 
@@ -229,8 +229,7 @@
 	    cnt++;
 	  }
 	  alert(text);
-	}
-
+	};
 	/**
 	 * SIGNATURE : void dumpObjectAsHTML(Object obj);
 	 *
@@ -332,13 +331,13 @@
 	    window.pvfn_dumpAsHTML = new Function("obj", $.DUMP.__STR_FNBODY__pvfn_dumpObjectAsHTML);
 	  }
 	  window.pvfn_dumpAsHTML(obj);
-	}	
+	};	
 	
 	// alert로 문자열(로그)를 표시하면 <Ctrl + C>안되기 때문에... 
 	$.DUMP.dumpPopLog = function(objStr){
 		var win = JF_WINDOW.popupWindowCenter("about:blank", "logWin", "200", "200", 1, 1, 1);
 		win.document.write(objStr);
-	}
+	};
 }
 
 {
@@ -347,7 +346,7 @@
 	  var endstr = document.cookie.indexOf (";", offset);
 	  if (endstr == -1) endstr = document.cookie.length;
 	  return unescape(document.cookie.substring(offset, endstr));
-	}
+	};
 
 	$.COOKIE.getCookie = function(name) {
 		var arg = name + "=";
@@ -362,7 +361,7 @@
 			if (i == 0) break;
 		}	//while close
 		return null;
-	}
+	};
 
 	// 시간은 분단위
 	$.COOKIE.setCookieVal = function(name, value, time) {
@@ -374,7 +373,7 @@
 		var myDomain = '/';
 		ExpDate.setTime(ExpDate.getTime() + 1000*60* time);
 		this.setCookie(name, value, ExpDate, myDomain);
-	}
+	};
 
 	$.COOKIE.setCookie = function(name, value) {
 		var argv = this.setCookie.arguments;
@@ -389,11 +388,11 @@
 			((path == null) ? "" : ("; path=" + path)) +
 			((domain == null) ? "" : ("; domain=" + domain)) +
 			((secure == true) ? "; secure" : "");
-	}
+	};
 	// 브라우저 인스턴스 쿠기 남김
 	$.COOKIE.setCookieInstacne = function(name, value, path){
 		document.cookie = name + "=" + value + "; path="+path+";" ;
-	}
+	};
 }
 
 {
@@ -437,7 +436,7 @@
 		}
 		else
 			return false ;
-	}	
+	};
 
 	//다른것 isEmptyRtnMsg와 같고, len만 이하체크를 한다.
 	$.FORM.isEmptyRtnMsg2 = function(obj, msg, len) {
@@ -477,19 +476,19 @@
 		}
 		else
 			return false ;
-	}
+	};
 	
 	$.FORM.select = function(obj){
 		obj.focus();
 		obj.select();
-	}
+	};
 
 	// 경고 메세지도 같이
 	$.FORM.selectMsg = function(obj,msg){
 		obj.focus();
 		obj.select();
 		alert(msg);
-	}
+	};
 	
 	// 이메일 형식 체크
 	// 형식에 위배되면 return false
@@ -517,7 +516,7 @@
 		}
 
 		return valid;
-	}
+	};
 	
 	
 	//  숫자여부 체크. 
@@ -550,7 +549,7 @@
 		}
 
 		return true ;
-	}	
+	};	
 	
 	// 숫자여부 체크. 자릿수 범위 지정
 	$.FORM.isIntegerRtnMsgRange = function(obj, msg, slen, elen) {
@@ -580,7 +579,7 @@
 			}
 	  }
 	  return true ;
-	}
+	};
 	
 	// 패스워드 체크 
 	$.FORM.passwdCheck = function(obj1, obj2, len) {
@@ -607,7 +606,7 @@
 			return false;
 		}
 		return true ;
-	}
+	};
 }
 
 
@@ -627,7 +626,7 @@
     this[9] = m9;
     this[10] = m10;
     this[11] = m11;
-	}
+	};
 	
 	//YYYYMMDD를 check한다.
 	$.DATE.checkDate = function( dateVal ) {
@@ -654,7 +653,7 @@
 			}
 		}
 		return isDate ;
-	}
+	};
 	
 	//YYYY-MM-DD를 check한다.
 	$.DATE.checkDate2 = function( dateVal ) {
@@ -678,13 +677,13 @@
 			}
 		}
 		return isDate ;
-	}
+	};
 	
 	
 	//HH를 Check한다.
 	$.DATE.checkHH = function( toCheck ) {
 		return ((!$.Str.isEmpty(toCheck)) && ($.STR.isInteger(toCheck)) && ( parseFloat(toCheck) >= 0 ) && (parseFloat(toCheck) <= 23));
-	}
+	};
 	
 	//HHMM를 Check한다.
 	$.DATE.checkHHMM = function( hh, mm ) {
@@ -692,7 +691,7 @@
 			return ((!$.Str.isEmpty(mm)) && ($.STR.isInteger(mm)) && ( parseFloat(mm) >= 0 ) && (parseFloat(mm) <= 59));
 		}
 		return false;
-	}
+	};
 	
 	//HHMMSS를 Check한다.
 	$.DATE.checkHHMMSS = function( hh, mm, ss ) {
@@ -700,22 +699,22 @@
 			return ((!$.STR.isEmpty(ss)) && ($.STR.isInteger(ss)) && ( parseFloat(ss) >= 0 ) && (parseFloat(ss) <= 59));
 		}
 		return false;
-	}
+	};
 	
 	//MI를 Check한다.
 	$.DATE.checkMI = function checkMI( toCheck ) {
 	  return ((!$.STR.isEmpty(toCheck)) && ($.STR.isInteger(toCheck)) && ( parseFloat(toCheck) >= 0 ) && (parseFloat(toCheck) <= 59));
-	}	
+	};
 	
 	//YYYY 를 check한다.
 	$.DATE.checkYYYY = function(toCheck) {
 		return ( ( toCheck.length == 4) && ( $.STR.isInteger(toCheck)  ) && ( toCheck != "0000") );
-	}
+	};
 	
 	//MM 를 check한다.
 	$.DATE.checkMM = function(toCheck) {
 		return ((!$.STR.isEmpty(toCheck)) && ($.STR.isInteger(toCheck)) && ( parseFloat(toCheck) > 0 ) && (parseFloat(toCheck) < 13));
-	}
+	};
 	
 	//YYYY,MM,DD를 check한다.
 	$.DATE.checkDD = function( yyyy, mm, toCheck) {
@@ -740,11 +739,11 @@
 	       isYMD = true;
 	
 	  return isYMD;
-	}	
+	};
 	
 	// yyyy-MM-dd 로 포맷된 날짜 리턴
 	$.DATE.getDate = function(dd){
-		var now
+		var now;
 		if(dd==null)
 			now = new Date();
 		else
@@ -756,13 +755,13 @@
 		d = nowYear + "-" + nowMonth + "-" + nowDay;
 
 		return d;
-	}
+	};
 
 	// yyyy-MM-dd 형식을 날짜로 변환
 	$.DATE.getStr2Date = function(dateStr){
 	    var dateinfo = dateStr.split("-");
 	    return new Date(dateinfo[0] , dateinfo[1] -1 , dateinfo[2]);
-	}
+	};
 
 	// yyyy-MM-dd HH:mm:ss 형식을 날짜로 변환
 	$.DATE.getStr2DateTime = function(dateStr){
@@ -770,7 +769,7 @@
 	    var dateinfo = datetime[0].split("-");
 	    var timeinfo = datetime[1].split(":");
 	    return new Date(dateinfo[0] , dateinfo[1] -1 , dateinfo[2], timeinfo[0], timeinfo[1], timeinfo[2]);
-	}
+	};
 
 	
 	// 현재 날짜에서  diff 만큼 더한 날짜 리턴
@@ -778,7 +777,7 @@
 		var day = 1000 * 60 * 60 * 24;
 		var time = (new Date()).getTime() + (diff * day);
 		return new Date(time);
-	}
+	};
 	// from 날짜와 to 날짜  - 날짜 형식 비교(yyyy-mm-dd 비교)
 	$.DATE.getDiffDate = function(fromDate,toDate){
 		var fDate = new Date();
@@ -790,10 +789,10 @@
 		tDate.setFullYear(tDates[0], tDates[1], tDates[2]);
 		var tTime = tDate.getTime();
 		if(tTime>=fTime){
-			return true
+			return true;
 		}
 		return false;
-	}
+	};
 	// 동일 년도 비교
 	$.DATE.getDiffYear = function(fromDate,toDate){
 		var fDates = fromDate.split("-");
@@ -802,10 +801,10 @@
 			return true;
 		}
 		return false;
-	}
+	};
 	// 해당 년월의 마지막 날자 값  리턴
 	$.DATE.getLastDay = function(fromYear,fromMonth){
 		var dd = new Date(fromYear,fromMonth,0);
 		return dd.getDate();
-	}
+	};
 }

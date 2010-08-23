@@ -35,6 +35,11 @@ User.createOrUpdate = function(){
 	if($.FORM.isEmptyRtnMsg(createAction.name, "이름을 입력해 주세요")){
 		return;
 	}	
+	if(createAction.passwd.value != createAction.passwdRe.value){
+		$.FORM.selectMsg(createAction.passwd, "비밀번호 입력이 서로 다릅니다.");
+		return;
+	}
+	
 	if(createAction.email.value != ""){
 		if(!$.FORM.isValidEmail(createAction.email)){
 			return;

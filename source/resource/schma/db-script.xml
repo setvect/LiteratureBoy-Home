@@ -13,14 +13,14 @@
 			CREATE TABLE TBAA_USER (
 			  USER_ID varchar(20) NOT NULL,
 			  NAME varchar(50) NOT NULL,
-			  PASSWD varchar(20) NOT NULL,
+			  PASSWD varchar(50) NOT NULL,
 			  EMAIL varchar(100),
 				DELETE_F varchar(1) NOT NULL,	 			  
 			  PRIMARY KEY  (USER_ID)
 			)
 		</creation>
 		<defaultValue>
-			<query>INSERT INTO TBAA_USER(USER_ID, NAME, PASSWD, EMAIL, DELETE_F) VALUES('admin', '관리자', '1234', '', 'N')</query>
+			<query>INSERT INTO TBAA_USER(USER_ID, NAME, PASSWD, EMAIL, DELETE_F) VALUES('admin', '관리자', '81dc9bdb52d04dc20036dbd8313ed055', '', 'N')</query>
 		</defaultValue>		
 	</table>
 

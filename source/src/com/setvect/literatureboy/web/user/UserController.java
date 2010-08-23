@@ -101,6 +101,7 @@ public class UserController {
 		else if (m == Mode.CREATE_ACTION) {
 			User user = new User();
 			Binder.bind(request, user);
+			user.setPasswd(StringUtilAd.encodePassword(user.getPasswd(), ConstraintWeb.PASSWD_ALGORITHM));
 			userService.createUser(user);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
@@ -115,6 +116,7 @@ public class UserController {
 		else if (m == Mode.UPDATE_ACTION) {
 			User user = new User();
 			Binder.bind(request, user);
+			user.setPasswd(StringUtilAd.encodePassword(user.getPasswd(), ConstraintWeb.PASSWD_ALGORITHM));
 			userService.updateUser(user);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;

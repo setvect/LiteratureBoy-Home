@@ -67,7 +67,4 @@ public class AuthMap {
 	public void setKey(AuthMapKey key) {
 		this.key = key;
 	}
-	
-	
-
 }
