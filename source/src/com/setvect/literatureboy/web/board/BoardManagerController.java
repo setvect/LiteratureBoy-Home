@@ -52,13 +52,7 @@ public class BoardManagerController {
 	@Resource
 	private BoardService boardService;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ipms.sfj.pt.setup.user.IUserController#userTranscation(javax.servlet
-	 * .http.HttpServletRequest, com.ipms.sfj.pt.setup.user.User)
-	 */
+
 	@RequestMapping("/board/manager.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();

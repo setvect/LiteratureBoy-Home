@@ -1,5 +1,7 @@
 package com.setvect.literatureboy.vo.user;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
+import com.setvect.literatureboy.web.ConstraintWeb;
+
 /**
  * 회원
  * 
@@ -17,7 +21,10 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "TBAA_USER")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class User {
+public class User implements Serializable {
+	/** */
+	private static final long serialVersionUID = 4058914352122647610L;
+
 	@Id
 	@Column(name = "USER_ID")
 	private String userId;
@@ -25,12 +32,21 @@ public class User {
 	@Column(name = "NAME")
 	private String name;
 
-	/** 총 게시물 파일 업로드 제한 */
+	/**
+	 * MD5로 암호화
+	 * 
+	 * @see ConstraintWeb#PASSWD_ALGORITHM
+	 */
 	@Column(name = "PASSWD")
 	private String passwd;
 
 	@Column(name = "EMAIL")
 	private String email;
+
+	/** 관리자 여부 */
+	@Column(name = "ADMIN_F")
+	@Type(type = "yes_no")
+	private boolean adminF;
 
 	@Column(name = "DELETE_F")
 	@Type(type = "yes_no")
@@ -94,6 +110,21 @@ public class User {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**
+	 * @return the adminF
+	 */
+	public boolean isAdminF() {
+		return adminF;
+	}
+
+	/**
+	 * @param adminF
+	 *            the adminF to set
+	 */
+	public void setAdminF(boolean adminF) {
+		this.adminF = adminF;
 	}
 
 	/**

@@ -60,13 +60,6 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ipms.sfj.pt.setup.user.IUserController#userTranscation(javax.servlet
-	 * .http.HttpServletRequest, com.ipms.sfj.pt.setup.user.User)
-	 */
 	@RequestMapping("/user/user.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();

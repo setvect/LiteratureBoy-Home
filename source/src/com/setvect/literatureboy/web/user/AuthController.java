@@ -52,13 +52,6 @@ public class AuthController {
 	@Resource
 	private UserService authService;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ipms.sfj.pt.setup.auth.IAuthController#authTranscation(javax.servlet
-	 * .http.HttpServletRequest, com.ipms.sfj.pt.setup.auth.Auth)
-	 */
 	@RequestMapping("/user/auth.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();

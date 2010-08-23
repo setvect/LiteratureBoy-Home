@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 
+import com.setvect.common.http.CookieProcess;
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.SearchListVo;
+import com.setvect.common.util.SerializerUtil;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.ApplicationException;
+import com.setvect.literatureboy.vo.user.User;
 
 /**
  * 프로젝트 의존적인 공통 메소드 모음
@@ -79,5 +82,23 @@ public class CommonUtil {
 		if (a == -1) {
 			throw new ApplicationException("[" + fileName + "] 은 허가된 파일이 아닙니다.");
 		}
+	}
+
+	/**
+	 * 쿠기 정보에 있는 로그인 코드를 객채화 시켜 가져옴
+	 * 
+	 * @param request
+	 * @return 로그인 안되어 있으면 null
+	 * @throws Exception
+	 */
+	public static User getLoginSession(HttpServletRequest request) throws Exception {
+		User user = null;
+		CookieProcess cookie = new CookieProcess(request);
+		String encode = cookie.get(ConstraintWeb.USER_SESSION);
+		if (encode != null) {
+			encode = encode.replaceAll("  ", "\n");
+			user = (User) SerializerUtil.restoreBase64Decode(encode);
+		}
+		return user;
 	}
 }

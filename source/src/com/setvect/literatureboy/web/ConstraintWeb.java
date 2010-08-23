@@ -29,7 +29,10 @@ public class ConstraintWeb {
 			ALLOW_UPLOAD_FILE[i] = s.get(i).toLowerCase().trim();
 		}
 	}
-	
+
 	/** 패스워드 암호화 알고리즘 */
 	public final static String PASSWD_ALGORITHM = "MD5";
+
+	/** 로그인 쿠키 키값 */
+	public static final String USER_SESSION = "_user_session_name";
 }
