@@ -17,7 +17,7 @@ import com.setvect.literatureboy.vo.user.User;
 /**
  * @version $Id: MemoService.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
-@Service
+@Service(value = "UserService")
 public class UserService {
 	/** DB 컨트롤 인스턴스 */
 	@Resource
@@ -147,6 +147,14 @@ public class UserService {
 	 */
 	public void clearAuthChangeListener() {
 		authChangeListener.clear();
+	}
+
+	/**
+	 * 권한 정보를 로딩
+	 */
+	public void initAuth() {
+		fireEventAuth();
+		fireEventAuthMap();
 	}
 
 	/**

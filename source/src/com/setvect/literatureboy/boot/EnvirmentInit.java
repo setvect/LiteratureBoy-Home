@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.setvect.common.log.LogPrinter;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.db.DBInitializer;
+import com.setvect.literatureboy.service.user.UserService;
 
 /**
  * WAS가 실행되면 어플리케이션에 기본적인 설정값, 로그설정등을 해준다. <br>
@@ -59,7 +60,7 @@ public class EnvirmentInit extends HttpServlet {
 
 		if (initialize) {
 			return;
-//			throw new IllegalStateException("aready initialized!");
+			// throw new IllegalStateException("aready initialized!");
 		}
 
 		File configFile = new File(webBase, configPath);
@@ -69,8 +70,8 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.init(logFilePath);
 		LogPrinter.info("Log Manager Initialized");
 
-		springContext = new ClassPathXmlApplicationContext(
-				new String[] { "classpath:spring/applicationContext.xml" }, false);
+		springContext = new ClassPathXmlApplicationContext(new String[] { "classpath:spring/applicationContext.xml" },
+				false);
 		springContext.refresh();
 
 		LogPrinter.info("Spring Initialized");
@@ -88,6 +89,9 @@ public class EnvirmentInit extends HttpServlet {
 		conn.makeTable();
 		LogPrinter.info("DB Table Initialized completed");
 		initialize = true;
+
+		UserService user = (UserService) springContext.getBean("UserService");
+		user.initAuth();
 	}
 
 	public void destroy() {
