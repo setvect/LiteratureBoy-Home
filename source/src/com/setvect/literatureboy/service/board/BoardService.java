@@ -115,6 +115,14 @@ public class BoardService {
 	}
 
 	/**
+	 * 조회수 증가
+	 * @param articleSeq
+	 */
+	public void updateArticleIncrementHit(int articleSeq) {
+		boardDao.updateArticleIncrementHit(articleSeq);
+	}
+	
+	/**
 	 * @param articleSeq
 	 */
 	public void removeArticle(int articleSeq) {
@@ -190,4 +198,5 @@ public class BoardService {
 	public void removeAttachFile(int seq) {
 		boardDao.removeAttachFile(seq);
 	}
+
 }

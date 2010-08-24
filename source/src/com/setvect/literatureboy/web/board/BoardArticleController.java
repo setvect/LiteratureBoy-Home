@@ -116,6 +116,7 @@ public class BoardArticleController {
 		}
 		else if (m == Mode.READ_FORM) {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
+			boardService.updateArticleIncrementHit(articleSeq);
 			BoardArticle article = boardService.getArticle(articleSeq);
 			mav.addObject(AttributeKey.ARTICLE.name(), article);
 

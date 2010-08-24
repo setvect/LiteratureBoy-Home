@@ -82,6 +82,11 @@ public interface BoardDao {
 	/**
 	 * @param articleSeq
 	 */
+	public void updateArticleIncrementHit(int articleSeq);
+
+	/**
+	 * @param articleSeq
+	 */
 	public void removeArticle(int articleSeq);
 
 	// ----- comment

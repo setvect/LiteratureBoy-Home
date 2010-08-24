@@ -250,6 +250,19 @@ public abstract class AbstractBoardDao implements BoardDao {
 		session.flush();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.setvect.literatureboy.db.BoardDao#updateArticleIncrementHit(int)
+	 */
+	public void updateArticleIncrementHit(int articleSeq) {
+		Session session = sessionFactory.getCurrentSession();
+		// IDX1
+		String q = "update BoardArticle set  hitCount = hitCount + 1 WHERE articleSeq = ?";
+		Query query = session.createQuery(q);
+		query.setParameter(0, articleSeq);
+		query.executeUpdate();
+		session.flush();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

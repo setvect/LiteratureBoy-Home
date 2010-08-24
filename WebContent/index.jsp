@@ -16,8 +16,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
 <title>Literature Boy</title>
-<link rel="stylesheet" type="text/css" href="/common/css/admin.css"/>     
-<link rel="stylesheet" type="text/css" href="/common/css/displaytag.css"/>
+<link rel="stylesheet" type="text/css" href="/common/css/admin.css"/>
 </head>
 <body>
 <div class="warp">
