@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.setvect.common.http.CookieProcess;
 import com.setvect.common.util.SerializerUtil;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.service.user.UserService;
@@ -61,6 +60,7 @@ public class LoginController {
 		}
 
 		mav.setViewName(ConstraintWeb.INDEX_VIEW);
+		String rtnUrl = request.getParameter(ConstraintWeb.RETURN_URL);
 		if (m == Mode.LOGIN_ACTION) {
 			String userId = request.getParameter("userId");
 			String passwd = request.getParameter("passwd");
@@ -85,6 +85,11 @@ public class LoginController {
 				Cookie loginCookie = new Cookie(ConstraintWeb.USER_COOKIE_KEY, cookieData);
 				loginCookie.setPath("/");
 				response.addCookie(loginCookie);
+				String returnUrl = rtnUrl;
+				returnUrl = StringUtilAd.null2str(returnUrl, "/");
+
+				mav.setViewName("redirect:" + returnUrl);
+				return mav;
 			}
 			// 로그인 실패
 			else {
@@ -94,10 +99,9 @@ public class LoginController {
 		}
 
 		if (m == Mode.LOGIN_FORM) {
-			User user = CommonUtil.getLoginSession(request);
+			mav.addObject(ConstraintWeb.RETURN_URL, rtnUrl);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/login/login.jsp");
 		}
-
 		return mav;
 	}
 

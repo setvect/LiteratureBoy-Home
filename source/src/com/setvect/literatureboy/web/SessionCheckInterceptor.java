@@ -1,5 +1,7 @@
 package com.setvect.literatureboy.web;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,10 +35,12 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		// TODO 권한 체크
 		User user = CommonUtil.getLoginSession(request);
 		if (user == null) {
-			response.sendRedirect(LOGIN_URL);
+			String returnUrl = currentUrl + "?" + StringUtilAd.null2str(request.getQueryString(), "");
+			response.sendRedirect(LOGIN_URL + "?" + ConstraintWeb.RETURN_URL + "="
+					+ URLEncoder.encode(returnUrl, request.getCharacterEncoding()));
 			return false;
 		}
-		
+
 		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
 		return true;
 	}

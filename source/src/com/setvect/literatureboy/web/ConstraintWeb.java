@@ -36,7 +36,10 @@ public class ConstraintWeb {
 	/** 로그인 쿠키 키값 */
 	public static final String USER_COOKIE_KEY = "_user_cookie_key";
 
-	/** 로그인 attribute 키값*/
+	/** 로그인 attribute 키값 */
 	public static final String USER_SESSION_KEY = "_user_session_key";
+
+	/** 리턴 URL 파라미터 이름 */
+	public static final String RETURN_URL = "returnUrl";
 
 }
