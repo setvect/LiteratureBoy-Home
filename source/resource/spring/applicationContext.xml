@@ -123,22 +123,7 @@
 	<!-- Login Check Interceptor -->
 	<bean id="loginCheckInterceptor" class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>
 	
-	
-	<!-- Properties -->
-<!-- 사용안함	
-	<bean id="configurableCallBack" scope="prototype"
-		class="anyframe.common.config.ConfigurableCallback" />	
-	
-	<bean id="propertiesService" class="anyframe.core.properties.impl.PropertiesServiceImpl">
-		<config:configuration>
-	      <properties>
-	         <element key="PAGE_SIZE" value="3"/>
-	         <element key="PAGE_UNIT" value="10"/>
-	      </properties>				
-		</config:configuration>					
-	</bean>
--->	
-	
+
 	<!-- =============================== -->
 	<!-- ======  WEB MVC Mapping ======= -->
 	<!-- =============================== -->

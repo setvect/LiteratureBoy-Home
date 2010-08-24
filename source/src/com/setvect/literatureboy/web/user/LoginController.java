@@ -13,7 +13,6 @@ import com.setvect.common.util.SerializerUtil;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.service.user.UserService;
 import com.setvect.literatureboy.vo.user.User;
-import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**

@@ -3,8 +3,6 @@ package com.setvect.literatureboy.service.memo;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.SearchListVo;
@@ -15,7 +13,6 @@ import com.setvect.literatureboy.vo.Memo;
  * @version $Id$
  */
 @Service
-@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class MemoService {
 	/** DB 컨트롤 인스턴스 */
 	@Resource

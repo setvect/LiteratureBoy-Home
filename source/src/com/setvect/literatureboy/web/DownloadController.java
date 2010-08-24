@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
-import com.setvect.literatureboy.boot.ApplicationException;
 
 /**
  * 파일 다운로드 파라미터

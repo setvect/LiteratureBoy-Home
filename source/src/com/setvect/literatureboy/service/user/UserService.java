@@ -1,10 +1,11 @@
 package com.setvect.literatureboy.service.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.literatureboy.db.UserDao;
@@ -17,11 +18,14 @@ import com.setvect.literatureboy.vo.user.User;
  * @version $Id: MemoService.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
 @Service
-@Transactional(rollbackFor = { Exception.class }, propagation = Propagation.REQUIRED)
 public class UserService {
 	/** DB 컨트롤 인스턴스 */
 	@Resource
 	private UserDao userDao;
+
+	/** 권한 변경 이벤트 */
+	@Resource
+	private List<AuthChangeListener> authChangeListener = new ArrayList<AuthChangeListener>();
 
 	// ---------------- 사용자
 	/**
@@ -32,7 +36,6 @@ public class UserService {
 	 */
 	public User getUser(String id) throws Exception {
 		return userDao.getUser(id);
-
 	}
 
 	public GenericPage<User> getPageList(UserSearch searchVo) throws Exception {
@@ -77,14 +80,17 @@ public class UserService {
 
 	public void createAuth(Auth auth) {
 		userDao.createAuth(auth);
+		fireEventAuth();
 	}
 
 	public void updateAuth(Auth auth) {
 		userDao.updateAuth(auth);
+		fireEventAuth();
 	}
 
 	public void removeAuth(int authSeq) {
 		userDao.removeAuth(authSeq);
+		fireEventAuth();
 	}
 
 	// ---------------- 권한 맵핑
@@ -98,6 +104,7 @@ public class UserService {
 
 	public void createAuthMap(AuthMap authMap) {
 		userDao.createAuthMap(authMap);
+		fireEventAuthMap();
 	}
 
 	public void removeAuthMap(AuthMapKey key) {
@@ -113,4 +120,66 @@ public class UserService {
 		userDao.removeAuthMapForUserId(userId);
 	}
 
+	// ---------------- 권한 변경 이벤트
+
+	/**
+	 * 권한 이벤트 등록
+	 * 
+	 * @param listener
+	 *            권한 변경 이벤트
+	 */
+	public void addAuthChangeListener(AuthChangeListener listener) {
+		authChangeListener.add(listener);
+	}
+
+	/**
+	 * 권한 변경 이벤트 삭제
+	 * 
+	 * @param listener
+	 *            삭제한 권한 변경 이벤트
+	 */
+	public void removeAuthChangeListener(AuthChangeListener listener) {
+		authChangeListener.remove(listener);
+	}
+
+	/**
+	 * 권한 이벤트 전체 삭제
+	 */
+	public void clearAuthChangeListener() {
+		authChangeListener.clear();
+	}
+
+	/**
+	 * 권한 정보 수정 notify
+	 */
+	private void fireEventAuth() {
+		AuthSearch search = new AuthSearch(1);
+		search.setPagePerItemCount(Integer.MAX_VALUE);
+		GenericPage<Auth> list = getAuthPagingList(search);
+
+		for (AuthChangeListener listener : authChangeListener) {
+			listener.updateAuth(list.getList());
+		}
+	}
+
+	/**
+	 * 권한 맵핑 정보 수정 notify
+	 */
+	private void fireEventAuthMap() {
+		AuthMapSearch search = new AuthMapSearch(1);
+		search.setPagePerItemCount(Integer.MAX_VALUE);
+		GenericPage<AuthMap> list = getAuthMapPagingList(search);
+
+		for (AuthChangeListener listener : authChangeListener) {
+			listener.updateAuthMap(list.getList());
+		}
+	}
+
+	/**
+	 * @param authChangeListener
+	 *            the authChangeListener to set
+	 */
+	public void setAuthChangeListener(List<AuthChangeListener> authChangeListener) {
+		this.authChangeListener = authChangeListener;
+	}
 }
