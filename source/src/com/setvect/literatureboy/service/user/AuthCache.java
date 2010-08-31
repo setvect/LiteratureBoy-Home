@@ -1,5 +1,6 @@
 package com.setvect.literatureboy.service.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.stereotype.Service;
@@ -49,5 +50,21 @@ public class AuthCache implements AuthChangeListener {
 	 */
 	public static Collection<AuthMap> getAuthMapCache() {
 		return authMapCache;
+	}
+
+	/**
+	 * 해당 사용자가 가지고 있는 맴핑 정보
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public static Collection<AuthMap> getAuthMapCache(String userId) {
+		Collection<AuthMap> col = new ArrayList<AuthMap>();
+		for (AuthMap map : authMapCache) {
+			if (map.getUserId().equals(userId)) {
+				col.add(map);
+			}
+		}
+		return col;
 	}
 }

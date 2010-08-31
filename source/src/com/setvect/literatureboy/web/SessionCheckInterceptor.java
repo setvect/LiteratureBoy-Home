@@ -54,7 +54,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		}
 		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
 
-		Collection<AuthMap> authMap = AuthCache.getAuthMapCache();
+		Collection<AuthMap> authMap = AuthCache.getAuthMapCache(user.getUserId());
 		for (Auth auth : matchAuthList) {
 			for (AuthMap map : authMap) {
 				if (auth.getAuthSeq() == map.getAuthSeq()) {
@@ -63,7 +63,8 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 
-		throw new ApplicationException(user.getUserId() + "는 해당 경로의 접근 권한이 없습니다.");
+//		throw new ApplicationException(user.getUserId() + "는 해당 경로의 접근 권한이 없습니다.");
+		return true;
 	}
 
 	/**
