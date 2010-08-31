@@ -90,6 +90,7 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.info("DB Table Initialized completed");
 		initialize = true;
 
+		// 권한 매핑 정보를 읽어 드림
 		UserService user = (UserService) springContext.getBean("UserService");
 		user.initAuth();
 	}

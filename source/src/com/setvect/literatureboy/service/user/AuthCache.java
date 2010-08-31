@@ -37,4 +37,17 @@ public class AuthCache implements AuthChangeListener {
 		authMapCache = authMap;
 	}
 
+	/**
+	 * @return the authCache
+	 */
+	public static Collection<Auth> getAuthCache() {
+		return authCache;
+	}
+
+	/**
+	 * @return the authMapCache
+	 */
+	public static Collection<AuthMap> getAuthMapCache() {
+		return authMapCache;
+	}
 }
