@@ -35,7 +35,9 @@
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
-		<display:column property="userId" href="javascript:User.readForm('${article.userId}')"  title="ID"/>
+		<display:column title="ID">
+			<a href="javascript:User.readForm('${article.userId}')">${article.userId}</a>
+		</display:column>
 		<display:column property="name" title="Name"/>
 		<display:column title="Auth">
 			<input type="button" value="권한" onclick="User.authMapForm('${article.userId}')">

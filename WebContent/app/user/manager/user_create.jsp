@@ -53,6 +53,13 @@
 				<th>이메일</th>
 				<td><form:input id="email" path="email" size="30" maxlength="50"/></td>
 			</tr>
+			<tr>
+				<th>관리자</th>
+				<td>
+					<form:radiobutton path="adminF" value="true"/>예
+					<form:radiobutton path="adminF" value="false"/>아니오
+				</td>
+			</tr>
 		</table>
 	</form:form>
 </div>

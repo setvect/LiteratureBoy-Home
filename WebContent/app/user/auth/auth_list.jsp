@@ -35,7 +35,9 @@
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
-		<display:column property="name" href="javascript:Auth.readForm('${article.authSeq}')"  title="Name"/>
+		<display:column title="Name">
+			<a href="javascript:Auth.readForm('${article.authSeq}')">${article.name}</a>
+		</display:column>
 		<display:column property="url" title="Url"/>
 		<display:column property="parameter" title="Parameter"/>		
 		<display:column title="Update">

@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<th>Parameter</th>
-			<td>${ITEM.Parameter}</td>
+			<td>${ITEM.parameter}</td>
 		</tr>
 	</table>
 </div>

@@ -36,7 +36,9 @@
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
 		<display:column property="boardCode" href="/board/article.do" paramId="searchCode" paramProperty="boardCode"  title="Code"/>
-		<display:column property="name" href="javascript:BoardManager.readForm('${article.boardCode}')" title="Name"/>
+		<display:column title="Name">
+			<a href="javascript:BoardManager.readForm('${article.boardCode}')">${article.name}</a>
+		</display:column>
 		<display:column title="Update">
 			<input type="button" value="수정" onclick="BoardManager.updateForm('${article.boardCode}')">
 		</display:column>

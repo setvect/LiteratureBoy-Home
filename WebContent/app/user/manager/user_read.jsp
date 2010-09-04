@@ -22,6 +22,10 @@
 			<th>이메일</th>
 			<td>${ITEM.email}</td>
 		</tr>
+		<tr>
+			<th>전체관리자 여부</th>
+			<td>${ITEM.adminF}</td>
+		</tr>		
 	</table>
 </div>
 <div>
