@@ -1,6 +1,10 @@
+<%@page import="com.setvect.literatureboy.service.board.BoardArticleSearch"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="java.util.Collection"%>
 <%@page import="com.setvect.literatureboy.service.board.BoardManagerSearch"%>
+<%@page import="com.setvect.literatureboy.web.board.BoardArticleController.AttributeKey"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="com.setvect.literatureboy.vo.board.Board"%>
 <%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
@@ -51,6 +55,8 @@
 	</display:table>
 </div>
 <div>
-	<input type="button" value="등록" onclick="BoardArticle.createFrom();">
+	<c:if test="${AUTH_WRITE}">
+		<input type="button" value="등록" onclick="BoardArticle.createFrom();">
+	</c:if>
 </div>
 <jsp:include page="board_article_form.inc.jsp"></jsp:include>

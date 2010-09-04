@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
+import com.setvect.literatureboy.web.AccessChecker;
 import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
@@ -69,7 +71,9 @@ public class BoardArticleController {
 		//
 		ARTICLE, ATTACH, COMMENT,
 		/** 페이지 및 검색 정보 */
-		PAGE_SEARCH
+		PAGE_SEARCH,
+		// 권한 정보를 제공
+		AUTH_WRITE
 	}
 
 	@Resource
@@ -222,10 +226,25 @@ public class BoardArticleController {
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/board/board_article_list.jsp");
 
-			request.setAttribute("pageList", boardPagingList);
+			checkWrite(request, pageCondition);
 		}
 
 		return mav;
+	}
+
+	/**
+	 * 쓰기 권한이 있는지 체크함 
+	 * @param request
+	 * @param pageCondition
+	 * @throws Exception
+	 */
+	private void checkWrite(HttpServletRequest request, BoardArticleSearch pageCondition)
+			throws Exception {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("searchCode", pageCondition.getSearchCode());
+		param.put("mode", Mode.CREATE_FORM.name());
+		boolean writerable = AccessChecker.isAccessToUrl(request, param);
+		request.setAttribute(AttributeKey.AUTH_WRITE.name(), writerable);
 	}
 
 	/**
