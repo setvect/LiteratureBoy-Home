@@ -17,7 +17,7 @@
 	}
 	request.setAttribute("createForm", board);
 %>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <script type="text/javascript" src="/app/webedit/fckeditor.js"></script>
 <script type="text/javascript">

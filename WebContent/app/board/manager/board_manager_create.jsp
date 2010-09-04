@@ -15,7 +15,7 @@
 	}
 	request.setAttribute("createForm", board);
 %>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
 	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">

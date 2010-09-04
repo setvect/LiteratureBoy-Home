@@ -35,9 +35,11 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		// 호출한 서블릿 주소(~~.do 시작하는)를 저장
 		// JSP에서 form action에 주소로 사용
 		request.setAttribute(ConstraintWeb.SERVLET_URL, currentUrl);
-
+		User user = CommonUtil.getLoginSession(request);
+		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
+		
 		@SuppressWarnings("unchecked")
-		Map<String, String> param = request.getParameterMap();
+		Map<String, String[]> param = request.getParameterMap();
 
 		List<Auth> matchAuthList = getMathAuth(currentUrl, param);
 		// 접근 권한 정보가 없으면 통과
@@ -45,14 +47,12 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 
-		User user = CommonUtil.getLoginSession(request);
 		if (user == null) {
 			String returnUrl = currentUrl + "?" + StringUtilAd.null2str(request.getQueryString(), "");
 			response.sendRedirect(LOGIN_URL + "?" + ConstraintWeb.RETURN_URL + "="
 					+ URLEncoder.encode(returnUrl, request.getCharacterEncoding()));
 			return false;
 		}
-		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
 
 		Collection<AuthMap> authMap = AuthCache.getAuthMapCache(user.getUserId());
 		for (Auth auth : matchAuthList) {
@@ -63,8 +63,8 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 
-//		throw new ApplicationException(user.getUserId() + "는 해당 경로의 접근 권한이 없습니다.");
-		return true;
+		throw new ApplicationException(user.getUserId() + "는 해당 경로의 접근 권한이 없습니다.");
+//		return true;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 	 *            query string 파라미터
 	 * @return 현재 URL에 맞는 접근 권한 정보. 해당 사항 없으면 빈 List
 	 */
-	private List<Auth> getMathAuth(String currentUrl, Map<String, String> param) {
+	private List<Auth> getMathAuth(String currentUrl, Map<String, String[]> param) {
 		// 현 접근 URL이 권한 맵리스트에 포함되어 있는지 여부
 		List<Auth> matchAuthList = new ArrayList<Auth>();
 		Collection<Auth> authList = AuthCache.getAuthCache();
@@ -95,12 +95,13 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	/**
+	 * 현재 전달 파라미터를 기준으로 권한 정보 설정값이 매칭 되는직 검사
 	 * @param param
 	 *            파라미터 정보
 	 * @param auth
 	 * @return
 	 */
-	private boolean isParamMatch(Map<String, String> param, Auth auth) {
+	private boolean isParamMatch(Map<String, String[]> param, Auth auth) {
 		String paramString = auth.getParameter();
 		if (paramString.equals("*")) {
 			return true;
@@ -114,19 +115,19 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 			}
 			String name = t[0];
 			String value = t[1];
-			String paramValue = param.get(name);
-			if (paramValue == null) {
+			String[] paramValue = param.get(name);
+			if (paramValue == null || paramValue.length == 0) {
 				return false;
 			}
 
 			if (value.endsWith("*")) {
 				String subValue = value.substring(0, value.length() - 1);
-				if (!paramValue.startsWith(subValue)) {
+				if (!paramValue[0].startsWith(subValue)) {
 					return false;
 				}
 			}
 			else {
-				if (!paramValue.equals(value)) {
+				if (!paramValue[0].equals(value)) {
 					return false;
 				}
 			}

@@ -6,7 +6,7 @@
 <%@page import="com.setvect.literatureboy.web.user.LoginController"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@include file="/common/taglib.inc.jsp"%>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript">
 	function login(){
 		if($.FORM.isEmptyRtnMsg(logineAction.userId, "아이디를 입력하세요.")){

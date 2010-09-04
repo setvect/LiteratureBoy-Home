@@ -14,7 +14,7 @@
 	}
 	request.setAttribute("createForm", auth);
 %>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript" src="/app/user/auth/auth.js"></script>
 <div>
 	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">

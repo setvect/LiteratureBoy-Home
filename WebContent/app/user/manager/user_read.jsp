@@ -6,7 +6,7 @@
 <%@page import="com.setvect.literatureboy.web.user.UserController"%>
 <%@page import="com.setvect.common.util.StringUtilAd"%>
 <%@include file="/common/taglib.inc.jsp"%>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript" src="/app/user/manager/user.js"></script>
 <div>
 	<table>

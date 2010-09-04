@@ -9,7 +9,7 @@
 <%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 
 <%@include file="/common/taglib.inc.jsp"%>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <div>
 	<form:form commandName="PAGE_SEARCH" name="encodeForm" method="post" action="${controller_url}">

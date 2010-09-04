@@ -7,7 +7,7 @@
 <%@page import="com.setvect.common.util.StringUtilAd"%>
 <%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
-<jsp:include page="/common/script.inc.jsp"/>
+
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
 	<table>
