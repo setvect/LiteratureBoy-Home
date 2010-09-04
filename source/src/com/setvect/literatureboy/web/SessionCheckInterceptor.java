@@ -1,9 +1,8 @@
 package com.setvect.literatureboy.web;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +12,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.ApplicationException;
-import com.setvect.literatureboy.service.user.AuthCache;
-import com.setvect.literatureboy.vo.user.Auth;
-import com.setvect.literatureboy.vo.user.AuthMap;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
@@ -23,11 +19,6 @@ import com.setvect.literatureboy.vo.user.User;
  * 모든 액션에 대해서 로그인 여부를 검사하여 로그인이 되지 않으면 로그인 페이지로 이동
  */
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
-	private static final String LOGIN_URL = "/user/login.do";
-	/**
-	 * 로그인 체크 제외 주소
-	 */
-	private static final String[] EXCUSE_URL = { LOGIN_URL };
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String currentUrl = request.getRequestURI();
@@ -37,126 +28,42 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute(ConstraintWeb.SERVLET_URL, currentUrl);
 		User user = CommonUtil.getLoginSession(request);
 		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
-		
-		@SuppressWarnings("unchecked")
-		Map<String, String[]> param = request.getParameterMap();
+		Map<String, String> param = makeParamMap(request);
 
-		List<Auth> matchAuthList = getMathAuth(currentUrl, param);
-		// 접근 권한 정보가 없으면 통과
-		if (StringUtilAd.isInclude(currentUrl, EXCUSE_URL) || matchAuthList.size() == 0) {
+		boolean hasAuth = AccessChecker.isAccessToUrl(user, currentUrl, param);
+		if(hasAuth){
 			return true;
 		}
-
-		if (user == null) {
+		
+		if (hasAuth == false && user == null) {
 			String returnUrl = currentUrl + "?" + StringUtilAd.null2str(request.getQueryString(), "");
-			response.sendRedirect(LOGIN_URL + "?" + ConstraintWeb.RETURN_URL + "="
+			response.sendRedirect(AccessChecker.LOGIN_URL + "?" + ConstraintWeb.RETURN_URL + "="
 					+ URLEncoder.encode(returnUrl, request.getCharacterEncoding()));
 			return false;
 		}
 
-		Collection<AuthMap> authMap = AuthCache.getAuthMapCache(user.getUserId());
-		for (Auth auth : matchAuthList) {
-			for (AuthMap map : authMap) {
-				if (auth.getAuthSeq() == map.getAuthSeq()) {
-					return true;
-				}
-			}
-		}
-
+		// 로그인 했는데 권한이 없으면 에러 메시지 표시
 		throw new ApplicationException(user.getUserId() + "는 해당 경로의 접근 권한이 없습니다.");
-//		return true;
+		// return true;
 	}
 
 	/**
-	 * URL과 파라미터 정보가 매치되는 권한 정보를 찾음
+	 * 파라미터 맵을 만듬 <br>
+	 * 참고로 request.getParameterMap()을 사용하면 값에 타입이 String[] 됨
 	 * 
-	 * @param currentUrl
-	 *            현 URL 주소
-	 * @param param
-	 *            query string 파라미터
-	 * @return 현재 URL에 맞는 접근 권한 정보. 해당 사항 없으면 빈 List
-	 */
-	private List<Auth> getMathAuth(String currentUrl, Map<String, String[]> param) {
-		// 현 접근 URL이 권한 맵리스트에 포함되어 있는지 여부
-		List<Auth> matchAuthList = new ArrayList<Auth>();
-		Collection<Auth> authList = AuthCache.getAuthCache();
-		for (Auth auth : authList) {
-			boolean urlMatch = false;
-			boolean paramMath = false;
-			urlMatch = isUrlMatch(currentUrl, auth);
-			if (urlMatch) {
-				paramMath = isParamMatch(param, auth);
-			}
-			if (urlMatch && paramMath) {
-				matchAuthList.add(auth);
-			}
-		}
-		return matchAuthList;
-	}
-
-	/**
-	 * 현재 전달 파라미터를 기준으로 권한 정보 설정값이 매칭 되는직 검사
-	 * @param param
-	 *            파라미터 정보
-	 * @param auth
+	 * @param request
 	 * @return
 	 */
-	private boolean isParamMatch(Map<String, String[]> param, Auth auth) {
-		String paramString = auth.getParameter();
-		if (paramString.equals("*")) {
-			return true;
-		}
-		String urlSplit[] = paramString.split("[&]");
-		for (String token : urlSplit) {
-			String[] t = token.split("[=]");
-			// "키=값" 형태가 아니면 무시
-			if (t.length != 2) {
-				continue;
-			}
-			String name = t[0];
-			String value = t[1];
-			String[] paramValue = param.get(name);
-			if (paramValue == null || paramValue.length == 0) {
-				return false;
-			}
+	private Map<String, String> makeParamMap(HttpServletRequest request) {
+		Map<String, String> param = new HashMap<String, String>();
 
-			if (value.endsWith("*")) {
-				String subValue = value.substring(0, value.length() - 1);
-				if (!paramValue[0].startsWith(subValue)) {
-					return false;
-				}
-			}
-			else {
-				if (!paramValue[0].equals(value)) {
-					return false;
-				}
-			}
-
+		@SuppressWarnings("unchecked")
+		Enumeration<String> paramNames = request.getParameterNames();
+		while (paramNames.hasMoreElements()) {
+			String key = paramNames.nextElement();
+			param.put(key, request.getParameter(key));
 		}
-		return true;
+		return param;
 	}
 
-	/**
-	 * @param currentUrl
-	 *            현 URL
-	 * @param auth
-	 *            매치를 비교할 권한 정보
-	 * @return URL이 매치 되면 true
-	 */
-	private boolean isUrlMatch(String currentUrl, Auth auth) {
-		boolean urlMatch = false;
-		String url = auth.getUrl();
-		if (url.endsWith("*")) {
-			url = url.substring(0, url.length() - 1);
-			if (currentUrl.startsWith(url)) {
-				urlMatch = true;
-			}
-		}
-		else {
-			if (currentUrl.equals(url)) {
-				urlMatch = true;
-			}
-		}
-		return urlMatch;
-	}
 }

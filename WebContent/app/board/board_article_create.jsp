@@ -19,15 +19,18 @@
 %>
 
 <script type="text/javascript" src="/app/board/board_article.js"></script>
-<script type="text/javascript" src="/app/webedit/fckeditor.js"></script>
+<script type="text/javascript" src="/app/smart_edit/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
   window.onload = function()
   {
-    var oFCKeditor = new FCKeditor( 'content' ) ;
-    oFCKeditor.ToolbarSet = 'Default';
-    oFCKeditor.BasePath = "/app/webedit/" ;
-    oFCKeditor.ReplaceTextarea() ;
-  }
+  	var oEditors = [];
+  	nhn.husky.EZCreator.createInIFrame({
+  		oAppRef: oEditors,
+  		elPlaceHolder: "content",
+  		sSkinURI: "/app/smart_edit/SEditorSkin.html",
+  		fCreator: "createSEditorInIFrame"
+  	});
+  };
 </script>
 <div>
 	<form:form commandName="createForm" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${controller_url}">
@@ -55,7 +58,7 @@
 			</tr>
 			<tr>
 				<th>Content</th>
-				<td><form:textarea id="content" path="content"/></td>
+				<td><form:textarea id="content" path="content" cssStyle="width:600px;"/></td>
 			</tr>
 			<c:if test="${BOARD.encodeF}">
 				<tr>
