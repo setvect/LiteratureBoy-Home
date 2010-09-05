@@ -31,7 +31,7 @@
 	</div>
 </div>
 <div>
-	<display:table name="LIST.list" class="table" id="article" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="list_table" id="article" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>

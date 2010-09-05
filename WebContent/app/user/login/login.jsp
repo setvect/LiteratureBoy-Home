@@ -9,13 +9,13 @@
 
 <script type="text/javascript">
 	function login(){
-		if($.FORM.isEmptyRtnMsg(logineAction.userId, "아이디를 입력하세요.")){
+		if($.FORM.isEmptyRtnMsg(document.logineAction.userId, "아이디를 입력하세요.")){
 			return;
 		}
-		if($.FORM.isEmptyRtnMsg(logineAction.passwd, "비밀번호 입력하세요.")){
+		if($.FORM.isEmptyRtnMsg(document.logineAction.passwd, "비밀번호 입력하세요.")){
 			return;
 		}
-		logineAction.submit();
+		document.logineAction.submit();
 	}
 </script>
 <div>

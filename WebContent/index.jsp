@@ -21,7 +21,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
 <title>Literature Boy</title>
-<link rel="stylesheet" type="text/css" href="/common/css/admin.css"/>
+<link rel="stylesheet" type="text/css" href="/common/css/main.css"/>
 <jsp:include page="/common/script.inc.jsp"/>
 </head>
 <body>

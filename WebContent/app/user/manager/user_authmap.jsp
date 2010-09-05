@@ -17,13 +17,13 @@
 		<input type="hidden" name="searchId" value="${PAGE_SEARCH.searchId}"/>
 		<input type="hidden" name="currentPage" value="${PAGE_SEARCH.currentPage}"/>	
 		<input type="hidden" name="userId" value="${ITEM.userId}"/>	
-		<display:table name="AUTH_LIST.list" class="table" id="article" requestURI="${controller_url}" export="false"  style="margin-top:10px;">
+		<display:table name="AUTH_LIST.list" class="list_table" id="article" requestURI="${controller_url}" export="false"  style="margin-top:10px;">
 	    <display:column title="No." >
 	      ${article_rowNum }
 	    </display:column>
-			<display:column property="name" title="Name"/>
-			<display:column property="url" title="Url"/>
-			<display:column property="parameter" title="Parameter"/>		
+			<display:column property="name" title="Name" class="left"/>
+			<display:column property="url" title="Url" class="left"/>
+			<display:column property="parameter" title="Parameter" class="left"/>		
 			<display:column title="Select">
 				<input type="checkbox" name="authSeq" value="${article.authSeq}" ${article.authHave ? "checked='checked'" : ""}>
 			</display:column>

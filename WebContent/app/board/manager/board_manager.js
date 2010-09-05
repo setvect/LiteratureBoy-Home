@@ -2,55 +2,55 @@
 var BoardManager = new Object();
 
 BoardManager.searchForm = function(){
-	if($.FORM.isEmptyRtnMsg(searchForm.searchWord, "검색단어를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.searchForm.searchWord, "검색단어를 입력해 주세요")){
 		return;
 	}
-	searchForm.submit();
+	document.searchForm.submit();
 };
 
 BoardManager.searchStopForm = function(){
-	listForm.searchName.value="";
-	listForm.searchCode.value="";
-	listForm.submit();
+	document.listForm.searchName.value="";
+	document.listForm.searchCode.value="";
+	document.listForm.submit();
 };
 
 
 BoardManager.listForm = function(){
-	listForm.submit();
+	document.listForm.submit();
 };
 
 BoardManager.readForm = function(code){
-	readForm.boardCode.value = code;
-	readForm.submit();
+	document.readForm.boardCode.value = code;
+	document.readForm.submit();
 };
 
 BoardManager.createFrom = function(){
-	createForm.submit();
+	document.createForm.submit();
 };
 
 BoardManager.createOrUpdate = function(){
-	if($.FORM.isEmptyRtnMsg(createAction.boardCode, "코드를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.boardCode, "코드를 입력해 주세요")){
 		return;
 	}
-	if($.FORM.isEmptyRtnMsg(createAction.name, "이름을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.name, "이름을 입력해 주세요")){
 		return;
 	}	
 	
-	if(!$.STR.isNumber(createAction.uploadLimit.value)){
-		$.FORM.selectMsg(createAction.uploadLimit, "숫자로 입력해 주세요");
+	if(!$.STR.isNumber(document.createAction.uploadLimit.value)){
+		$.FORM.selectMsg(document.createAction.uploadLimit, "숫자로 입력해 주세요");
 		return;
 	}
-	createAction.submit();
+	document.createAction.submit();
 };
 
 BoardManager.updateForm = function(code){
-	updateForm.boardCode.value = code;
-	updateForm.submit();
+	document.updateForm.boardCode.value = code;
+	document.updateForm.submit();
 };
 
 BoardManager.removeAction = function(code){
 	if(confirm("삭제 하시겠습니까?")){
-		removeAction.boardCode.value = code;
-		removeAction.submit();
+		document.removeAction.boardCode.value = code;
+		document.removeAction.submit();
 	}
 };

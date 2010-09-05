@@ -2,55 +2,55 @@
 var Auth = new Object();
 
 Auth.searchForm = function(){
-	if($.FORM.isEmptyRtnMsg(searchForm.searchWord, "검색단어를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.searchForm.searchWord, "검색단어를 입력해 주세요")){
 		return;
 	}
-	searchForm.submit();
+	document.searchForm.submit();
 };
 
 Auth.searchStopForm = function(){
-	listForm.searchName.value="";
-	listForm.searchUrl.value="";
-	listForm.submit();
+	document.listForm.searchName.value="";
+	document.listForm.searchUrl.value="";
+	document.listForm.submit();
 };
 
 
 Auth.listForm = function(){
-	listForm.submit();
+	document.listForm.submit();
 };
 
 Auth.readForm = function(seq){
-	readForm.authSeq.value = seq;
-	readForm.submit();
+	document.readForm.authSeq.value = seq;
+	document.readForm.submit();
 };
 
 Auth.createFrom = function(){
-	createForm.submit();
+	document.createForm.submit();
 };
 
 Auth.createOrUpdate = function(){
 
-	if($.FORM.isEmptyRtnMsg(createAction.name, "이름을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.name, "이름을 입력해 주세요")){
 		return;
 	}	
-	if($.FORM.isEmptyRtnMsg(createAction.url, "URL를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.url, "URL를 입력해 주세요")){
 		return;
 	}	
-	if($.FORM.isEmptyRtnMsg(createAction.parameter, "파라미터를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.parameter, "파라미터를 입력해 주세요")){
 		return;
 	}	
 
-	createAction.submit();
+	document.createAction.submit();
 };
 
 Auth.updateForm = function(seq){
-	updateForm.authSeq.value = seq;
-	updateForm.submit();
+	document.updateForm.authSeq.value = seq;
+	document.updateForm.submit();
 };
 
 Auth.removeAction = function(seq){
 	if(confirm("삭제 하시겠습니까?")){
-		removeAction.authSeq.value = seq;
-		removeAction.submit();
+		document.removeAction.authSeq.value = seq;
+		document.removeAction.submit();
 	}
 };

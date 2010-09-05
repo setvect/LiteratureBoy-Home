@@ -2,69 +2,69 @@
 var User = new Object();
 
 User.searchForm = function(){
-	if($.FORM.isEmptyRtnMsg(searchForm.searchWord, "검색단어를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.searchForm.searchWord, "검색단어를 입력해 주세요")){
 		return;
 	}
-	searchForm.submit();
+	document.searchForm.submit();
 };
 
 User.searchStopForm = function(){
-	listForm.searchName.value="";
-	listForm.searchId.value="";
-	listForm.submit();
+	document.listForm.searchName.value="";
+	document.listForm.searchId.value="";
+	document.listForm.submit();
 };
 
 
 User.listForm = function(){
-	listForm.submit();
+	document.listForm.submit();
 };
 
 User.readForm = function(userId){
-	readForm.userId.value = userId;
-	readForm.submit();
+	document.readForm.userId.value = userId;
+	document.readForm.submit();
 };
 
 User.createFrom = function(){
-	createForm.submit();
+	document.createForm.submit();
 };
 
 User.createOrUpdate = function(){
-	if($.FORM.isEmptyRtnMsg(createAction.userId, "아이디를 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.userId, "아이디를 주세요")){
 		return;
 	}
-	if($.FORM.isEmptyRtnMsg(createAction.name, "이름을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.name, "이름을 입력해 주세요")){
 		return;
 	}	
-	if(createAction.passwd.value != createAction.passwdRe.value){
-		$.FORM.selectMsg(createAction.passwd, "비밀번호 입력이 서로 다릅니다.");
+	if(document.createAction.passwd.value != document.createAction.passwdRe.value){
+		$.FORM.selectMsg(document.createAction.passwd, "비밀번호 입력이 서로 다릅니다.");
 		return;
 	}
 	
-	if(createAction.email.value != ""){
-		if(!$.FORM.isValidEmail(createAction.email)){
+	if(document.createAction.email.value != ""){
+		if(!$.FORM.isValidEmail(document.createAction.email)){
 			return;
 		}
 	}
-	createAction.submit();
+	document.createAction.submit();
 };
 
 User.updateForm = function(userId){
-	updateForm.userId.value = userId;
-	updateForm.submit();
+	document.updateForm.userId.value = userId;
+	document.updateForm.submit();
 };
 
 User.removeAction = function(userId){
 	if(confirm("삭제 하시겠습니까?")){
-		removeAction.userId.value = userId;
-		removeAction.submit();
+		document.removeAction.userId.value = userId;
+		document.removeAction.submit();
 	}
 };
 
 User.authMapForm = function(userId){
-	authMapForm.userId.value = userId;
-	authMapForm.submit();
+	document.authMapForm.userId.value = userId;
+	document.authMapForm.submit();
 };
 
 User.authMapAction = function(){
-	authMapAction.submit();
-}
+	document.authMapAction.submit();
+};

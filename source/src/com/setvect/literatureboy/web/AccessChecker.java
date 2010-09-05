@@ -33,9 +33,24 @@ public class AccessChecker {
 	 * @throws Exception
 	 */
 	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param) throws Exception {
+		return isAccessToUrl(request, param, null);
+	}
+
+	/**
+	 * 로그인된 사용자가 URL과 그에 따른 파라미터에 접근 가능하지 여부 확인
+	 * 
+	 * @param request
+	 * @param param
+	 * @param appendAccess
+	 *            URL 체크 별도로 모듈 성격에 따른 Access 체크 로직
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param, AccessRule appendAccess)
+			throws Exception {
 		User user = CommonUtil.getLoginSession(request);
 		String currentUrl = (String) request.getAttribute(ConstraintWeb.SERVLET_URL);
-		return isAccessToUrl(user, currentUrl, param);
+		return isAccessToUrl(user, currentUrl, param, appendAccess);
 	}
 
 	/**
@@ -49,13 +64,30 @@ public class AccessChecker {
 	 * @throws Exception
 	 */
 	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param) throws Exception {
+		return isAccessToUrl(user, currentUrl, param, null);
+	}
+
+	/**
+	 * 로그인된 사용자가 URL과 그에 따른 파라미터에 접근 가능하지 여부 확인
+	 * 
+	 * @param user
+	 * @param currentUrl
+	 * @param param
+	 *            URL 파라미터
+	 * @param appendAccess
+	 *            URL 체크 별도로 모듈 성격에 따른 Access 체크 로직
+	 * @return 접근 가능하면 true, 아니면 false
+	 * @throws Exception
+	 */
+	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param,
+			AccessRule appendAccess) throws Exception {
 		List<Auth> matchAuthList = getMathAuth(currentUrl, param);
 		// 접근 권한 정보가 없으면 통과
 		if (StringUtilAd.isInclude(currentUrl, EXCUSE_URL) || matchAuthList.size() == 0) {
 			return true;
 		}
-		
-		if(user == null){
+
+		if (user == null) {
 			return false;
 		}
 
@@ -68,7 +100,12 @@ public class AccessChecker {
 		for (Auth auth : matchAuthList) {
 			for (AuthMap map : authMap) {
 				if (auth.getAuthSeq() == map.getAuthSeq()) {
-					return true;
+					if (appendAccess != null) {
+						return appendAccess.isAccess();
+					}
+					else {
+						return true;
+					}
 				}
 			}
 		}

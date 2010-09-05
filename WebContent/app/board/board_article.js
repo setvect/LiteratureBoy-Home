@@ -2,88 +2,85 @@
 var BoardArticle = new Object();
 
 BoardArticle.searchForm = function(){
-	if($.FORM.isEmptyRtnMsg(searchForm.searchWord, "검색단어를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.searchForm.searchWord, "검색단어를 입력해 주세요")){
 		return;
 	}
-	searchForm.submit();
+	document.searchForm.submit();
 };
 
 BoardArticle.encodeForm = function(){
-	if($.FORM.isEmptyRtnMsg(encodeForm.encode, "단어를 입력하세요")){
+	if($.FORM.isEmptyRtnMsg(document.encodeForm.encode, "단어를 입력하세요")){
 		return;
 	}
-	encodeForm.submit();
+	document.encodeForm.submit();
 };
 
 BoardArticle.searchStopForm = function(){
-	listForm.searchName.value="";
-	listForm.searchTitle.value="";
-	listForm.searchContent.value="";
-	listForm.submit();
+	document.listForm.searchName.value="";
+	document.listForm.searchTitle.value="";
+	document.listForm.searchContent.value="";
+	document.listForm.submit();
 };
 
 BoardArticle.listForm = function(){
-	listForm.submit();
+	document.listForm.submit();
 };
 
 BoardArticle.readForm = function(seq){
-	readForm.articleSeq.value = seq;
-	readForm.submit();
+	document.readForm.articleSeq.value = seq;
+	document.readForm.submit();
 };
 
 BoardArticle.createFrom = function(){
-	createForm.submit();
+	document.createForm.submit();
 };
 
 BoardArticle.createOrUpdate = function(){
-	if($.FORM.isEmptyRtnMsg(createAction.title, "제목을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.title, "제목을 입력해 주세요")){
 		return;
 	}
-	if($.FORM.isEmptyRtnMsg(createAction.name, "이름을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.createAction.name, "이름을 입력해 주세요")){
 		return;
 	}	
-	if(createAction.email.value !=""){
-		if(!$.FORM.isValidEmail(createAction.email)){
+	if(document.createAction.email.value !=""){
+		if(!$.FORM.isValidEmail(document.createAction.email)){
 			return;
 		}
 	}
-	var oEditor = FCKeditorAPI.GetInstance('content') ; 
-	var editorContent = oEditor.GetXHTML( true );
-	if(editorContent == ""){
-		alert("내용을  입력해 주세요");
+	if($.FORM.isEmptyRtnMsg(document.createAction.content, "내용을 입력해 주세요")){
 		return;
-	}
-	createAction.submit();
+	}		
+	document.createAction.submit();
 };
 
 BoardArticle.updateForm = function(seq){
-	updateForm.articleSeq.value = seq;
-	updateForm.submit();
+	document.updateForm.articleSeq.value = seq;
+	document.updateForm.submit();
 };
 
 BoardArticle.removeAction = function(seq){
 	if(confirm("삭제 하시겠습니까?")){
-		removeAction.articleSeq.value = seq;
-		removeAction.submit();
+		document.removeAction.articleSeq.value = seq;
+		document.removeAction.submit();
 	}
 };
 
 BoardArticle.commentCreateAction = function(seq){
-	if($.FORM.isEmptyRtnMsg(commentCreateAction.name, "이름을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.commentCreateAction.name, "이름을 입력해 주세요")){
 		return;
 	}
-	if($.FORM.isEmptyRtnMsg(commentCreateAction.passwd, "비밀번호를 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.commentCreateAction.passwd, "비밀번호를 입력해 주세요")){
 		return;
 	}	
-	if($.FORM.isEmptyRtnMsg(commentCreateAction.content, "내용을 입력해 주세요")){
+	if($.FORM.isEmptyRtnMsg(document.commentCreateAction.content, "내용을 입력해 주세요")){
 		return;
 	}	
-	commentCreateAction.submit();
+	document.commentCreateAction.submit();
 };
 
 BoardArticle.commentRemoveAction = function(commentSeq){
 	if(confirm("삭제 하시겠습니까?")){
-		commentRemoveAction.commentSeq.value = commentSeq;
-		commentRemoveAction.submit();
+		document.commentRemoveAction.commentSeq.value = commentSeq;
+		document.commentRemoveAction.submit();
 	}
 };

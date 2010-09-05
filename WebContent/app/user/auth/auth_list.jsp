@@ -31,15 +31,15 @@
 	</div>
 </div>
 <div>
-	<display:table name="LIST.list" class="table" id="article" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="list_table" id="article" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
-		<display:column title="Name">
+		<display:column title="Name" class="left">
 			<a href="javascript:Auth.readForm('${article.authSeq}')">${article.name}</a>
 		</display:column>
-		<display:column property="url" title="Url"/>
-		<display:column property="parameter" title="Parameter"/>		
+		<display:column property="url" title="Url"  class="left"/>
+		<display:column property="parameter" title="Parameter" class="left"/>		
 		<display:column title="Update">
 			<input type="button" value="수정" onclick="Auth.updateForm('${article.authSeq}')">
 		</display:column>

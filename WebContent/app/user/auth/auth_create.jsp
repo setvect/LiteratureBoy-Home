@@ -26,7 +26,7 @@
 		<table>
 			<tr>
 				<th>이름</th>
-				<td><form:input path="name" size="15" maxlength="8"/></td>
+				<td><form:input path="name" size="15" maxlength="15"/></td>
 			</tr>
 			<tr>
 				<th>URL</th>
