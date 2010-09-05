@@ -4,7 +4,6 @@
 <%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@include file="/common/taglib.inc.jsp"%>
-
 <%
 	String incPage = (String) request
 			.getAttribute(ConstraintWeb.INCLUDE_PAGE);
@@ -21,15 +20,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
 <title>Literature Boy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/common/css/main.css"/>
 <jsp:include page="/common/script.inc.jsp"/>
 </head>
 <body>
 <div class="warp">
 	<div class="header">
-		menu1
 		<c:if test="${_user_session_key != null}">
-			${ _user_session_key.userId}
+			로그인 아이디:	${ _user_session_key.userId}
+			<a href="/user/logout.do">로그아웃</a>
 		</c:if>
 	</div>
 	<div class="container" >

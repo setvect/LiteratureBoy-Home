@@ -21,9 +21,9 @@
 	    <display:column title="No." >
 	      ${article_rowNum }
 	    </display:column>
-			<display:column property="name" title="Name" class="left"/>
-			<display:column property="url" title="Url" class="left"/>
-			<display:column property="parameter" title="Parameter" class="left"/>		
+			<display:column property="name" title="Name" class="align_left"/>
+			<display:column property="url" title="Url" class="align_left"/>
+			<display:column property="parameter" title="Parameter" class="align_left"/>		
 			<display:column title="Select">
 				<input type="checkbox" name="authSeq" value="${article.authSeq}" ${article.authHave ? "checked='checked'" : ""}>
 			</display:column>

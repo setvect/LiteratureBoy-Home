@@ -19,10 +19,12 @@ import com.setvect.literatureboy.vo.user.User;
 public class AccessChecker {
 
 	static final String LOGIN_URL = "/user/login.do";
+
+	static final String LOGOUT = "/user/logout.do";
 	/**
 	 * 로그인 체크 제외 주소
 	 */
-	private static final String[] EXCUSE_URL = { LOGIN_URL };
+	private static final String[] EXCUSE_URL = { LOGIN_URL, LOGOUT };
 
 	/**
 	 * 로그인된 사용자가 URL과 그에 따른 파라미터에 접근 가능하지 여부 확인
@@ -79,8 +81,8 @@ public class AccessChecker {
 	 * @return 접근 가능하면 true, 아니면 false
 	 * @throws Exception
 	 */
-	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param,
-			AccessRule appendAccess) throws Exception {
+	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param, AccessRule appendAccess)
+			throws Exception {
 		List<Auth> matchAuthList = getMathAuth(currentUrl, param);
 		// 접근 권한 정보가 없으면 통과
 		if (StringUtilAd.isInclude(currentUrl, EXCUSE_URL) || matchAuthList.size() == 0) {

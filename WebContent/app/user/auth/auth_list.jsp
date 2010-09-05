@@ -35,11 +35,11 @@
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>
-		<display:column title="Name" class="left">
+		<display:column title="Name" class="align_left">
 			<a href="javascript:Auth.readForm('${article.authSeq}')">${article.name}</a>
 		</display:column>
-		<display:column property="url" title="Url"  class="left"/>
-		<display:column property="parameter" title="Parameter" class="left"/>		
+		<display:column property="url" title="Url"  class="align_left"/>
+		<display:column property="parameter" title="Parameter" class="align_left"/>		
 		<display:column title="Update">
 			<input type="button" value="수정" onclick="Auth.updateForm('${article.authSeq}')">
 		</display:column>
