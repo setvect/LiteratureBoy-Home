@@ -47,9 +47,16 @@ BoardArticle.createOrUpdate = function(){
 			return;
 		}
 	}
-	if($.FORM.isEmptyRtnMsg(document.createAction.content, "내용을 입력해 주세요")){
+	
+	var content = oEditors.getById["content"].getIR();
+	if($.STR.trim(content) == ""){
+		alert("내용을 입력해 주세요");
 		return;
-	}		
+	}
+	
+	// 에디터의 내용을 에디터 생성시에 사용했던 textarea에 넣어 줍니다.
+	oEditors.getById["content"].exec("UPDATE_IR_FIELD", []);
+			
 	document.createAction.submit();
 };
 

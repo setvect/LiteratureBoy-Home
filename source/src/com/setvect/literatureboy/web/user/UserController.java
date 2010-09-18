@@ -63,7 +63,6 @@ public class UserController {
 	@RequestMapping("/user/user.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		response.setCharacterEncoding(request.getCharacterEncoding());
 		String mode = request.getParameter("mode");
 
 		Mode m;

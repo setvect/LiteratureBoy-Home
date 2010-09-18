@@ -13,7 +13,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.web.CommonUtil;
 

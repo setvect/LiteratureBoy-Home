@@ -12,6 +12,13 @@
 		return ext;
 	};
 	
+	// 이미지 확장자를 가지면 true, 아니면  false
+	$.STR.isImage = function(filename){
+		var ext = $.STR.getExt(filename);
+		ext = ext.toLowerCase();
+		return (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png");
+	};
+	
 	// 파일 이름(확장자 제외)
 	// val: 풀 경로 문자열
 	// 디렉토리 구별자 (기본값 '\')
