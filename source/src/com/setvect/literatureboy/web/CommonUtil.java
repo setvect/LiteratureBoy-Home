@@ -95,7 +95,7 @@ public class CommonUtil {
 		User user = null;
 		CookieProcess cookie = new CookieProcess(request);
 		String encode = cookie.get(ConstraintWeb.USER_COOKIE_KEY);
-		if (encode != null) {
+		if (!StringUtilAd.isEmpty(encode)) {
 			encode = encode.replaceAll("  ", "\n");
 			user = (User) SerializerUtil.restoreBase64Decode(encode);
 		}
