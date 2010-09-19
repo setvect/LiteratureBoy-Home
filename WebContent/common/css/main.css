@@ -17,7 +17,8 @@ select {border:1x solid #ADAEAD; color:#777777; background-color:#ffffff; font-s
 .header{width:100%; background:#e5e5e5; }
 .container{clear: both;}
 .container .left{ background:#ccc; width:130px; float:left; }
-.container .content{background:#ddd; margin-left:130px;  }
+/* IE8 핵 */ 
+.container .content{background:#ddd; margin-left:140px; *width: 100%;  }
 
 /* ====== 목록 테이블 ====== */
 .list_table {

@@ -11,7 +11,7 @@ import com.setvect.literatureboy.config.EnvirmentProperty;
  */
 public class ConstraintWeb {
 	/** 기본 틀을 가진 뷰 이름 */
-	public final static String INDEX_VIEW = "index";
+	public final static String INDEX_VIEW = "main";
 
 	/** jsp에 전달할 인쿨루드 페이지 정보를 답는 attribute key */
 	public final static String INCLUDE_PAGE = "include_page";
