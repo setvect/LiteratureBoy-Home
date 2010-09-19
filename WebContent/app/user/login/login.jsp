@@ -1,8 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
-<%@page import="java.util.Collection"%>
-<%@page import="com.setvect.literatureboy.service.user.AuthSearch"%>
-<%@page import="com.setvect.literatureboy.vo.user.Auth"%>
-<%@page import="com.setvect.common.util.GenericPage"%>
 <%@page import="com.setvect.literatureboy.web.user.LoginController"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@include file="/common/taglib.inc.jsp"%>

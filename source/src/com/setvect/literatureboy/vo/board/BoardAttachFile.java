@@ -15,6 +15,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.service.board.BoardService;
+import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
  * 첨부파일
@@ -44,8 +46,8 @@ public class BoardAttachFile {
 	private int size;
 
 	@Transient
-	/** 첨부파일 저장 디렉토리 */
-	private File basePath;
+	/** 연관된 게시물 */
+	private BoardArticle article;
 
 	/**
 	 * @return the fileSeq
@@ -110,6 +112,7 @@ public class BoardAttachFile {
 	 * @return 웹루트를 기준으로 첨부파일 경로.(파일명 포함)
 	 */
 	public String getSavePath() {
+		File basePath = new File(BoardService.SAVE_PATH, article.getBoardCode());
 		File f = new File(basePath, saveName);
 		return f.getPath();
 	}
@@ -119,6 +122,13 @@ public class BoardAttachFile {
 	 */
 	public String getSavePathEncode() {
 		return StringUtilAd.encodeString(getSavePath());
+	}
+
+	/**
+	 * @return 파일 URL 경로 
+	 */
+	public String getUrl() {
+		return "/" + ConstraintWeb.UPLOAD_URL_BASE + "/" + article.getBoardCode() + "/" + saveName;
 	}
 
 	/**
@@ -145,11 +155,11 @@ public class BoardAttachFile {
 	}
 
 	/**
-	 * @param file
-	 *            웹 루트를 기준으로 파일 저장 디렉토리
+	 * @param article
+	 *            the article to set
 	 */
-	public void setBasePath(File file) {
-		this.basePath = file;
-
+	public void setArticle(BoardArticle article) {
+		this.article = article;
 	}
+
 }

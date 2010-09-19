@@ -1,11 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
-<%@page import="java.util.Collection"%>
-<%@page import="com.setvect.literatureboy.vo.board.Board"%>
-<%@page import="com.setvect.common.util.GenericPage"%>
-<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
-<%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
-<%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 
 <%@include file="/common/taglib.inc.jsp"%>
@@ -33,7 +26,7 @@
 			<th>첨부파일</th>
 			<td>
 				<ul>
-					<c:forEach var="file" items="${ATTACH}">
+					<c:forEach var="file" items="${ARTICLE.attach}">
 						<li>Attach: <a href="/download.do?s=${file.savePathEncode}&amp;d=${file.originalNameEncode}">${file.originalName}</a></li>
 					</c:forEach>
 				</ul>			

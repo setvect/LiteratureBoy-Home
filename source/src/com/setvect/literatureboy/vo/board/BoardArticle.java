@@ -1,6 +1,7 @@
 package com.setvect.literatureboy.vo.board;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -100,6 +101,10 @@ public class BoardArticle {
 
 	@Transient
 	private MultipartFile[] attachFile;
+
+	/** Ã·ºÎÆÄÀÏ */
+	@Transient
+	private List<BoardAttachFile> attach;
 
 	/**
 	 * @return the articleSeq
@@ -369,6 +374,20 @@ public class BoardArticle {
 	 */
 	public void setAttachFile(MultipartFile[] attachFile) {
 		this.attachFile = attachFile;
+	}
+
+	/**
+	 * @return the attach
+	 */
+	public List<BoardAttachFile> getAttach() {
+		return attach;
+	}
+
+	/**
+	 * @param attach the attach to set
+	 */
+	public void setAttach(List<BoardAttachFile> attach) {
+		this.attach = attach;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.setvect.common.util.GenericPage;
+import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.db.BoardDao;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -18,6 +19,9 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  */
 @Service
 public class BoardService {
+	/** 웹 루트를 기준으로 저장 경로 */
+	public static final String SAVE_PATH = EnvirmentProperty
+			.getString("com.setvect.literatureboy.board.file_upload_dir");
 
 	@Resource
 	private BoardDao boardDao;
@@ -113,12 +117,13 @@ public class BoardService {
 
 	/**
 	 * 조회수 증가
+	 * 
 	 * @param articleSeq
 	 */
 	public void updateArticleIncrementHit(int articleSeq) {
 		boardDao.updateArticleIncrementHit(articleSeq);
 	}
-	
+
 	/**
 	 * @param articleSeq
 	 */

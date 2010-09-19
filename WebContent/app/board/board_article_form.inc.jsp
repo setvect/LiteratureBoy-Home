@@ -1,12 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
-<%@page import="java.util.Collection"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 <%@page import="com.setvect.literatureboy.service.board.BoardArticleSearch"%>
-<%@page import="com.setvect.literatureboy.vo.board.Board"%>
-<%@page import="com.setvect.common.util.GenericPage"%>
-<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
-<%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <%
 	BoardArticleSearch searchVO = (BoardArticleSearch)request.getAttribute(BoardArticleController.AttributeKey.PAGE_SEARCH.name());

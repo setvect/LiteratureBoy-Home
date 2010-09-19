@@ -1,13 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
-<%@page import="java.util.Collection"%>
-<%@page import="com.setvect.literatureboy.vo.board.Board"%>
-<%@page import="com.setvect.common.util.GenericPage"%>
-<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
-<%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
-<%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
-<%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
-
 <%@include file="/common/taglib.inc.jsp"%>
 
 <script type="text/javascript" src="/app/board/board_article.js"></script>

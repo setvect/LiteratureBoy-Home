@@ -1,14 +1,6 @@
+<%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="com.setvect.literatureboy.vo.board.BoardArticle"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
-<%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
-<%@page import="java.util.Collection"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardManagerSearch"%>
-<%@page import="com.setvect.literatureboy.vo.board.Board"%>
-<%@page import="com.setvect.common.util.GenericPage"%>
-<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
-<%@page import="com.setvect.literatureboy.web.board.BoardManagerController"%>
-<%@page import="com.setvect.common.util.StringUtilAd"%>
-<%@page import="com.setvect.literatureboy.service.board.BoardService"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <%
 	BoardArticle board = (BoardArticle) request.getAttribute(BoardArticleController.AttributeKey.ARTICLE.name());
@@ -75,7 +67,7 @@
 					<td>
 						<span>이전 첨부파일 삭제</span>
 						<ul>
-							<c:forEach var="file" items="${ATTACH}">
+							<c:forEach var="file" items="${ARTICLE.attach}">
 								<li><input type="checkbox" name="deleteAttach" value="${file.fileSeq}"/> ${file.originalName} </li>
 							</c:forEach>
 						</ul>

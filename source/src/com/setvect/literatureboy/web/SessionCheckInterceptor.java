@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.ApplicationException;
+import com.setvect.literatureboy.service.user.UserService;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
@@ -19,6 +21,8 @@ import com.setvect.literatureboy.vo.user.User;
  * 모든 액션에 대해서 로그인 여부를 검사하여 로그인이 되지 않으면 로그인 페이지로 이동
  */
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
+	@Resource
+	private UserService userService;
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String currentUrl = request.getRequestURI();
@@ -27,6 +31,12 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		// JSP에서 form action에 주소로 사용
 		request.setAttribute(ConstraintWeb.Attribute.SERVLET_URL.name(), currentUrl);
 		User user = CommonUtil.getLoginSession(request);
+
+		// 개발중에는 자동 로그인
+		if(user == null){
+			user = userService.getUser("setvect");
+		}
+		
 		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
 		Map<String, String> param = makeParamMap(request);
 

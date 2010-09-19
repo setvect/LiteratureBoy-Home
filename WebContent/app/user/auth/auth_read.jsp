@@ -1,10 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
-<%@page import="java.util.Collection"%>
-<%@page import="com.setvect.literatureboy.vo.user.Auth"%>
-<%@page import="com.setvect.common.util.GenericPage"%>
-<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
-<%@page import="com.setvect.literatureboy.web.user.AuthController"%>
-<%@page import="com.setvect.common.util.StringUtilAd"%>
 <%@include file="/common/taglib.inc.jsp"%>
 
 <script type="text/javascript" src="/app/user/auth/auth.js"></script>

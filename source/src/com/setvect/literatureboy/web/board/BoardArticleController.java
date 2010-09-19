@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,6 @@ import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringEncrypt;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.ApplicationException;
-import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.board.BoardArticleSearch;
 import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.vo.board.Board;
@@ -45,9 +45,16 @@ import com.setvect.literatureboy.web.ConstraintWeb;
  */
 @Controller
 public class BoardArticleController {
-	/** 웹 루트를 기준으로 저장 경로 */
-	private static final String SAVE_PATH = EnvirmentProperty
-			.getString("com.setvect.literatureboy.board.file_upload_dir");
+
+	private static final Map<JspPageKey, String> DEFAUlT_JSP;
+	static {
+		HashMap<JspPageKey, String> jsp = new HashMap<JspPageKey, String>();
+		jsp.put(JspPageKey.LIST, "/app/board/board_article_list.jsp");
+		jsp.put(JspPageKey.READ, "/app/board/board_article_read.jsp");
+		jsp.put(JspPageKey.WRITE, "/app/board/board_article_create.jsp");
+		jsp.put(JspPageKey.ENCODE, "/app/board/board_article_encode.jsp");
+		DEFAUlT_JSP = jsp;
+	}
 
 	/**
 	 * 서브 명령어 정의
@@ -69,7 +76,7 @@ public class BoardArticleController {
 		/** 게시물 정보 */
 		BOARD,
 		//
-		ARTICLE, ATTACH, COMMENT,
+		ARTICLE, COMMENT,
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH,
 		// 권한 정보를 제공
@@ -79,10 +86,20 @@ public class BoardArticleController {
 	@Resource
 	private BoardService boardService;
 
+	/** jsp 페이지 */
+	private final Map<JspPageKey, String> jspPage = DEFAUlT_JSP;
+
+	/**
+	 * View에 보여질 jsp 페이지는 정보 해쉬 키
+	 */
+	public static enum JspPageKey {
+		LIST, READ, WRITE, ENCODE
+	}
+
 	@RequestMapping("/board/article.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		String mode = request.getParameter("mode");
 
 		Mode m;
@@ -128,25 +145,22 @@ public class BoardArticleController {
 			encodePage = isEncodePage(request, article);
 
 			if (encodePage) {
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/board_article_encode.jsp");
+				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.ENCODE));
 				mav.addObject(AttributeKey.MODE.name(), m);
 			}
 			else {
-				List<BoardAttachFile> attach = boardService.listAttachFile(articleSeq);
-				for (BoardAttachFile f : attach) {
-					f.setBasePath(new File(SAVE_PATH, article.getBoardCode()));
-				}
-				mav.addObject(AttributeKey.ATTACH.name(), attach);
+				List<BoardAttachFile> attach = getAttachFile(article);
+				article.setAttach(attach);
 
 				List<BoardComment> comments = boardService.listComment(articleSeq);
 				mav.addObject(AttributeKey.COMMENT.name(), comments);
 
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/board_article_read.jsp");
+				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.READ));
 			}
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/board_article_create.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
 		}
 		else if (m == Mode.CREATE_ACTION) {
 			BoardArticle article = new BoardArticle();
@@ -167,17 +181,18 @@ public class BoardArticleController {
 			int articleSeq = Integer.parseInt(request.getParameter("articleSeq"));
 			BoardArticle article = boardService.getArticle(articleSeq);
 			boolean encodePage = isEncodePage(request, article);
-			
+
 			mav.addObject(AttributeKey.ARTICLE.name(), article);
 			if (encodePage) {
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/board_article_encode.jsp");
+				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.ENCODE));
 				mav.addObject(AttributeKey.MODE.name(), m);
 			}
 			else {
 				mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), article);
 				mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
-				mav.addObject(AttributeKey.ATTACH.name(), boardService.listAttachFile(articleSeq));
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/board_article_create.jsp");
+				List<BoardAttachFile> attach = getAttachFile(article);
+				article.setAttach(attach);				
+				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
 			}
 		}
 		else if (m == Mode.UPDATE_ACTION) {
@@ -223,8 +238,14 @@ public class BoardArticleController {
 
 		if (m == Mode.LIST_FORM) {
 			GenericPage<BoardArticle> boardPagingList = boardService.getArticlePagingList(pageCondition);
+			
+			Collection<BoardArticle> list = boardPagingList.getList();
+			for(BoardArticle article : list){
+				article.setAttach(getAttachFile(article));
+			}
+			
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/board_article_list.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.LIST));
 
 			checkWrite(request, pageCondition);
 		}
@@ -233,13 +254,25 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * 쓰기 권한이 있는지 체크함 
+	 * @param article
+	 * @return
+	 */
+	private List<BoardAttachFile> getAttachFile(BoardArticle article) {
+		List<BoardAttachFile> attach = boardService.listAttachFile(article.getArticleSeq());
+		for (BoardAttachFile f : attach) {
+			f.setArticle(article);
+		}
+		return attach;
+	}
+
+	/**
+	 * 쓰기 권한이 있는지 체크함
+	 * 
 	 * @param request
 	 * @param pageCondition
 	 * @throws Exception
 	 */
-	private void checkWrite(HttpServletRequest request, BoardArticleSearch pageCondition)
-			throws Exception {
+	private void checkWrite(HttpServletRequest request, BoardArticleSearch pageCondition) throws Exception {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("searchCode", pageCondition.getSearchCode());
 		param.put("mode", Mode.CREATE_FORM.name());
@@ -292,7 +325,7 @@ public class BoardArticleController {
 	 */
 	private void saveAttachFile(HttpServletRequest request, BoardArticle article) throws IOException,
 			FileNotFoundException {
-		String destDir = request.getSession().getServletContext().getRealPath(SAVE_PATH);
+		String destDir = request.getSession().getServletContext().getRealPath(BoardService.SAVE_PATH);
 
 		File saveDir = new File(destDir, article.getBoardCode());
 		if (!saveDir.exists()) {
@@ -361,5 +394,12 @@ public class BoardArticleController {
 		BoardArticleSearch searchVO = new BoardArticleSearch(currentPage);
 		Binder.bind(request, searchVO);
 		return searchVO;
+	}
+
+	/**
+	 * @return the jspPage
+	 */
+	public Map<JspPageKey, String> getJspPage() {
+		return jspPage;
 	}
 }

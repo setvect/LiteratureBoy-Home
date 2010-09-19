@@ -13,11 +13,16 @@ public class ConstraintWeb {
 	/** 기본 틀을 가진 뷰 이름 */
 	public final static String INDEX_VIEW = "main";
 
+	/** 업로드 기준 URL*/
+	public final static String UPLOAD_URL_BASE = EnvirmentProperty.getString("com.setvect.literatureboy.file_upload_dir");
+
 	public enum Attribute {
 		// jsp에 전달할 인쿨루드 페이지 정보
 		INCLUDE_PAGE,
 		// 서비스 주소 저장
-		SERVLET_URL
+		SERVLET_URL,
+		// 게시판 전체 정보
+		BOARD_ITEMS,
 	}
 
 	/** 업로드 파일 확장자 */

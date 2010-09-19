@@ -20,6 +20,7 @@ select {border:1x solid #ADAEAD; color:#777777; background-color:#ffffff; font-s
 /* IE8 핵 */ 
 .container .content{background:#ddd; margin-left:140px; *width: 100%;  }
 
+
 /* ====== 목록 테이블 ====== */
 .list_table {
 	border-collapse: collapse;
@@ -54,8 +55,16 @@ select {border:1x solid #ADAEAD; color:#777777; background-color:#ffffff; font-s
 	text-align: left;    
 } 
 
+.list_table .align_right{                                 
+	text-align: right;    
+}
+
 .list_pagelinks{
 	padding-top: 10px;
 	text-align:center;
 	width:100%;
 }
+
+
+/* ====== 문단 또는 글자 관련 ====== */
+.italic{font-style: italic;}
