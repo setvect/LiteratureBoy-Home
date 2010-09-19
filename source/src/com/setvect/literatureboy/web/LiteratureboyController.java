@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,8 +26,9 @@ import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
  * 환경설정>운영자 관리 메뉴 컨트롤러
  */
 @Controller
+@Scope(value = "prototype")
 public class LiteratureboyController {
-	@Resource
+	@Autowired
 	private BoardArticleController boardArticleController;
 
 	@Resource
