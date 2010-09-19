@@ -16,7 +16,7 @@
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <div>
 	<div>
-		<form:form name="searchForm" method="get" action="${controller_url}">
+		<form:form name="searchForm" method="get" action="${SERVLET_URL}">
 			<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.SEARCH_FORM%>"/>
 			<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
 			Search: 
@@ -37,7 +37,7 @@
 	</div>
 </div>
 <div>
-	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column property="articleSeq" title="No." />
  		<display:column title="Title" class="align_left">
  			<span style="padding-left: ${(articleList.depthLevel -1) * 10}">

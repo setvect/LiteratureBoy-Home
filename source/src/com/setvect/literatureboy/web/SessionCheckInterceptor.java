@@ -25,16 +25,16 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
 		// 호출한 서블릿 주소(~~.do 시작하는)를 저장
 		// JSP에서 form action에 주소로 사용
-		request.setAttribute(ConstraintWeb.SERVLET_URL, currentUrl);
+		request.setAttribute(ConstraintWeb.Attribute.SERVLET_URL.name(), currentUrl);
 		User user = CommonUtil.getLoginSession(request);
 		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
 		Map<String, String> param = makeParamMap(request);
 
 		boolean hasAuth = AccessChecker.isAccessToUrl(user, currentUrl, param);
-		if(hasAuth){
+		if (hasAuth) {
 			return true;
 		}
-		
+
 		if (hasAuth == false && user == null) {
 			String returnUrl = currentUrl + "?" + StringUtilAd.null2str(request.getQueryString(), "");
 			response.sendRedirect(AccessChecker.LOGIN_URL + "?" + ConstraintWeb.RETURN_URL + "="

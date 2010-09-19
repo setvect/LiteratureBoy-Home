@@ -17,7 +17,7 @@
 
 <script type="text/javascript" src="/app/user/auth/auth.js"></script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<input type="hidden" name="searchUrl" value="${PAGE_SEARCH.searchUrl}"/>
 		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>

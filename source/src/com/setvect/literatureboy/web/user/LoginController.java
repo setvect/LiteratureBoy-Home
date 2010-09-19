@@ -98,7 +98,7 @@ public class LoginController {
 
 		if (m == Mode.LOGIN_FORM) {
 			mav.addObject(ConstraintWeb.RETURN_URL, rtnUrl);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/login/login.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/login/login.jsp");
 		}
 		return mav;
 	}

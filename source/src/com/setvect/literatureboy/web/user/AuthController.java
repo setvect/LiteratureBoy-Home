@@ -84,11 +84,11 @@ public class AuthController {
 			String authSeq = request.getParameter("authSeq");
 			Auth auth = authService.getAuth(Integer.parseInt(authSeq));
 			mav.addObject(AuthController.AttributeKey.ITEM.name(), auth);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_read.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/auth/auth_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_create.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/auth/auth_create.jsp");
 		}
 		else if (m == Mode.CREATE_ACTION) {
 			Auth auth = new Auth();
@@ -102,7 +102,7 @@ public class AuthController {
 			Auth auth = authService.getAuth(Integer.parseInt(authSeq));
 			mav.addObject(AuthController.AttributeKey.ITEM.name(), auth);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_create.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/auth/auth_create.jsp");
 		}
 		else if (m == Mode.UPDATE_ACTION) {
 			Auth auth = new Auth();
@@ -120,7 +120,7 @@ public class AuthController {
 		if (m == Mode.LIST_FORM) {
 			GenericPage<Auth> boardPagingList = authService.getAuthPagingList(pageCondition);
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
-			mav.addObject(ConstraintWeb.INCLUDE_PAGE, "/app/user/auth/auth_list.jsp");
+			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/auth/auth_list.jsp");
 
 			request.setAttribute(AttributeKey.LIST.name(), boardPagingList);
 		}

@@ -18,7 +18,7 @@
 
 <script type="text/javascript" src="/app/board/manager/board_manager.js"></script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${controller_url}">
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>
 		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>

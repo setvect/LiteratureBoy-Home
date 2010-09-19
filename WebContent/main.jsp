@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@include file="/common/taglib.inc.jsp"%>
-<!--${include_page}-->
+<!--${INCLUDE_PAGE}-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -23,7 +23,7 @@
 			<jsp:include page="/include/menu.inc.jsp" />
 		</div>
 		<div class="content">
-			<jsp:include page="${include_page}"></jsp:include>
+			<jsp:include page="${INCLUDE_PAGE}"></jsp:include>
 		</div>
 	</div>
 </div> 

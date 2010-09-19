@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/app/user/manager/user.js"></script>
 <div>
 	<div>
-		<form:form name="searchForm" method="get" action="${controller_url}">
+		<form:form name="searchForm" method="get" action="${SERVLET_URL}">
 			<input type="hidden" name="mode" value="<%=UserController.Mode.SEARCH_FORM%>"/>
 			Search: 
 			<select name="searchType">
@@ -31,7 +31,7 @@
 	</div>
 </div>
 <div>
-	<display:table name="LIST.list" class="list_table" id="article" requestURI="${controller_url}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="list_table" id="article" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>

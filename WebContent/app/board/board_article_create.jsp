@@ -33,7 +33,7 @@
   };
 </script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${controller_url}">
+	<form:form commandName="createForm" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
 		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>

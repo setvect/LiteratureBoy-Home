@@ -29,7 +29,7 @@
 <body>
 <div>
 	<form:form name="uploadAction" id="uploadAction" method="post" 
-			enctype="multipart/form-data" action="${controller_url}">
+			enctype="multipart/form-data" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<table>
 			<tr>

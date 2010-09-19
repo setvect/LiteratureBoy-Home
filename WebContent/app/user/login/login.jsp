@@ -19,7 +19,7 @@
 	}
 </script>
 <div>
-	<form:form name="logineAction" method="post" action="${controller_url}">
+	<form:form name="logineAction" method="post" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="<%=LoginController.Mode.LOGIN_ACTION%>"/>
 		<input type="hidden" name="<%=ConstraintWeb.RETURN_URL %>" value="<c:out value="${returnUrl}"/>"/>
 		<c:if test="${LOGIN_FAIL}">

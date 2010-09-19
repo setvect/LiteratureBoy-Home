@@ -42,7 +42,7 @@
 	</table>
 </div>
 <div>
-	<form:form commandName="PAGE_SEARCH" name="commentCreateAction" method="get" action="${controller_url}">
+	<form:form commandName="PAGE_SEARCH" name="commentCreateAction" method="get" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.COMMENT_CREATE_ACTION%>"/> 
 		<form:hidden path="searchCode"/>
 		<form:hidden path="searchName"/>
@@ -91,7 +91,7 @@
 	<input type="button" value="목록" onclick="BoardArticle.listForm()">
 </div>
 
-<form:form commandName="PAGE_SEARCH" name="commentRemoveAction" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="commentRemoveAction" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.COMMENT_REMOVE_ACTION%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>

@@ -11,7 +11,7 @@
 <%
 	BoardArticleSearch searchVO = (BoardArticleSearch)request.getAttribute(BoardArticleController.AttributeKey.PAGE_SEARCH.name());
 %>
-<form:form commandName="PAGE_SEARCH" name="listForm" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="listForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.LIST_FORM%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
@@ -20,7 +20,7 @@
 	<form:hidden path="currentPage"/>	
 </form:form>
 
-<form:form commandName="PAGE_SEARCH" name="readForm" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="readForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.READ_FORM%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
@@ -30,7 +30,7 @@
 	<input type="hidden" name="articleSeq"/>		
 </form:form>
 
-<form:form commandName="PAGE_SEARCH" name="createForm" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="createForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.CREATE_FORM%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
@@ -39,7 +39,7 @@
 	<form:hidden path="currentPage"/>		
 </form:form>
 
-<form:form commandName="PAGE_SEARCH" name="updateForm" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="updateForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.UPDATE_FORM%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
@@ -49,7 +49,7 @@
 	<input type="hidden" name="articleSeq"/>		
 </form:form>
 	
-<form:form commandName="PAGE_SEARCH" name="removeAction" method="get" action="${controller_url}">
+<form:form commandName="PAGE_SEARCH" name="removeAction" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.REMOVE_ACTION%>"/> 
 	<form:hidden path="searchCode"/>
 	<form:hidden path="searchName"/>
