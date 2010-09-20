@@ -1,6 +1,6 @@
 package com.setvect.literatureboy.web;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +26,7 @@ import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
  * 환경설정>운영자 관리 메뉴 컨트롤러
  */
 @Controller
-@Scope(value = "prototype")
+@Scope("prototype")
 public class LiteratureboyController {
 	@Autowired
 	private BoardArticleController boardArticleController;
@@ -56,15 +56,16 @@ public class LiteratureboyController {
 
 		// 일반 게시판 UI
 		if (pageName.equals("bd")) {
-			Map<JspPageKey, String> jsp = boardArticleController.getJspPage();
+			HashMap<JspPageKey, String> jsp = boardArticleController.getJspPage();
 			boolean include = StringUtilAd.isInclude(request.getParameter("searchCode"), listContentViewBoard);
 			if (include) {
 				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list_body.jsp");
 			}
-			else{
-				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list.jsp");	
-			}			
+			else {
+				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list.jsp");
+			}
 			jsp.put(BoardArticleController.JspPageKey.READ, "/app/board/user/board_article_read.jsp");
+			boardArticleController.setJspPage(jsp);
 			return boardArticleController.process(request, response);
 		}
 		// 관리자가 보는 게시판 UI

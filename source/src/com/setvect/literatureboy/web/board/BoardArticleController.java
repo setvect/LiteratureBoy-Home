@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -44,9 +45,10 @@ import com.setvect.literatureboy.web.ConstraintWeb;
  * 환경설정>운영자 관리 메뉴 컨트롤러
  */
 @Controller
+@Scope("prototype")
 public class BoardArticleController {
 
-	private static final Map<JspPageKey, String> DEFAUlT_JSP;
+	private static final HashMap<JspPageKey, String> DEFAUlT_JSP;
 	static {
 		HashMap<JspPageKey, String> jsp = new HashMap<JspPageKey, String>();
 		jsp.put(JspPageKey.LIST, "/app/board/board_article_list.jsp");
@@ -87,7 +89,7 @@ public class BoardArticleController {
 	private BoardService boardService;
 
 	/** jsp 페이지 */
-	private final Map<JspPageKey, String> jspPage = DEFAUlT_JSP;
+	private HashMap<JspPageKey, String> jspPage = DEFAUlT_JSP;
 
 	/**
 	 * View에 보여질 jsp 페이지는 정보 해쉬 키
@@ -191,7 +193,7 @@ public class BoardArticleController {
 				mav.addObject(BoardArticleController.AttributeKey.ARTICLE.name(), article);
 				mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
 				List<BoardAttachFile> attach = getAttachFile(article);
-				article.setAttach(attach);				
+				article.setAttach(attach);
 				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
 			}
 		}
@@ -238,12 +240,12 @@ public class BoardArticleController {
 
 		if (m == Mode.LIST_FORM) {
 			GenericPage<BoardArticle> boardPagingList = boardService.getArticlePagingList(pageCondition);
-			
+
 			Collection<BoardArticle> list = boardPagingList.getList();
-			for(BoardArticle article : list){
+			for (BoardArticle article : list) {
 				article.setAttach(getAttachFile(article));
 			}
-			
+
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
 			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.LIST));
 
@@ -399,7 +401,17 @@ public class BoardArticleController {
 	/**
 	 * @return the jspPage
 	 */
-	public Map<JspPageKey, String> getJspPage() {
-		return jspPage;
+	@SuppressWarnings("unchecked")
+	public HashMap<JspPageKey, String> getJspPage() {
+		return (HashMap<JspPageKey, String>) jspPage.clone();
 	}
+
+	/**
+	 * @param jspPage
+	 *            the jspPage to set
+	 */
+	public void setJspPage(HashMap<JspPageKey, String> jspPage) {
+		this.jspPage = jspPage;
+	}
+
 }
