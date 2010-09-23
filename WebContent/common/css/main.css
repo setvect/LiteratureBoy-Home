@@ -68,3 +68,6 @@ select {border:1x solid #ADAEAD; color:#777777; background-color:#ffffff; font-s
 
 /* ====== 문단 또는 글자 관련 ====== */
 .italic{font-style: italic;}
+
+/* ====== 팝업창관련 ====== */
+.popup{padding: 10px;}

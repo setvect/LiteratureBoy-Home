@@ -9,37 +9,36 @@
 <link rel="stylesheet" type="text/css" href="/common/css/main.css"/>
 <jsp:include page="/common/script.inc.jsp"/>
 <script type="text/javascript">
-	var ImageUpload = new Object();
-	ImageUpload.upload = function(){
-		if($.FORM.isEmptyRtnMsg(document.uploadAction.imageFile, "이미지를 선택해 줘~")){
+	var EmailGet = new Object();
+	EmailGet.get = function(){
+		if($.FORM.isEmptyRtnMsg(document.getAction.inputNumber, "숫자 입력!!")){
 			return;
 		}	
 
-		var imageName = document.uploadAction.imageFile.value;
-		
-		if(!$.STR.isImage(imageName)){
-			$.FORM.selectMsg(document.uploadAction.imageFile, "이미지 파일만 업로드 하럼.");
-			return;			
-		}		
-		
-		document.uploadAction.submit();
+		document.getAction.submit();
 	};
 </script>
 </head>
 <body>
 <div class="popup">
-	<form:form name="uploadAction" id="uploadAction" method="post" 
-			enctype="multipart/form-data" action="${SERVLET_URL}">
+	<form:form name="getAction" id="uploadAction" method="post" 
+			action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<table>
 			<tr>
-				<th>이미지</th>
-				<td><input type="file" name="imageFile" style="width:100%"/></td>
+				<th>입력값</th>
+				<td>${EMAIL_NUMBER}</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					위 숫자를 입력하세요.(요즘 스펨이 많아서리.)
+					<input type="text" name="inputNumber" size="4" maxlength="4"/>
+				</td>
 			</tr>
 		</table>
 	</form:form>
 	<div>
-		<input type="button" value="확인" onclick="ImageUpload.upload()"/>
+		<input type="button" value="확인" onclick="EmailGet.get()"/>
 		<input type="button" value="취소" onclick="window.close();"/>
 	</div>
 </div>

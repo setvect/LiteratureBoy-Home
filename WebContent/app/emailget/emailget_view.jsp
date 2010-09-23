@@ -8,22 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/common/css/main.css"/>
 <jsp:include page="/common/script.inc.jsp"/>
-<script type="text/javascript">
-	var ImageUpload = new Object();
-	ImageUpload.apply = function(){
-		var sHTML = "<img src='${IMAGE_URL}'/>";
-
-
-		// 하드 코딩..원래는 이미지 팝업창 오픈 할때 이미지를 받을 객체의 파라미터를 넣어야 됨.
-		opener.window.oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
-		window.close();
-	};
-</script>
 </head>
 <body>
 <div class="popup">
-	<input type="button" value="확인" onclick="ImageUpload.apply()"/>
-	<img src='${IMAGE_URL}' onclick="ImageUpload.apply()"/>
+	<c:if test="${empty EMAIL}">
+		음~ 뭔가 잘 못 입력 하셨군요.
+	</c:if>
+	<c:if test="${!empty EMAIL}">
+		정호 이메일은 <a href="mailto:${EMAIL}">${EMAIL}</a> 이네요.	
+	</c:if>
 </div>
 </body>
 </html>
