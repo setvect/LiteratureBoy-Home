@@ -5,10 +5,10 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.setvect.common.util.StringUtilAd;
@@ -21,7 +21,7 @@ import com.setvect.literatureboy.vo.user.User;
  * 모든 액션에 대해서 로그인 여부를 검사하여 로그인이 되지 않으면 로그인 페이지로 이동
  */
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
-	@Resource
+	@Autowired
 	private UserService userService;
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

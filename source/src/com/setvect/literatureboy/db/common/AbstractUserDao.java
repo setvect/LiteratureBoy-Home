@@ -3,11 +3,10 @@ package com.setvect.literatureboy.db.common;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
@@ -26,7 +25,7 @@ import com.setvect.literatureboy.vo.user.User;
  * @version $Id: AbstractMemoDao.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
 public abstract class AbstractUserDao<T, PK extends Serializable> implements UserDao {
-	@Resource
+	@Autowired
 	SessionFactory sessionFactory;
 
 	// ---------------- »ç¿ëÀÚ

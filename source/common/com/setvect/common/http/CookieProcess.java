@@ -7,7 +7,6 @@ package com.setvect.common.http;
  * @version $Id: CookieProcess.java,v 1.5 2005/06/20 09:25:46 setvect Exp $
  */
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;

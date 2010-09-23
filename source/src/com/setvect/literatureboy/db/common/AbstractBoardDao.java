@@ -2,11 +2,10 @@ package com.setvect.literatureboy.db.common;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
@@ -24,7 +23,7 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  * @version $Id$
  */
 public abstract class AbstractBoardDao implements BoardDao {
-	@Resource
+	@Autowired
 	SessionFactory sessionFactory;
 
 	// --------------- °ü¸®

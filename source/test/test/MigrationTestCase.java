@@ -24,9 +24,9 @@ import com.setvect.literatureboy.vo.board.BoardAttachFile;
  * @version $Id: MemoTestCase.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
 public class MigrationTestCase extends TestSystem {
-	@Resource
+	@Autowired
 	private BoardService boardService;
-	@Resource
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	/**

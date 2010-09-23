@@ -12,6 +12,7 @@
 		<directory>${basedir}/build</directory>
 		<sourceDirectory>${basedir}/source/src/</sourceDirectory>
 		<outputDirectory>${basedir}/WebContent/WEB-INF/classes</outputDirectory>
+		<!-- 
 		<testSourceDirectory>${basedir}/source/test</testSourceDirectory>
 		<testOutputDirectory>${basedir}/build/test-classes</testOutputDirectory>
 		<testResources>
@@ -22,6 +23,7 @@
 	       </excludes>
 	   	</testResource>
 		</testResources>  
+  	 -->
   	<plugins>
     	<plugin>
       	<artifactId>maven-war-plugin</artifactId>
@@ -202,11 +204,7 @@
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
-    <dependency>
-    	<groupId>javax.servlet</groupId>
-    	<artifactId>jstl</artifactId>
-    	<version>1.2</version>
-    </dependency>
+
     <dependency>
     	<groupId>commons-fileupload</groupId>
     	<artifactId>commons-fileupload</artifactId>
@@ -235,5 +233,19 @@
 
 
     
+    <dependency>
+    	<groupId>jstl</groupId>
+    	<artifactId>jstl</artifactId>
+    	<version>1.1.2</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>taglibs</groupId>
+    	<artifactId>standard</artifactId>
+    	<version>1.1.2</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>

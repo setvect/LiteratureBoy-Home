@@ -3,8 +3,7 @@ package com.setvect.literatureboy.service.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.setvect.common.util.GenericPage;
@@ -20,11 +19,11 @@ import com.setvect.literatureboy.vo.user.User;
 @Service(value = "UserService")
 public class UserService {
 	/** DB 컨트롤 인스턴스 */
-	@Resource
+	@Autowired
 	private UserDao userDao;
 
 	/** 권한 변경 이벤트 */
-	@Resource
+	@Autowired
 	private List<AuthChangeListener> authChangeListener = new ArrayList<AuthChangeListener>();
 
 	// ---------------- 사용자

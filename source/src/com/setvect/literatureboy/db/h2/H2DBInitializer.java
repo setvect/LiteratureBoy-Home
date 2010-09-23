@@ -3,11 +3,10 @@ package com.setvect.literatureboy.db.h2;
 import java.net.URL;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.setvect.common.db.TableCreateInfo;
@@ -22,7 +21,7 @@ import com.setvect.literatureboy.db.DBInitializer;
 @Service(value = "db.initializer")
 public class H2DBInitializer extends DBInitializer {
 
-	@Resource
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	/** 사용자 테이블을 의미하는 타입 값 */

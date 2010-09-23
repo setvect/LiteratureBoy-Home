@@ -1,7 +1,6 @@
 package com.setvect.literatureboy.service.memo;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.setvect.common.util.GenericPage;
@@ -15,7 +14,7 @@ import com.setvect.literatureboy.vo.Memo;
 @Service
 public class MemoService {
 	/** DB 컨트롤 인스턴스 */
-	@Resource
+	@Autowired
 	private MemoDao memoDao;
 
 	/**

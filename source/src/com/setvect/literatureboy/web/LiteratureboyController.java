@@ -2,7 +2,6 @@ package com.setvect.literatureboy.web;
 
 import java.util.HashMap;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +32,7 @@ public class LiteratureboyController {
 	@Autowired
 	private BoardArticleController boardArticleController;
 
-	@Resource
+	@Autowired
 	private BoardService boardService;
 
 	/** 목록에서 콘텐츠내용이 보여지는 게시판 코드 */

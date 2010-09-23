@@ -19,7 +19,7 @@ import com.setvect.literatureboy.vo.Memo;
  * @version $Id$
  */
 public class MemoTestCase extends TestSystem {
-	@Resource
+	@Autowired
 	private MemoService service;
 
 	/**

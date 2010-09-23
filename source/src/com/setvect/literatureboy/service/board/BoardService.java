@@ -2,8 +2,7 @@ package com.setvect.literatureboy.service.board;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.setvect.common.util.GenericPage;
@@ -23,7 +22,7 @@ public class BoardService {
 	public static final String SAVE_PATH = EnvirmentProperty
 			.getString("com.setvect.literatureboy.board.file_upload_dir");
 
-	@Resource
+	@Autowired
 	private BoardDao boardDao;
 
 	// --------------- °ü¸®

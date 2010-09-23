@@ -26,7 +26,7 @@ import com.setvect.literatureboy.vo.board.BoardComment;
  */
 public class BoardTestCase extends TestSystem {
 	private static final String CODE = "BDAAAA01";
-	@Resource
+	@Autowired
 	private BoardService service;
 
 	/**

@@ -3,11 +3,10 @@ package com.setvect.literatureboy.db.common;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import anyframe.core.generic.dao.hibernate.GenericDaoHibernate;
 
@@ -23,7 +22,7 @@ import com.setvect.literatureboy.vo.Memo;
  */
 public abstract class AbstractMemoDao<T, PK extends Serializable> extends GenericDaoHibernate<Memo, Integer> implements
 		MemoDao {
-	@Resource
+	@Autowired
 	SessionFactory sessionFactory;
 
 	/*
