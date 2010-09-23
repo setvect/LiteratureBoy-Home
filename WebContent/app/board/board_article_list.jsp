@@ -5,7 +5,7 @@
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <div>
 	<div>
-		<form:form name="searchForm" method="get" action="${SERVLET_URL}">
+		<form:form id="" name="searchForm" method="get" action="${SERVLET_URL}">
 			<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.SEARCH_FORM%>"/>
 			<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
 			Search: 
@@ -14,8 +14,8 @@
 				<option value="name" ${empty PAGE_SEARCH.searchName ? "" : "selected='selected'"}>Name</option>
 				<option value="content" ${empty PAGE_SEARCH.searchContent ? "" : "selected='selected'"}>Content</option>
 			</select>
-			<input type="text" name="searchWord" value="<c:out value="${PAGE_SEARCH.word}"/>">
-			<input type="button" value="Search" onclick="BoardArticle.searchForm()">
+			<input type="text" name="searchWord" value="<c:out value="${PAGE_SEARCH.word}"/>"/>
+			<input type="button" value="Search" onclick="BoardArticle.searchForm()"/>
 			<c:if test="${! empty PAGE_SEARCH.word}">
 				<input type="button" value="Search Stop"  onclick="BoardArticle.searchStopForm()">
 			</c:if>
@@ -45,7 +45,7 @@
 </div>
 <div>
 	<c:if test="${AUTH_WRITE}">
-		<input type="button" value="등록" onclick="BoardArticle.createFrom();">
+		<input type="button" value="등록" onclick="BoardArticle.createFrom();"/>
 	</c:if>
 </div>
 <jsp:include page="board_article_form.inc.jsp"></jsp:include>

@@ -15,7 +15,7 @@
 	}
 </script>
 <div>
-	<form:form name="logineAction" method="post" action="${SERVLET_URL}">
+	<form:form id="" name="logineAction" method="post" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="<%=LoginController.Mode.LOGIN_ACTION%>"/>
 		<input type="hidden" name="<%=ConstraintWeb.RETURN_URL %>" value="<c:out value="${returnUrl}"/>"/>
 		<c:if test="${LOGIN_FAIL}">
@@ -34,5 +34,8 @@
 	</form:form>
 </div>
 <div>
-	<input type="button" value="확인" onclick="login()">
+	<input type="button" value="확인" onclick="login()"/>
 </div>
+<script type="text/javascript">
+	document.logineAction.userId.focus();
+</script>

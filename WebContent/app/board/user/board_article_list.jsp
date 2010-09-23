@@ -2,9 +2,6 @@
 <%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 <%@include file="/common/taglib.inc.jsp"%>
 <script type="text/javascript" src="/app/board/board_article.js"></script>
-<style type="text/css">
-	.list_table thead{display: none};
-</style>
 <div>
 	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}">
  		<display:column title="Title" class="align_left">
@@ -21,3 +18,6 @@
 	</display:table>
 </div>
 <jsp:include page="../board_article_form.inc.jsp"></jsp:include>
+<script type="text/javascript">
+	$(".list_table thead").css("display", "none");
+</script>

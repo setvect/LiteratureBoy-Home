@@ -16,9 +16,12 @@
 		<li><a href="#" onclick="$.POPUP.popupWindowCenter('/emailget.do', 'emailInput', 400, 250, false, false, false)">email</a></li>
 	</ul>
 	<hr/>
+		
+	<c:if test="${fn:length(BOARD_ITEMS) > 0}" >
 	<ul>
 		<c:forEach var="board" items="${BOARD_ITEMS}">
 			<li><a href="/literatureboy/bdm.do?searchCode=${board.boardCode}">${board.name}</a></li>		
 		</c:forEach>
-	</ul>	
+	</ul>
+	</c:if>
 </div>

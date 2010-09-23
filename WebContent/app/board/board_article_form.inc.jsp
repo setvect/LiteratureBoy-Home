@@ -5,51 +5,51 @@
 <%
 	BoardArticleSearch searchVO = (BoardArticleSearch)request.getAttribute(BoardArticleController.AttributeKey.PAGE_SEARCH.name());
 %>
-<form:form commandName="PAGE_SEARCH" name="listForm" method="get" action="${SERVLET_URL}">
+<form:form commandName="PAGE_SEARCH" id="" name="listForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.LIST_FORM%>"/> 
-	<form:hidden path="searchCode"/>
-	<form:hidden path="searchName"/>
-	<form:hidden path="searchTitle"/>
-	<form:hidden path="searchContent"/>
-	<form:hidden path="currentPage"/>	
+	<form:hidden id="" path="searchCode"/>
+	<form:hidden id="" path="searchName"/>
+	<form:hidden id="" path="searchTitle"/>
+	<form:hidden id="" path="searchContent"/>
+	<form:hidden id="" path="currentPage"/>	
 </form:form>
 
-<form:form commandName="PAGE_SEARCH" name="readForm" method="get" action="${SERVLET_URL}">
+<form:form commandName="PAGE_SEARCH" id="" name="readForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.READ_FORM%>"/> 
-	<form:hidden path="searchCode"/>
-	<form:hidden path="searchName"/>
-	<form:hidden path="searchTitle"/>
-	<form:hidden path="searchContent"/>
-	<form:hidden path="currentPage"/>
+	<form:hidden id="" path="searchCode"/>
+	<form:hidden id="" path="searchName"/>
+	<form:hidden id="" path="searchTitle"/>
+	<form:hidden id="" path="searchContent"/>
+	<form:hidden id="" path="currentPage"/>
 	<input type="hidden" name="articleSeq"/>		
 </form:form>
 
-<form:form commandName="PAGE_SEARCH" name="createForm" method="get" action="${SERVLET_URL}">
+<form:form commandName="PAGE_SEARCH" id="" name="createForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.CREATE_FORM%>"/> 
-	<form:hidden path="searchCode"/>
-	<form:hidden path="searchName"/>
-	<form:hidden path="searchTitle"/>
-	<form:hidden path="searchContent"/>
-	<form:hidden path="currentPage"/>		
+	<form:hidden id="" path="searchCode"/>
+	<form:hidden id="" path="searchName"/>
+	<form:hidden id="" path="searchTitle"/>
+	<form:hidden id="" path="searchContent"/>
+	<form:hidden id="" path="currentPage"/>		
 </form:form>
 
-<form:form commandName="PAGE_SEARCH" name="updateForm" method="get" action="${SERVLET_URL}">
+<form:form commandName="PAGE_SEARCH" id="" name="updateForm" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.UPDATE_FORM%>"/> 
-	<form:hidden path="searchCode"/>
-	<form:hidden path="searchName"/>
-	<form:hidden path="searchTitle"/>
-	<form:hidden path="searchContent"/>
-	<form:hidden path="currentPage"/>
+	<form:hidden id="" path="searchCode"/>
+	<form:hidden id="" path="searchName"/>
+	<form:hidden id="" path="searchTitle"/>
+	<form:hidden id="" path="searchContent"/>
+	<form:hidden id="" path="currentPage"/>
 	<input type="hidden" name="articleSeq"/>		
 </form:form>
 	
-<form:form commandName="PAGE_SEARCH" name="removeAction" method="get" action="${SERVLET_URL}">
+<form:form commandName="PAGE_SEARCH" id="" name="removeAction" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.REMOVE_ACTION%>"/> 
-	<form:hidden path="searchCode"/>
-	<form:hidden path="searchName"/>
-	<form:hidden path="searchTitle"/>
-	<form:hidden path="searchContent"/>
-	<form:hidden path="currentPage"/>
+	<form:hidden id="" path="searchCode"/>
+	<form:hidden id="" path="searchName"/>
+	<form:hidden id="" path="searchTitle"/>
+	<form:hidden id="" path="searchContent"/>
+	<form:hidden id="" path="currentPage"/>
 	<input type="hidden" name="articleSeq"/>				
 </form:form>
 
