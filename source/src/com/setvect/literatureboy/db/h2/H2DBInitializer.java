@@ -84,6 +84,6 @@ public class H2DBInitializer extends DBInitializer {
 			query = session.createSQLQuery(q);
 			query.executeUpdate();
 		}
-		LogPrinter.info(tableInfo.getTableName() + " table created");
+		LogPrinter.out.info(tableInfo.getTableName() + " table created");
 	}
 }

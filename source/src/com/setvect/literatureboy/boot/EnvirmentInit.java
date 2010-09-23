@@ -68,13 +68,13 @@ public class EnvirmentInit extends HttpServlet {
 
 		File logFilePath = new File(webBase, EnvirmentProperty.getString("com.setvect.literatureboy.log.config"));
 		LogPrinter.init(logFilePath);
-		LogPrinter.info("Log Manager Initialized");
+		LogPrinter.out.info("Log Manager Initialized");
 
 		springContext = new ClassPathXmlApplicationContext(new String[] { "classpath:spring/applicationContext.xml" },
 				false);
 		springContext.refresh();
 
-		LogPrinter.info("Spring Initialized");
+		LogPrinter.out.info("Spring Initialized");
 
 		// DB init
 		// H2 데이터 베이스 파일 생성 경로 지정. Spring Initialized 전에 해야됨
@@ -84,10 +84,10 @@ public class EnvirmentInit extends HttpServlet {
 
 		DBInitializer conn = (DBInitializer) springContext.getBean("db.initializer");
 		conn.init();
-		LogPrinter.info("DB Initialized");
+		LogPrinter.out.info("DB Initialized");
 
 		conn.makeTable();
-		LogPrinter.info("DB Table Initialized completed");
+		LogPrinter.out.info("DB Table Initialized completed");
 		initialize = true;
 
 		// 권한 매핑 정보를 읽어 드림
