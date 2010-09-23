@@ -86,11 +86,11 @@ public class BoardManagerController {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
 			mav.addObject(BoardManagerController.AttributeKey.ITEM.name(), b);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_read.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_create.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_create.jsp");
 		}
 		else if (m == Mode.CREATE_ACTION) {
 			Board bd = new Board();
@@ -105,7 +105,7 @@ public class BoardManagerController {
 			Board b = boardService.getBoard(code);
 			mav.addObject(BoardManagerController.AttributeKey.ITEM.name(), b);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_create.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_create.jsp");
 		}
 		else if (m == Mode.UPDATE_ACTION) {
 			Board bd = new Board();
@@ -127,7 +127,7 @@ public class BoardManagerController {
 		if (m == Mode.LIST_FORM) {
 			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(pageCondition);
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_list.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/board/manager/board_manager_list.jsp");
 
 			request.setAttribute(AttributeKey.LIST.name(), boardPagingList);
 		}

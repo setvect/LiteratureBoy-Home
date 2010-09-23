@@ -29,7 +29,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
 		// 호출한 서블릿 주소(~~.do 시작하는)를 저장
 		// JSP에서 form action에 주소로 사용
-		request.setAttribute(ConstraintWeb.Attribute.SERVLET_URL.name(), currentUrl);
+		request.setAttribute(ConstraintWeb.AttributeKey.SERVLET_URL.name(), currentUrl);
 		User user = CommonUtil.getLoginSession(request);
 
 		// 개발중에는 자동 로그인

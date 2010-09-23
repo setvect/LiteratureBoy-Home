@@ -6,19 +6,17 @@
 	.list_table thead{display: none};
 </style>
 <div>
-	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
- 		<display:column title="Title" class="align_left">
+	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}" >
+ 		<display:column title="Title" class="body_list_td align_left">
 			<p>
 				${articleList.title}
 	 			-
 	 			<fmt:formatDate value="${articleList.regDate}" pattern="yyyy-MM-dd"/>
  			</p>
 			<c:forEach var="file" items="${articleList.attach}">
-				<img src="${file.url}" alt="${file.originalName}" align="left"/>
+				<img src="${file.url}" alt="${file.originalName}" class="list_image"/>
 			</c:forEach>
- 			<p>
- 				${articleList.content}
- 			</p>	
+			${articleList.content}
  		</display:column>
 	</display:table>
 </div>

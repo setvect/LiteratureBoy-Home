@@ -51,7 +51,7 @@ public class AccessChecker {
 	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param, AccessRule appendAccess)
 			throws Exception {
 		User user = CommonUtil.getLoginSession(request);
-		String currentUrl = (String) request.getAttribute(ConstraintWeb.Attribute.SERVLET_URL.name());
+		String currentUrl = (String) request.getAttribute(ConstraintWeb.AttributeKey.SERVLET_URL.name());
 		return isAccessToUrl(user, currentUrl, param, appendAccess);
 	}
 

@@ -92,11 +92,11 @@ public class UserController {
 			String userId = request.getParameter("userId");
 			User user = userService.getUser(userId);
 			mav.addObject(AttributeKey.ITEM.name(), user);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/manager/user_read.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/user/manager/user_read.jsp");
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/manager/user_create.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/user/manager/user_create.jsp");
 		}
 		else if (m == Mode.CREATE_ACTION) {
 			User user = new User();
@@ -111,7 +111,7 @@ public class UserController {
 			User user = userService.getUser(userId);
 			mav.addObject(AttributeKey.ITEM.name(), user);
 			mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/manager/user_create.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/user/manager/user_create.jsp");
 		}
 		else if (m == Mode.UPDATE_ACTION) {
 			User user = new User();
@@ -158,7 +158,7 @@ public class UserController {
 
 			mav.addObject(AttributeKey.ITEM.name(), user);
 			mav.addObject(AttributeKey.AUTH_LIST.name(), authList);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/manager/user_authmap.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/user/manager/user_authmap.jsp");
 		}
 		else if (m == Mode.AUTHMAP_ACTION) {
 			String userId = request.getParameter("userId");
@@ -181,7 +181,7 @@ public class UserController {
 		if (m == Mode.LIST_FORM) {
 			GenericPage<User> boardPagingList = userService.getPageList(pageCondition);
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), "/app/user/manager/user_list.jsp");
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/app/user/manager/user_list.jsp");
 
 			request.setAttribute(AttributeKey.LIST.name(), boardPagingList);
 		}

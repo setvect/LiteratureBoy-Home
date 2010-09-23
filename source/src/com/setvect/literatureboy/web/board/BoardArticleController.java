@@ -147,7 +147,7 @@ public class BoardArticleController {
 			encodePage = isEncodePage(request, article);
 
 			if (encodePage) {
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.ENCODE));
+				mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.ENCODE));
 				mav.addObject(AttributeKey.MODE.name(), m);
 			}
 			else {
@@ -157,12 +157,12 @@ public class BoardArticleController {
 				List<BoardComment> comments = boardService.listComment(articleSeq);
 				mav.addObject(AttributeKey.COMMENT.name(), comments);
 
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.READ));
+				mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.READ));
 			}
 		}
 		else if (m == Mode.CREATE_FORM) {
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
 		}
 		else if (m == Mode.CREATE_ACTION) {
 			BoardArticle article = new BoardArticle();
@@ -186,7 +186,7 @@ public class BoardArticleController {
 
 			mav.addObject(AttributeKey.ARTICLE.name(), article);
 			if (encodePage) {
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.ENCODE));
+				mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.ENCODE));
 				mav.addObject(AttributeKey.MODE.name(), m);
 			}
 			else {
@@ -194,7 +194,7 @@ public class BoardArticleController {
 				mav.addObject(AttributeKey.MODE.name(), Mode.UPDATE_ACTION);
 				List<BoardAttachFile> attach = getAttachFile(article);
 				article.setAttach(attach);
-				mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
+				mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
 			}
 		}
 		else if (m == Mode.UPDATE_ACTION) {
@@ -247,7 +247,7 @@ public class BoardArticleController {
 			}
 
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
-			mav.addObject(ConstraintWeb.Attribute.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.LIST));
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.LIST));
 
 			checkWrite(request, pageCondition);
 		}
