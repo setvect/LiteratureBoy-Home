@@ -49,10 +49,9 @@
 				<td><form:input id="email" path="email" size="30" maxlength="50"/></td>
 			</tr>
 			<tr>
-				<th>Content</th>
-				<td>
-					<form:textarea id="content" path="content" cssStyle="width:900px;"/>
-					<input onclick="$.APP.openImageUpload();" type="button" value="이미지"/>
+				<td colspan="2">
+					<form:textarea id="content" path="content"/><br>
+					<input onclick="$.APP.openImageUpload();" type="button" value="이미지 첨부"/>
 				</td>
 			</tr>
 			<c:if test="${BOARD.encodeF}">
@@ -60,7 +59,7 @@
 					<th>암호코드</th>
 					<td><input type="text" name="encode"/></td>
 				</tr>
-			</c:if>
+			</c:if> 
 			<c:if test="${BOARD.attachF}">
 				<tr>
 					<th>Attach</th>

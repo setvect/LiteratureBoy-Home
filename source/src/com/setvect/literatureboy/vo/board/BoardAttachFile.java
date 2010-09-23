@@ -15,8 +15,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.board.BoardService;
-import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
  * 첨부파일
@@ -27,6 +27,11 @@ import com.setvect.literatureboy.web.ConstraintWeb;
 @Table(name = "TBBD_BOARD_FILE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BoardAttachFile {
+
+	/** 업로드 기준 URL */
+	private final static String ATTACH_UPLOAD_URL = EnvirmentProperty
+			.getString("com.setvect.literatureboy.board.file_upload_url");
+
 	@Id
 	@Column(name = "FILE_SEQ")
 	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
@@ -125,10 +130,10 @@ public class BoardAttachFile {
 	}
 
 	/**
-	 * @return 파일 URL 경로 
+	 * @return 파일 URL 경로
 	 */
 	public String getUrl() {
-		return "/" + ConstraintWeb.UPLOAD_URL_BASE + "/" + article.getBoardCode() + "/" + saveName;
+		return "/" + ATTACH_UPLOAD_URL + "/" + article.getBoardCode() + "/" + saveName;
 	}
 
 	/**

@@ -12,12 +12,12 @@
 </head>
 <body>
 <div class="warp">
-	<div class="header">
-		<c:if test="${_user_session_key != null}">
+	<c:if test="${_user_session_key != null}">
+		<div class="header">
 			로그인 아이디:	${ _user_session_key.userId}
 			<a href="/user/logout.do">로그아웃</a>
-		</c:if>
-	</div>
+		</div>
+	</c:if>
 	<div class="container" >
 		<div class="left">
 			<jsp:include page="/include/menu.inc.jsp" />

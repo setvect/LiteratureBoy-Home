@@ -14,7 +14,7 @@ public class ConstraintWeb {
 	public final static String INDEX_VIEW = "main";
 
 	/** 업로드 기준 URL*/
-	public final static String UPLOAD_URL_BASE = EnvirmentProperty.getString("com.setvect.literatureboy.file_upload_dir");
+	public final static String UPLOAD_URL_BASE = EnvirmentProperty.getString("com.setvect.literatureboy.file_upload_url");
 
 	public enum Attribute {
 		// jsp에 전달할 인쿨루드 페이지 정보

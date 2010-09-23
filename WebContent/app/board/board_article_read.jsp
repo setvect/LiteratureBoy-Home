@@ -7,33 +7,42 @@
 <div>
 	<table>
 		<tr>
-			<th>제목</th>
+			<th>Title</th>
 			<td>${ARTICLE.title}</td>
 		</tr>
 		<tr>
-			<th>이름</th>
+			<th>Name</th>
 			<td>${ARTICLE.name}</td>
 		</tr>
 		<tr>
-			<th>날짜</th>
+			<th>Date</th>
 			<td><fmt:formatDate value="${ARTICLE.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		</tr>
 		<tr>
-			<th>본문</th>
+			<th>Content</th>
 			<td>${ARTICLE.content}</td>
 		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td>
-				<ul>
-					<c:forEach var="file" items="${ARTICLE.attach}">
-						<li>Attach: <a href="/download.do?s=${file.savePathEncode}&amp;d=${file.originalNameEncode}">${file.originalName}</a></li>
-					</c:forEach>
-				</ul>			
-			</td>
-		</tr>
+		<c:if test="${fn:length(ARTICLE.attach) > 0}" >
+			<tr>
+				<th>Attach</th>
+				<td>
+					<ul>
+						<c:forEach var="file" items="${ARTICLE.attach}">
+							<li>File: <a href="/download.do?s=${file.savePathEncode}&amp;d=${file.originalNameEncode}">${file.originalName}</a></li>
+						</c:forEach>
+					</ul>			
+				</td>
+			</tr>
+		</c:if>
 	</table>
 </div>
+
+<div>
+	<input type="button" value="수정" onclick="BoardArticle.updateForm('${ARTICLE.articleSeq}')">
+	<input type="button" value="삭제" onclick="BoardArticle.removeAction('${ARTICLE.articleSeq}')">
+	<input type="button" value="목록" onclick="BoardArticle.listForm()">
+</div>
+
 <div>
 	<form:form commandName="PAGE_SEARCH" name="commentCreateAction" method="get" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.COMMENT_CREATE_ACTION%>"/> 
@@ -53,7 +62,7 @@
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea rows="" cols="" name="content"></textarea>
+						<textarea name="content"></textarea>
 					</td>					
 				</tr>
 			</table>
@@ -77,11 +86,6 @@
 			</table>
 		</c:forEach>
 	</div>
-</div>
-<div>
-	<input type="button" value="수정" onclick="BoardArticle.updateForm('${ARTICLE.articleSeq}')">
-	<input type="button" value="삭제" onclick="BoardArticle.removeAction('${ARTICLE.articleSeq}')">
-	<input type="button" value="목록" onclick="BoardArticle.listForm()">
 </div>
 
 <form:form commandName="PAGE_SEARCH" name="commentRemoveAction" method="get" action="${SERVLET_URL}">

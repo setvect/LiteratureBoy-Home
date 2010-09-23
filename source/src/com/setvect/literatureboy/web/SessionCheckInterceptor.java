@@ -33,10 +33,10 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		User user = CommonUtil.getLoginSession(request);
 
 		// 개발중에는 자동 로그인
-		if(user == null){
-			user = userService.getUser("setvect");
-		}
-		
+		// if(user == null){
+		// user = userService.getUser("setvect");
+		// }
+
 		request.setAttribute(ConstraintWeb.USER_SESSION_KEY, user);
 		Map<String, String> param = makeParamMap(request);
 
