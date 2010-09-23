@@ -22,7 +22,6 @@
 	       </excludes>
 	   	</testResource>
 		</testResources>  
-    
   	<plugins>
     	<plugin>
       	<artifactId>maven-war-plugin</artifactId>
@@ -233,5 +232,13 @@
     	<artifactId>itext</artifactId>
     	<version>2.1.7</version>
     </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
+
+    
   </dependencies>
 </project>
