@@ -4,7 +4,7 @@
 <div>
 	<table>
 		<tr>
-			<td>${ARTICLE.title}</td>
+			<td class="title">${ARTICLE.title}</td>
 			<td>(<fmt:formatDate value="${ARTICLE.regDate}" pattern="yyyy-MM-dd"/>)</td>
 		</tr>
 		<tr>

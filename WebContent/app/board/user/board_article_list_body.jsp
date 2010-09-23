@@ -8,13 +8,14 @@
 <div>
 	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}" >
  		<display:column title="Title" class="body_list_td align_left">
-			<p>
-				${articleList.title}
-	 			-
-	 			<fmt:formatDate value="${articleList.regDate}" pattern="yyyy-MM-dd"/>
- 			</p>
+			<div>
+				<span class="title">
+					${articleList.title}
+				</span>
+	 			(<fmt:formatDate value="${articleList.regDate}" pattern="yyyy-MM-dd"/>)
+ 			</div><br/>
 			<c:forEach var="file" items="${articleList.attach}">
-				<img src="${file.url}" alt="${file.originalName}" class="list_image"/>
+				<img src="${file.url}" alt="${file.originalName}" width="290" class="list_image"/>
 			</c:forEach>
 			${articleList.content}
  		</display:column>

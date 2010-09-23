@@ -6,7 +6,7 @@
 	.list_table thead{display: none};
 </style>
 <div>
-	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}">
  		<display:column title="Title" class="align_left">
  			<span style="padding-left: ${(articleList.depthLevel -1) * 10}">
  				<a href="javascript:BoardArticle.readForm(${articleList.articleSeq})">${articleList.title}</a>
