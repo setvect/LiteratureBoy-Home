@@ -5,12 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.annotation.Resource;
-
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 import com.setvect.literatureboy.service.board.BoardService;
@@ -79,7 +78,7 @@ public class MigrationTestCase extends TestSystem {
 		st.close();
 
 		st = sourceConnecton.createStatement();
-		rs = st.executeQuery("select * from TBBB_BOARD_ARTICLE");
+		rs = st.executeQuery("select * from TBBB_BOARD_ARTICLE order by IDX2 ");
 		int count = 0;
 		while (rs.next()) {
 
@@ -100,7 +99,7 @@ public class MigrationTestCase extends TestSystem {
 			article.setEncodeF(rs.getString("ENCODE_F").equals("Y"));
 			article.setRegDate(rs.getDate("REG_DATE"));
 			article.setDeleteF(false);
-			boardService.createArticle(article);
+			boardService.createArticleMigration(article);
 
 			int articleSeq = rs.getInt("ARTICLE_SEQ");
 

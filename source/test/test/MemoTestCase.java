@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
-import javax.annotation.Resource;
-
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.SearchListVo;

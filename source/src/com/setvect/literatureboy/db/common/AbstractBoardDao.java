@@ -238,6 +238,19 @@ public abstract class AbstractBoardDao implements BoardDao {
 		session.flush();
 	}
 
+	/**
+	 * idx 관련 연산없음 <br>
+	 * 마이그레이션 용
+	 * 
+	 * @param article
+	 *            게시물 정보
+	 */
+	public void createArticleMigration(BoardArticle article) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(article);
+		session.flush();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -249,7 +262,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 		session.flush();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.setvect.literatureboy.db.BoardDao#updateArticleIncrementHit(int)
 	 */
 	public void updateArticleIncrementHit(int articleSeq) {

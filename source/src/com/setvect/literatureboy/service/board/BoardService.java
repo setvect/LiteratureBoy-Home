@@ -108,6 +108,17 @@ public class BoardService {
 	}
 
 	/**
+	 * idx 관련 연산없음 <br>
+	 * 마이그레이션 용
+	 * 
+	 * @param article
+	 *            게시물
+	 */
+	public void createArticleMigration(BoardArticle article) {
+		boardDao.createArticleMigration(article);
+	}
+
+	/**
 	 * @param article
 	 */
 	public void updateArticle(BoardArticle article) {

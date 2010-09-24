@@ -75,6 +75,15 @@ public interface BoardDao {
 	public void createArticleReply(BoardArticle article, int parentId);
 
 	/**
+	 * idx 관련 연산없음 <br>
+	 * 마이그레이션 용
+	 * 
+	 * @param article
+	 *            게시물 정보
+	 */
+	public void createArticleMigration(BoardArticle article);
+
+	/**
 	 * @param article
 	 */
 	public void updateArticle(BoardArticle article);

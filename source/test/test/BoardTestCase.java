@@ -3,12 +3,11 @@ package test;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import junit.framework.Assert;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.setvect.common.util.GenericPage;
 import com.setvect.literatureboy.service.board.BoardArticleSearch;

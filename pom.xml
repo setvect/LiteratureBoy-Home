@@ -12,7 +12,7 @@
 		<directory>${basedir}/build</directory>
 		<sourceDirectory>${basedir}/source/src/</sourceDirectory>
 		<outputDirectory>${basedir}/WebContent/WEB-INF/classes</outputDirectory>
-		<!-- 
+
 		<testSourceDirectory>${basedir}/source/test</testSourceDirectory>
 		<testOutputDirectory>${basedir}/build/test-classes</testOutputDirectory>
 		<testResources>
@@ -23,7 +23,7 @@
 	       </excludes>
 	   	</testResource>
 		</testResources>  
-  	 -->
+
   	<plugins>
     	<plugin>
       	<artifactId>maven-war-plugin</artifactId>

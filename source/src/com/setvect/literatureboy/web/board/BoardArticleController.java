@@ -111,7 +111,7 @@ public class BoardArticleController {
 		else {
 			m = Mode.valueOf(mode);
 		}
-
+		// TODO 한페이지당 표시 갯수 정하기
 		BoardArticleSearch pageCondition = bindSearch(request);
 		// pageCondition.setDeleteView(true);
 		if (StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
