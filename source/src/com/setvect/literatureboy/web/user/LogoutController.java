@@ -25,7 +25,7 @@ public class LogoutController {
 	@RequestMapping("/user/logout.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(ConstraintWeb.INDEX_VIEW);
+		mav.setViewName(ConstraintWeb.LITERATUREBOY_LAYOUT);
 		Cookie loginCookie = new Cookie(ConstraintWeb.USER_COOKIE_KEY, null);
 		loginCookie.setPath("/");
 		response.addCookie(loginCookie);

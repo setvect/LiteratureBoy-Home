@@ -57,7 +57,7 @@ public class LoginController {
 			m = Mode.valueOf(mode);
 		}
 
-		mav.setViewName(ConstraintWeb.INDEX_VIEW);
+		mav.setViewName(ConstraintWeb.LITERATUREBOY_LAYOUT);
 		String rtnUrl = request.getParameter(ConstraintWeb.RETURN_URL);
 		if (m == Mode.LOGIN_ACTION) {
 			String userId = request.getParameter("userId");

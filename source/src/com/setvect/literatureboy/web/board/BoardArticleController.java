@@ -122,7 +122,7 @@ public class BoardArticleController {
 		Board board = boardService.getBoard(pageCondition.getSearchCode());
 		mav.addObject(AttributeKey.BOARD.name(), board);
 
-		mav.setViewName(ConstraintWeb.INDEX_VIEW);
+		mav.setViewName(ConstraintWeb.LITERATUREBOY_LAYOUT);
 		if (m == Mode.SEARCH_FORM) {
 			String type = request.getParameter("searchType");
 			String word = request.getParameter("searchWord");

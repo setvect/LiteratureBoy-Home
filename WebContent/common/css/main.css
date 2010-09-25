@@ -13,12 +13,12 @@ select {color:#777777; background-color:#ffffff; font-size:12px; color:#5D5D5D; 
 *, div, td, span {font-size: 15px;}
 
 /* ====== 레이어 정리 ====== */
-.wrap{background:#f7f7f7; min-width:800px; }
+.warp{ min-width:850px; }
 .header{width:100%; background:#e5e5e5; margin-bottom:5px; float: left; }
-.container{clear: both; margin: 10px; float: left; width: 100%;}
-.container .left{ background:#ccc; width:130px; float:left; padding: 5px; }
+.container{clear: both; float: left; width: 100%;}
+.container .left{ background:#ccc; width:130px; float:left; }
 /* IE8 핵 */ 
-.container .content{ margin-left:150px; margin-right: 20px; *width: 100%;  }
+.container .content{ margin:10px 20px 0 150px; *width: 100%;  }
 
 /* ====== 목록 테이블 ====== */
 .list_table {
@@ -70,6 +70,8 @@ select {color:#777777; background-color:#ffffff; font-size:12px; color:#5D5D5D; 
 .title{
 	font-weight: bold;                               
 }
+
+.left_area  ul{padding-left: 10px;}
 
 .main_content div a{font-style: italic; font-size: 12px;}
 

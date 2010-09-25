@@ -2,7 +2,7 @@
 <%@include file="/common/taglib.inc.jsp"%>
 <div class="left_area">
 	<div class="main_image"><a href="/"><img src="/upload/image_reg/main_08.jpg" alt="야구장에서..."/></a></div>
-	<ul class="menu">
+	<ul>
 		<li><a href="/literatureboy/bd.do?searchCode=BDAAAA01">글</a></li>
 		<li><a href="/literatureboy/bd.do?searchCode=BDAAAA09">꿈</a></li>
 		<li><a href="/literatureboy/bd.do?searchCode=BDAAAA02">책</a></li>

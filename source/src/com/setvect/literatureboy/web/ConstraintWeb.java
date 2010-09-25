@@ -10,8 +10,11 @@ import com.setvect.literatureboy.config.EnvirmentProperty;
  * @version $Id$
  */
 public class ConstraintWeb {
-	/** 기본 틀을 가진 뷰 이름 */
-	public final static String INDEX_VIEW = "main";
+	/** 문학소년: 기본 틀을 가진 뷰 이름 */
+	public final static String LITERATUREBOY_LAYOUT = "literatureboy/layout";
+
+	/** 개발: 기본 틀을 가진 뷰 이름 */
+	public final static String DEVLOP_LAYOUT = "devlop/layout";
 
 	/** 업로드 기준 URL */
 	public final static String UPLOAD_URL_BASE = EnvirmentProperty

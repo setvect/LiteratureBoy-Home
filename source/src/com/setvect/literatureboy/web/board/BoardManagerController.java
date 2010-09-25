@@ -70,7 +70,7 @@ public class BoardManagerController {
 		BoardManagerSearch pageCondition = bindSearch(request);
 		mav.addObject(AttributeKey.PAGE_SEARCH.name(), pageCondition);
 
-		mav.setViewName(ConstraintWeb.INDEX_VIEW);
+		mav.setViewName(ConstraintWeb.LITERATUREBOY_LAYOUT);
 		if (m == Mode.SEARCH_FORM) {
 			String type = request.getParameter("searchType");
 			String word = request.getParameter("searchWord");

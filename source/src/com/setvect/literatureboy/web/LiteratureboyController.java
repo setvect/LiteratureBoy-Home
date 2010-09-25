@@ -88,7 +88,7 @@ public class LiteratureboyController {
 			pageCondition.setPagePerItemCount(1);
 			GenericPage<BoardArticle> list = boardService.getArticlePagingList(pageCondition);
 			BoardArticle[] mainPage = list.getList().toArray(new BoardArticle[0]);
-			ModelAndView modelAndView = new ModelAndView(ConstraintWeb.INDEX_VIEW);
+			ModelAndView modelAndView = new ModelAndView(ConstraintWeb.LITERATUREBOY_LAYOUT);
 			modelAndView.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/literatureboy/main.jsp");
 			modelAndView.addObject(AttributeKey.MAIN_ARTICLE.name(), mainPage[0]);
 			return modelAndView;
