@@ -77,6 +77,6 @@ select {color:#777777; background-color:#ffffff; font-size:12px; color:#5D5D5D; 
 .popup{padding: 10px;}
 
 /* ====== 게시판 ====== */
-form[name="createAction"] textarea[name="content"]{height: 200px; width: 750px;}
+#content{height: 300px; width: 750px;}
 .list_image{float: left; margin-right: 20px;}
 .body_list_td{padding: 10px 0 10px 0}
