@@ -37,6 +37,7 @@ import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
+import com.setvect.literatureboy.vo.user.User;
 import com.setvect.literatureboy.web.AccessChecker;
 import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
@@ -161,6 +162,15 @@ public class BoardArticleController {
 			}
 		}
 		else if (m == Mode.CREATE_FORM) {
+			User user = CommonUtil.getLoginSession(request);
+			BoardArticle article = new BoardArticle();
+			if (user != null) {
+				article.setUserId(user.getUserId());
+				article.setEmail(user.getEmail());
+				article.setName(user.getName());
+			}
+
+			mav.addObject(AttributeKey.ARTICLE.name(), article);
 			mav.addObject(AttributeKey.MODE.name(), Mode.CREATE_ACTION);
 			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.WRITE));
 		}

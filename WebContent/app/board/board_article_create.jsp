@@ -2,14 +2,6 @@
 <%@page import="com.setvect.literatureboy.vo.board.BoardArticle"%>
 <%@page import="com.setvect.literatureboy.web.board.BoardArticleController"%>
 <%@include file="/common/taglib.inc.jsp"%>
-<%
-	BoardArticle board = (BoardArticle) request.getAttribute(BoardArticleController.AttributeKey.ARTICLE.name());
-	if(board == null){
-		board = new BoardArticle();
-	}
-	request.setAttribute("createForm", board);
-%>
-
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <script type="text/javascript" src="/app/smart_edit/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -25,7 +17,7 @@
   };
 </script>
 <div>
-	<form:form commandName="createForm" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${SERVLET_URL}">
+	<form:form commandName="ARTICLE" name="createAction" id="createAction" method="post" enctype="multipart/form-data" action="${SERVLET_URL}">
 		<input type="hidden" name="mode" value="${MODE}"/>
 		<input type="hidden" name="searchCode" value="${PAGE_SEARCH.searchCode}"/>
 		<input type="hidden" name="searchName" value="${PAGE_SEARCH.searchName}"/>

@@ -13,7 +13,7 @@ select {color:#777777; background-color:#ffffff; font-size:12px; color:#5D5D5D; 
 *, div, td, span {font-size: 15px;}
 
 /* ====== 레이어 정리 ====== */
-.warp{ min-width:850px; }
+.warp{min-width: 900px; }
 .header{width:100%; background:#e5e5e5; margin-bottom:5px; float: left; }
 .container{clear: both; float: left; width: 100%;}
 .container .left{ background:#ccc; width:130px; float:left; }
@@ -71,7 +71,7 @@ select {color:#777777; background-color:#ffffff; font-size:12px; color:#5D5D5D; 
 	font-weight: bold;                               
 }
 
-.left_area  ul{padding-left: 10px;}
+.left_area  ul{padding: 5px 0 5px 10px;}
 
 .main_content div a{font-style: italic; font-size: 12px;}
 
