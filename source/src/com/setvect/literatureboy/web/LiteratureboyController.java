@@ -1,6 +1,7 @@
 package com.setvect.literatureboy.web;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,18 @@ public class LiteratureboyController {
 	@Autowired
 	private BoardService boardService;
 
+	/** 게시판 코드에 따른 한 화면 표시 갯수 */
+	private static final Map<String, Integer> BOARD_PAGE_PER_ITEM_COUNT;
+	static {
+		BOARD_PAGE_PER_ITEM_COUNT = new HashMap<String, Integer>();
+		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA02", 5);
+		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA03", 5);
+		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA04", 5);
+		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA05", 5);
+		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA06", 5);
+		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA08", 5);
+	}
+
 	/** 목록에서 콘텐츠내용이 보여지는 게시판 코드 */
 	private static final String[] listContentViewBoard = EnvirmentProperty
 			.getStringArray("com.setvect.literatureboy.board.list_content_view");
@@ -64,6 +77,9 @@ public class LiteratureboyController {
 
 		// 일반 게시판 UI
 		if (pageName.equals("bd")) {
+			String boardCode = request.getParameter("searchCode");
+			Integer pageItemCount = BOARD_PAGE_PER_ITEM_COUNT.get(boardCode);
+			request.setAttribute(BoardArticleController.Parameter.PAGE_PER_ITEM_COUNT.name(), pageItemCount);
 			HashMap<JspPageKey, String> jsp = boardArticleController.getJspPage();
 			boolean include = StringUtilAd.isInclude(request.getParameter("searchCode"), listContentViewBoard);
 			if (include) {

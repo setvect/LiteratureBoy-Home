@@ -70,6 +70,14 @@ public class BoardArticleController {
 	}
 
 	/**
+	 * 컨트롤러 호출 전에 전달될 파라미터 정보에 대한 키
+	 */
+	public static enum Parameter {
+		PAGE_PER_ITEM_COUNT
+		// 한 페이지당 표시 항목 수
+	}
+
+	/**
 	 * 뷰에 전달할 객체를 가르키는 키
 	 */
 	public static enum AttributeKey {
@@ -112,8 +120,13 @@ public class BoardArticleController {
 		else {
 			m = Mode.valueOf(mode);
 		}
-		// TODO 한페이지당 표시 갯수 정하기
+		// 한페이지당 표시 갯수 정하기
 		BoardArticleSearch pageCondition = bindSearch(request);
+		Integer countItem = (Integer) request.getAttribute(BoardArticleController.Parameter.PAGE_PER_ITEM_COUNT.name());
+		if (countItem != null) {
+			pageCondition.setPagePerItemCount(countItem);
+		}
+
 		// pageCondition.setDeleteView(true);
 		if (StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
 			throw new ApplicationException("not setting to 'searchCode'");
