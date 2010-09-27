@@ -1,5 +1,6 @@
 // file encodeing utf-8 (2009-12-21)
 // 문자열 연산 관련 클래스 
+
 {
 	$.STR = new Object();
 	
@@ -11,14 +12,14 @@
 		ext = val.slice(val.lastIndexOf(".")).toLowerCase();
 		return ext;
 	};
-	
+
 	// 이미지 확장자를 가지면 true, 아니면  false
 	$.STR.isImage = function(filename){
 		var ext = $.STR.getExt(filename);
 		ext = ext.toLowerCase();
 		return (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png");
 	};
-	
+		
 	// 파일 이름(확장자 제외)
 	// val: 풀 경로 문자열
 	// 디렉토리 구별자 (기본값 '\')
@@ -614,6 +615,82 @@
 		}
 		return true ;
 	};
+
+	// 체크박스 전체 선택 해제
+	$.FORM.checkboxAll = function (ck, target, desable) {
+		
+		var val = false;
+		var i;
+		
+		if (ck == null)
+			return;
+
+		if(ck.checked) {
+			val = true;
+		}
+		else {
+			val = false;
+		}
+		if (target == null)
+			return;
+
+		if(target.length== null) {
+			target.checked = val;
+		}else {
+			for(i=0;i<target.length;i++){
+				
+				target[i].checked = val;
+				if(val == true & desable != null){
+					target[i].disabled = true;
+				}
+				else{
+					target[i].disabled = false;
+				}
+			}
+		}
+	};
+	
+	// 라디오(체크박스)버튼 체크여부
+	// 하나 이상 체크되면 true, 아니면 false
+	$.FORM.isChoicedRadio = function(rb, msg){
+
+		// 객체 아님
+		if(rb == null){
+			return false;
+		}
+
+		// 배여 아님
+		if (rb.length == null){
+			if(rb.checked){
+				return true;
+			}
+			else{
+				alert(msg);
+				rb.focus();
+				return false;
+			}
+		}
+
+		var ck = false;
+
+		// 배열이면
+		var i;
+
+		for(i=0; i<rb.length; i++) {
+			if(rb[i].checked){
+				ck = true;
+			}
+		}
+		if(ck){
+			return true;
+		}
+		else{
+			alert(msg);
+			rb[0].focus();
+			return false;
+		}
+	};
+	
 }
 
 
