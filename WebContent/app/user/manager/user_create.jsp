@@ -42,6 +42,9 @@
 				<td>
 					<form:password id="passwd" path="passwd" size="15" maxlength="12"/><br/>
 					다시입력:<input type="password" name="passwdRe" size="15" maxlength="12"/>
+					<c:if test="${MODE == 'UPDATE_ACTION'}">
+						<br/>입력하지 않으면 현재 비밀번호 유지
+					</c:if>
 				</td>
 			</tr>
 			<tr>

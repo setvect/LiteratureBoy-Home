@@ -116,7 +116,14 @@ public class UserController {
 		else if (m == Mode.UPDATE_ACTION) {
 			User user = new User();
 			Binder.bind(request, user);
-			user.setPasswd(StringUtilAd.encodePassword(user.getPasswd(), ConstraintWeb.PASSWD_ALGORITHM));
+			if (StringUtilAd.isEmpty(user.getPasswd())) {
+				// 비밀번호가 입력되지 않으면 그전 비밀번호 유지
+				User temp = userService.getUser(user.getUserId());
+				user.setPasswd(temp.getPasswd());
+			}	
+			else {
+				user.setPasswd(StringUtilAd.encodePassword(user.getPasswd(), ConstraintWeb.PASSWD_ALGORITHM));
+			}
 			userService.updateUser(user);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
