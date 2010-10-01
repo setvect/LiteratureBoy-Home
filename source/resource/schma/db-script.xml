@@ -134,6 +134,25 @@
 	</table>
 
 
+	<table name="TBBE_BOARD_TRACKBACK">
+		<creation>
+			CREATE TABLE TBBE_BOARD_TRACKBACK (
+			  RELATION_SEQ int NOT NULL,
+			  ARTICLE_SEQ int NOT NULL,
+			  TITLE varchar(200) NOT NULL,
+			  EXCERPT varchar(500) NOT NULL,
+			  URL varchar(200) NOT NULL,
+			  BLOG_NAME varchar(50) NOT NULL,
+			  REG_DATE datetime NOT NULL,
+			  PRIMARY KEY  (RELATION_SEQ)
+			)		
+		</creation>
+		<defaultValue>
+			<query>ALTER TABLE TBBE_BOARD_TRACKBACK ADD FOREIGN KEY (ARTICLE_SEQ) REFERENCES TBBB_BOARD_ARTICLE(ARTICLE_SEQ)</query>
+		</defaultValue>		
+	</table>
+
+
 	<table name="TBZZ_MEMO">
 		<creation>
 			CREATE TABLE TBZZ_MEMO
