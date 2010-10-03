@@ -55,6 +55,7 @@
             	<!-- 소스 드렉토리 더 추가 -->
               <sources>
                 <source>${basedir}/source/common/</source>
+                <source>${basedir}/source/resource/</source>
               </sources>
             </configuration>
           </execution>
@@ -246,6 +247,13 @@
     	<version>1.1.2</version>
     	<type>jar</type>
     	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>servlet-api</artifactId>
+    	<version>2.4</version>
+    	<type>jar</type>
+    	<scope>test</scope>
     </dependency>
   </dependencies>
 </project>
