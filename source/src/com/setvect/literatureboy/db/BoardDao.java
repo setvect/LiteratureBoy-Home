@@ -9,6 +9,7 @@ import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
+import com.setvect.literatureboy.vo.board.BoardTrackback;
 
 /**
  * 게시물, 첨부파일, 코멘트 DAO
@@ -151,5 +152,29 @@ public interface BoardDao {
 	 *            첨부파일 번호
 	 */
 	public void removeAttachFile(int seq);
+
+	// ----- Trackback 
+	/**
+	 * @param boardItemSeq
+	 *            게시물 번호
+	 * @return 게시물에 등록된 트래백 목로
+	 */
+	public List<BoardTrackback> listTrackback(int boardItemSeq);
+
+	/**
+	 * 트래백 등록
+	 * 
+	 * @param trackback
+	 *            트래백 정보
+	 */
+	public void createTrackback(BoardTrackback trackback);
+
+	/**
+	 * 트래백 삭제
+	 * 
+	 * @param seq
+	 *            트래백 번호
+	 */
+	public void removeTrackback(int seq);
 
 }

@@ -891,4 +891,18 @@
 		var dd = new Date(fromYear,fromMonth,0);
 		return dd.getDate();
 	};
+	
+	$.UTIL = new Object();
+
+	//클립보드에 값 복사 하기
+	$.UTIL.copyClipboard = function(text)	{
+		if(!$.browser.msie){
+      alert("해당 기능은 IE만 지원합니다. 직접 복사해 주세요.");
+      return;
+   }
+		
+		alert("현재 주소를 복사하였습니다. Ctrl+V를 눌러서 사용할 수 있습니다.");
+		window.clipboardData.setData('text', text);
+	};
+	
 }

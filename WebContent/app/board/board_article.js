@@ -91,3 +91,11 @@ BoardArticle.commentRemoveAction = function(commentSeq){
 		document.commentRemoveAction.submit();
 	}
 };
+
+BoardArticle.trackbackRemoveAction = function(articleSeq, relationSeq){
+	if(confirm("삭제 하시겠습니까?")){
+		document.trackbackRemoveAction.articleSeq.value = articleSeq;
+		document.trackbackRemoveAction.relationSeq.value = relationSeq;
+		document.trackbackRemoveAction.submit();
+	}
+};

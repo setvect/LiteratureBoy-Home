@@ -16,6 +16,7 @@ import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
+import com.setvect.literatureboy.vo.board.BoardTrackback;
 
 /**
  * °Ô½Ã¹° DAO
@@ -394,6 +395,49 @@ public abstract class AbstractBoardDao implements BoardDao {
 	public void removeAttachFile(int seq) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(session.get(BoardAttachFile.class, seq));
+		session.flush();
+	}
+
+	// ----- Trackback
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.setvect.literatureboy.db.BoardDao#listTrackback(int)
+	 */
+	public List<BoardTrackback> listTrackback(int boardItemSeq) {
+		Session session = sessionFactory.getCurrentSession();
+
+		String q = " from BoardTrackback where articleSeq = ? order by relationSeq ";
+		Query query = session.createQuery(q);
+
+		query.setInteger(0, boardItemSeq);
+
+		@SuppressWarnings("unchecked")
+		List<BoardTrackback> resultList = query.list();
+
+		return resultList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.setvect.literatureboy.db.BoardDao#createTrackback(com.setvect.literatureboy.vo.board.BoardTrackback)
+	 */
+	public void createTrackback(BoardTrackback trackback) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(trackback);
+		session.flush();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.setvect.literatureboy.db.BoardDao#removeTrackback(int)
+	 */
+	public void removeTrackback(int seq) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(session.get(BoardTrackback.class, seq));
 		session.flush();
 	}
 }

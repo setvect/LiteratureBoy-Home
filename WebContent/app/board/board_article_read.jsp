@@ -88,6 +88,22 @@
 	</div>
 </div>
 
+<div class="trackback">
+	<div class="address">
+		트래백 주소:${TRACK_ADDR} <input type="button" onclick="$.UTIL.copyClipboard('${TRACK_ADDR}')" value="주소복사">
+	</div>
+	<div class="list">
+		<ul>
+			<c:forEach var="tarckback" items="${TRACK_LIST}">
+				<li>
+					<a href="${tarckback.url}" target="_blank">${tarckback.title}</a>
+					<input type="button" value="삭제" onclick="BoardArticle.trackbackRemoveAction(${ARTICLE.articleSeq}, ${tarckback.relationSeq})">
+				</li>
+			</c:forEach>				
+		</ul>
+	</div>
+</div>
+
 <form:form commandName="PAGE_SEARCH" name="commentRemoveAction" method="get" action="${SERVLET_URL}">
 	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.COMMENT_REMOVE_ACTION%>"/> 
 	<form:hidden path="searchCode"/>

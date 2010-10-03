@@ -12,6 +12,7 @@ import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
+import com.setvect.literatureboy.vo.board.BoardTrackback;
 
 /**
  * @version $Id$
@@ -209,6 +210,32 @@ public class BoardService {
 	 */
 	public void removeAttachFile(int seq) {
 		boardDao.removeAttachFile(seq);
+	}
+
+	// ----- Attach File
+	/**
+	 * @param boardItemSeq
+	 *            게시물 번호
+	 * @return 게시물에 등록된 트래백 목로
+	 */
+	public List<BoardTrackback> listTrackback(int boardItemSeq) {
+		return boardDao.listTrackback(boardItemSeq);
+	}
+
+	/**
+	 * 트래백 등록  
+	 * @param trackback 트래백 정보  
+	 */
+	public void createTrackback(BoardTrackback trackback) {
+		boardDao.createTrackback(trackback);
+	}
+	
+	/**
+	 * 트래백 삭제 
+	 * @param seq 트래백 번호 
+	 */
+	public void removeTrackback(int seq) {
+		boardDao.removeTrackback(seq);
 	}
 
 }

@@ -29,7 +29,7 @@
 	<context:component-scan  base-package="com.setvect.literatureboy">
 		<!-- DB가 2가지 이상 사용시 사용 안할 DB DAO 패스 지정  -->
 		<!-- <context:exclude-filter type="aspectj" expression="com.setvect.literatureboy.db.h2.*"/> -->
-	</context:component-scan>
+	</context:component-scan>	
 	       
 	<!--  Message Resources -->
 	<bean id="messageSource" 
@@ -68,6 +68,7 @@
 				<value>com.setvect.literatureboy.vo.board.BoardArticle</value>
 				<value>com.setvect.literatureboy.vo.board.BoardAttachFile</value>
 				<value>com.setvect.literatureboy.vo.board.BoardComment</value>
+				<value>com.setvect.literatureboy.vo.board.BoardTrackback</value>
 				<value>com.setvect.literatureboy.vo.user.User</value>
 				<value>com.setvect.literatureboy.vo.user.Auth</value>
 				<value>com.setvect.literatureboy.vo.user.AuthMap</value>
@@ -99,6 +100,23 @@
 	<bean id="hibernateTxManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
+	
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="1" />
+		<property name="alwaysUseFullPath" value="true" />
+		<property name="mappings">
+			<props>
+				<prop key="/tb/board/*">trackbackController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean name="trackbackController"
+		class="com.setvect.literatureboy.web.board.BoardTrackbackController"/>
+			
+
 	
 	<tx:advice id="hibernateTxAdvice" transaction-manager="hibernateTxManager">
 		<tx:attributes>

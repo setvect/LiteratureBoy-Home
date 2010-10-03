@@ -53,3 +53,14 @@
 	<input type="hidden" name="articleSeq"/>				
 </form:form>
 
+<form:form commandName="PAGE_SEARCH" id="" name="trackbackRemoveAction" method="get" action="${SERVLET_URL}">
+	<input type="hidden" name="mode" value="<%=BoardArticleController.Mode.TRACKBACK_REMOVE_ACTION%>"/> 
+	<form:hidden id="" path="searchCode"/>
+	<form:hidden id="" path="searchName"/>
+	<form:hidden id="" path="searchTitle"/>
+	<form:hidden id="" path="searchContent"/>
+	<form:hidden id="" path="currentPage"/>
+	<input type="hidden" name="relationSeq" value="" />
+	<input type="hidden" name="articleSeq" value="" />
+				
+</form:form>

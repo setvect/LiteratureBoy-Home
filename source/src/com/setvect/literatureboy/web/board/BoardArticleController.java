@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.setvect.common.http.UrlParameter;
+import com.setvect.common.net.NetworkUtil;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.GenericPage;
@@ -37,6 +38,7 @@ import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
+import com.setvect.literatureboy.vo.board.BoardTrackback;
 import com.setvect.literatureboy.vo.user.User;
 import com.setvect.literatureboy.web.AccessChecker;
 import com.setvect.literatureboy.web.CommonUtil;
@@ -48,6 +50,9 @@ import com.setvect.literatureboy.web.ConstraintWeb;
 @Controller
 @Scope("prototype")
 public class BoardArticleController {
+
+	/** 트래백 경로 */
+	private static final String TRACKBACK_PATH = "/tb/board/";
 
 	private static final HashMap<JspPageKey, String> DEFAUlT_JSP;
 	static {
@@ -66,7 +71,9 @@ public class BoardArticleController {
 		/** USER,AGEN,Menu 리스트 보기 */
 		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, CREATE_ACTION, UPDATE_FORM, UPDATE_ACTION, REMOVE_ACTION,
 		//
-		COMMENT_CREATE_ACTION, COMMENT_REMOVE_ACTION
+		COMMENT_CREATE_ACTION, COMMENT_REMOVE_ACTION,
+		//
+		TRACKBACK_REMOVE_ACTION
 	}
 
 	/**
@@ -91,7 +98,9 @@ public class BoardArticleController {
 		/** 페이지 및 검색 정보 */
 		PAGE_SEARCH,
 		// 권한 정보를 제공
-		AUTH_WRITE
+		AUTH_WRITE,
+		// 트래백 주소 및 목록
+		TRACK_ADDR, TRACK_LIST,
 	}
 
 	@Autowired
@@ -170,8 +179,10 @@ public class BoardArticleController {
 
 				List<BoardComment> comments = boardService.listComment(articleSeq);
 				mav.addObject(AttributeKey.COMMENT.name(), comments);
-
 				mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), jspPage.get(JspPageKey.READ));
+
+				mav.addObject(AttributeKey.TRACK_ADDR.name(), getTrackbackAddr(request, article));
+				mav.addObject(AttributeKey.TRACK_LIST.name(), getTrackbackList(article));
 			}
 		}
 		else if (m == Mode.CREATE_FORM) {
@@ -260,6 +271,11 @@ public class BoardArticleController {
 			boardService.removeComment(commentSeq);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 		}
+		else if (m == Mode.TRACKBACK_REMOVE_ACTION){
+			int relationSeq = Integer.parseInt(request.getParameter("relationSeq"));
+			boardService.removeTrackback(relationSeq);
+			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
+		}
 
 		if (m == Mode.LIST_FORM) {
 			GenericPage<BoardArticle> boardPagingList = boardService.getArticlePagingList(pageCondition);
@@ -276,6 +292,25 @@ public class BoardArticleController {
 		}
 
 		return mav;
+	}
+
+	/**
+	 * @param article
+	 *            게시물 정보
+	 * @return 해당 게시물에 등록된 트래백 목록
+	 */
+	private List<BoardTrackback> getTrackbackList(BoardArticle article) {
+		List<BoardTrackback> listTrackback = boardService.listTrackback(article.getArticleSeq());
+		return listTrackback;
+	}
+
+	/**
+	 * @param request
+	 * @param article
+	 * @return 해당 게시물의 트래백 주소
+	 */
+	private String getTrackbackAddr(HttpServletRequest request, BoardArticle article) {
+		return NetworkUtil.getHomepageUrl(request) + TRACKBACK_PATH + article.getArticleSeq();
 	}
 
 	/**
@@ -397,8 +432,8 @@ public class BoardArticleController {
 
 		String mode = request.getParameter("mode");
 		Mode m = Mode.valueOf(mode);
-		// 코멘트 관련 액션이면 읽기 페이지로 이동
-		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_REMOVE_ACTION) {
+		// 코멘트, 트래백 관련 액션이면 읽기 페이지로 이동
+		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_REMOVE_ACTION || m == Mode.TRACKBACK_REMOVE_ACTION) {
 			param.put("mode", Mode.READ_FORM);
 			param.put("articleSeq", request.getParameter("articleSeq"));
 		}
