@@ -56,7 +56,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
-		<url-pattern>/tb/*</url-pattern>
+		<url-pattern>/servlet/tb/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

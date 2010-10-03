@@ -52,7 +52,7 @@ import com.setvect.literatureboy.web.ConstraintWeb;
 public class BoardArticleController {
 
 	/** 트래백 경로 */
-	private static final String TRACKBACK_PATH = "/tb/board/";
+	private static final String TRACKBACK_PATH = "/servlet/tb/";
 
 	private static final HashMap<JspPageKey, String> DEFAUlT_JSP;
 	static {

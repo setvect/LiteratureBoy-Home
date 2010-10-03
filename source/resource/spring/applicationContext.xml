@@ -108,7 +108,7 @@
 		<property name="alwaysUseFullPath" value="true" />
 		<property name="mappings">
 			<props>
-				<prop key="/tb/board/*">trackbackController</prop>
+				<prop key="/servlet/tb/*">trackbackController</prop>
 			</props>
 		</property>
 	</bean>

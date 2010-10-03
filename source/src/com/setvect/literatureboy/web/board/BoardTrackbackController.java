@@ -33,7 +33,7 @@ public class BoardTrackbackController extends AbstractController {
 		String[] param = vp.substring(1).split("/");
 		// Æ®·¡¹é
 		try {
-			int articleID = Integer.parseInt(param[1]);
+			int articleID = Integer.parseInt(param[0]);
 			boolean result = trackback(articleID, request);
 			responseTrack(result, response);
 			return null;
