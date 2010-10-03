@@ -14,11 +14,12 @@ select {color:#777777; background-color:#ffffff; font-size:12px; color:#5D5D5D; 
 
 /* ====== 레이어 정리 ====== */
 .warp{min-width: 900px; }
-.header{width:100%; background:#e5e5e5; margin-bottom:5px; float: left; }
-.container{clear: both; float: left; width: 100%;}
+.header{width:99.5%; background:#e5e5e5; margin-bottom:5px; float: left; }
+.container{clear: both; float: left; width: 99.5%;}
 .container .left{ background:#ccc; width:130px; float:left; }
 /* IE8 핵 */ 
 .container .content{ margin:10px 20px 0 150px; *width: 100%;  }
+
 
 /* ====== 목록 테이블 ====== */
 .list_table {
