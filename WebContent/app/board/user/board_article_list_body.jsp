@@ -12,7 +12,7 @@
 	 			(<fmt:formatDate value="${articleList.regDate}" pattern="yyyy-MM-dd"/>)
  			</div><br/>
 			<c:forEach var="file" items="${articleList.attach}">
-				<img src="${file.url}" alt="${file.originalName}" width="290" class="list_image"/>
+				<img src="/servlet/Thumbnail?i=${file.url}&w=290&h=450" alt="${file.originalName}" class="list_image"/>
 			</c:forEach>
 			${articleList.content}
  		</display:column>
