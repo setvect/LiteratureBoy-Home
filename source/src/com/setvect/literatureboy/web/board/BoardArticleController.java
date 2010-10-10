@@ -118,7 +118,11 @@ public class BoardArticleController {
 
 	@RequestMapping("/board/article.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = (ModelAndView) request.getAttribute(ConstraintWeb.AttributeKey.MODEL_VIEW.name());
+		// 전달될 뷰 모델없으면 기본 값으로
+		if (mav == null) {
+			mav = new ModelAndView(ConstraintWeb.LITERATUREBOY_LAYOUT);
+		}
 
 		String mode = request.getParameter("mode");
 
@@ -144,8 +148,6 @@ public class BoardArticleController {
 
 		Board board = boardService.getBoard(pageCondition.getSearchCode());
 		mav.addObject(AttributeKey.BOARD.name(), board);
-
-		mav.setViewName(ConstraintWeb.LITERATUREBOY_LAYOUT);
 		if (m == Mode.SEARCH_FORM) {
 			String type = request.getParameter("searchType");
 			String word = request.getParameter("searchWord");
@@ -271,7 +273,7 @@ public class BoardArticleController {
 			boardService.removeComment(commentSeq);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 		}
-		else if (m == Mode.TRACKBACK_REMOVE_ACTION){
+		else if (m == Mode.TRACKBACK_REMOVE_ACTION) {
 			int relationSeq = Integer.parseInt(request.getParameter("relationSeq"));
 			boardService.removeTrackback(relationSeq);
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));

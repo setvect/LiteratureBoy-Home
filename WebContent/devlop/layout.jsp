@@ -20,7 +20,13 @@
 	</c:if>
 	<div class="container" >
 		<div class="left">
-			<jsp:include page="/include/menu.inc.jsp" />
+			<div class="left_area">
+				<div class="main_image"><a href="/"><img src="/upload/image_reg/main_08.jpg" alt="야구장에서..."/></a></div>
+				<ul>
+					<li><a href="/literatureboy/bd.do?searchCode=BDBBAA01">지식</a></li>
+				</ul>
+				<hr/>
+			</div>
 		</div>
 		<div class="content">
 			<jsp:include page="${INCLUDE_PAGE}"></jsp:include>

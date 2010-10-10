@@ -98,6 +98,7 @@ public class AccessChecker {
 			return true;
 		}
 
+		// 해당 사용자가 가지고 있는 맴핑 정보
 		Collection<AuthMap> authMap = AuthCache.getAuthMapCache(user.getUserId());
 		for (Auth auth : matchAuthList) {
 			for (AuthMap map : authMap) {

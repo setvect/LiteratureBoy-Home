@@ -27,6 +27,9 @@ public class ConstraintWeb {
 		SERVLET_URL,
 		// 게시판 전체 정보
 		BOARD_ITEMS,
+		// 상위 컨트롤러에서 전달하는 뷰 모델 
+		MODEL_VIEW,
+
 	}
 
 	/** 업로드 파일 확장자 */
