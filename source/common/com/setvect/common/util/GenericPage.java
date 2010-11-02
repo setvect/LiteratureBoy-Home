@@ -2,8 +2,6 @@ package com.setvect.common.util;
 
 import java.util.Collection;
 
-import anyframe.common.Page;
-
 /**
  * Page에서 검색된 객체들의 타입을 지정함
  */

@@ -1,10 +1,14 @@
 package com.setvect.common.util;
 
-import java.util.List;
+import java.io.IOException;
+import java.security.MessageDigest;
 
 import org.apache.commons.lang.StringUtils;
 
-import anyframe.common.util.StringUtil;
+import com.setvect.common.log.LogPrinter;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  * anyframe.common.util.StringUtil에서 사용하고 있는 Methd Delegate
@@ -19,6 +23,7 @@ public class StringUtilAd extends StringUtils {
 	 * @return sql String 값에 들어가도록 변경
 	 */
 	public static String getSqlString(String word) {
+
 		word = null2str(word);
 		word = replace(word, "'", "''");
 		word = word.trim();
@@ -96,6 +101,26 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
+	 * @param word
+	 *            문자열
+	 * @return word가 null 이면 빈문자열로 변환
+	 */
+	public static String null2str(String word) {
+		return word == null ? "" : word;
+	}
+
+	/**
+	 * @param word
+	 *            문자열
+	 * @param substitution
+	 *            대체 문자열
+	 * @return word가 null 이면 대체 문자열로 변환
+	 */
+	public static String null2str(String word, String substitution) {
+		return word == null ? substitution : word;
+	}
+
+	/**
 	 * s2 배열에중에 s1과 같은 문장이 있는지 검사. 만약 있으면 존제하는 배열위치 리턴
 	 * 
 	 * @param s1
@@ -116,197 +141,48 @@ public class StringUtilAd extends StringUtils {
 		return -1;
 	}
 
-	/**
-	 * @param password
-	 * @param algorithm
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#encodePassword(java.lang.String, java.lang.String)
-	 */
 	public static String encodePassword(String password, String algorithm) {
-		return StringUtil.encodePassword(password, algorithm);
+		byte[] unencodedPassword = password.getBytes();
+
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance(algorithm);
+		} catch (Exception e) {
+			LogPrinter.out.error("Exception: " + e);
+			return password;
+		}
+
+		md.reset();
+
+		md.update(unencodedPassword);
+
+		byte[] encodedPassword = md.digest();
+
+		StringBuffer buf = new StringBuffer();
+
+		for (int i = 0; i < encodedPassword.length; ++i) {
+			if ((encodedPassword[i] & 0xFF) < 16) {
+				buf.append("0");
+			}
+
+			buf.append(Long.toString(encodedPassword[i] & 0xFF, 16));
+		}
+
+		return buf.toString();
 	}
 
-	/**
-	 * @param str
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#encodeString(java.lang.String)
-	 */
-	public static String encodeString(String str) {
-		return StringUtil.encodeString(str);
-	}
-
-	/**
-	 * @param str
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#decodeString(java.lang.String)
-	 */
 	public static String decodeString(String str) {
-		return StringUtil.decodeString(str);
+		BASE64Decoder dec = new BASE64Decoder();
+		try {
+			return new String(dec.decodeBuffer(str));
+		} catch (IOException io) {
+			throw new RuntimeException(io.getMessage(), io.getCause());
+		}
 	}
 
-	/**
-	 * @param str
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#swapFirstLetterCase(java.lang.String)
-	 */
-	public static String swapFirstLetterCase(String str) {
-		return StringUtil.swapFirstLetterCase(str);
-	}
-
-	/**
-	 * @param origStr
-	 * @param strToken
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#getLastString(java.lang.String, java.lang.String)
-	 */
-	public static String getLastString(String origStr, String strToken) {
-		return StringUtil.getLastString(origStr, strToken);
-	}
-
-	/**
-	 * @param str
-	 * @param strToken
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#getStringArray(java.lang.String, java.lang.String)
-	 */
-	public static String[] getStringArray(String str, String strToken) {
-		return StringUtil.getStringArray(str, strToken);
-	}
-
-	/**
-	 * @param str
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#string2integer(java.lang.String)
-	 */
-	public static int string2integer(String str) {
-		return StringUtil.string2integer(str);
-	}
-
-	/**
-	 * @param integer
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#integer2string(int)
-	 */
-	public static String integer2string(int integer) {
-		return StringUtil.integer2string(integer);
-	}
-
-	/**
-	 * @param str
-	 * @param pattern
-	 * @return
-	 * @throws Exception
-	 * @see com.setvect.common.StringUtil.StringUtil#isPatternMatching(java.lang.String, java.lang.String)
-	 */
-	public static boolean isPatternMatching(String str, String pattern) throws Exception {
-		return StringUtil.isPatternMatching(str, pattern);
-	}
-
-	/**
-	 * @param str
-	 * @param maxSeqNumber
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#containsMaxSequence(java.lang.String, java.lang.String)
-	 */
-	public static boolean containsMaxSequence(String str, String maxSeqNumber) {
-		return StringUtil.containsMaxSequence(str, maxSeqNumber);
-	}
-
-	/**
-	 * @param str
-	 * @param invalidChars
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#containsInvalidChars(java.lang.String, char[])
-	 */
-	public static boolean containsInvalidChars(String str, char[] invalidChars) {
-		return StringUtil.containsInvalidChars(str, invalidChars);
-	}
-
-	/**
-	 * @param str
-	 * @param invalidChars
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#containsInvalidChars(java.lang.String, java.lang.String)
-	 */
-	public static boolean containsInvalidChars(String str, String invalidChars) {
-		return StringUtil.containsInvalidChars(str, invalidChars);
-	}
-
-	/**
-	 * @param originalStr
-	 * @param ch
-	 * @param cipers
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#fillString(java.lang.String, char, int)
-	 */
-	public static String fillString(String originalStr, char ch, int cipers) {
-		return StringUtil.fillString(originalStr, ch, cipers);
-	}
-
-	/**
-	 * @param lst
-	 * @param separator
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#getTokens(java.lang.String, java.lang.String)
-	 */
-	public static List<String> getTokens(String lst, String separator) {
-		return StringUtil.getTokens(lst, separator);
-	}
-
-	/**
-	 * @param lst
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#getTokens(java.lang.String)
-	 */
-	public static List<String> getTokens(String lst) {
-		return StringUtil.getTokens(lst);
-	}
-
-	/**
-	 * @param targetString
-	 * @param posChar
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#convertToCamelCase(java.lang.String, char)
-	 */
-	public static String convertToCamelCase(String targetString, char posChar) {
-		return StringUtil.convertToCamelCase(targetString, posChar);
-	}
-
-	/**
-	 * @param underScore
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#convertToCamelCase(java.lang.String)
-	 */
-	public static String convertToCamelCase(String underScore) {
-		return StringUtil.convertToCamelCase(underScore);
-	}
-
-	/**
-	 * @param camelCase
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#convertToUnderScore(java.lang.String)
-	 */
-	public static String convertToUnderScore(String camelCase) {
-		return StringUtil.convertToUnderScore(camelCase);
-	}
-
-	/**
-	 * @param org
-	 * @param converted
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#null2str(java.lang.String, java.lang.String)
-	 */
-	public static String null2str(String org, String converted) {
-		return StringUtil.null2str(org, converted);
-	}
-
-	/**
-	 * @param org
-	 * @return
-	 * @see com.setvect.common.StringUtil.StringUtil#null2str(java.lang.String)
-	 */
-	public static String null2str(String org) {
-		return StringUtil.null2str(org);
+	public static String encodeString(String str) {
+		BASE64Encoder encoder = new BASE64Encoder();
+		return new String(encoder.encodeBuffer(str.getBytes())).trim();
 	}
 
 }
