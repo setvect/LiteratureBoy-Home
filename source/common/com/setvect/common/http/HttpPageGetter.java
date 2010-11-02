@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -24,16 +26,20 @@ import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
 
 /**
  * 웹페이지 주도에 대한 내용을 가져옴
  * 
- * @version $Id$ 
+ * @version $Id: HttpPageGetter.java 131 2010-11-02 06:21:57Z setvect@naver.com
+ *          $
  */
 public class HttpPageGetter {
+
+	public static final String METHOD_GET = "GET";
+	public static final String METHOD_POST = "POST";
+
 	/** 기본 캐릭터 셋(데이터 받는 상황에서) */
 	private static final String DEFAULT_BODY_CHARSET = "utf-8";
 
@@ -53,10 +59,16 @@ public class HttpPageGetter {
 	private URL urlinfo;
 
 	/** URL 오픈 커넥션 */
-	private URLConnection conn;
+	private HttpURLConnection conn;
 
 	/** 연결 제한 시간, 기본값 0, 단위 밀리세컨드 */
 	private int conntionTimeout = 0;
+
+	/**
+	 * @see #METHOD_GET
+	 * @see #METHOD_POST
+	 */
+	private String method = METHOD_GET;
 
 	/**
 	 * @param url
@@ -82,22 +94,36 @@ public class HttpPageGetter {
 	}
 
 	/**
+	 * 일반적으로 UrlPageInfo(String, String)를 사용<br>
+	 * 상식적으로 데이터를 받을때 캐릭터넷을 정의할 필요는 없다.<br>
+	 * http 해더를 분석해서 받는 url에 charset를 알아야 된다. <br>
+	 * 그러나 getContentType()에서 charset정보를 주지 않는 경우가 있음.<br>
+	 * 이때는 호출 하는 쪽에서 처리
+	 * 
 	 * @param url
 	 *            URL 주소 <br>
-	 *            ex)http://www.idq.co.kr/page/main.asp
+	 *            ex)http://www.google.com/page/main.asp
 	 * @param bodyCharset
 	 *            본문 캐릭터 셋
 	 * @param urlCharset
 	 *            url 파라미터 캐릭터 셋
-	 * @deprecated UrlPageInfo(String, String)를 사용<br>
-	 *             상식적으로 데이터를 받을때 캐릭터넷을 정의할 필요는 없다.<br>
-	 *             http 해더를 분석해서 받는 url에 charset를 알아야 된다.
+	 * 
 	 */
 	public HttpPageGetter(String url, String bodyCharset, String urlCharset) {
 		this.url = url;
 		this.bodyCharset = bodyCharset;
 		this.urlCharset = urlCharset;
 
+	}
+
+	/**
+	 * @param method
+	 *            the method to set
+	 * @see #METHOD_GET
+	 * @see #METHOD_POST
+	 */
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
 	/**
@@ -110,8 +136,28 @@ public class HttpPageGetter {
 		}
 		try {
 			urlinfo = new URL(getUrl());
-			conn = urlinfo.openConnection();
+			conn = (HttpURLConnection) urlinfo.openConnection();
 			conn.setConnectTimeout(conntionTimeout);
+			conn.setRequestMethod(method);
+
+			if (method.equals(METHOD_POST)) {
+				conn.setDoInput(true);
+				conn.setDoOutput(true);
+				conn.setRequestMethod("POST");
+				String params = getParameterString();
+				OutputStream os = null;
+				try {
+					os = conn.getOutputStream();
+					os.write(params.getBytes());
+					os.flush();
+					os.close();
+				} finally {
+					if (os != null) {
+						os.close();
+					}
+				}
+			}
+
 			// 본문 캐릭터 셋이 없을 경우 해더 분석
 			if (bodyCharset == null) {
 				// application/x-msdownload; charset=utf-8 이런식으로 옮
@@ -141,19 +187,27 @@ public class HttpPageGetter {
 	 */
 	public String getBody() throws IOException {
 		conn();
-		InputStream in = conn.getInputStream();
-		byte buf[] = new byte[1024];
-		ByteArrayOutputStream bout = new ByteArrayOutputStream();
-		while (true) {
-			int n = in.read(buf);
-			if (n == -1)
-				break;
-			if (n != 0) {
-				bout.write(buf, 0, n);
+		InputStream in = null;
+		String body = null;
+		try {
+			in = conn.getInputStream();
+			byte buf[] = new byte[1024];
+			ByteArrayOutputStream bout = new ByteArrayOutputStream();
+			while (true) {
+				int n = in.read(buf);
+				if (n == -1)
+					break;
+				if (n != 0) {
+					bout.write(buf, 0, n);
+				}
+			}
+			bout.flush();
+			body = new String(bout.toByteArray(), bodyCharset);
+		} finally {
+			if (in != null) {
+				in.close();
 			}
 		}
-		bout.flush();
-		String body = new String(bout.toByteArray(), bodyCharset);
 		return body;
 	}
 
@@ -396,17 +450,28 @@ public class HttpPageGetter {
 	 * @return 주소+파라미터
 	 */
 	public String getUrl() {
+		if (method.equals(METHOD_POST)) {
+			return url;
+		}
+		String parameterString = getParameterString();
+		if (StringUtilAd.isEmpty(parameterString)) {
+			return url;
+		} else {
+			return url + "?" + parameterString;
+		}
+
+	}
+
+	/**
+	 * @return 파라미터 정보를 문자열로 변경
+	 */
+	private String getParameterString() {
 		Enumeration<String> enum1 = parameter.keys();
 		StringBuffer buf = new StringBuffer();
-		boolean isFirst = true;
 		while (enum1.hasMoreElements()) {
-			if (isFirst) {
-				isFirst = false;
-				buf.append('?');
-			} else {
+			if (buf.length() != 0) {
 				buf.append('&');
 			}
-
 			String key = (String) enum1.nextElement();
 			String value = (String) parameter.get(key);
 			try {
@@ -414,10 +479,10 @@ public class HttpPageGetter {
 				buf.append('=');
 				buf.append(URLEncoder.encode(value, urlCharset));
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
-		return url + buf.toString();
+		return buf.toString();
 	}
 
 	/**
