@@ -31,7 +31,7 @@ import com.setvect.common.util.StringUtilAd;
 /**
  * 웹페이지 주도에 대한 내용을 가져옴
  * 
- * @version $Id$
+ * @version $Id$ 
  */
 public class HttpPageGetter {
 	/** 기본 캐릭터 셋(데이터 받는 상황에서) */
