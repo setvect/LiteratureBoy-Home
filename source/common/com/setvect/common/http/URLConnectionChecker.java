@@ -9,6 +9,7 @@ import java.net.URL;
  * url 주소를 통해 정상적인 경로인지 파악
  * @version $Id$
  */
+
 public class URLConnectionChecker {
 	/**
 	 * @param url
