@@ -10,6 +10,7 @@ import java.net.URL;
  * @version $Id$
  */
 public class URLConnectionChecker {
+	
 	/**
 	 * @param url
 	 *            URL 전체 주소<br>
