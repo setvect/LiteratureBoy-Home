@@ -105,8 +105,7 @@ public class FileUtil extends FileUtils {
 				while ((read = fin.read(b)) != -1) {
 					outs.write(b, 0, read);
 				}
-			}
-			else {
+			} else {
 				throw new IOException("파일이 없습니다. : " + file);
 			}
 		} catch (IOException e) {
@@ -187,5 +186,46 @@ public class FileUtil extends FileUtils {
 	public static boolean makeDir(String strDir) {
 		File makeDir = new File(strDir);
 		return makeDir.mkdir();
+	}
+
+	/**
+	 * File 삭제
+	 * 
+	 * @param path
+	 *            File명(Full Path)
+	 * @return bool 성공(true), 실패(false)
+	 */
+	public static boolean delFile(String path) {
+		boolean bool = false;
+		File f = new File(path);
+
+		// 파일 일때만 삭제를 한다. 괜히 디렉토리 까지 지울 수 있다.
+		if (f.exists() && f.isFile()) {
+			try {
+				bool = f.delete();
+			} catch (SecurityException e) {
+				bool = false;
+			}
+		}
+
+		return bool;
+	}
+
+	/**
+	 * File 존재 여부
+	 * 
+	 * @param path
+	 *            File명(Full Path)
+	 * @return bool 성공(true), 실패(false)
+	 */
+	public static boolean isExists(String path) {
+		boolean bool = false;
+		File f = new File(path);
+
+		if (f.exists() && f.isFile()) {
+			bool = true;
+		}
+
+		return bool;
 	}
 }
