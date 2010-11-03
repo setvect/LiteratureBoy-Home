@@ -117,7 +117,11 @@ public class StringUtilAd extends StringUtils {
 	 * @return word가 null 이면 대체 문자열로 변환
 	 */
 	public static String null2str(String word, String substitution) {
-		return word == null ? substitution : word;
+		if (word == null || word.equals("")) {
+			return substitution;
+		} else {
+			return word;
+		}
 	}
 
 	/**
