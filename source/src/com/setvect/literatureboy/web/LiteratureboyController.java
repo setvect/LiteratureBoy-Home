@@ -84,8 +84,7 @@ public class LiteratureboyController {
 			boolean include = StringUtilAd.isInclude(request.getParameter("searchCode"), listContentViewBoard);
 			if (include) {
 				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list_body.jsp");
-			}
-			else {
+			} else {
 				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list.jsp");
 			}
 			jsp.put(BoardArticleController.JspPageKey.READ, "/app/board/user/board_article_read.jsp");
@@ -106,7 +105,9 @@ public class LiteratureboyController {
 			BoardArticle[] mainPage = list.getList().toArray(new BoardArticle[0]);
 			ModelAndView modelAndView = new ModelAndView(ConstraintWeb.LITERATUREBOY_LAYOUT);
 			modelAndView.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/literatureboy/main.jsp");
-			modelAndView.addObject(AttributeKey.MAIN_ARTICLE.name(), mainPage[0]);
+			if (mainPage.length != 0) {
+				modelAndView.addObject(AttributeKey.MAIN_ARTICLE.name(), mainPage[0]);
+			}
 			return modelAndView;
 		}
 
