@@ -10,7 +10,6 @@ import java.util.BitSet;
  * 
  * 스트링 + 키값을 = HEX로 변환된 스트링
  * 
- * @author <a href="mailto:setvect@idq.co.kr">장정호 </a>
  * @version $Id: StringEncrypt.java,v 1.7 2006/10/24 13:47:42 setvect Exp $
  */
 public class StringEncrypt {
@@ -62,8 +61,7 @@ public class StringEncrypt {
 		for (i = 0; i < s; i += CUT_STRING_LEN) {
 			if (i + CUT_STRING_LEN < s) {
 				lm_sbT.append(lm_sValue.substring(i, i + CUT_STRING_LEN));
-			}
-			else {
+			} else {
 				lm_sbT.append(lm_sValue.substring(i, s));
 			}
 

@@ -1,6 +1,4 @@
-/*
- * Copyright (c) DQ Co., Ltd
- */
+
 package com.setvect.common.date;
 
 import java.io.Serializable;
@@ -11,8 +9,6 @@ import java.util.Date;
  * 날짜의 범위를 나타내줌 <br>
  * 날짜 범위 검색에 필요한 파라미터 역활을 할 수 있음
  * 
- * @author <a href="mailto:setvect@idq.co.kr">장정호 </a>
- * @version $Id: DateRange.java,v 1.6 2006/06/28 06:28:23 setvect Exp $
  */
 public class DateRange implements Serializable {
 

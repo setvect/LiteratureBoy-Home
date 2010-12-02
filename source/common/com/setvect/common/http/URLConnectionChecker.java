@@ -14,7 +14,7 @@ public class URLConnectionChecker {
 	/**
 	 * @param url
 	 *            URL 전체 주소<br>
-	 *            ex) http://www.idq.co.kr/page/main.html
+	 *            ex) http://www.naver.com/index.html
 	 * @return 접근 가능하면 true 아니면 false;
 	 */
 	public static boolean isConnectionable(String url) {

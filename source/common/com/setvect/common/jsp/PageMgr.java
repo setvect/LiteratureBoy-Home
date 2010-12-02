@@ -491,7 +491,6 @@ public class PageMgr {
 	 * 디자인 요소<br>
 	 * page navigation에 링크 디자인 요소와 변수(링크 번호, 주소)를 따로
 	 * 
-	 * @author <a href="mailto:setvect@idq.co.kr">장정호 </a>
 	 * @version $Id$
 	 */
 	public class DesignElement {

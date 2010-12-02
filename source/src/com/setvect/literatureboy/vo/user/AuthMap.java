@@ -1,6 +1,3 @@
-/*
- * Copyright (c) DQ Co., Ltd
- */
 package com.setvect.literatureboy.vo.user;
 
 import javax.persistence.Entity;

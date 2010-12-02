@@ -1,6 +1,3 @@
-/*
- * Copyright (c) DQ Co., Ltd
- */
 
 package com.setvect.common.date;
 
@@ -12,8 +9,6 @@ import java.util.Date;
 /**
  * 날짜, 시간관련된 클래
  * 
- * @author <a href="mailto:setvect@idq.co.kr">장정호 </a>
- * @version $Id: DateTime.java,v 1.11 2006/07/12 05:33:59 setvect Exp $
  */
 public abstract class DateUtil {
 

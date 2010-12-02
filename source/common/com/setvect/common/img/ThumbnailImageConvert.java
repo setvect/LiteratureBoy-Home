@@ -14,7 +14,6 @@ import com.setvect.common.util.FileUtil;
 /**
  * 섬네일 이미지 제작
  * 
- * @author <a href="mailto:setvect@idq.co.kr">장정호 </a>
  * @version $Id$
  */
 public class ThumbnailImageConvert {

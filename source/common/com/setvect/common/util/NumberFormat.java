@@ -1,12 +1,9 @@
-/*
- * Copyright (c) DQ Co., Ltd 
- */
+
 package com.setvect.common.util;
 
 /**
  *  숫자 포맵 변환 관련 클래스
  * 
- * @author <a href="mailto:setvect@idq.co.kr">장정호 </a>
  * @version $Id: NumberFormat.java,v 1.5 2006/06/28 06:28:23 setvect Exp $
  */
 public class NumberFormat {

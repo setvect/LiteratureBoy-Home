@@ -73,7 +73,7 @@ public class HttpPageGetter {
 	/**
 	 * @param url
 	 *            URL 주소 <br>
-	 *            ex)http://www.idq.co.kr/page/main.asp
+	 *            ex)http://www.naver.com/index.html
 	 */
 	public HttpPageGetter(String url) {
 		this.url = url;
@@ -83,7 +83,7 @@ public class HttpPageGetter {
 	/**
 	 * @param url
 	 *            URL 주소 <br>
-	 *            ex)http://www.idq.co.kr/page/main.asp
+	 *            ex)http://www.naver.com/index.html
 	 * @param urlCharset
 	 *            url 파라미터 캐릭터 셋
 	 */
