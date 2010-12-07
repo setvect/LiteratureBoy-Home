@@ -9,7 +9,7 @@ import java.util.TreeSet;
 /**
  * 카테고리, 메뉴, 권한 정보를 캐싱한다.
  */
-public class TreeManager<OBJ extends TreeItem> {
+public class TreeCollection<OBJ extends TreeItem> {
 	/** 카테고리 정보 */
 	private Hashtable<Object, OBJ> category = new Hashtable<Object, OBJ>();
 
@@ -26,7 +26,7 @@ public class TreeManager<OBJ extends TreeItem> {
 	 *            카테고리 root 아이디
 	 */
 	@SuppressWarnings("unchecked")
-	public TreeManager(OBJ[] items, Object rootID) {
+	public TreeCollection(OBJ[] items, Object rootID) {
 		if (items.length == 0) {
 			throw new RuntimeException("items size zero!!.");
 		}
@@ -40,7 +40,7 @@ public class TreeManager<OBJ extends TreeItem> {
 	/**
 	 * @return 루트 카테고리 아이디
 	 */
-	public Object getCategoryRootID() {
+	public Object getRootID() {
 		return categoryRootID;
 	}
 
@@ -61,27 +61,36 @@ public class TreeManager<OBJ extends TreeItem> {
 	 *            카테고리 아이디
 	 * @return 카테고리 정보
 	 */
-	public OBJ getCategory(Object categoryID) {
+	public OBJ get(Object categoryID) {
 		return category.get(categoryID);
 	}
 
 	/**
 	 * 
-	 * @param parentID
-	 *            부모 카테고리
+	 * @param baseRootCategoryID
+	 *            트리 시작 지점
 	 * @return 자식 객체 정보
 	 */
-	public OBJ[] getChildCategory(Object parentID) {
+	public OBJ[] getTree(Object baseRootCategoryID) {
 		Enumeration<OBJ> e = category.elements();
 		TreeSet<OBJ> n = new TreeSet<OBJ>();
 		OBJ mc = null;
 		while (e.hasMoreElements()) {
 			mc = (OBJ) e.nextElement();
-			if (mc.getParent().equals(parentID) && !mc.getId().equals(categoryRootID)) {
+			if (mc.getParent().equals(baseRootCategoryID) && !mc.getId().equals(categoryRootID)) {
 				n.add(mc);
 			}
 		}
 		return (OBJ[]) n.toArray(_obj_empty_array);
+	}
+
+	/**
+	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
+	 * 
+	 * @return 카테고리 전체 구조(루트 카테고리 제외 )
+	 */
+	public OBJ[] getTree() {
+		return getCategoryTree(categoryRootID);
 	}
 
 	/**
@@ -91,7 +100,7 @@ public class TreeManager<OBJ extends TreeItem> {
 	 *            루트로 부터 formCategoryID카테고리 까지 경로를 구함
 	 * @return 카테고리 경로
 	 */
-	public OBJ[] getCategoryPath(Object formCategoryID) {
+	public OBJ[] getPath(Object formCategoryID) {
 		ArrayList<OBJ> saveCategory = new ArrayList<OBJ>();
 		path(formCategoryID, saveCategory);
 
@@ -118,22 +127,13 @@ public class TreeManager<OBJ extends TreeItem> {
 	 *            재귀 호출을 통해 카테고리 정보를 담는 변수
 	 */
 	private void path(Object currentCategoryID, ArrayList<OBJ> saveCategory) {
-		OBJ mc = getCategory(currentCategoryID);
+		OBJ mc = get(currentCategoryID);
 		saveCategory.add(mc);
 
 		// 루트 카테고리가 아니면 하위 카테고리를 더 찾음
 		if (!currentCategoryID.equals(categoryRootID)) {
 			path(mc.getParent(), saveCategory);
 		}
-	}
-
-	/**
-	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
-	 * 
-	 * @return 카테고리 전체 구조(루트 카테고리 제외 )
-	 */
-	public OBJ[] getCategoryTree() {
-		return getCategoryTree(categoryRootID);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class TreeManager<OBJ extends TreeItem> {
 		}
 
 		// 루트 카테고리 지정
-		OBJ root = getCategory(rootCategory);
+		OBJ root = get(rootCategory);
 		if (modifyLevel) {
 			root.setLevel(level);
 		}
