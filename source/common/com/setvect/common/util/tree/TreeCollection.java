@@ -9,7 +9,7 @@ import java.util.TreeSet;
 /**
  * 카테고리, 메뉴, 권한 정보를 캐싱한다.
  */
-public class TreeCollection<OBJ extends TreeItem> {
+public class TreeCollection<OBJ extends TreeItem<?>> {
 	/** 카테고리 정보 */
 	private Hashtable<Object, OBJ> category = new Hashtable<Object, OBJ>();
 
