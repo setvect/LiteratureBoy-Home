@@ -69,9 +69,9 @@ public class TreeCollection<OBJ extends TreeItem> {
 	 * 
 	 * @param baseRootCategoryID
 	 *            트리 시작 지점
-	 * @return 자식 객체 정보
+	 * @return 자식 객체 정보, 트리형태 아님
 	 */
-	public OBJ[] getTree(Object baseRootCategoryID) {
+	public OBJ[] getChild(Object baseRootCategoryID) {
 		Enumeration<OBJ> e = category.elements();
 		TreeSet<OBJ> n = new TreeSet<OBJ>();
 		OBJ mc = null;
@@ -90,7 +90,31 @@ public class TreeCollection<OBJ extends TreeItem> {
 	 * @return 카테고리 전체 구조(루트 카테고리 제외 )
 	 */
 	public OBJ[] getTree() {
-		return getCategoryTree(categoryRootID);
+		return getTree(categoryRootID);
+	}
+
+	/**
+	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
+	 * 
+	 * @param rootCategory
+	 *            시작되는 카테고리
+	 * @return 정렬된 카테고리 배열
+	 */
+	public OBJ[] getTree(Object rootCategory) {
+		return getTree(rootCategory, false);
+	}
+
+	/**
+	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
+	 * 
+	 * @param rootCategory
+	 *            시작되는 카테고리
+	 * @param rootSave
+	 *            루트 카테고리 포함 여부
+	 * @return 정렬된 카테고리 배열
+	 */
+	public OBJ[] getTree(Object rootCategory, boolean rootSave) {
+		return getTree(rootCategory, 0, true, rootSave);
 	}
 
 	/**
@@ -137,30 +161,6 @@ public class TreeCollection<OBJ extends TreeItem> {
 	}
 
 	/**
-	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
-	 * 
-	 * @param rootCategory
-	 *            시작되는 카테고리
-	 * @return 정렬된 카테고리 배열
-	 */
-	public OBJ[] getCategoryTree(Object rootCategory) {
-		return getCategoryTree(rootCategory, false);
-	}
-
-	/**
-	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
-	 * 
-	 * @param rootCategory
-	 *            시작되는 카테고리
-	 * @param rootSave
-	 *            루트 카테고리 포함 여부
-	 * @return 정렬된 카테고리 배열
-	 */
-	public OBJ[] getCategoryTree(Object rootCategory, boolean rootSave) {
-		return getCategoryTree(rootCategory, 0, true, rootSave);
-	}
-
-	/**
 	 * @param rootCategory
 	 *            시작 카테고리
 	 * @param level
@@ -171,7 +171,7 @@ public class TreeCollection<OBJ extends TreeItem> {
 	 *            루트 카테고리 포함 여부
 	 * @return 정렬된 카테고리 배열
 	 */
-	private OBJ[] getCategoryTree(Object rootCategory, int level, boolean modifyLevel, boolean rootSave) {
+	private OBJ[] getTree(Object rootCategory, int level, boolean modifyLevel, boolean rootSave) {
 		ArrayList<OBJ> saveCategory = new ArrayList<OBJ>();
 
 		Enumeration<OBJ> e = category.elements();
