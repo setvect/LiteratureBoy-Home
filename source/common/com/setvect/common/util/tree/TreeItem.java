@@ -13,7 +13,7 @@ public interface TreeItem<ID> extends Comparable<ID> {
 	/**
 	 * @return Returns the parent.
 	 */
-	public ID getParent();
+	public ID getParentId();
 
 	/**
 	 * @param level

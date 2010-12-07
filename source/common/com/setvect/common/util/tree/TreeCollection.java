@@ -77,7 +77,7 @@ public class TreeCollection<OBJ extends TreeItem> {
 		OBJ mc = null;
 		while (e.hasMoreElements()) {
 			mc = (OBJ) e.nextElement();
-			if (mc.getParent().equals(baseRootCategoryID) && !mc.getId().equals(categoryRootID)) {
+			if (mc.getParentId().equals(baseRootCategoryID) && !mc.getId().equals(categoryRootID)) {
 				n.add(mc);
 			}
 		}
@@ -156,7 +156,7 @@ public class TreeCollection<OBJ extends TreeItem> {
 
 		// 루트 카테고리가 아니면 하위 카테고리를 더 찾음
 		if (!currentCategoryID.equals(categoryRootID)) {
-			path(mc.getParent(), saveCategory);
+			path(mc.getParentId(), saveCategory);
 		}
 	}
 
@@ -214,7 +214,7 @@ public class TreeCollection<OBJ extends TreeItem> {
 			boolean modifyLevel) {
 		for (int i = 0; i < cat.length; i++) {
 			OBJ mc = cat[i];
-			if (mc.getParent().equals(currentCategoryID) && !mc.getId().equals(categoryRootID)) {
+			if (mc.getParentId().equals(currentCategoryID) && !mc.getId().equals(categoryRootID)) {
 				if (modifyLevel)
 					mc.setLevel(level);
 				saveCategory.add(mc);
