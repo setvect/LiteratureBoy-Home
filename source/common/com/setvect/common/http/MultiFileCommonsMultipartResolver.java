@@ -14,16 +14,19 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.setvect.common.util.StringUtilAd;
-import com.setvect.literatureboy.web.CommonUtil;
+import com.setvect.literatureboy.boot.ApplicationException;
 
 /**
- * Spring 2.5에서는 동일한 이름으로 첨부파일 등록 폼이 2개 이상이 경우 에러남
- * spring mvc 2.5.5 multipart multi file upload 지원<br>
+ * Spring 2.5에서는 동일한 이름으로 첨부파일 등록 폼이 2개 이상이 경우 에러남 spring mvc 2.5.5 multipart
+ * multi file upload 지원<br>
  * 참고: http://nezah.egloos.com/3994564<br>
  * 
  * @version $Id$
  */
 public class MultiFileCommonsMultipartResolver extends CommonsMultipartResolver {
+
+	private CheckAllowUploadFile ckFile;
+
 	protected MultipartParsingResult parseFileItems(List fileItems, String encoding) {
 		Map multipartFiles = new HashMap();
 		Map multipartParameters = new HashMap();
@@ -59,12 +62,19 @@ public class MultiFileCommonsMultipartResolver extends CommonsMultipartResolver 
 			else {
 				CommonsMultipartFile file = new CommonsMultipartFile(fileItem);
 				// if (multipartFiles.put(file.getName(), file) != null) {
-				// throw new MultipartException("Multiple files for field name [" + file.getName()
+				// throw new
+				// MultipartException("Multiple files for field name [" +
+				// file.getName()
 				// + "] found - not supported by MultipartResolver");
 				// }
 
 				if (!StringUtilAd.isEmpty(file.getOriginalFilename())) {
-					CommonUtil.checkAllowUploadFile(file.getOriginalFilename());
+					if(ckFile != null){
+						boolean allow = ckFile.check(file.getOriginalFilename()); 
+						if(!allow){
+							throw new RuntimeException("[" + file.getOriginalFilename() + "] is not allow file");
+						}
+					}
 
 					List list = (List) multipartFiles.get(file.getName());
 					if (list != null) {
@@ -103,5 +113,13 @@ public class MultiFileCommonsMultipartResolver extends CommonsMultipartResolver 
 				file.getFileItem().delete();
 			}
 		}
+	}
+
+	/**
+	 * @param ckFile
+	 *            파일 업로드 체크
+	 */
+	public void setCkFile(CheckAllowUploadFile ckFile) {
+		this.ckFile = ckFile;
 	}
 }
