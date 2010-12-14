@@ -14,7 +14,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.setvect.common.util.StringUtilAd;
-import com.setvect.literatureboy.boot.ApplicationException;
 
 /**
  * Spring 2.5에서는 동일한 이름으로 첨부파일 등록 폼이 2개 이상이 경우 에러남 spring mvc 2.5.5 multipart
