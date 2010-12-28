@@ -27,7 +27,6 @@
 				${ _user_session_key.userId}
 				<a href="/user/logout.do">로그아웃</a>
 			</c:if>		
-			<h2>Categories :</h2>
 			<ul>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA01">글</a></li>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA09">꿈</a></li>
