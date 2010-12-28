@@ -3,7 +3,7 @@
 <div class="main_content">
 	<c:if test="${! empty MAIN_ARTICLE}">
 		${MAIN_ARTICLE.content}
-		<div>
+		<div class="tail">
 			<a href="/literatureboy/bd.do?searchCode=${MAIN_ARTICLE.boardCode}">이전 메인화면</a>	
 		</div>
 	</c:if>

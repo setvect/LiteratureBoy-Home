@@ -5,10 +5,10 @@ import java.security.MessageDigest;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.setvect.common.log.LogPrinter;
-
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
+import com.setvect.common.log.LogPrinter;
 
 /**
  * anyframe.common.util.StringUtil에서 사용하고 있는 Methd Delegate
@@ -119,7 +119,8 @@ public class StringUtilAd extends StringUtils {
 	public static String null2str(String word, String substitution) {
 		if (word == null || word.equals("")) {
 			return substitution;
-		} else {
+		}
+		else {
 			return word;
 		}
 	}
@@ -175,6 +176,11 @@ public class StringUtilAd extends StringUtils {
 		return buf.toString();
 	}
 
+	/**
+	 * @param str
+	 *            base64로 된 문자열
+	 * @return 디코딩 된 문자열
+	 */
 	public static String decodeString(String str) {
 		BASE64Decoder dec = new BASE64Decoder();
 		try {
@@ -184,9 +190,67 @@ public class StringUtilAd extends StringUtils {
 		}
 	}
 
+	/**
+	 * @param str
+	 *            인코딩 할 문자열
+	 * @return base64 문자열
+	 */
 	public static String encodeString(String str) {
 		BASE64Encoder encoder = new BASE64Encoder();
 		return new String(encoder.encodeBuffer(str.getBytes())).trim();
 	}
 
+	/**
+	 * 바이트 단위 스트링 절삭 (한글 인코딩에 따라 안될 수도 있음)
+	 * 
+	 * @param str
+	 *            스트링
+	 * @param sz
+	 *            자를 바이트수
+	 * @return 잘라진 스트링
+	 */
+	public static String substringByte(String str, int limit) {
+
+		if (str == null)
+			return str;
+
+		int len = str.length();
+		int cnt = 0, index = 0;
+
+		while (index < len && cnt < limit) {
+			if (str.charAt(index++) < 256) // 1바이트 문자라면...
+				cnt++; // 길이 1 증가
+			else {
+				cnt += 2; // 길이 2 증가
+			}
+		}
+
+		if (index < len && limit >= cnt)
+			str = str.substring(0, index);
+		else if (index < len && limit < cnt)
+			str = str.substring(0, index - 1);
+		return str;
+	}
+
+	/**
+	 * 제목등에 표시할때 스트링 줄임을 표현 (...)<br>
+	 * 바이트 단위
+	 * 
+	 * @param s
+	 *            원본스트링
+	 * @param limit
+	 *            표현 한계
+	 * @return 줄임 처리된 스트링
+	 */
+	public static String lessen(String s, int limit) {
+		String t;
+		// ... 문자열 사이즈
+		t = substringByte(s, limit - 3);
+		if (s == null || s.equals(t)) {
+			return t;
+		}
+		else {
+			return t + "...";
+		}
+	}
 }

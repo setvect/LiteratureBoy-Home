@@ -1,0 +1,251 @@
+@charset "utf-8";
+* {
+    padding: 0;
+    margin: 0;
+} 
+
+body {
+background: #555;
+font-family: dotum, Verdana, Arial, Helvetica, sans-serif;
+font-size: 14px; 
+line-height: 23px;
+color: #333333;;
+}
+
+img { border: none; }
+a { color: #3E92EA;  }
+a:hover { text-decoration: none; color : #000; }
+
+#wrap {
+margin: 40px auto 0 auto;
+width: 800px;
+}
+
+#header { 
+padding-bottom:10px;
+}
+#header h1 {
+font-size: 26px;
+font-weight: 100;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+padding: 12px 0 5px 10px;
+}
+#header h1 a {
+color: #fff;
+text-decoration: none;
+}
+#header h1 a:hover {
+color: #fff;
+text-decoration: none;
+}
+#header h2 {
+color: #ccc;
+font-size: 15px;
+font-weight: 100;
+padding: 0 0 0 11px;
+line-height: 12px;
+}
+
+#menu {
+height: 30px;
+line-height: 30px;
+background: #222 url(/image/menu.jpg) no-repeat;
+}
+#menu ul {
+padding-left: 10px;
+list-style-type: none;
+}
+#menu ul li {
+display: block;
+float: left;
+}
+#menu ul li a {
+color: #eee;
+padding: 0 10px;
+text-decoration: none;
+font-weight: 600;
+}
+#menu ul li a:hover {
+color: #fff;
+text-decoration: underline;
+}
+
+#content {
+background: #555 url(/image/content.jpg) repeat-y;
+padding: 10px 20px;
+}
+
+.left {
+width: 568px;
+float: left;
+text-align: justify;
+}
+
+.left h2 {
+color: #EEEEEE;
+font-size: 14px;
+font-weight: bold;
+padding : 3px 0 1px 5px;
+background-color: teal;
+}
+
+.left h3 {
+color: #0048FF;
+font-size: 16px;
+font-weight: 100;
+padding : 5px 0 7px 0;
+}
+
+.left .tail{
+	float:right;
+	font-size: 12px;
+	padding-bottom: 10px;
+}
+
+.right {
+width: 150px;
+float: right;
+padding: 10px;
+border-left: 1px solid #bbb;
+font-size: 14px;
+}
+.right ul {
+list-style-type: none;
+padding: 5px 10px 10px 10px;
+}
+.right h2 {
+height: 30px;
+font-size: 12px;
+color: #666;
+line-height: 30px;
+}
+.right a { text-decoration: none }
+
+#top {
+background: #555 url(/image/top.jpg) no-repeat;
+padding: 5px 0;
+}
+#bottom {
+background: #555 url(/image/bottom.jpg) no-repeat;
+padding: 10px 0;
+}
+
+#footer {
+text-align: center;
+color: #eee;
+font-size: 11px;
+padding: 0 0 10px 0;
+}
+
+/* ====== 문단 또는 글자 관련 ====== */
+.italic{font-style: italic;}
+
+/* ====== 목록 테이블 ====== */
+.list_table {
+	border-collapse: collapse;
+	border: 0px #fff;
+	color: #000;
+	background: #fff;
+	width: 100%;
+}
+.list_table thead th{ /* table header */
+	border: 1px solid #fff;
+	text-align: center;
+	text-decoration: none; 
+	color: #000000; 
+	/*font-weight: bold;*/
+	height:30px;
+	background: #E3E3E3; /*header bg color */
+	background-color:#E3E3E3; border-bottom-style: solid ; 
+	border-bottom-color: #808285; 				
+	border-bottom-width: 1px; 	                                          
+}
+
+.list_table td {  /* table td */         
+	text-align: center;    
+	border-bottom-style: solid ; 
+	border-bottom-color: #D6D7D6; 				
+	border-bottom-width: 1px; 	        
+	height:30px;           
+}
+
+.list_table .align_left {                                 
+	text-align: left;    
+} 
+
+.list_table .align_right{                                 
+	text-align: right;    
+}
+
+.list_pagelinks{
+	padding-top: 10px;
+	text-align:center;
+	width:100%;
+}
+
+
+
+/* Button Reset */
+.button{ margin:0 2px;}
+.button,
+.button a,
+.button button,
+.button input { position:relative; display:-moz-inline-stack; display:inline-block; text-decoration:none !important; border:0; font-size:12px; font-family:Tahoma, Sans-serif; white-space:nowrap; background:url(/image/buttonWhite.gif) no-repeat; overflow:visible; color:#333;}
+.button { height:23px; padding:0; vertical-align:middle; margin-right:2px; background-position:left top;}
+.button a,
+.button button,
+.button input{ left:2px; vertical-align:top; cursor:pointer;}
+
+
+/* Button Size */
+.button.large { height:29px; background-position:left -30px; }
+.button.xLarge { height:35px; background-position:left -65px; }
+.button.small { height:18px; background-position:left -107px; }
+.button a,
+.button button,
+.button input { height:23px; padding:0 10px 0 8px; font-size:12px; line-height:23px; background-position:right top;}
+.button.large a,
+.button.large button,
+.button.large input { height:30px; padding:0 10px 0 8px; font-size:16px; line-height:29px; background-position:right -30px;}
+.button.xLarge a,
+.button.xLarge button,
+.button.xLarge input { height:35px; padding:0 10px 0 8px; font-size:20px; line-height:35px; background-position:right -65px;}
+.button.small a,
+.button.small button,
+.button.small input { height:18px; padding:0 6px 0 4px; font-size:11px; line-height:18px; background-position:right -107px;}
+
+/* Button Text Color */
+.button *:hover,
+.button *:active,
+.button *:focus{ color:#690;}
+.button.green,
+.button.green a,
+.button.green button,
+.button.green input { background-image:url(/image/buttonGreen.gif); color:#fff;}
+.button.green *:hover,
+.button.green *:active,
+.button.green *:focus{ color:#ff0;}
+.button.black,
+.button.black a,
+.button.black button,
+.button.black input { background-image:url(/image/buttonBlack.gif); color:#fff;}
+.button.black *:hover,
+.button.black *:active,
+.button.black *:focus{ color:#ff0;}
+.button.red,
+.button.red a,
+.button.red button,
+.button.red input { background-image:url(/image/buttonRed.gif); color:#fff;}
+.button.red *:hover,
+.button.red *:active,
+.button.red *:focus{ color:#ff0;}
+.button.blue,
+.button.blue a,
+.button.blue button,
+.button.blue input { background-image:url(/image/buttonBlue.gif); color:#fff;}
+.button.blue *:hover,
+.button.blue *:active,
+.button.blue *:focus{ color:#ff0;}
+
+/* Button Text Strong */
+.button.strong * { font-weight:bold !important;}
