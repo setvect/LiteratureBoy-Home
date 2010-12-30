@@ -40,6 +40,14 @@ public class SearchListVo implements Serializable {
 	}
 
 	/**
+	 * @param currentPage
+	 *            현 페이지. 1부터 시작
+	 */
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	/**
 	 * @return 한페이지당 표시 항목 수
 	 */
 	public int getPagePerItemCount() {
