@@ -70,7 +70,7 @@ color: #fff;
 text-decoration: underline;
 }
 
-#content {
+#content_area {
 background: #555 url(/image/content.jpg) repeat-y;
 padding: 10px 20px;
 }

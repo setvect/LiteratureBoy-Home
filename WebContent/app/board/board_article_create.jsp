@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<form:textarea id="content" path="content"/><br>
+					<form:textarea id="content" path="content" cssStyle="width:590px; height:300px"/><br>
 					<input onclick="$.APP.openImageUpload();" type="button" value="이미지 첨부"/>
 				</td>
 			</tr>

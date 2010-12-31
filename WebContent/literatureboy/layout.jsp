@@ -17,7 +17,7 @@
 		<h2>글이란 옛 기억을 여는 열쇠</h2>
 	</div>
 	<div id="top"> </div>
-	<div id="content">
+	<div id="content_area">
 		<div class="left"> 
 			<jsp:include page="${INCLUDE_PAGE}"></jsp:include>
 		</div>
