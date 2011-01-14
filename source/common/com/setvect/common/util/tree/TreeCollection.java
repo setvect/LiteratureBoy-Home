@@ -114,7 +114,22 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	 * @return 정렬된 카테고리 배열
 	 */
 	public OBJ[] getTree(Object rootCategory, boolean rootSave) {
-		return getTree(rootCategory, 0, true, rootSave);
+		return getTree(rootCategory, 0, true, rootSave, null);
+	}
+
+	/**
+	 * 트리 표시 순서대로 카테고리를 정렬 해서 가져옴
+	 * 
+	 * @param rootCategory
+	 *            시작되는 카테고리
+	 * @param rootSave
+	 *            루트 카테고리 포함 여부
+	 * @param excludeCategory
+	 *            제외 할 메뉴(하위 그룹까지 다 제외)
+	 * @return 정렬된 카테고리 배열
+	 */
+	public OBJ[] getTree(Object rootCategory, boolean rootSave, Object excludeCategory) {
+		return getTree(rootCategory, 0, true, rootSave, excludeCategory);
 	}
 
 	/**
@@ -166,12 +181,14 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	 * @param level
 	 *            현재 진행 카테고리 깊이
 	 * @param modifyLevel
-	 *            ture 깊이 정보 변경, false 변경하지 않음 *
+	 *            ture 깊이 정보 변경, false 변경하지 않음
 	 * @param rootSave
 	 *            루트 카테고리 포함 여부
+	 * @param excludeCategory
+	 *            제외 할 메뉴(하위 그룹까지 다 제외)
 	 * @return 정렬된 카테고리 배열
 	 */
-	private OBJ[] getTree(Object rootCategory, int level, boolean modifyLevel, boolean rootSave) {
+	private OBJ[] getTree(Object rootCategory, int level, boolean modifyLevel, boolean rootSave, Object excludeCategory) {
 		ArrayList<OBJ> saveCategory = new ArrayList<OBJ>();
 
 		Enumeration<OBJ> e = category.elements();
@@ -191,7 +208,7 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 			saveCategory.add(root);
 		}
 
-		recurrence(cat, rootCategory, saveCategory, level + 1, modifyLevel);
+		recurrence(cat, rootCategory, saveCategory, level + 1, modifyLevel, excludeCategory);
 		return (OBJ[]) saveCategory.toArray(_obj_empty_array);
 	}
 
@@ -209,16 +226,22 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	 *            현재 진행 카테고리 깊이
 	 * @param modifyLevel
 	 *            ture 깊이 정보 변경, false 변경하지 않음
+	 * @param excludeCategory
+	 *            제외 할 메뉴(하위 그룹까지 다 제외)
 	 */
 	private void recurrence(OBJ[] cat, Object currentCategoryID, ArrayList<OBJ> saveCategory, int level,
-			boolean modifyLevel) {
+			boolean modifyLevel, Object excludeCategory) {
 		for (int i = 0; i < cat.length; i++) {
 			OBJ mc = cat[i];
 			if (mc.getParentId().equals(currentCategoryID) && !mc.getId().equals(categoryRootID)) {
-				if (modifyLevel)
+				if (modifyLevel) {
 					mc.setLevel(level);
-				saveCategory.add(mc);
-				recurrence(cat, mc.getId(), saveCategory, level + 1, modifyLevel);
+				}
+				// 제외 카테고리 검사
+				if (!mc.getId().equals(excludeCategory)) {
+					saveCategory.add(mc);
+					recurrence(cat, mc.getId(), saveCategory, level + 1, modifyLevel, excludeCategory);
+				}
 			}
 		}
 	}
