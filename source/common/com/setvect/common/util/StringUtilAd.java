@@ -2,6 +2,9 @@ package com.setvect.common.util;
 
 import java.io.IOException;
 import java.security.MessageDigest;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -252,5 +255,33 @@ public class StringUtilAd extends StringUtils {
 		else {
 			return t + "...";
 		}
+	}
+
+	/**
+	 * html 테그 제거
+	 * 
+	 * @param src
+	 *            Html 코드가 들어간 텍스트 데이터
+	 * @return 순수 TEXT 데이터만 리턴
+	 */
+	public static String clearHtml(String src) {
+		Pattern pa = Pattern.compile("<style>.+?</style>", Pattern.CASE_INSENSITIVE);
+		Matcher ma = pa.matcher(src);
+		String s = ma.replaceAll("");
+
+		pa = Pattern.compile("<.+?>", Pattern.CASE_INSENSITIVE);
+		ma = pa.matcher(s);
+		// return src.replaceAll(
+		// "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+		String clearStr = ma.replaceAll("").replaceAll("&nbsp;", " ").replaceAll("&quot;", "\"").replaceAll("&gt;", "")
+				.replaceAll("&lt;", "").replaceAll("&amp;", "");
+		// 중간 부분에 스페이스 영역을 하나로 축소
+		// "bcde    feafg" ===> "bcde feafg"
+		StringTokenizer st = new StringTokenizer(clearStr, " \r\n");
+		String rtnValue = "";
+		while (st.hasMoreTokens()) {
+			rtnValue += st.nextToken() + " ";
+		}
+		return rtnValue;
 	}
 }
