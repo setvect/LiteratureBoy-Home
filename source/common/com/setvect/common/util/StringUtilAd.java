@@ -91,6 +91,44 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
+	 * Html 코드를 텍스트로 코드화 변환
+	 * 
+	 * @param src
+	 *            html문자열
+	 * @return text로 변경된 문자열
+	 */
+	public static String toText(String src) {
+		String strBuffer = null2str(src, "");
+		strBuffer = replace(strBuffer, "&", "&amp;");
+		strBuffer = replace(strBuffer, "<", "&lt;");
+		strBuffer = replace(strBuffer, ">", "&gt;");
+		strBuffer = replace(strBuffer, "\"", "&quot;");
+		strBuffer = replace(strBuffer, "\'", "&#039;");
+		strBuffer = replace(strBuffer, " ", "&nbsp;");
+		// strBuffer.replaceAll(" ", "&nbsp;");
+		strBuffer = replace(strBuffer, "\n", "<br>");
+
+		// &#33324의 글자를 보존 하기 위해서
+		strBuffer = replace(strBuffer, "&amp;#", "&#");
+		return strBuffer;
+	}
+
+	/**
+	 * 개행문자를 br 테그를 변경
+	 * 
+	 * @param src
+	 *            source String
+	 * @return 변환된 String
+	 */
+	public static String toBr(String src) {
+		if (src == null) {
+			return StringUtilAd.EMPTY;
+		}
+		String strBuffer = src;
+		return replace(strBuffer, "\n", "<br>");
+	}
+
+	/**
 	 * s2 배열에중에 s1과 같은 문장이 있는지 검사
 	 * 
 	 * @param s1

@@ -56,7 +56,7 @@ public class LapTimeChecker {
 	public void check(String message) {
 		checkCount++;
 		long cur = System.currentTimeMillis();
-		out.println(name + ", " + NumberFormat.getNumberString("0000", checkCount) + ", " + (cur - startTime) + "ms, "
-				+ message);
+		out.println(name + ", " + NumberFormat.getNumberString("0000", checkCount) + ", "
+				+ NumberFormat.getNumberString(",###", cur - startTime) + "ms, " + message);
 	}
 }
