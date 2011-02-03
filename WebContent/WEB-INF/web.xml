@@ -49,7 +49,17 @@
 		<servlet-name>ThumbnailServlet</servlet-name>
 		<servlet-class>com.setvect.common.img.ThumbnailImageServlet</servlet-class>
 	</servlet>
-
+  
+  <servlet>
+    <servlet-name>greetServlet</servlet-name>
+    <servlet-class>com.setvect.gwt.server.GreetingServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>greetServlet</servlet-name>
+    <url-pattern>/gwtfirst/greet</url-pattern>
+  </servlet-mapping>
+  
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
