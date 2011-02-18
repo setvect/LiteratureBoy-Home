@@ -14,8 +14,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,6 +28,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
 
@@ -47,7 +50,10 @@ public class HttpPageGetter {
 	private String url;
 
 	/** 파라미터 정보 */
-	private Hashtable<String, String> parameter = new Hashtable<String, String>();
+	private Map<String, String> parameter = new HashMap<String, String>();
+
+	/** request property */
+	private Map<String, String> requestProperty = new HashMap<String, String>();
 
 	/** 본문 인코드 캐릭터 셋 */
 	private String bodyCharset;
@@ -69,6 +75,8 @@ public class HttpPageGetter {
 	 * @see #METHOD_POST
 	 */
 	private String method = METHOD_GET;
+	/** method가 POST인 경우에만 사용 가능 */
+	private String sendBody;
 
 	/**
 	 * @param url
@@ -137,6 +145,13 @@ public class HttpPageGetter {
 		try {
 			urlinfo = new URL(getUrl());
 			conn = (HttpURLConnection) urlinfo.openConnection();
+			conn.setDoOutput(true);
+
+			Set<String> property = requestProperty.keySet();
+			for (String key : property) {
+				conn.addRequestProperty(key, requestProperty.get(key));
+			}
+
 			conn.setConnectTimeout(conntionTimeout);
 			conn.setRequestMethod(method);
 
@@ -149,6 +164,9 @@ public class HttpPageGetter {
 				try {
 					os = conn.getOutputStream();
 					os.write(params.getBytes());
+					if (StringUtilAd.isNotEmpty(sendBody)) {
+						os.write(sendBody.getBytes());
+					}
 					os.flush();
 					os.close();
 				} finally {
@@ -169,7 +187,8 @@ public class HttpPageGetter {
 						ed = t.length();
 					}
 					bodyCharset = t.substring(st, ed);
-				} else {
+				}
+				else {
 					bodyCharset = DEFAULT_BODY_CHARSET;
 				}
 
@@ -312,7 +331,8 @@ public class HttpPageGetter {
 		String fileName;
 		if (fi == null) {
 			fileName = urlFileName(urlinfo.getPath());
-		} else {
+		}
+		else {
 			fileName = dispositionFileName(fi);
 		}
 		return fileName;
@@ -358,7 +378,8 @@ public class HttpPageGetter {
 		if (fileStartPos != -1) {
 			fileStartPos += "filename=".length();
 			fileName = URLDecoder.decode(fi.substring(fileStartPos, fileEndPos), bodyCharset);
-		} else {
+		}
+		else {
 			fileName = "fileDownloadAutoName";
 		}
 		return fileName;
@@ -441,9 +462,42 @@ public class HttpPageGetter {
 	 *            키 정보
 	 * @param value
 	 *            값
+	 * @deprecated 네이밍이 맞지 않음 addParameter()사용
 	 */
 	public void setParameter(String key, String value) {
 		parameter.put(key, value);
+	}
+
+	/**
+	 * URL에 넘길 파라미터 정보를 설정
+	 * 
+	 * @param key
+	 *            키 정보
+	 * @param value
+	 *            값
+	 */
+	public void addParameter(String key, String value) {
+		parameter.put(key, value);
+	}
+
+	/**
+	 * request property
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void addRequestProperty(String key, String value) {
+		requestProperty.put(key, value);
+	}
+
+	/**
+	 * request property
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void setRequestProperty(Map<String, String> reqProperty) {
+		requestProperty = reqProperty;
 	}
 
 	/**
@@ -456,7 +510,8 @@ public class HttpPageGetter {
 		String parameterString = getParameterString();
 		if (StringUtilAd.isEmpty(parameterString)) {
 			return url;
-		} else {
+		}
+		else {
 			return url + "?" + parameterString;
 		}
 
@@ -466,13 +521,12 @@ public class HttpPageGetter {
 	 * @return 파라미터 정보를 문자열로 변경
 	 */
 	private String getParameterString() {
-		Enumeration<String> enum1 = parameter.keys();
+		Set<String> enum1 = parameter.keySet();
 		StringBuffer buf = new StringBuffer();
-		while (enum1.hasMoreElements()) {
+		for (String key : enum1) {
 			if (buf.length() != 0) {
 				buf.append('&');
 			}
-			String key = (String) enum1.nextElement();
 			String value = (String) parameter.get(key);
 			try {
 				buf.append(URLEncoder.encode(key, urlCharset));
@@ -491,7 +545,7 @@ public class HttpPageGetter {
 	 * @param parameter
 	 *            URL 파라미터 정보
 	 */
-	public void setParameter(Hashtable<String, String> parameter) {
+	public void setParameter(Map<String, String> parameter) {
 		this.parameter = parameter;
 	}
 
@@ -500,6 +554,16 @@ public class HttpPageGetter {
 	 */
 	public int getConntionTimeout() {
 		return conntionTimeout;
+	}
+
+	/**
+	 * method가 POST인 경우에만 사용 가능
+	 * 
+	 * @param sendBody
+	 *            서버에 전달할 데이터
+	 */
+	public void setSendBody(String sendBody) {
+		this.sendBody = sendBody;
 	}
 
 	/**
