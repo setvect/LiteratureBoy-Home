@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @version $Id$
+ * @deprecated com.setvect.common.http.HttpUtil 또 같은 기능 있음
  */
 public class NetworkUtil {
 	/**

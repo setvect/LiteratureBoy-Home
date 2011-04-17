@@ -17,7 +17,7 @@ import com.setvect.literatureboy.vo.board.BoardTrackback;
 /**
  * @version $Id$
  */
-@Service
+@Service("BoardService")
 public class BoardService {
 	/** 웹 루트를 기준으로 저장 경로 */
 	public static final String SAVE_PATH = EnvirmentProperty
