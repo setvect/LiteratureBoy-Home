@@ -3,6 +3,7 @@ package com.setvect.literatureboy.config;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,7 +29,24 @@ public class EnvirmentProperty {
 			// 파일 수정 자동 감지
 			conf.setReloadingStrategy(new FileChangedReloadingStrategy());
 			config = conf;
-		} catch (ConfigurationException e) {
+		}
+		catch (ConfigurationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * @param propertise
+	 *            propertise 파일
+	 */
+	public static void init(URL propertise) {
+		try {
+			PropertiesConfiguration conf = new PropertiesConfiguration(propertise);
+			// 파일 수정 자동 감지
+			conf.setReloadingStrategy(new FileChangedReloadingStrategy());
+			config = conf;
+		}
+		catch (ConfigurationException e) {
 			throw new RuntimeException(e);
 		}
 	}
