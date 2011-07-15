@@ -44,7 +44,7 @@ public class GenericPage<T> extends Page {
 	 *         ¹üÀ§ : total() ~ 1
 	 */
 	public int getRowNumDesc() {
-		return getTotal() - (getPagesize() * (getCurrentPage() - 1));
+		return getTotalCount() - (getPagesize() * (getCurrentPage() - 1));
 	}
 
 }

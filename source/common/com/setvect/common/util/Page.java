@@ -153,13 +153,6 @@ public class Page implements Serializable {
 	public void setEmptyPage(boolean val) {
 	}
 
-	public int getTotal() {
-		return this.totalCount;
-	}
-
-	public void setTotal(int val) {
-	}
-
 	public String getCurrentPageStr() {
 		return new Integer(this.currentPage).toString();
 	}
