@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,7 +107,8 @@ public class FileUtil extends FileUtils {
 				while ((read = fin.read(b)) != -1) {
 					outs.write(b, 0, read);
 				}
-			} else {
+			}
+			else {
 				throw new IOException("파일이 없습니다. : " + file);
 			}
 		} catch (IOException e) {
@@ -227,5 +230,36 @@ public class FileUtil extends FileUtils {
 		}
 
 		return bool;
+	}
+
+	/**
+	 * @param saveFile
+	 * @param stringData
+	 * @param charset
+	 */
+	public static void saveString2File(File saveFile, String stringData, String charset) {
+		FileOutputStream fos = null;
+		OutputStreamWriter osw = null;
+		try {
+			fos = new FileOutputStream(saveFile);
+			osw = new OutputStreamWriter(fos, charset);
+			osw.write(stringData);
+			osw.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException ignor) {
+				}
+			}
+			if (osw != null) {
+				try {
+					osw.close();
+				} catch (IOException ignor) {
+				}
+			}
+		}
 	}
 }

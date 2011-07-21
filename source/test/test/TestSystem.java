@@ -24,7 +24,6 @@ import com.setvect.literatureboy.boot.EnvirmentInit;
 @Transactional
 public class TestSystem {
 	private static final String WEB_ROOT_NAME = "WebContent";
-	private static final String CONFIG_PROPERTIES = "WEB-INF/config.properties";
 
 	@BeforeClass
 	public static void load() {
@@ -33,8 +32,7 @@ public class TestSystem {
 
 		// 현재 클래스 경로를 추적해 웹루트 디렉토리를 찾음. 꼼수임
 		File projectRoot = currentPath.getParentFile().getParentFile().getParentFile().getParentFile();
-		File webRoot = new File(projectRoot, WEB_ROOT_NAME);
-		EnvirmentInit.bootUp(webRoot, CONFIG_PROPERTIES);
+		EnvirmentInit.bootUp();
 	}
 
 	@AfterClass
