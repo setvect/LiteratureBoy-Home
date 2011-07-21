@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.setvect.common.util.FileDown;
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
 
@@ -53,11 +54,10 @@ public class DownloadController extends HttpServlet {
 		File attachFile = new File(webBase, saveName);
 
 		try {
-			FileUtil.fileDown(attachFile, downName, request, response);
+			FileDown.fileDown(attachFile, downName, request, response);
 		} catch (Exception e) {
 			throw new IOException(e.getMessage());
 		}
 	}
-
 
 }
