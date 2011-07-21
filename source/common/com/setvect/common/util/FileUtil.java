@@ -158,34 +158,4 @@ public class FileUtil extends FileUtils {
 		return bool;
 	}
 
-	/**
-	 * @param saveFile
-	 * @param stringData
-	 * @param charset
-	 */
-	public static void saveString2File(File saveFile, String stringData, String charset) {
-		FileOutputStream fos = null;
-		OutputStreamWriter osw = null;
-		try {
-			fos = new FileOutputStream(saveFile);
-			osw = new OutputStreamWriter(fos, charset);
-			osw.write(stringData);
-			osw.flush();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (fos != null) {
-				try {
-					fos.close();
-				} catch (IOException ignor) {
-				}
-			}
-			if (osw != null) {
-				try {
-					osw.close();
-				} catch (IOException ignor) {
-				}
-			}
-		}
-	}
 }
