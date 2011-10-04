@@ -37,6 +37,7 @@
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA08">잡담</a></li>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA06">기억</a></li>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA07">인연</a></li>
+				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA11">소설</a></li>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA10">기술사</a></li>
 				<li><a href="#" onclick="$.POPUP.popupWindowCenter('/emailget.do', 'emailInput', 400, 250, false, false, false)">email</a></li>			
 			</ul>
