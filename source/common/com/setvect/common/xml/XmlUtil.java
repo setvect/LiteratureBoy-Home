@@ -21,11 +21,6 @@ import org.w3c.dom.Text;
  * @version $Id$
  */
 public class XmlUtil {
-	/** XML root 태그 */
-	public final static String ROOT_TAG_NAME = "list";
-
-	/** 데이터 항목을 나누는 테그 */
-	public final static String ARTICLE_TAG_NAME = "article";
 
 	private XmlUtil() {
 		// not instance
@@ -92,7 +87,8 @@ public class XmlUtil {
 			Node child = children.item(i);
 			if (child instanceof Text && ((Text) child).getData().trim().length() == 0) {
 				e.removeChild(child);
-			} else if (child instanceof Element) {
+			}
+			else if (child instanceof Element) {
 				removeWhitespaceNodes((org.w3c.dom.Element) child);
 			}
 		}

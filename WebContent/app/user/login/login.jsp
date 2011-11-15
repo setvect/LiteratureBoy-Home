@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@page import="com.setvect.literatureboy.web.user.LoginController"%>
-<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
+<%@page import="com.setvect.bokslsearch.web.ConstraintWeb"%>
 <%@include file="/common/taglib.inc.jsp"%>
 
 <script type="text/javascript">
