@@ -165,8 +165,8 @@ public class PageMgr {
 		String tmpLink = "<script language=\"javascript\" text=\"text/javascript\">\n";
 		tmpLink += " function pf_pageMove(_curPage)\n";
 		tmpLink += " {\n";
-		tmpLink += "   " + formName + ".curPage.value     = _curPage;\n";
-		tmpLink += "   " + formName + ".submit();\n";
+		tmpLink += "   document." + formName + ".curPage.value     = _curPage;\n";
+		tmpLink += "   document." + formName + ".submit();\n";
 		tmpLink += " }\n";
 		tmpLink += "</script>\n";
 
