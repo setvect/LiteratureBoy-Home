@@ -72,7 +72,7 @@ public class LapTimeChecker {
 	 *            출력 메시지
 	 */
 	public void check(String message) {
-		out.print(getCheckMessage(message));
+		out.println(getCheckMessage(message));
 	}
 
 	/**
