@@ -322,4 +322,16 @@ public class StringUtilAd extends StringUtils {
 		}
 		return rtnValue;
 	}
+
+	/**
+	 * 특수 문자 제거
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String removeSpecialChar(String str) {
+		String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+		str = str.replaceAll(match, " ");
+		return str;
+	}
 }
