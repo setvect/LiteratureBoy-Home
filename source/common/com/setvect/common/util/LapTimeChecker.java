@@ -1,4 +1,4 @@
-	package com.setvect.common.util;
+package com.setvect.common.util;
 
 import java.io.PrintStream;
 import java.text.DecimalFormat;
@@ -72,10 +72,22 @@ public class LapTimeChecker {
 	 *            출력 메시지
 	 */
 	public void check(String message) {
+		out.print(getCheckMessage(message));
+	}
+
+	/**
+	 * 시간 체크 출력 메세지를 문자열로 반환
+	 * 
+	 * @param message
+	 *            출력 메시지
+	 * @return
+	 */
+	public String getCheckMessage(String message) {
 		checkCount++;
 		long cur = System.currentTimeMillis();
-		out.println(name + ", " + NUMBER_FORMAT.format(checkCount) + ", " + NUMBER_COMMA_FORMAT.format(cur - startTime)
-				+ "ms, " + message);
+		String msg = name + ", " + NUMBER_FORMAT.format(checkCount) + ", "
+				+ NUMBER_COMMA_FORMAT.format(cur - startTime) + "ms, " + message;
+		return msg;
 	}
 
 	/**
