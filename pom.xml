@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>setvect</groupId>
   <artifactId>literatureboy</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>literatureboy Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -252,14 +252,5 @@
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
-    <!-- 
-    <dependency>
-    	<groupId>com.google.gwt</groupId>
-    	<artifactId>gwt-servlet</artifactId>
-    	<version>2.1.1</version>
-    	<type>jar</type>
-    	<scope>runtime</scope>
-    </dependency>
-     -->        
   </dependencies>
 </project>
