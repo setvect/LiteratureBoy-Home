@@ -11,7 +11,7 @@
   	nhn.husky.EZCreator.createInIFrame({
   		oAppRef: oEditors,
   		elPlaceHolder: "content",
-  		sSkinURI: "/app/smart_edit/SEditorSkin.html",
+  		sSkinURI: "/app/smart_edit/SmartEditor2Skin.html",
   		fCreator: "createSEditorInIFrame"
   	});
   };
@@ -27,7 +27,7 @@
 			
 		<input type="hidden" name="boardCode" value="${PAGE_SEARCH.searchCode}"/>	
 		<form:hidden path="articleSeq"/>	
-		<table>
+		<table style="width:100%">
 			<tr>
 				<th>Title</th>
 				<td><form:input id="title" path="title" size="50" maxlength="50"/></td>
@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<form:textarea id="content" path="content" cssStyle="width:590px; height:300px"/><br>
+					<form:textarea id="content" path="content" cssStyle="height:300px;display:none;"/><br>
 					<input onclick="$.APP.openImageUpload();" type="button" value="이미지 첨부"/>
 				</td>
 			</tr>

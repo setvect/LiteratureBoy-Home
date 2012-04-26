@@ -21,11 +21,11 @@
 		</form:form>
 	</div>
 	<div>
-		Total: ${LIST.total},  Page: ${LIST.currentPage }/${LIST.maxPage}
+		Total: ${LIST.totalCount},  Page: ${LIST.currentPage }/${LIST.maxPage}
 	</div>
 </div>
 <div>
-	<display:table name="LIST.list" class="list_table" id="article" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
+	<display:table name="LIST.list" class="list_table" id="article" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.totalCount}" pagesize="${LIST.pagesize}"  style="margin-top:10px;">
     <display:column title="No." >
       ${LIST.rowNumDesc - article_rowNum + 1}
     </display:column>

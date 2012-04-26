@@ -20,7 +20,7 @@
 </script>
 
 <h2>${BOARD.name}</h2>
-<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.total}" pagesize="${LIST.pagesize}" >
+<display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.totalCount}" pagesize="${LIST.pagesize}" >
 	<display:column title="Title" class="body_list_td align_left">
 		<div>
 			<h3>

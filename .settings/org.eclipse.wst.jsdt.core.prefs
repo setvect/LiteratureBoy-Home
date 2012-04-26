@@ -1,4 +1,4 @@
-#Thu Dec 02 11:41:43 KST 2010
+#Wed Apr 25 14:45:38 KST 2012
 eclipse.preferences.version=1
 org.eclipse.wst.jsdt.core.compiler.codegen.inlineJsrBytecode=disabled
 org.eclipse.wst.jsdt.core.compiler.codegen.targetPlatform=1.2
@@ -40,7 +40,7 @@ org.eclipse.wst.jsdt.core.compiler.problem.unresolvedMethodReference=warning
 org.eclipse.wst.jsdt.core.compiler.problem.unresolvedTypeReference=warning
 org.eclipse.wst.jsdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
 org.eclipse.wst.jsdt.core.compiler.problem.unusedLabel=warning
-org.eclipse.wst.jsdt.core.compiler.problem.unusedLocal=warning
+org.eclipse.wst.jsdt.core.compiler.problem.unusedLocal=ignore
 org.eclipse.wst.jsdt.core.compiler.problem.unusedParameter=ignore
 org.eclipse.wst.jsdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
 org.eclipse.wst.jsdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled

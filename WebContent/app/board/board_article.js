@@ -47,7 +47,6 @@ BoardArticle.createOrUpdate = function(){
 			return;
 		}
 	}
-	
 	var content = oEditors.getById["content"].getIR();
 	if($.STR.trim(content) == ""){
 		alert("내용을 입력해 주세요");
@@ -55,7 +54,7 @@ BoardArticle.createOrUpdate = function(){
 	}
 	
 	// 에디터의 내용을 에디터 생성시에 사용했던 textarea에 넣어 줍니다.
-	oEditors.getById["content"].exec("UPDATE_IR_FIELD", []);
+	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 			
 	document.createAction.submit();
 };
