@@ -13,6 +13,9 @@ public class ConstraintWeb {
 	/** 문학소년: 기본 틀을 가진 뷰 이름 */
 	public final static String LITERATUREBOY_LAYOUT = "literatureboy/layout";
 
+	/** 문학소년(모바일): 기본 틀을 가진 뷰 이름 */
+	public final static String MOBILE_LAYOUT = "m/layout";
+
 	/** 개발: 기본 틀을 가진 뷰 이름 */
 	public final static String DEVLOP_LAYOUT = "devlop/layout";
 
