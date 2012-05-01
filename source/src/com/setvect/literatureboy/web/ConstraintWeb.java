@@ -30,7 +30,7 @@ public class ConstraintWeb {
 		SERVLET_URL,
 		// 게시판 전체 정보
 		BOARD_ITEMS,
-		// 상위 컨트롤러에서 전달하는 뷰 모델 
+		// 상위 컨트롤러에서 전달하는 뷰 모델
 		MODEL_VIEW,
 
 	}
@@ -61,4 +61,14 @@ public class ConstraintWeb {
 	/** 메인화면 게시판 코드 */
 	public static final String MAIN_BOARD = "BDAAAA00";
 
+	/** 모바일에서 PC 화면 보기 사용 */
+	public static final String PC_VIEW_COOKIE_KEY = "pc_view_key";
+
+	/**
+	 * 모바일 브라우저 Agent <br>
+	 * request.getHeader("user-agent") 확인한 값
+	 */
+	public static final String[] MOBILE_BROWSER_AGENT = { "iPhone", "iPod", "Android", "Windows CE", "BlackBerry",
+			"Symbian", "Windows Phone", "webOS", "Opera Mini", "Opera Mobi", "POLARIS", "IEMobile", "lgtelecom",
+			"nokia", "SonyEricsson", "LG", "SAMSUNG", "Samsung" };
 }

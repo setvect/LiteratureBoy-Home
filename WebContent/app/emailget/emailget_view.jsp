@@ -15,7 +15,7 @@
 		음~ 뭔가 잘 못 입력 하셨군요.
 	</c:if>
 	<c:if test="${!empty EMAIL}">
-		정호 이메일은 <a href="mailto:${EMAIL}">${EMAIL}</a> 이네요.	
+		빙고! 정호 이메일은 <a href="mailto:${EMAIL}">${EMAIL}</a> 입니당. ^^
 	</c:if>
 </div>
 </body>

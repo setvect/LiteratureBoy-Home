@@ -3,6 +3,7 @@ package com.setvect.literatureboy.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.setvect.common.http.CookieProcess;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.config.EnvirmentProperty;
@@ -67,6 +69,8 @@ public class LiteratureboyController {
 		String pageName = requestURI.substring(posStart, posEnd);
 		User user = (User) request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
 
+		boolean mobileView = checkMobileView(request, response);
+
 		// 관리자가 로그인 하면 왼쪽 메뉴에 게시판 전체 목록 표시
 		if (user != null && user.isAdminF()) {
 			BoardManagerSearch pageCondition = new BoardManagerSearch(1);
@@ -84,7 +88,8 @@ public class LiteratureboyController {
 			boolean include = StringUtilAd.isInclude(request.getParameter("searchCode"), listContentViewBoard);
 			if (include) {
 				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list_body.jsp");
-			} else {
+			}
+			else {
 				jsp.put(BoardArticleController.JspPageKey.LIST, "/app/board/user/board_article_list.jsp");
 			}
 			jsp.put(BoardArticleController.JspPageKey.READ, "/app/board/user/board_article_read.jsp");
@@ -112,5 +117,54 @@ public class LiteratureboyController {
 		}
 
 		return new ModelAndView();
+	}
+
+	/**
+	 * 모바일 브라우저 해더이면 모바일 페이지로. 단 강제적으로 PC화면을 본다면 PC 화면으로 나옴
+	 * 
+	 * @param request
+	 * @param response
+	 * @return true 모바일 페이지로 이동, false 그냥 처리
+	 */
+	private boolean checkMobileView(HttpServletRequest request, HttpServletResponse response) {
+		// 모바일 브라우저 체크
+		boolean mobileBrowser = isMobileBrowser(request);
+		if (!mobileBrowser) {
+			return false;
+		}
+		
+		// 강제 보기 쿠기값 있는지 체크
+		CookieProcess cookie = new CookieProcess(request);
+		String pcView = cookie.get(ConstraintWeb.PC_VIEW_COOKIE_KEY);
+		if (pcView != null && pcView.equals("true")) {
+			return false;
+		}
+
+		boolean constrantPcView = Boolean.parseBoolean(request.getParameter("pc"));
+		if (constrantPcView) {
+			Cookie loginCookie = new Cookie(ConstraintWeb.PC_VIEW_COOKIE_KEY, "true");
+			loginCookie.setPath("/");
+			response.addCookie(loginCookie);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 모바일 브라우저 체크
+	 * 
+	 * @param request
+	 *            모바일 브라우저 체크
+	 * @return 모바일 브라우저이면 true, 아니면 false
+	 */
+	private boolean isMobileBrowser(HttpServletRequest request) {
+		String agent = request.getHeader("user-agent");
+		
+		for(String s : ConstraintWeb.MOBILE_BROWSER_AGENT){
+			if(agent.contains(s)){
+				return true;
+			}
+		}
+		return false;
 	}
 }

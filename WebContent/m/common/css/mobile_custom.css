@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* ====== 목록 테이블 ====== */
+.list_table {
+	border-collapse: collapse;
+	border: 0px #fff;
+	color: #000;
+	background: #fff;
+	width: 100%;
+}
+.list_table thead th{ /* table header */
+	border: 1px solid #fff;
+	text-align: center;
+	text-decoration: none; 
+	color: #000000; 
+	/*font-weight: bold;*/
+	height:30px;
+	background: #E3E3E3; /*header bg color */
+	background-color:#E3E3E3; border-bottom-style: solid ; 
+	border-bottom-color: #808285; 				
+	border-bottom-width: 1px; 	                                          
+}
+
+.list_table td {                                 /* table td */         
+	text-align: center;    
+	border-bottom-style: solid ; 
+	border-bottom-color: #D6D7D6; 				
+	border-bottom-width: 1px; 	        
+	height:30px;           
+}
+
+.list_table .align_left {                                 
+	text-align: left;    
+} 
+
+.list_table .align_right{                                 
+	text-align: right;    
+}
+
+.list_pagelinks{
+	padding-top: 10px;
+	text-align:center;
+	width:100%;
+}
+
+.list_pagelinks a{
+		padding: 5px;
+}
+
+.list_pagelinks strong{
+		padding: 5px;
+}
+
+/* ====== 목록 테이블 ====== */
+.title{font-size: 1.1em;color:purple;font-weight: bold;}
+.date{font-size: 0.8em;float: right;}

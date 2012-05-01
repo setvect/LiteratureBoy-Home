@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.setvect.common.http.HttpUtil;
 import com.setvect.common.http.UrlParameter;
-import com.setvect.common.net.NetworkUtil;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.GenericPage;
@@ -91,7 +91,7 @@ public class BoardArticleController {
 		MODE,
 		/** 리스트 */
 		LIST,
-		/** 게시물 정보 */
+		/** 게시판 정보 */
 		BOARD,
 		//
 		ARTICLE, COMMENT,
@@ -312,7 +312,7 @@ public class BoardArticleController {
 	 * @return 해당 게시물의 트래백 주소
 	 */
 	private String getTrackbackAddr(HttpServletRequest request, BoardArticle article) {
-		return NetworkUtil.getHomepageUrl(request) + TRACKBACK_PATH + article.getArticleSeq();
+		return HttpUtil.getHomepageUrl(request) + TRACKBACK_PATH + article.getArticleSeq();
 	}
 
 	/**
@@ -455,6 +455,10 @@ public class BoardArticleController {
 		int currentPage = CommonUtil.getCurrentPage(request, "articleList");
 		BoardArticleSearch searchVO = new BoardArticleSearch(currentPage);
 		Binder.bind(request, searchVO);
+		
+		// bind시 currentPage 파라미터가 있으면 display tag에 값을 무시 하기 때문에
+		// display Tag에서 가져온 값을 우선적으로 대입(설명이 잘 안된다 ㅡㅡ);		
+		searchVO.setCurrentPage(currentPage);
 		return searchVO;
 	}
 

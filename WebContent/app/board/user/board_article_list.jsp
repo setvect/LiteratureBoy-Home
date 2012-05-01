@@ -16,7 +16,6 @@
 		<fmt:formatDate value="${articleList.regDate}" pattern="yyyy-MM-dd"/>
 	</display:column>
 </display:table>
-
 <jsp:include page="../board_article_form.inc.jsp"></jsp:include>
 <script type="text/javascript">
 	$(".list_table thead").css("display", "none");

@@ -8,9 +8,10 @@ import java.util.Set;
 
 /**
  * Map에 있는 값을 Get형식의 파라미터 스트링으로 변환<br>
- * ※ 파라미터 키 값이 2개 이상인 경우는 지원 하지 않음.
+ * ※ 파라미터 키 값이 2개 이상인 경우는 지원 하지 않음.<br>
  * 
  * @version $Id$
+ * @deprecated com.setvect.common.jsp.URLParameter 사용하기 바람
  */
 public class UrlParameter {
 	private static final long serialVersionUID = 7246368964117438269L;

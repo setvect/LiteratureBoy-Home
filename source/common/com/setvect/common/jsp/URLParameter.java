@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 중복되는 URL 파라미터를 간소화 시켜서 재 사용을 편리하게 하기 위해서 만듬
  * 
@@ -50,7 +52,8 @@ public class URLParameter {
 		if (s == null) {
 			s = new ArrayList<String>();
 			s.add(value);
-		} else {
+		}
+		else {
 			s.clear();
 			s.add(value);
 		}
@@ -83,11 +86,27 @@ public class URLParameter {
 		if (s == null) {
 			s = new ArrayList<String>();
 			s.add(value);
-		} else {
+		}
+		else {
 			s.add(value);
 		}
 		param.put(key, s);
 		return this;
+	}
+
+	/**
+	 * request 파라미터 정보를 그대로 셋팅<br>
+	 * 파라미터 배열(같은 이름이 두개 이상인 파라미터)는 지원 하지 않음
+	 * 
+	 * @param request
+	 */
+	public void put(HttpServletRequest request) {
+		Enumeration names = request.getParameterNames();
+		while (names.hasMoreElements()) {
+			String name = (String) names.nextElement();
+			String value = request.getParameter(name);
+			putOverlap(name, value);
+		}
 	}
 
 	/**
@@ -101,6 +120,16 @@ public class URLParameter {
 		return putOverlap(key, String.valueOf(value));
 	}
 
+	/** 
+	 * 특정 키 값을 제거 
+	 * @param key  키
+	 * @return URLParamter 객체 정보. chain 형식
+	 */
+	public URLParameter clearParam(String key){
+		param.remove(key);
+		return this;
+	}
+	
 	/**
 	 * @param url
 	 *            URL
@@ -168,4 +197,15 @@ public class URLParameter {
 		pa.param = (Hashtable<String, ArrayList<String>>) this.param.clone();
 		return pa;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "URLParameter [url=" + url + ", encode=" + encode + ", param=" + param + "]";
+	}
+
 }
