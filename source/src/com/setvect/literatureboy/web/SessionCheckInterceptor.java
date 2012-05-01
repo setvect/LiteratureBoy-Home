@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.setvect.common.log.LogPrinter;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.ApplicationException;
 import com.setvect.literatureboy.vo.user.User;
@@ -22,6 +23,8 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String currentUrl = request.getRequestURI();
+
+		LogPrinter.out.info("[Connect] IP: " + request.getRemoteAddr() + ", " + request.getHeader("User-Agent"));
 
 		// 호출한 서블릿 주소(~~.do 시작하는)를 저장
 		// JSP에서 form action에 주소로 사용

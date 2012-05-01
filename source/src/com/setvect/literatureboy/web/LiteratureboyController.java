@@ -70,6 +70,16 @@ public class LiteratureboyController {
 		User user = (User) request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
 
 		boolean mobileView = checkMobileView(request, response);
+		if (mobileView) {
+			ModelAndView mav = new ModelAndView();
+			if (pageName.equals("bd")) {
+				mav.setViewName("redirect:/m/bd.do?" + request.getQueryString());
+			}
+			else {
+				mav.setViewName("redirect:/m");
+			}
+			return mav;
+		}
 
 		// 관리자가 로그인 하면 왼쪽 메뉴에 게시판 전체 목록 표시
 		if (user != null && user.isAdminF()) {
@@ -132,7 +142,7 @@ public class LiteratureboyController {
 		if (!mobileBrowser) {
 			return false;
 		}
-		
+
 		// 강제 보기 쿠기값 있는지 체크
 		CookieProcess cookie = new CookieProcess(request);
 		String pcView = cookie.get(ConstraintWeb.PC_VIEW_COOKIE_KEY);
@@ -159,9 +169,9 @@ public class LiteratureboyController {
 	 */
 	private boolean isMobileBrowser(HttpServletRequest request) {
 		String agent = request.getHeader("user-agent");
-		
-		for(String s : ConstraintWeb.MOBILE_BROWSER_AGENT){
-			if(agent.contains(s)){
+
+		for (String s : ConstraintWeb.MOBILE_BROWSER_AGENT) {
+			if (agent.contains(s)) {
 				return true;
 			}
 		}

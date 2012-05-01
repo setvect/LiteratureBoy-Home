@@ -9,18 +9,25 @@
 	URLParameter urlParam = pageStatus.getUrlParam();
 	urlParam.put("mode", BoardArticleController.Mode.LIST_FORM.name());
 %>
+<style type="text/css">
+	.ui-content{padding: 0px;}
+</style>
 <script type="text/javascript" src="/app/board/board_article.js"></script>
-<script type="text/javascript">
-	$(function() {
-	  $("form").attr("data-ajax", "false");
-	});
-</script>
-
 <div>
-	<span class="title">${ARTICLE.title}</span>
-	${ARTICLE.content}
-	<span class="date"><fmt:formatDate value="${ARTICLE.regDate}" pattern="yyyy년MM월dd일"/></span>
+	<p class="title">${ARTICLE.title}</p>
+	<div style="text-align: center">
+		<c:forEach var="file" items="${ARTICLE.attach}">
+			<c:if test="${file.image}"> 
+				<img src="/servlet/Thumbnail?i=${file.url}&w=290&h=450" alt="${file.originalName}" class="list_image" onclick=""/><br/>
+			</c:if>
+		</c:forEach>
+	</div>
+	${ARTICLE.content}<br/>
+	<p class="date"><fmt:formatDate value="${ARTICLE.regDate}" pattern="yyyy년MM월dd일"/></p>
+	<br/>
 </div>
+<div style="text-align: center; clear: both;">
 <a href="<%=urlParam.getParam()%>" data-role="button" data-inline="true" data-transition="fade"
 	href="page1" data-icon="back" data-iconpos="left">목록</a>
+</div>	
 

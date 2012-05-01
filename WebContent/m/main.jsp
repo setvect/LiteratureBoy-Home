@@ -1,5 +1,8 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false"%>
 <%@include file="/common/taglib.inc.jsp"%>
+<style type="text/css">
+	.ui-content{padding: 5px;}
+</style>
 
 <div data-role="content">
 	<ul data-role="listview" data-divider-theme="e" data-inset="false">

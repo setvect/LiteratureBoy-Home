@@ -14,14 +14,17 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.board.BoardService;
+import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
  * 첨부파일
  * 
- * @version $Id$
+ * @version $Id: BoardAttachFile.java 105 2010-09-23 14:52:48Z setvect@naver.com
+ *          $
  */
 @Entity
 @Table(name = "TBBD_BOARD_FILE")
@@ -165,6 +168,16 @@ public class BoardAttachFile {
 	 */
 	public void setArticle(BoardArticle article) {
 		this.article = article;
+	}
+
+	/**
+	 * 확장자를 기준으로 이미지 파일 여부 체크
+	 * 
+	 * @return 이미지 파일이면 true
+	 */
+	public boolean isImage() {
+		String ext = FileUtil.getExt(originalName);
+		return ConstraintWeb.IMAGE_EXT.contains(ext);
 	}
 
 }

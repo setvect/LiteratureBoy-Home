@@ -30,7 +30,7 @@
 		</div>
 		<!-- 내용 종료 -->
 		<div data-theme="a" data-role="footer" style="text-align: center; margin-top: 20px;">
-			<a href="/literatureboy/main.do?pc=true" data-role="button" data-inline="true" data-transition="none" href="page1" data-icon="star" data-iconpos="left">PC 화면</a>
+			<a href="/literatureboy/main.do?pc=true" data-ajax="false">PC 화면</a>
 		</div>		
 	</div>
 </body>

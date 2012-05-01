@@ -9,13 +9,18 @@
 	URLParameter urlParam = pageStatus.getUrlParam();
 	urlParam.put("mode", BoardArticleController.Mode.READ_FORM.name()).clearParam("articleSeq").clearParam("encode");
 %>
+<style type="text/css">
+	.ui-content{padding: 0px;}
+</style>
 <script type="text/javascript" src="/app/board/board_article.js"></script>
+
+
 
 <display:table name="LIST.list" class="list_table" id="articleList" requestURI="${SERVLET_URL}" export="false" partialList="true" size="${LIST.totalCount}" pagesize="${LIST.pagesize}">
 	<display:column title="Title" class="align_left">
 		<span style="padding-left: ${(articleList.depthLevel -1) * 10}">
 			<c:if test="${STATUS.menu == 'ALL'}">
-				<div style="width: 40px; float: left;">${BOARD_MAP[articleList.boardCode].name}</div>
+				<div style="width: 30px; float: left; font-size: 12px">${BOARD_MAP[articleList.boardCode].name}</div>
 			</c:if>   
 			<a href="<%=urlParam.getParam()%>&amp;articleSeq=${articleList.articleSeq}">${articleList.title}</a>
 			<c:if test="${articleList.encodeF}">
@@ -23,8 +28,8 @@
 			</c:if>
 		</span>
 	</display:column>
-	<display:column title="Date" class="align_right">
-		<fmt:formatDate value="${articleList.regDate}" pattern="yyyy-MM-dd"/>
+	<display:column title="Date" class="align_right" style="font-size: 10px">
+		<fmt:formatDate value="${articleList.regDate}" pattern="MM월dd일"/>
 	</display:column>
 </display:table>
  <script type="text/javascript">

@@ -142,9 +142,9 @@ public class BoardArticleController {
 		if (countItem != null) {
 			pageCondition.setPagePerItemCount(countItem);
 		}
-		
-		// 여러게 게시판에 게시물 표시 하기 위함 
-		if(searchBoards!=null){
+
+		// 여러게 게시판에 게시물 표시 하기 위함
+		if (searchBoards != null) {
 			pageCondition.setSearchCodes(searchBoards);
 		}
 
@@ -175,6 +175,8 @@ public class BoardArticleController {
 			boardService.updateArticleIncrementHit(articleSeq);
 			BoardArticle article = boardService.getArticle(articleSeq);
 			mav.addObject(AttributeKey.ARTICLE.name(), article);
+
+			article.setAttach(getAttachFile(article));
 
 			boolean encodePage = false;
 			encodePage = isEncodePage(request, article);

@@ -28,7 +28,9 @@
 			</h3>
 		</div><br/>
 		<c:forEach var="file" items="${articleList.attach}">
-			<img src="/servlet/Thumbnail?i=${file.url}&w=290&h=450" alt="${file.originalName}" class="list_image" onclick=""/>
+			<c:if test="${file.image}"> 
+				<img src="/servlet/Thumbnail?i=${file.url}&w=290&h=450" alt="${file.originalName}" class="list_image" onclick=""/>
+			</c:if>
 		</c:forEach>
 		${articleList.content}<br/>
 		<span class="tail">

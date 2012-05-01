@@ -37,6 +37,9 @@ public class ConstraintWeb {
 
 	/** 업로드 파일 확장자 */
 	public final static String[] ALLOW_UPLOAD_FILE;
+	/** 이미지 확장자 */
+	public final static List<String> IMAGE_EXT;
+
 	static {
 		@SuppressWarnings("unchecked")
 		List<String> s = EnvirmentProperty.getList("com.setvect.literatureboy.allow_upload_file");
@@ -44,6 +47,8 @@ public class ConstraintWeb {
 		for (int i = 0; i < s.size(); i++) {
 			ALLOW_UPLOAD_FILE[i] = s.get(i).toLowerCase().trim();
 		}
+
+		IMAGE_EXT = EnvirmentProperty.getList("com.setvect.literatureboy.image_ext");
 	}
 
 	/** 패스워드 암호화 알고리즘 */

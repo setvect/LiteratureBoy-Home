@@ -51,5 +51,5 @@
 }
 
 /* ====== 목록 테이블 ====== */
-.title{font-size: 1.1em;color:purple;font-weight: bold;}
-.date{font-size: 0.8em;float: right;}
+.title{font-size: 1.1em;color:purple;font-weight: bold;clear: both;}
+.date{font-size: 0.8em;float: right;clear: both;}
