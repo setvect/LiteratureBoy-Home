@@ -10,7 +10,7 @@
 	urlParam.put("mode", BoardArticleController.Mode.LIST_FORM.name());
 %>
 <style type="text/css">
-	.ui-content{padding: 0px;}
+	.ui-content{padding: 5px;}
 </style>
 <script type="text/javascript" src="/app/board/board_article.js"></script>
 <div>
