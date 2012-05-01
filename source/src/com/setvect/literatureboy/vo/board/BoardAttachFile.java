@@ -177,7 +177,7 @@ public class BoardAttachFile {
 	 */
 	public boolean isImage() {
 		String ext = FileUtil.getExt(originalName);
-		return ConstraintWeb.IMAGE_EXT.contains(ext);
+		return ConstraintWeb.IMAGE_EXT.contains(ext.toLowerCase());
 	}
 
 }
