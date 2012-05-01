@@ -16,13 +16,11 @@
 	});
 </script>
 
-<div data-role="content">
-	<div>
-		<span class="title">${ARTICLE.title}</span>
-		${ARTICLE.content}
-		<span class="date"><fmt:formatDate value="${ARTICLE.regDate}" pattern="yyyy년MM월dd일"/></span>
-	</div>
-	<a href="<%=urlParam.getParam()%>" data-role="button" data-inline="true" data-transition="fade"
-		href="page1" data-icon="back" data-iconpos="left">목록</a>
+<div>
+	<span class="title">${ARTICLE.title}</span>
+	${ARTICLE.content}
+	<span class="date"><fmt:formatDate value="${ARTICLE.regDate}" pattern="yyyy년MM월dd일"/></span>
 </div>
+<a href="<%=urlParam.getParam()%>" data-role="button" data-inline="true" data-transition="fade"
+	href="page1" data-icon="back" data-iconpos="left">목록</a>
 

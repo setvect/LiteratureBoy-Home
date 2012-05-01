@@ -1,5 +1,7 @@
 package com.setvect.literatureboy.service.board;
 
+import java.util.List;
+
 import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
 
@@ -15,6 +17,11 @@ public class BoardArticleSearch extends SearchListVo {
 
 	private String searchName;
 	private String searchCode;
+	/**
+	 * 복수의 게시물 조회<br>
+	 * 본 필드에 값이 있으면 searchCode 값은 무시함
+	 */
+	private List<String> searchCodes;
 	private String searchTitle;
 	private String searchContent;
 
@@ -41,6 +48,8 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
+	 * 조회할 게시판 코드<br>
+	 * 
 	 * @return the searchCode
 	 */
 	public String getSearchCode() {
@@ -48,11 +57,32 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
+	 * 조회할 게시판 코드<br>
+	 * 
 	 * @param searchCode
 	 *            the searchCode to set
 	 */
 	public void setSearchCode(String searchCode) {
 		this.searchCode = searchCode;
+	}
+
+	/**
+	 * 복수의 게시물 조회
+	 * 
+	 * @return the searchCodes
+	 */
+	public List<String> getSearchCodes() {
+		return searchCodes;
+	}
+
+	/**
+	 * 복수의 게시물 조회
+	 * 
+	 * @param searchCodes
+	 *            the searchCodes to set
+	 */
+	public void setSearchCodes(List<String> searchCodes) {
+		this.searchCodes = searchCodes;
 	}
 
 	/**

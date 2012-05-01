@@ -109,6 +109,9 @@ public class BoardArticleController {
 	/** jsp 페이지 */
 	private HashMap<JspPageKey, String> jspPage = DEFAUlT_JSP;
 
+	/** 다중 게시물 검색 */
+	private List<String> searchBoards;
+
 	/**
 	 * View에 보여질 jsp 페이지는 정보 해쉬 키
 	 */
@@ -138,6 +141,11 @@ public class BoardArticleController {
 		Integer countItem = (Integer) request.getAttribute(BoardArticleController.Parameter.PAGE_PER_ITEM_COUNT.name());
 		if (countItem != null) {
 			pageCondition.setPagePerItemCount(countItem);
+		}
+		
+		// 여러게 게시판에 게시물 표시 하기 위함 
+		if(searchBoards!=null){
+			pageCondition.setSearchCodes(searchBoards);
 		}
 
 		// pageCondition.setDeleteView(true);
@@ -455,9 +463,9 @@ public class BoardArticleController {
 		int currentPage = CommonUtil.getCurrentPage(request, "articleList");
 		BoardArticleSearch searchVO = new BoardArticleSearch(currentPage);
 		Binder.bind(request, searchVO);
-		
+
 		// bind시 currentPage 파라미터가 있으면 display tag에 값을 무시 하기 때문에
-		// display Tag에서 가져온 값을 우선적으로 대입(설명이 잘 안된다 ㅡㅡ);		
+		// display Tag에서 가져온 값을 우선적으로 대입(설명이 잘 안된다 ㅡㅡ);
 		searchVO.setCurrentPage(currentPage);
 		return searchVO;
 	}
@@ -476,6 +484,13 @@ public class BoardArticleController {
 	 */
 	public void setJspPage(HashMap<JspPageKey, String> jspPage) {
 		this.jspPage = jspPage;
+	}
+
+	/**
+	 * 다중 게시물을 검색하기 위함
+	 */
+	public void setSearchBoards(List<String> boards) {
+		searchBoards = boards;
 	}
 
 }

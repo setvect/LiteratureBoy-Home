@@ -42,7 +42,9 @@
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA07">인연</a></li>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA11">소설</a></li>
 				<li><a href="/literatureboy/bd.do?searchCode=BDAAAA10">기술사</a></li>
-				<li><a href="#" onclick="$.POPUP.popupWindowCenter('/emailget.do', 'emailInput', 400, 250, false, false, false)">email</a></li>			
+				<%--
+				<li><a href="#" onclick="$.POPUP.popupWindowCenter('/emailget.do', 'emailInput', 400, 250, false, false, false)">email</a></li>
+				 --%>			
 			</ul>
 			<c:if test="${fn:length(BOARD_ITEMS) > 0}" >
 				<h2>Manager</h2>

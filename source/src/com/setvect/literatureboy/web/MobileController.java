@@ -3,6 +3,7 @@ package com.setvect.literatureboy.web;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,8 +42,8 @@ public class MobileController {
 	 */
 	public static enum AttributeKey {
 		STATUS, // 상태 정보
-		BOARD_MENU, // 메인화면에 표시될 게시판
 		LINK_PARAMETER, // 현제 페이지 링크 주소와 파라미터 정보
+		BOARD_MAP, // 게시판 정보 Map
 	}
 
 	public static enum Menu {
@@ -54,8 +55,17 @@ public class MobileController {
 	private static final String[] ALL_VIEW_BOARD = EnvirmentProperty
 			.getStringArray("com.setvect.literatureboy.board.all_view");
 
+	public static final List<String> ALL_VIEW_BOARD_LIST = new ArrayList<String>();
+
 	/** 전체 게시판 */
 	private final List<Board> ALL_BOARD = new ArrayList<Board>();
+
+	public final Map<String, Board> ALL_BOARD_MAP = new HashMap<String, Board>();
+	static {
+		for (String s : ALL_VIEW_BOARD) {
+			ALL_VIEW_BOARD_LIST.add(s);
+		}
+	}
 
 	@RequestMapping("/m/*.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -70,24 +80,36 @@ public class MobileController {
 		String pageName = requestURI.substring(posStart, posEnd);
 
 		// 일반 게시판 UI
-		if (pageName.equals("bd")) {
+		if (pageName.equals("bd") || pageName.equals("bdAll")) {
+			// 전체 게시물
+			if (pageName.equals("bdAll")) {
+				boardArticleController.setSearchBoards(ALL_VIEW_BOARD_LIST);
+			}
+
 			request.setAttribute(BoardArticleController.Parameter.PAGE_PER_ITEM_COUNT.name(), 10);
 			HashMap<JspPageKey, String> jsp = boardArticleController.getJspPage();
 			jsp.put(BoardArticleController.JspPageKey.LIST, "/m/app/board/board_article_list.jsp");
 			jsp.put(BoardArticleController.JspPageKey.READ, "/m/app/board/board_article_read.jsp");
 			boardArticleController.setJspPage(jsp);
 			ModelAndView mav = new ModelAndView(ConstraintWeb.MOBILE_LAYOUT);
-			request.setAttribute(ConstraintWeb.AttributeKey.MODEL_VIEW.name(), mav); 
-			
+			request.setAttribute(ConstraintWeb.AttributeKey.MODEL_VIEW.name(), mav);
+
 			mav = boardArticleController.process(request, response);
 
 			Board board = (Board) mav.getModel().get(BoardArticleController.AttributeKey.BOARD.name());
-			MobilePageStatus ps = new MobilePageStatus(board.getName(), Menu.MAIN);
+			MobilePageStatus ps;
+			if (pageName.equals("bdAll")) {
+				ps = new MobilePageStatus("전체보기", Menu.ALL);
+			}
+			else {
+				ps = new MobilePageStatus(board.getName(), Menu.MAIN);
+			}
 			ps.setUrlParam(getUrlParam(request));
 			mav.addObject(AttributeKey.STATUS.name(), ps);
-
+			mav.addObject(AttributeKey.BOARD_MAP.name(), ALL_BOARD_MAP);
 			return mav;
 		}
+
 		// 이메일 주소 알기
 		else if (pageName.equals("emailget")) {
 			ModelAndView modelAndView = emailGetController.process(request, response);
@@ -132,9 +154,11 @@ public class MobileController {
 	 */
 	private void loadViewBoardList() {
 		ALL_BOARD.clear();
+		ALL_BOARD_MAP.clear();
 		for (String bd : ALL_VIEW_BOARD) {
 			Board a = boardService.getBoard(bd);
 			ALL_BOARD.add(a);
+			ALL_BOARD_MAP.put(a.getBoardCode(), a);
 		}
 	}
 

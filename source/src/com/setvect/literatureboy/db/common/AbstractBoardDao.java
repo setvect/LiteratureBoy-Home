@@ -21,7 +21,8 @@ import com.setvect.literatureboy.vo.board.BoardTrackback;
 /**
  * 게시물 DAO
  * 
- * @version $Id$
+ * @version $Id: AbstractBoardDao.java 121 2010-10-03 05:59:11Z
+ *          setvect@naver.com $
  */
 public abstract class AbstractBoardDao implements BoardDao {
 	@Autowired
@@ -36,7 +37,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
+	 * @see
+	 * com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy
+	 * .service.memo.MemoSearchVO)
 	 */
 	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) {
 
@@ -119,7 +122,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy.service.memo.MemoSearchVO)
+	 * @see
+	 * com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy
+	 * .service.memo.MemoSearchVO)
 	 */
 	// TODO 목록 검색시 불필요한 항목(내용 TEXT)까지 가져오는 경우 발생. 성능 문제 발생시 수정
 	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondtion) {
@@ -129,7 +134,8 @@ public abstract class AbstractBoardDao implements BoardDao {
 		Query query = session.createQuery(q);
 		int totalCount = ((Long) query.uniqueResult()).intValue();
 
-		q = " from BoardArticle " + getArticleWhereClause(pageCondtion) + " order by IDX2 desc, IDX3 ASC ";
+		q = " from BoardArticle " + getArticleWhereClause(pageCondtion) + getOrder(pageCondtion);
+
 		query = session.createQuery(q);
 		query.setFirstResult(pageCondtion.getStartNumber());
 		query.setMaxResults(pageCondtion.getPagePerItemCount());
@@ -143,13 +149,40 @@ public abstract class AbstractBoardDao implements BoardDao {
 	}
 
 	/**
+	 * 정렬 조건
+	 * 
+	 * @param search
+	 *            검색 조건
+	 * @return
+	 */
+	private String getOrder(BoardArticleSearch search) {
+		// 게시판 두개 이상인 경우 계층형 구조로 정렬은 하지 않고 입력순 으로 정렬
+		if (search.getSearchCodes() != null) {
+			return " order by articleSeq desc";
+		}
+		else {
+			return " order by IDX2 desc, IDX3 ASC ";
+		}
+	}
+
+	/**
 	 * @param search
 	 *            검색 조건
 	 * @return select where 절 조건
 	 */
 	private String getArticleWhereClause(BoardArticleSearch search) {
-
-		String where = " where boardCode = " + StringUtilAd.getSqlString(search.getSearchCode());
+		String where = " where ";
+		List<String> codes = search.getSearchCodes();
+		if (codes == null) {
+			where += " boardCode = " + StringUtilAd.getSqlString(search.getSearchCode());
+		}
+		else {
+			where += " boardCode in ( '___dummyCode'";
+			for (String c : codes) {
+				where += ","+StringUtilAd.getSqlString(c) ;
+			}
+			where += " ) ";
+		}
 
 		if (!search.isDeleteView()) {
 			// 삭제 게시물 보여 주지 않음
@@ -172,7 +205,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see anyframe.core.generic.dao.hibernate.GenericDaoHibernate#create(java.lang.Object)
+	 * @see
+	 * anyframe.core.generic.dao.hibernate.GenericDaoHibernate#create(java.lang
+	 * .Object)
 	 */
 	public void createArticle(BoardArticle article) {
 		Session session = sessionFactory.getCurrentSession();
@@ -202,8 +237,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.BoardArticleDao#createReply(com.setvect.literatureboy.vo.board.BoardArticle,
-	 * int)
+	 * @see
+	 * com.setvect.literatureboy.db.BoardArticleDao#createReply(com.setvect.
+	 * literatureboy.vo.board.BoardArticle, int)
 	 */
 	public void createArticleReply(BoardArticle article, int parentId) {
 		Session session = sessionFactory.getCurrentSession();
@@ -255,7 +291,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.BoardArticleDao#updateArticle(com.setvect.literatureboy.vo.board.BoardArticle)
+	 * @see
+	 * com.setvect.literatureboy.db.BoardArticleDao#updateArticle(com.setvect
+	 * .literatureboy.vo.board.BoardArticle)
 	 */
 	public void updateArticle(BoardArticle article) {
 		Session session = sessionFactory.getCurrentSession();
@@ -323,7 +361,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.BoardArticleDao#saveComment(com.setvect.literatureboy.vo.board.BoardComment)
+	 * @see
+	 * com.setvect.literatureboy.db.BoardArticleDao#saveComment(com.setvect.
+	 * literatureboy.vo.board.BoardComment)
 	 */
 	public void createComment(BoardComment comment) {
 		Session session = sessionFactory.getCurrentSession();
@@ -334,7 +374,9 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.BoardArticleDao#updateComment(com.setvect.literatureboy.vo.board.BoardComment)
+	 * @see
+	 * com.setvect.literatureboy.db.BoardArticleDao#updateComment(com.setvect
+	 * .literatureboy.vo.board.BoardComment)
 	 */
 	public void updateComment(BoardComment comment) {
 		Session session = sessionFactory.getCurrentSession();
@@ -379,7 +421,8 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.setvect.literatureboy.db.BoardArticleDao#saveAttachFile(com.setvect.literatureboy.vo.board.BoardAttachFile)
+	 * com.setvect.literatureboy.db.BoardArticleDao#saveAttachFile(com.setvect
+	 * .literatureboy.vo.board.BoardAttachFile)
 	 */
 	public void createAttachFile(BoardAttachFile attachFile) {
 		Session session = sessionFactory.getCurrentSession();
@@ -422,7 +465,8 @@ public abstract class AbstractBoardDao implements BoardDao {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.setvect.literatureboy.db.BoardDao#createTrackback(com.setvect.literatureboy.vo.board.BoardTrackback)
+	 * @see com.setvect.literatureboy.db.BoardDao#createTrackback(com.setvect.
+	 * literatureboy.vo.board.BoardTrackback)
 	 */
 	public void createTrackback(BoardTrackback trackback) {
 		Session session = sessionFactory.getCurrentSession();
