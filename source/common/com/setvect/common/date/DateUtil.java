@@ -1,4 +1,3 @@
-
 package com.setvect.common.date;
 
 import java.text.ParseException;
@@ -54,6 +53,34 @@ public abstract class DateUtil {
 
 		if (!formatter.format(date).equals(s))
 			throw new java.text.ParseException("Out of bound date:\"" + s + "\" with format \"" + format + "\"", 0);
+	}
+
+	/**
+	 * 날짜 패턴을 검사함
+	 * 
+	 * @param s
+	 *            날짜 문자열
+	 * @param format
+	 *            검사 패턴 형식 <br>
+	 *            예: "yyyy-MM-dd"
+	 */
+	public static boolean isDatePatten(String s, String format) {
+		if (s == null || format == null) {
+			return false;
+		}
+
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		Date date = null;
+		try {
+			date = formatter.parse(s);
+		} catch (java.text.ParseException e) {
+			return false;
+		}
+
+		if (!formatter.format(date).equals(s)) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -249,7 +276,7 @@ public abstract class DateUtil {
 	 *            표현할 패턴
 	 * @return 변환된 패턴 스트링
 	 */
-	public static String getSysDateTime(long t, String pattern) {
+	public static String getFormatString(long t, String pattern) {
 		// Date클래스에서 현재의 날짜 시간을 가져옴
 		java.util.Date datetime = new java.util.Date(t);
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat(pattern);
@@ -263,7 +290,7 @@ public abstract class DateUtil {
 	 *            시간값
 	 * @return YYYY-MM-DD으로 전달
 	 */
-	public static String getCalendarDate(Calendar cal) {
+	public static String getFormatString(Calendar cal) {
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat("yyyy-MM-dd");
 		return formattime.format(cal.getTime());
 	}
@@ -275,9 +302,21 @@ public abstract class DateUtil {
 	 *            표현할 패턴
 	 * @return 패턴대로 리턴
 	 */
-	public static String getCalendarDate(Calendar cal, String pattern) {
+	public static String getFormatString(Calendar cal, String pattern) {
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat(pattern);
 		return formattime.format(cal.getTime());
+	}
+
+	/**
+	 * 날짜를 기본 패턴 (yyyy-MM-dd HH:mm:ss)로 리턴
+	 * 
+	 * @param dd
+	 *            날짜값
+	 * @return 변환된 날짜 스트링
+	 */
+	public static String getFormatStringDateTime(Calendar cal) {
+		// TODO Auto-generated method stub
+		return getFormatString(cal, "yyyy-MM-dd HH:mm:ssa");
 	}
 
 	/**
@@ -301,7 +340,7 @@ public abstract class DateUtil {
 	 * @return
 	 */
 	public static Date getDate(Calendar cal) {
-		String d = getCalendarDate(cal);
+		String d = getFormatString(cal);
 		return getDate(d);
 	}
 
@@ -505,7 +544,7 @@ public abstract class DateUtil {
 		cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_YEAR, diff);
 
-		return getCalendarDate(cal);
+		return getFormatString(cal);
 	}
 
 	/**
@@ -520,7 +559,25 @@ public abstract class DateUtil {
 		cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, diff);
 
-		return getCalendarDate(cal);
+		return getFormatString(cal);
 	}
 
+	/**
+	 * 해당 날짜가 포함된 주의 첫날로 이동.<br>
+	 * 예) <br>
+	 * 2011-01-01(토요일), 주 시작: 일요일 = > 2010-12-26<br>
+	 * 2012-02-08(수요일), 주 시작: 월요일 = > 2012-02-06<br>
+	 * 
+	 * @param cal
+	 *            날짜
+	 * @param fristWeek
+	 *            주(week)에 시작 요일. Calendar 클래스 상수값 이용
+	 * @return 주의 첫날로 이동된 날짜. 시간데이터는 변경되지 않음.
+	 */
+	public static Calendar getFirstWeekDate(Calendar cal, int fristWeek) {
+		Calendar rtnValue = (Calendar) cal.clone();
+		rtnValue.setFirstDayOfWeek(fristWeek);
+		rtnValue.set(Calendar.DAY_OF_WEEK, fristWeek);
+		return rtnValue;
+	}
 }

@@ -1,4 +1,3 @@
-
 package com.setvect.common.date;
 
 import java.io.Serializable;
@@ -50,16 +49,16 @@ public class DateRange implements Serializable {
 		// 양수
 		if (diff > 0) {
 			cal = Calendar.getInstance();
-			st = DateUtil.getCalendarDate(cal);
+			st = DateUtil.getFormatString(cal);
 			cal.add(Calendar.DAY_OF_YEAR, diff);
-			ed = DateUtil.getCalendarDate(cal);
+			ed = DateUtil.getFormatString(cal);
 		}
 		// 음수
 		else {
 			cal = Calendar.getInstance();
-			ed = DateUtil.getCalendarDate(cal);
+			ed = DateUtil.getFormatString(cal);
 			cal.add(Calendar.DAY_OF_YEAR, diff);
-			st = DateUtil.getCalendarDate(cal);
+			st = DateUtil.getFormatString(cal);
 		}
 
 		start = DateUtil.getDate(st, "yyyy-MM-dd");
