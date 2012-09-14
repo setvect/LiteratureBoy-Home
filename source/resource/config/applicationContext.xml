@@ -102,8 +102,6 @@
 	
 	<bean name="trackbackController"
 		class="com.setvect.literatureboy.web.board.BoardTrackbackController"/>
-			
-
 	
 	<tx:advice id="hibernateTxAdvice" transaction-manager="hibernateTxManager">
 		<tx:attributes>
@@ -112,12 +110,10 @@
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut id="appDao" expression="execution(* com.setvect.literatureboy.db..*DaoImpl.*(..))"/>
-		<aop:pointcut id="dao" expression="execution(* com.setvect.literatureboy.db.common.*Dao.*(..))"/>
+		<aop:pointcut id="dao" expression="execution(* com.setvect.literatureboy.db..*Dao.*(..))"/>
 		<aop:pointcut id="serivce" expression="execution(* com.setvect.literatureboy.db..*DBInitializer.*(..))"/>
 		<aop:pointcut id="controller" expression="execution(* com.setvect.literatureboy.web..*Controller.*(..))"/>
 		
-		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="appDao" />
 		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="dao" />
 		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="serivce" />
 		<!-- <aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="controller" /> -->
