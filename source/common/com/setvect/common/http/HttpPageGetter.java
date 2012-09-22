@@ -15,7 +15,6 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
@@ -68,7 +67,7 @@ public class HttpPageGetter {
 	private HttpURLConnection conn;
 
 	/** 연결 제한 시간, 기본값 0, 단위 밀리세컨드 */
-	private int conntionTimeout = 0;
+	private int connectTimeout = 0;
 
 	/**
 	 * @see #METHOD_GET
@@ -152,7 +151,7 @@ public class HttpPageGetter {
 				conn.addRequestProperty(key, requestProperty.get(key));
 			}
 
-			conn.setConnectTimeout(conntionTimeout);
+			conn.setConnectTimeout(connectTimeout);
 			conn.setRequestMethod(method);
 
 			if (method.equals(METHOD_POST)) {
@@ -553,7 +552,7 @@ public class HttpPageGetter {
 	 * @return Returns the conntionTimeout.
 	 */
 	public int getConntionTimeout() {
-		return conntionTimeout;
+		return connectTimeout;
 	}
 
 	/**
@@ -571,7 +570,7 @@ public class HttpPageGetter {
 	 *            The conntionTimeout to set.
 	 */
 	public void setConntionTimeout(int conntionTimeout) {
-		this.conntionTimeout = conntionTimeout;
+		this.connectTimeout = conntionTimeout;
 	}
 
 }
