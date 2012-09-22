@@ -3,7 +3,7 @@ package com.setvect.common.util;
 import java.util.Collection;
 
 /**
- * Page¿¡¼­ °Ë»öµÈ °´Ã¼µéÀÇ Å¸ÀÔÀ» ÁöÁ¤ÇÔ
+ * Pageì—ì„œ ê²€ìƒ‰ëœ ê°ì²´ë“¤ì˜ íƒ€ì…ì„ ì§€ì •í•¨
  */
 public class GenericPage<T> extends Page {
 
@@ -12,15 +12,15 @@ public class GenericPage<T> extends Page {
 
 	/**
 	 * @param objects
-	 *            ¸®½ºÆ®
+	 *            ë¦¬ìŠ¤íŠ¸
 	 * @param currentPage
-	 *            ÇöÀç ÆäÀÌÁö
+	 *            í˜„ì¬ í˜ì´ì§€
 	 * @param totalCount
-	 *            ÀüÃ¼ Ç×¸ñ ¼ö
+	 *            ì „ì²´ í•­ëª© ìˆ˜
 	 * @param pageunit
-	 *            ¹­À½ ÆäÀÌÁö °¹¼ö
+	 *            ë¬¶ìŒ í˜ì´ì§€ ê°¯ìˆ˜
 	 * @param pagesize
-	 *            ÆäÀÌÁö´ç Ç¥½Ã °¹¼ö
+	 *            í˜ì´ì§€ë‹¹ í‘œì‹œ ê°¯ìˆ˜
 	 */
 	public GenericPage(Collection<T> objects, int currentPage, int totalCount, int pageunit, int pagesize) {
 		super(objects, currentPage, totalCount, pageunit, pagesize);
@@ -32,16 +32,16 @@ public class GenericPage<T> extends Page {
 	}
 
 	/**
-	 * @return ÇöÀç ÆäÀÌÁöÀÇ Ã¹¹øÂ° Ç×¸ñÀÇ Çà¹øÈ£.<br>
-	 *         1ºÎÅÍ ½ÃÀÛ
+	 * @return í˜„ì¬ í˜ì´ì§€ì˜ ì²«ë²ˆì§¸ í•­ëª©ì˜ í–‰ë²ˆí˜¸.<br>
+	 *         1ë¶€í„° ì‹œì‘
 	 */
 	public int getRowNum() {
 		return getPagesize() * (getCurrentPage() - 1) + 1;
 	}
 
 	/**
-	 * @return ÇöÀç ÆäÀÌÁöÀÇ Ã¹¹øÂ° Ç×¸ñÀÇ Çà¹øÈ£. ¿ª¼ø<br>
-	 *         ¹üÀ§ : total() ~ 1
+	 * @return í˜„ì¬ í˜ì´ì§€ì˜ ì²«ë²ˆì§¸ í•­ëª©ì˜ í–‰ë²ˆí˜¸. ì—­ìˆœ<br>
+	 *         ë²”ìœ„ : total() ~ 1
 	 */
 	public int getRowNumDesc() {
 		return getTotalCount() - (getPagesize() * (getCurrentPage() - 1));

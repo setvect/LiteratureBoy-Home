@@ -6,13 +6,13 @@ import com.setvect.literatureboy.vo.user.User;
 import com.setvect.literatureboy.web.AccessRule;
 
 /**
- * °Ô½Ã¹° Á¢±Ù ±ÇÇÑ Ã¼Å©
+ * ê²Œì‹œë¬¼ ì ‘ê·¼ ê¶Œí•œ ì²´í¬
  * 
  * @version $Id$
  */
 public class BoardAccessRule implements AccessRule {
 
-	/** ÆĞ½º¿öµå ¸ÂÁö ¾ÊÀ½ */
+	/** íŒ¨ìŠ¤ì›Œë“œ ë§ì§€ ì•ŠìŒ */
 	public static final int STATUS_PASSWD_NOT_MATCH = 1;
 	public static final int STATUS_NONE = 0;
 
@@ -24,9 +24,9 @@ public class BoardAccessRule implements AccessRule {
 
 	/**
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 * @param user
-	 *            ·Î±×ÀÎ Á¤º¸
+	 *            ë¡œê·¸ì¸ ì •ë³´
 	 */
 	public BoardAccessRule(BoardArticle article, User user) {
 		this.article = article;
@@ -36,9 +36,9 @@ public class BoardAccessRule implements AccessRule {
 
 	/**
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 * @param passwd
-	 *            ÀÔ·ÂµÈ ÆĞ½º¿öµå
+	 *            ì…ë ¥ëœ íŒ¨ìŠ¤ì›Œë“œ
 	 */
 	public BoardAccessRule(BoardArticle article, String passwd) {
 		this.article = article;
@@ -47,10 +47,10 @@ public class BoardAccessRule implements AccessRule {
 	}
 
 	/**
-	 * ±ÇÇÑ Ã³¸®
+	 * ê¶Œí•œ ì²˜ë¦¬
 	 */
 	private void process() {
-		// ·Î±×ÀÎÇØ¼­ ÀÛ¼ºµÈ ±ÛÀÌ ¾Æ´Ò¶§ ±ÇÇÑ °Ë»ç
+		// ë¡œê·¸ì¸í•´ì„œ ì‘ì„±ëœ ê¸€ì´ ì•„ë‹ë•Œ ê¶Œí•œ ê²€ì‚¬
 		if (user == null) {
 			if (StringUtilAd.isEmpty(article.getUserId())) {
 				if (article.getPasswd() != null && article.getPasswd().equals(passwd)) {
@@ -58,7 +58,7 @@ public class BoardAccessRule implements AccessRule {
 					return;
 				}
 				else {
-					// ÆĞ½º¿öµå ÀÔ·Â ¿À·ù(»õ·Î ÀÔ·Â ¿ä¸Á)
+					// íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ ì˜¤ë¥˜(ìƒˆë¡œ ì…ë ¥ ìš”ë§)
 					status = STATUS_PASSWD_NOT_MATCH;
 				}
 			}
@@ -70,7 +70,7 @@ public class BoardAccessRule implements AccessRule {
 			return;
 		}
 
-		// ·Î±×ÀÎÇßÀ»¶§ ÀÛ¼ºÇÑ ±ÛÀÌ¸é ÇØ´ç »ç¿ëÀÚ ÀÎÁö ÆÇ´Ü
+		// ë¡œê·¸ì¸í–ˆì„ë•Œ ì‘ì„±í•œ ê¸€ì´ë©´ í•´ë‹¹ ì‚¬ìš©ì ì¸ì§€ íŒë‹¨
 		access = user.getUserId().equals(article.getUserId());
 	}
 

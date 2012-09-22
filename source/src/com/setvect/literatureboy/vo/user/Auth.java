@@ -13,7 +13,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * ±ÇÇÑ Á¤º¸
+ * ê¶Œí•œ ì •ë³´
  * 
  * @version $Id: Board.java 54 2010-08-09 14:25:54Z setvect@naver.com $
  */
@@ -27,17 +27,17 @@ public class Auth {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
 	private int authSeq;
 
-	/** ±ÇÇÑ ±¸ºĞ ÀÌ¸§ */
+	/** ê¶Œí•œ êµ¬ë¶„ ì´ë¦„ */
 	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "URL")
 	private String url;
 
-	/** ÃÑ °Ô½Ã¹° ÆÄÀÏ ¾÷·Îµå Á¦ÇÑ */
+	/** ì´ ê²Œì‹œë¬¼ íŒŒì¼ ì—…ë¡œë“œ ì œí•œ */
 	@Column(name = "PARAMETER")
 	private String parameter;
-	/** ±ÇÇÑ ºÎ¿© ¿©ºÎ */
+	/** ê¶Œí•œ ë¶€ì—¬ ì—¬ë¶€ */
 	@Transient
 	private boolean authHave;
 

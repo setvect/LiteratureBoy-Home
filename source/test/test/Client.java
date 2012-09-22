@@ -13,18 +13,18 @@ public class Client {
 		String temp = "bokaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1234";
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-		DatagramPacket write, read; // UDP ÆĞÅ¶°´Ã¼ÅÍ³Î»ı¼º
-		DatagramSocket sock; // UDP ¼ÒÄÏ °´Ã¼»ı¼º
+		DatagramPacket write, read; // UDP íŒ¨í‚·ê°ì²´í„°ë„ìƒì„±
+		DatagramSocket sock; // UDP ì†Œì¼“ ê°ì²´ìƒì„±
 		InetAddress ip = InetAddress.getByName("192.168.1.117");
 
-		// Åë½Å¿ë ¹öÆÛ¼³Á¤
+		// í†µì‹ ìš© ë²„í¼ì„¤ì •
 		byte[] write_buf, read_buf;
 		write_buf = new byte[1024];
 		read_buf = new byte[1024];
 
 		try {
 
-			sock = new DatagramSocket(); // ¼ÒÄÏ»ı¼º
+			sock = new DatagramSocket(); // ì†Œì¼“ìƒì„±
 			int count = 0;
 			while (true) {
 				temp = "";
@@ -33,16 +33,16 @@ public class Client {
 				}
 				write_buf = temp.getBytes();
 
-				// ¼­¹ö¿¡°Ô Àü´ŞÇÒ ÆĞÅ¶»ı¼º
+				// ì„œë²„ì—ê²Œ ì „ë‹¬í•  íŒ¨í‚·ìƒì„±
 				write = new DatagramPacket(write_buf, write_buf.length, ip, 7070);
-				sock.send(write); // ÆĞÅ¶Àü¼Û
+				sock.send(write); // íŒ¨í‚·ì „ì†¡
 				Thread.sleep(1);
 				count++;
-				System.out.println(count + "Àü¼Û");
+				System.out.println(count + "ì „ì†¡");
 			}
 			// sock.close();
 		} catch (SocketException e) {
-			System.out.println("¼ÒÄÏ»ı¼º¿À·ù");
+			System.out.println("ì†Œì¼“ìƒì„±ì˜¤ë¥˜");
 		} catch (IOException e) {
 			System.err.println(e);
 		} catch (InterruptedException e) {

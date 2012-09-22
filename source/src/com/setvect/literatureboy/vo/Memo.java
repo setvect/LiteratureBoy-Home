@@ -9,7 +9,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * �׽�Ʈ �ӽ�
+ * 테스트 임시
  * 
  * @version $Id$
  */

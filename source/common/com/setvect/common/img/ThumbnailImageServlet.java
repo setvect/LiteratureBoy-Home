@@ -16,8 +16,8 @@ import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 
 /**
- * À¥ ·çÆ® ¹Ù±ù¿¡ ÀÖ´Â ÀÌ¹ÌÁö ÆÄÀÏÀ» ¿­¾î¼­ µ¥ÀÌÅÍ¸¦ »Ñ¿© ÁÖ´Â Å¬·¡½º <br>
- * ex) <img src="/servlet/Thumbnail?i=ÀÌ¸§Áö¸í&w=³ĞÀÌ&h=³ôÀÌ"> ÀÌ·± ½ÄÀ¸·Î »ç¿ë ÇÏ¸é µÈ´Ù.
+ * ì›¹ ë£¨íŠ¸ ë°”ê¹¥ì— ìˆëŠ” ì´ë¯¸ì§€ íŒŒì¼ì„ ì—´ì–´ì„œ ë°ì´í„°ë¥¼ ë¿Œì—¬ ì£¼ëŠ” í´ë˜ìŠ¤ <br>
+ * ex) <img src="/servlet/Thumbnail?i=ì´ë¦„ì§€ëª…&w=ë„“ì´&h=ë†’ì´"> ì´ëŸ° ì‹ìœ¼ë¡œ ì‚¬ìš© í•˜ë©´ ëœë‹¤.
  * 
  * @version $Id$
  */
@@ -26,13 +26,13 @@ public class ThumbnailImageServlet extends HttpServlet {
 	/** */
 	private static final long serialVersionUID = 3865935617999439844L;
 
-	/** ¼¶³×ÀÏ ´ë»ó ÀÌ¹ÌÁö°¡ µé¾î ÀÖ´Â ±âº» °æ·Î */
+	/** ì„¬ë„¤ì¼ ëŒ€ìƒ ì´ë¯¸ì§€ê°€ ë“¤ì–´ ìˆëŠ” ê¸°ë³¸ ê²½ë¡œ */
 	public final static String BASE_DIR_SESSION_NAME = "_thum_base_dir";
 
 	private static String tempImagePath = EnvirmentProperty.getString("com.setvect.literatureboy.image.thumbnail_dir");
 
 	/**
-	 * ½æ³×ÀÏ ÀÌ¹ÌÁö
+	 * ì¸ë„¤ì¼ ì´ë¯¸ì§€
 	 * 
 	 * @param req
 	 * @param res
@@ -42,32 +42,32 @@ public class ThumbnailImageServlet extends HttpServlet {
 	 *      javax.servlet.http.HttpServletResponse)
 	 */
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		// ¿øº» ÀÌ¹ÌÁö
+		// ì›ë³¸ ì´ë¯¸ì§€
 		String orgImagePath = req.getParameter("i");
 		int width = Integer.parseInt(StringUtilAd.null2str(req.getParameter("w"), "0"));
 		int height = Integer.parseInt(StringUtilAd.null2str(req.getParameter("h"), "0"));
 
-		// ÀÔ·Â°ªÀÌ Àç´ë·Î ÀÔ·ÂµÇÁö ¾ÊÀ¸¸é ±×³É ¸®ÅÏ
+		// ì…ë ¥ê°’ì´ ì¬ëŒ€ë¡œ ì…ë ¥ë˜ì§€ ì•Šìœ¼ë©´ ê·¸ëƒ¥ ë¦¬í„´
 		if (orgImagePath == null || width == 0 || height == 0) {
 			return;
 		}
 		File sourceImageFile;
 		String baseDir = (String) req.getSession().getAttribute(BASE_DIR_SESSION_NAME);
 		if (baseDir == null) {
-			// ±âº» °æ·Î°¡ ¾øÀ» °æ¿ì À¥ ·çÆ® °æ·Î¸¦ ±âº»À¸·Î ÇÑ´Ù.
+			// ê¸°ë³¸ ê²½ë¡œê°€ ì—†ì„ ê²½ìš° ì›¹ ë£¨íŠ¸ ê²½ë¡œë¥¼ ê¸°ë³¸ìœ¼ë¡œ í•œë‹¤.
 			sourceImageFile = new File(getServletConfig().getServletContext().getRealPath(orgImagePath));
 		}
 		else {
 			sourceImageFile = new File(baseDir, orgImagePath);
 		}
 
-		// ÆÄÀÏÀÌ Á¸Àç ÇÏÁö ¾ÊÀ¸¸é ±×³É Á¾·á
+		// íŒŒì¼ì´ ì¡´ì¬ í•˜ì§€ ì•Šìœ¼ë©´ ê·¸ëƒ¥ ì¢…ë£Œ
 		if (!sourceImageFile.exists()) {
-			LogPrinter.out.warn(sourceImageFile + " ÀÌ¹ÌÁö°¡ ¾ø½À´Ï´Ù.");
+			LogPrinter.out.warn(sourceImageFile + " ì´ë¯¸ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.");
 			return;
 		}
 
-		// ¼¶³×ÀÏ ÀÌ¹ÌÁö ÆÄÀÏÀÌ¸§ ¸¸µé±â
+		// ì„¬ë„¤ì¼ ì´ë¯¸ì§€ íŒŒì¼ì´ë¦„ ë§Œë“¤ê¸°
 		// e.g) imagename_w33_h44.jpg
 		String tempImg = FileUtil.getFilenameWithoutExt(orgImagePath) + "_w" + width + "_h" + height
 				+ FileUtil.getExt(orgImagePath);
@@ -77,18 +77,18 @@ public class ThumbnailImageServlet extends HttpServlet {
 			saveDir.mkdirs();
 		}
 
-		// ¼¶³×ÀÏ ¹öÀüµÈ °æ·Î
+		// ì„¬ë„¤ì¼ ë²„ì „ëœ ê²½ë¡œ
 		File toFile = new File(saveDir, tempImg);
 		boolean fileExist = toFile.exists();
 		boolean fileOld = toFile.lastModified() < sourceImageFile.lastModified();
 
-		// ±âÁ¸¿¡ ¼¶³×ÀÏ·Î º¯È¯µÈ ÆÄÀÏÀÌ ÀÖ´Â³Ä?
-		// ¼¶³×ÀÏ·Î º¯È¯µÈ ÆÄÀÏÀÌ ¾ø°Å³ª, ÆÄÀÏÀÌ ¼öÁ¤µÇ¾úÀ» °æ¿ì ¼¶³×ÀÏ ´Ù½Ã ¸¸µé±â
+		// ê¸°ì¡´ì— ì„¬ë„¤ì¼ë¡œ ë³€í™˜ëœ íŒŒì¼ì´ ìˆëŠ”ëƒ?
+		// ì„¬ë„¤ì¼ë¡œ ë³€í™˜ëœ íŒŒì¼ì´ ì—†ê±°ë‚˜, íŒŒì¼ì´ ìˆ˜ì •ë˜ì—ˆì„ ê²½ìš° ì„¬ë„¤ì¼ ë‹¤ì‹œ ë§Œë“¤ê¸°
 		if (!fileExist || fileOld) {
 			ThumbnailImageConvert.toJPEGAny(sourceImageFile.getPath(), toFile.getPath(), width, height);
 		}
 
-		// ½æ³×ÀÏ·Î º¯È¯µÈ ÆÄÀÏ ÀĞ¾î µé¸®±â
+		// ì¸ë„¤ì¼ë¡œ ë³€í™˜ëœ íŒŒì¼ ì½ì–´ ë“¤ë¦¬ê¸°
 		FileInputStream ifp = null;
 
 		try {
@@ -103,7 +103,7 @@ public class ThumbnailImageServlet extends HttpServlet {
 				out.flush();
 			}
 		} catch (Exception e) {
-			LogPrinter.out.error("ÀÌ¹ÌÁö ÀĞ¾î µå¸®±â ½ÇÆĞ: " + toFile, e);
+			LogPrinter.out.error("ì´ë¯¸ì§€ ì½ì–´ ë“œë¦¬ê¸° ì‹¤íŒ¨: " + toFile, e);
 			return;
 		} finally {
 			if (ifp != null) {

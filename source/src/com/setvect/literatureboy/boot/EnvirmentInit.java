@@ -15,7 +15,7 @@ import com.setvect.literatureboy.db.DBInitializer;
 import com.setvect.literatureboy.service.user.UserService;
 
 /**
- * WAS°¡ ½ÇÇàµÇ¸é ¾îÇÃ¸®ÄÉÀÌ¼Ç¿¡ ±âº»ÀûÀÎ ¼³Á¤°ª, ·Î±×¼³Á¤µîÀ» ÇØÁØ´Ù. <br>
+ * WASê°€ ì‹¤í–‰ë˜ë©´ ì–´í”Œë¦¬ì¼€ì´ì…˜ì— ê¸°ë³¸ì ì¸ ì„¤ì •ê°’, ë¡œê·¸ì„¤ì •ë“±ì„ í•´ì¤€ë‹¤. <br>
  * $Id$
  */
 @SuppressWarnings("serial")
@@ -24,7 +24,7 @@ public class EnvirmentInit extends HttpServlet {
 	private static final String CONFIG_LOG4J_XML = "/config/log4j.xml";
 	private static final String CONFIG_CONFIG_PROPERTIES = "/config/config.properties";
 
-	/** ÃÊ±âÈ­ ¿©ºÎ */
+	/** ì´ˆê¸°í™” ì—¬ë¶€ */
 	private static boolean initialize = false;
 	private static ClassPathXmlApplicationContext springContext;
 
@@ -44,7 +44,7 @@ public class EnvirmentInit extends HttpServlet {
 	}
 
 	/**
-	 * config propertity, log4j, spring, hibernate ¼³Á¤ ÃÊ±âÈ­
+	 * config propertity, log4j, spring, hibernate ì„¤ì • ì´ˆê¸°í™”
 	 */
 	public static void bootUp() {
 
@@ -60,7 +60,7 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.init(log4j);
 		LogPrinter.out.info("Log Manager Initialized");
 
-		// Jetty »ç¿ë¿¡¼­ ¹ß»ıµÇ´Â ¿À·ù ÇØ°á
+		// Jetty ì‚¬ìš©ì—ì„œ ë°œìƒë˜ëŠ” ì˜¤ë¥˜ í•´ê²°
 		loadForSpringJarFile();
 
 		springContext = new ClassPathXmlApplicationContext(new String[] { CONFIG_SPRING }, false);
@@ -69,7 +69,7 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.out.info("Spring Initialized");
 		
 		// DB init
-		// H2 µ¥ÀÌÅÍ º£ÀÌ½º ÆÄÀÏ »ı¼º °æ·Î ÁöÁ¤. Spring Initialized Àü¿¡ ÇØ¾ßµÊ
+		// H2 ë°ì´í„° ë² ì´ìŠ¤ íŒŒì¼ ìƒì„± ê²½ë¡œ ì§€ì •. Spring Initialized ì „ì— í•´ì•¼ë¨
 		if (System.getProperty("h2.baseDir") == null) {
 			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db.path"));
 		}
@@ -82,18 +82,18 @@ public class EnvirmentInit extends HttpServlet {
 		LogPrinter.out.info("DB Table Initialized completed");
 		initialize = true;
 
-		// ±ÇÇÑ ¸ÅÇÎ Á¤º¸¸¦ ÀĞ¾î µå¸²
+		// ê¶Œí•œ ë§¤í•‘ ì •ë³´ë¥¼ ì½ì–´ ë“œë¦¼
 		UserService user = (UserService) springContext.getBean("UserService");
 		user.initAuth();
 	}
 
 	/**
-	 * Á÷Á¢ÀûÀ¸·Î ÇÁ·Î±×·¥ µ¿ÀÛ¿¡ ¾Æ¹«·Ã ¿µÇâÀÌ ¾øÀ½<br>
-	 * ´Ù¸¸ spring ÃÊ±âÈ­Àü¿¡ °ü·Ã jar ÆÄÀÏÀ» ·ÎµùÇÏ±â À§ÇÑ ¸ñÀûÀ¸·Î »ç¿ë<br>
-	 * °ü·ÃµÈ ½ºÅ°¸¶ Á¤º¸°¡ ÀÖ´Â jar ÆÄÀÏ ·ÎµùÀ» ÇÏÁö ¾Ê°í xml parsing Çß±â ¶§¹®ÀÌ´Ù. jetty´Â jar ÆÄÀÏ¾È¿¡ ÀÖ´Â
-	 * Å¬·¡½º¸¦ ÇÑ¹øÀÌ¶óµµ ·Îµù ÇØ¾ßÁö jarÀ» Á¢±Ù ÇÒ ¼ö ÀÖ³ª º¸´Ù. (ÃßÃø) ±×·¡¼­ °­Á¦ÀûÀ¸·Î jarÆÄÀÏÀ» ·Îµù ÇÏ±âÀ§ÇØ ¾Æ·¡¿Í °°ÀÌ
-	 * ¼Ò½º¸¦ ³Ö¾úÀ½<br>
-	 * ÇØ´ç ¸Ş¼Òµå¸¦ »ç¿ëÇÏÁö ¾ÊÀ¸¸é jetty¿¡¼­´Â ¾Æ·¡¿Í °°ÀÌ ¿À·ù°¡ ³ªÅ¸³²<br>
+	 * ì§ì ‘ì ìœ¼ë¡œ í”„ë¡œê·¸ë¨ ë™ì‘ì— ì•„ë¬´ë ¨ ì˜í–¥ì´ ì—†ìŒ<br>
+	 * ë‹¤ë§Œ spring ì´ˆê¸°í™”ì „ì— ê´€ë ¨ jar íŒŒì¼ì„ ë¡œë”©í•˜ê¸° ìœ„í•œ ëª©ì ìœ¼ë¡œ ì‚¬ìš©<br>
+	 * ê´€ë ¨ëœ ìŠ¤í‚¤ë§ˆ ì •ë³´ê°€ ìˆëŠ” jar íŒŒì¼ ë¡œë”©ì„ í•˜ì§€ ì•Šê³  xml parsing í–ˆê¸° ë•Œë¬¸ì´ë‹¤. jettyëŠ” jar íŒŒì¼ì•ˆì— ìˆëŠ”
+	 * í´ë˜ìŠ¤ë¥¼ í•œë²ˆì´ë¼ë„ ë¡œë”© í•´ì•¼ì§€ jarì„ ì ‘ê·¼ í•  ìˆ˜ ìˆë‚˜ ë³´ë‹¤. (ì¶”ì¸¡) ê·¸ë˜ì„œ ê°•ì œì ìœ¼ë¡œ jaríŒŒì¼ì„ ë¡œë”© í•˜ê¸°ìœ„í•´ ì•„ë˜ì™€ ê°™ì´
+	 * ì†ŒìŠ¤ë¥¼ ë„£ì—ˆìŒ<br>
+	 * í•´ë‹¹ ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šìœ¼ë©´ jettyì—ì„œëŠ” ì•„ë˜ì™€ ê°™ì´ ì˜¤ë¥˜ê°€ ë‚˜íƒ€ë‚¨<br>
 	 * <br>
 	 * org.springframework.beans.factory.parsing.BeanDefinitionParsingException:
 	 * Configuration problem: Unable to locate Spring NamespaceHandler for XML

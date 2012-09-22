@@ -18,8 +18,8 @@ import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardTrackback;
 
 /**
- * Æ®·¡¹é Á¦¾î<br>
- * ½Å±âÇÏ°Ôµµ annotationÀ¸·Î ÇÏ¸é * ÆĞÅÏÀ» ÀÎ½ÄÇÏÁö ¸øÇØ xml¿¡ ¸í½ÃÇÏ¿´À½
+ * íŠ¸ë˜ë°± ì œì–´<br>
+ * ì‹ ê¸°í•˜ê²Œë„ annotationìœ¼ë¡œ í•˜ë©´ * íŒ¨í„´ì„ ì¸ì‹í•˜ì§€ ëª»í•´ xmlì— ëª…ì‹œí•˜ì˜€ìŒ
  */
 public class BoardTrackbackController extends AbstractController {
 
@@ -31,7 +31,7 @@ public class BoardTrackbackController extends AbstractController {
 			throws Exception {
 		String vp = request.getPathInfo();
 		String[] param = vp.substring(1).split("/");
-		// Æ®·¡¹é
+		// íŠ¸ë˜ë°±
 		try {
 			int articleID = Integer.parseInt(param[0]);
 			boolean result = trackback(articleID, request);
@@ -39,20 +39,20 @@ public class BoardTrackbackController extends AbstractController {
 			return null;
 
 		} catch (Exception e) {
-  			LogPrinter.out.warn("°Ô½ÃÆÇ  Æ®·¡¹é ¿¡·¯(" + vp + ")");
+  			LogPrinter.out.warn("ê²Œì‹œíŒ  íŠ¸ë˜ë°± ì—ëŸ¬(" + vp + ")");
 			sendNotFoundError(response, vp);
 		}
 		return null;
 	}
 
 	/**
-	 * ´Ù¸¥ ºí·Î±×·Î ºÎÅÍ µé¾î¿À´Â Æ®·¡¹é Á¤º¸¸¦ µî·ÏÃ³¸®ÇÏ°í, ¼º°ø¿©ºÎ¸¦ ¾Ë·ÁÁÜ
+	 * ë‹¤ë¥¸ ë¸”ë¡œê·¸ë¡œ ë¶€í„° ë“¤ì–´ì˜¤ëŠ” íŠ¸ë˜ë°± ì •ë³´ë¥¼ ë“±ë¡ì²˜ë¦¬í•˜ê³ , ì„±ê³µì—¬ë¶€ë¥¼ ì•Œë ¤ì¤Œ
 	 * 
 	 * @param articleID
-	 *            Æ®·¡¹éÀÌ µî·ÏµÉ ÄÜÅÙÃ÷ ¾ÆÀÌµğ
+	 *            íŠ¸ë˜ë°±ì´ ë“±ë¡ë  ì½˜í…ì¸  ì•„ì´ë””
 	 * @param req
 	 *            request
-	 * @return Æ®·¡¹é ºv·ÏÀÌ ¼º°ø true, ¾Æ´Ï¸é false
+	 * @return íŠ¸ë˜ë°± í‹ë¡ì´ ì„±ê³µ true, ì•„ë‹ˆë©´ false
 	 */
 	private boolean trackback(int articleID, HttpServletRequest req) {
 		String blogName = req.getParameter("blog_name");
@@ -60,14 +60,14 @@ public class BoardTrackbackController extends AbstractController {
 		String url = req.getParameter("url");
 		String excerpt = req.getParameter("excerpt");
 
-		// ÇÊ¼ö µ¥ÀÌÅÍ Á¡°Ë
+		// í•„ìˆ˜ ë°ì´í„° ì ê²€
 		if (StringUtilAd.isEmpty(blogName) || StringUtilAd.isEmpty(title) || StringUtilAd.isEmpty(url)) {
 			return false;
 		}
 
 		BoardTrackback trackback = new BoardTrackback();
 		BoardArticle b = boardService.getArticle(articleID);
-		// ÇØ´ç ±Û¿¡ °Ô½Ã¹° Á¤º¸°¡ ¾øÀ¸¸é Æ®·¡¹é ºÒÇã
+		// í•´ë‹¹ ê¸€ì— ê²Œì‹œë¬¼ ì •ë³´ê°€ ì—†ìœ¼ë©´ íŠ¸ë˜ë°± ë¶ˆí—ˆ
 		if (b == null) {
 			return false;
 		}
@@ -87,10 +87,10 @@ public class BoardTrackbackController extends AbstractController {
 	}
 
 	/**
-	 * Æ®·¡¹é µî·Ï ¼º°ø ¿©ºÎ¿¡ µû¸¥ ÀÀ´ä ¸Ş¼¼Áö Àü´Ş
+	 * íŠ¸ë˜ë°± ë“±ë¡ ì„±ê³µ ì—¬ë¶€ì— ë”°ë¥¸ ì‘ë‹µ ë©”ì„¸ì§€ ì „ë‹¬
 	 * 
 	 * @param result
-	 *            Æ®·¡¹é µî·Ï ¼º°ø °æºÎ
+	 *            íŠ¸ë˜ë°± ë“±ë¡ ì„±ê³µ ê²½ë¶€
 	 * @param res
 	 *            response
 	 * @throws IOException
@@ -116,13 +116,13 @@ public class BoardTrackbackController extends AbstractController {
 
 	/**
 	 * @param res
-	 *            ÀÀÅ½
+	 *            ì‘íƒ
 	 * @param vp
-	 *            °æ·Î
+	 *            ê²½ë¡œ
 	 * @throws IOException
 	 */
 	protected void sendNotFoundError(HttpServletResponse res, String vp) throws IOException {
-		String mesg = "À¯È¿ÇÏÁö ¾ÊÀº °¡»ó °æ·Î : [VPATH=" + vp + "]";
+		String mesg = "ìœ íš¨í•˜ì§€ ì•Šì€ ê°€ìƒ ê²½ë¡œ : [VPATH=" + vp + "]";
 		LogPrinter.out.warn(mesg);
 		res.sendError(HttpServletResponse.SC_NOT_FOUND);
 	}

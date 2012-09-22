@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * »ç¿ëÀÚ¿Í ±ÇÇÑ ¸ÊÇÎ
+ * ì‚¬ìš©ìì™€ ê¶Œí•œ ë§µí•‘
  * 
  * @version $Id: ConnKey.java 590 2009-06-02 10:29:25Z setvect $
  */
@@ -16,11 +16,11 @@ public class AuthMapKey implements Serializable {
 	/** */
 	private static final long serialVersionUID = -8519884056908412301L;
 
-	/** ±ÇÇÑ ÀÏ·ÃÁ¤º¸ */
+	/** ê¶Œí•œ ì¼ë ¨ì •ë³´ */
 	@Column(name = "AUTH_SEQ")
 	private int authSeq;
 
-	/** »ç¿ëÀÚ */
+	/** ì‚¬ìš©ì */
 	@Column(name = "USER_ID")
 	private String userId;
 

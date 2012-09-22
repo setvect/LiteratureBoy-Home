@@ -3,7 +3,7 @@ package com.setvect.literatureboy.service.user;
 import com.setvect.common.util.SearchListVo;
 
 /**
- * °Ô½Ã¹° °ü¸® ¸ñ·Ï ÆäÀÌÂ¡ ¹× °Ë»ö Á¶°Ç
+ * ê²Œì‹œë¬¼ ê´€ë¦¬ ëª©ë¡ í˜ì´ì§• ë° ê²€ìƒ‰ ì¡°ê±´
  * 
  * @version $Id$
  */

@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * ³¯Â¥, ½Ã°£°ü·ÃµÈ Å¬·¡
+ * ë‚ ì§œ, ì‹œê°„ê´€ë ¨ëœ í´ë˜
  * 
  */
 public abstract class DateUtil {
@@ -56,13 +56,13 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ³¯Â¥ ÆĞÅÏÀ» °Ë»çÇÔ
+	 * ë‚ ì§œ íŒ¨í„´ì„ ê²€ì‚¬í•¨
 	 * 
 	 * @param s
-	 *            ³¯Â¥ ¹®ÀÚ¿­
+	 *            ë‚ ì§œ ë¬¸ìì—´
 	 * @param format
-	 *            °Ë»ç ÆĞÅÏ Çü½Ä <br>
-	 *            ¿¹: "yyyy-MM-dd"
+	 *            ê²€ì‚¬ íŒ¨í„´ í˜•ì‹ <br>
+	 *            ì˜ˆ: "yyyy-MM-dd"
 	 */
 	public static boolean isDatePatten(String s, String format) {
 		if (s == null || format == null) {
@@ -84,7 +84,7 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * @return DD Çü½ÄÀÇ ³¯Â¥
+	 * @return DD í˜•ì‹ì˜ ë‚ ì§œ
 	 */
 	public static int getDay() {
 		return getNumberByPattern("dd");
@@ -106,14 +106,14 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ³¯Â¥¸¦ ¿øÇÏ´Â ÆĞÅÏÀ¸·Î ¸®ÅÏ
+	 * ë‚ ì§œë¥¼ ì›í•˜ëŠ” íŒ¨í„´ìœ¼ë¡œ ë¦¬í„´
 	 * 
 	 * @param dd
-	 *            ³¯Â¥°ª
+	 *            ë‚ ì§œê°’
 	 * @param pattern
 	 *            "yyyy, MM, dd, HH, mm, ss and more"
 	 * 
-	 * @return º¯È¯µÈ ³¯Â¥ ½ºÆ®¸µ
+	 * @return ë³€í™˜ëœ ë‚ ì§œ ìŠ¤íŠ¸ë§
 	 */
 	public static String getFormatString(Date dd, String pattern) {
 		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat(pattern);
@@ -122,29 +122,29 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ³¯Â¥¸¦ ±âº» ÆĞÅÏ (yyyy-MM-dd)·Î ¸®ÅÏ
+	 * ë‚ ì§œë¥¼ ê¸°ë³¸ íŒ¨í„´ (yyyy-MM-dd)ë¡œ ë¦¬í„´
 	 * 
 	 * @param dd
-	 *            ³¯Â¥°ª
-	 * @return º¯È¯µÈ ³¯Â¥ ½ºÆ®¸µ
+	 *            ë‚ ì§œê°’
+	 * @return ë³€í™˜ëœ ë‚ ì§œ ìŠ¤íŠ¸ë§
 	 */
 	public static String getFormatString(Date dd) {
 		return getFormatString(dd, "yyyy-MM-dd");
 	}
 
 	/**
-	 * ³¯Â¥¸¦ ±âº» ÆĞÅÏ (yyyy-MM-dd HH:mm:ss)·Î ¸®ÅÏ
+	 * ë‚ ì§œë¥¼ ê¸°ë³¸ íŒ¨í„´ (yyyy-MM-dd HH:mm:ss)ë¡œ ë¦¬í„´
 	 * 
 	 * @param dd
-	 *            ³¯Â¥°ª
-	 * @return º¯È¯µÈ ³¯Â¥ ½ºÆ®¸µ
+	 *            ë‚ ì§œê°’
+	 * @return ë³€í™˜ëœ ë‚ ì§œ ìŠ¤íŠ¸ë§
 	 */
 	public static String getFormatStringDateTime(Date dd) {
 		return getFormatString(dd, "yyyy-MM-dd HH:mm:ss");
 	}
 
 	/**
-	 * @return ÇöÁ¦ ´Ş(Month)
+	 * @return í˜„ì œ ë‹¬(Month)
 	 */
 
 	public static int getMonth() {
@@ -152,7 +152,7 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ÇöÀç ½Ã°£À» ÁöÁ¤ÇÑ ÆĞÅÏÀ¸·Î º¯È¯ <br>
+	 * í˜„ì¬ ì‹œê°„ì„ ì§€ì •í•œ íŒ¨í„´ìœ¼ë¡œ ë³€í™˜ <br>
 	 * For example, String time = DateTime.getFormatString("yyyy-MM-dd
 	 * HH:mm:ss");
 	 * 
@@ -202,38 +202,38 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * @return ÇöÀç ³âµµ
+	 * @return í˜„ì¬ ë…„ë„
 	 */
 	public static int getYear() {
 		return getNumberByPattern("yyyy");
 	}
 
 	/**
-	 * @return ÇöÀç ½Ã°£
+	 * @return í˜„ì¬ ì‹œê°„
 	 */
 	public static int getHour() {
 		return getNumberByPattern("HH");
 	}
 
 	/**
-	 * @return ÇöÀç ºĞ
+	 * @return í˜„ì¬ ë¶„
 	 */
 	public static int getMinute() {
 		return getNumberByPattern("mm");
 	}
 
 	/**
-	 * @return ÇöÀç ÃÊ
+	 * @return í˜„ì¬ ì´ˆ
 	 */
 	public static int getSecond() {
 		return getNumberByPattern("ss");
 	}
 
 	/**
-	 * @return ÇöÀç½Ã°£À» YYYY-MM-DDÀ¸·Î Àü´Ş
+	 * @return í˜„ì¬ì‹œê°„ì„ YYYY-MM-DDìœ¼ë¡œ ì „ë‹¬
 	 */
 	public static String getSysDate() {
-		// DateÅ¬·¡½º¿¡¼­ ÇöÀçÀÇ ³¯Â¥ ½Ã°£À» °¡Á®¿È
+		// Dateí´ë˜ìŠ¤ì—ì„œ í˜„ì¬ì˜ ë‚ ì§œ ì‹œê°„ì„ ê°€ì ¸ì˜´
 		java.util.Date datetime = new java.util.Date();
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat("yyyy-MM-dd");
 		String texttime = formattime.format(datetime);
@@ -242,14 +242,14 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ÇöÀç½Ã°£À» ÁÖ¾îÁø ³¯ÀÚ Çü½ÄÀ¸·Î º¯È¯
+	 * í˜„ì¬ì‹œê°„ì„ ì£¼ì–´ì§„ ë‚ ì í˜•ì‹ìœ¼ë¡œ ë³€í™˜
 	 * 
 	 * @param strFormat
-	 *            ÁÖ¾îÁø ³¯ÀÚÇü½Ä
-	 * @return ³¯Â¥ ½ºÆ®¸µ
+	 *            ì£¼ì–´ì§„ ë‚ ìí˜•ì‹
+	 * @return ë‚ ì§œ ìŠ¤íŠ¸ë§
 	 */
 	public static String getSysDate(String strFormat) {
-		// DateÅ¬·¡½º¿¡¼­ ÇöÀçÀÇ ³¯Â¥ ½Ã°£À» °¡Á®¿È
+		// Dateí´ë˜ìŠ¤ì—ì„œ í˜„ì¬ì˜ ë‚ ì§œ ì‹œê°„ì„ ê°€ì ¸ì˜´
 		java.util.Date datetime = new java.util.Date();
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat(strFormat);
 		String texttime = formattime.format(datetime);
@@ -258,10 +258,10 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * @return ÇöÁö½Ã°£À» 'yyyy-MM-dd HH:mm:ss' ÀÌ·± ½ÄÀ¸·Î ¸®ÅÏ
+	 * @return í˜„ì§€ì‹œê°„ì„ 'yyyy-MM-dd HH:mm:ss' ì´ëŸ° ì‹ìœ¼ë¡œ ë¦¬í„´
 	 */
 	public static String getSysDateTime() {
-		// DateÅ¬·¡½º¿¡¼­ ÇöÀçÀÇ ³¯Â¥ ½Ã°£À» °¡Á®¿È
+		// Dateí´ë˜ìŠ¤ì—ì„œ í˜„ì¬ì˜ ë‚ ì§œ ì‹œê°„ì„ ê°€ì ¸ì˜´
 		java.util.Date datetime = new java.util.Date();
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String texttime = formattime.format(datetime);
@@ -271,13 +271,13 @@ public abstract class DateUtil {
 
 	/**
 	 * @param t
-	 *            Å¸ÀÓ ½ºÅÛÇÁ Çü½ÄÀÇ ½Ã°£
+	 *            íƒ€ì„ ìŠ¤í…œí”„ í˜•ì‹ì˜ ì‹œê°„
 	 * @param pattern
-	 *            Ç¥ÇöÇÒ ÆĞÅÏ
-	 * @return º¯È¯µÈ ÆĞÅÏ ½ºÆ®¸µ
+	 *            í‘œí˜„í•  íŒ¨í„´
+	 * @return ë³€í™˜ëœ íŒ¨í„´ ìŠ¤íŠ¸ë§
 	 */
 	public static String getFormatString(long t, String pattern) {
-		// DateÅ¬·¡½º¿¡¼­ ÇöÀçÀÇ ³¯Â¥ ½Ã°£À» °¡Á®¿È
+		// Dateí´ë˜ìŠ¤ì—ì„œ í˜„ì¬ì˜ ë‚ ì§œ ì‹œê°„ì„ ê°€ì ¸ì˜´
 		java.util.Date datetime = new java.util.Date(t);
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat(pattern);
 		String texttime = formattime.format(datetime);
@@ -287,8 +287,8 @@ public abstract class DateUtil {
 
 	/**
 	 * @param cal
-	 *            ½Ã°£°ª
-	 * @return YYYY-MM-DDÀ¸·Î Àü´Ş
+	 *            ì‹œê°„ê°’
+	 * @return YYYY-MM-DDìœ¼ë¡œ ì „ë‹¬
 	 */
 	public static String getFormatString(Calendar cal) {
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat("yyyy-MM-dd");
@@ -297,10 +297,10 @@ public abstract class DateUtil {
 
 	/**
 	 * @param cal
-	 *            ½Ã°£°ª
+	 *            ì‹œê°„ê°’
 	 * @param pattern
-	 *            Ç¥ÇöÇÒ ÆĞÅÏ
-	 * @return ÆĞÅÏ´ë·Î ¸®ÅÏ
+	 *            í‘œí˜„í•  íŒ¨í„´
+	 * @return íŒ¨í„´ëŒ€ë¡œ ë¦¬í„´
 	 */
 	public static String getFormatString(Calendar cal, String pattern) {
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat(pattern);
@@ -308,11 +308,11 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ³¯Â¥¸¦ ±âº» ÆĞÅÏ (yyyy-MM-dd HH:mm:ss)·Î ¸®ÅÏ
+	 * ë‚ ì§œë¥¼ ê¸°ë³¸ íŒ¨í„´ (yyyy-MM-dd HH:mm:ss)ë¡œ ë¦¬í„´
 	 * 
 	 * @param dd
-	 *            ³¯Â¥°ª
-	 * @return º¯È¯µÈ ³¯Â¥ ½ºÆ®¸µ
+	 *            ë‚ ì§œê°’
+	 * @return ë³€í™˜ëœ ë‚ ì§œ ìŠ¤íŠ¸ë§
 	 */
 	public static String getFormatStringDateTime(Calendar cal) {
 		// TODO Auto-generated method stub
@@ -320,14 +320,14 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¸Ş¼Òµå ¼³¸íÀ» »ğÀÔÇÏ½Ê½Ã¿À.
+	 * ë©”ì†Œë“œ ì„¤ëª…ì„ ì‚½ì…í•˜ì‹­ì‹œì˜¤.
 	 * 
 	 * @param lDate
-	 *            timestamp ÇüÅÂ
-	 * @return 'yyyy-MM-dd' Çü½ÄÀ¸·Î ³¯Â¥ ½ºÆ®¸µ
+	 *            timestamp í˜•íƒœ
+	 * @return 'yyyy-MM-dd' í˜•ì‹ìœ¼ë¡œ ë‚ ì§œ ìŠ¤íŠ¸ë§
 	 */
 	public static String getDate(long lDate) {
-		// DateÅ¬·¡½º¿¡¼­ ÇöÀçÀÇ ³¯Â¥ ½Ã°£À» °¡Á®¿È
+		// Dateí´ë˜ìŠ¤ì—ì„œ í˜„ì¬ì˜ ë‚ ì§œ ì‹œê°„ì„ ê°€ì ¸ì˜´
 		java.util.Date datetime = new java.util.Date(lDate);
 		java.text.SimpleDateFormat formattime = new SimpleDateFormat("yyyy-MM-dd");
 		String texttime = formattime.format(datetime);
@@ -345,15 +345,15 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ½ÃÀÛÀÏ°ú Á¾¿äÀÏ »çÀÌ¿¡ cod°¡ ÀÖÀ¸¸é true ¾Æ´Ï¸é false ³¯Â¥ Çü½ÄÀº yyyy-MM-dd·Î ÇÑ´Ù.
+	 * ì‹œì‘ì¼ê³¼ ì¢…ìš”ì¼ ì‚¬ì´ì— codê°€ ìˆìœ¼ë©´ true ì•„ë‹ˆë©´ false ë‚ ì§œ í˜•ì‹ì€ yyyy-MM-ddë¡œ í•œë‹¤.
 	 * 
 	 * @param cod
-	 *            ºñ±³
+	 *            ë¹„êµ
 	 * @param start
-	 *            ½ÃÀÛÀÏ
+	 *            ì‹œì‘ì¼
 	 * @param end
-	 *            Á¾·áÀÏ
-	 * @return ³¯Â¥»çÀÌ¿¡ condµğ°¡ ÀÖÀ¸¸é true ×À¸¸é false
+	 *            ì¢…ë£Œì¼
+	 * @return ë‚ ì§œì‚¬ì´ì— condë””ê°€ ìˆìœ¼ë©´ true ì•–ìœ¼ë©´ false
 	 */
 	public static boolean isBetween(String cod, String start, String end) throws Exception {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -373,13 +373,13 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * µÎ³¯Â¥ Â÷ÀÌ ±¸ÇÏ±â
+	 * ë‘ë‚ ì§œ ì°¨ì´ êµ¬í•˜ê¸°
 	 * 
 	 * @param startDate
-	 *            ³¯Â¥ ½ÃÀÛ
+	 *            ë‚ ì§œ ì‹œì‘
 	 * @param format
-	 *            ³¯Â¥ Á¾·á
-	 * @return µÎ ³¯Â¥ÀÇ Â÷ÀÌ (Å¸ÀÓ½ºÅÛÇÁ)
+	 *            ë‚ ì§œ ì¢…ë£Œ
+	 * @return ë‘ ë‚ ì§œì˜ ì°¨ì´ (íƒ€ì„ìŠ¤í…œí”„)
 	 * @throws Exception
 	 */
 	public static long dayDiff(String startDate, String format) throws Exception {
@@ -387,15 +387,15 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * µÎ ³¯Â¥ »çÀÌÀÇ Â÷ÀÌ
+	 * ë‘ ë‚ ì§œ ì‚¬ì´ì˜ ì°¨ì´
 	 * 
 	 * @param startDate
-	 *            ½ÃÀÛ ³¯Â¥
+	 *            ì‹œì‘ ë‚ ì§œ
 	 * @param endDate
-	 *            Á¾·á ³¯Â¥
+	 *            ì¢…ë£Œ ë‚ ì§œ
 	 * @param format
-	 *            ³¯Â¥ Çü½Ä ±âº»°ª: yyyy-MM-dd HH:mm:ss.SSS
-	 * @return long ³¯Â¥ Â÷ÀÌ ÃÊ´ÜÀ§
+	 *            ë‚ ì§œ í˜•ì‹ ê¸°ë³¸ê°’: yyyy-MM-dd HH:mm:ss.SSS
+	 * @return long ë‚ ì§œ ì°¨ì´ ì´ˆë‹¨ìœ„
 	 */
 	public static long dayDiff(String startDate, String endDate, String format) throws Exception {
 		if (format == null)
@@ -417,12 +417,12 @@ public abstract class DateUtil {
 
 	/**
 	 * @param startDate
-	 *            ½ÃÀÛ³¯Â¥
+	 *            ì‹œì‘ë‚ ì§œ
 	 * @param endDate
-	 *            Á¾·á ³¯Â¥
+	 *            ì¢…ë£Œ ë‚ ì§œ
 	 * @param format
-	 *            ³¯Â¥ Æ÷¸Ë (ex: yyyy-MM-dd HH:mm:ss.SSS)
-	 * @return µÎ ³¯Â¥¿¡ Â÷ÀÌ ÀÏ¼ö
+	 *            ë‚ ì§œ í¬ë§· (ex: yyyy-MM-dd HH:mm:ss.SSS)
+	 * @return ë‘ ë‚ ì§œì— ì°¨ì´ ì¼ìˆ˜
 	 */
 	public static int dayDiffDate(String startDate, String endDate, String format) {
 		return dayDiffDate(getDate(startDate, format), getDate(endDate, format));
@@ -430,10 +430,10 @@ public abstract class DateUtil {
 
 	/**
 	 * @param startDate
-	 *            ½ÃÀÛ³¯Â¥
+	 *            ì‹œì‘ë‚ ì§œ
 	 * @param endDate
-	 *            Á¾·á ³¯ÀÚ
-	 * @return µÎ ³¯Â¥¿¡ Â÷ÀÌ ÀÏ¼ö
+	 *            ì¢…ë£Œ ë‚ ì
+	 * @return ë‘ ë‚ ì§œì— ì°¨ì´ ì¼ìˆ˜
 	 */
 	public static int dayDiffDate(Date startDate, Date endDate) {
 		long diff = (endDate.getTime() - startDate.getTime()) / 1000;
@@ -441,10 +441,10 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¹®ÀÚ¿­ÀÇ ³¯Â¥¸¦ Date Å¸ÀÔÀ¸·Î º¯È¯ ±âº» Æ÷¸Ë Çü½Ä "yyyy-MM-dd"
+	 * ë¬¸ìì—´ì˜ ë‚ ì§œë¥¼ Date íƒ€ì…ìœ¼ë¡œ ë³€í™˜ ê¸°ë³¸ í¬ë§· í˜•ì‹ "yyyy-MM-dd"
 	 * 
 	 * @param dateString
-	 *            ¹®ÀÚ¿­ ³¯Â¥
+	 *            ë¬¸ìì—´ ë‚ ì§œ
 	 * @return Date
 	 */
 	public static Date getDate(String dateString) {
@@ -452,10 +452,10 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¹®ÀÚ¿­ÀÇ ³¯Â¥¸¦ Date Å¸ÀÔÀ¸·Î º¯È¯ ±âº» Æ÷¸Ë Çü½Ä "yyyy-MM-dd HH:mm:ss"
+	 * ë¬¸ìì—´ì˜ ë‚ ì§œë¥¼ Date íƒ€ì…ìœ¼ë¡œ ë³€í™˜ ê¸°ë³¸ í¬ë§· í˜•ì‹ "yyyy-MM-dd HH:mm:ss"
 	 * 
 	 * @param dateString
-	 *            ¹®ÀÚ¿­ ³¯Â¥
+	 *            ë¬¸ìì—´ ë‚ ì§œ
 	 * @return Date
 	 */
 	public static Date getDateTime(String dateString) {
@@ -463,10 +463,10 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¹®ÀÚ¿­ÀÇ ½Ã°£¸¦ Date Å¸ÀÔÀ¸·Î º¯È¯ ±âº» Æ÷¸Ë Çü½Ä "HH:mm:ss"
+	 * ë¬¸ìì—´ì˜ ì‹œê°„ë¥¼ Date íƒ€ì…ìœ¼ë¡œ ë³€í™˜ ê¸°ë³¸ í¬ë§· í˜•ì‹ "HH:mm:ss"
 	 * 
 	 * @param dateString
-	 *            ¹®ÀÚ¿­ ½Ã°£
+	 *            ë¬¸ìì—´ ì‹œê°„
 	 * @return Date
 	 */
 	public static Date getTime(String dateString) {
@@ -474,12 +474,12 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¹®ÀÚ¿­ÀÇ ³¯Â¥¸¦ Date Å¸ÀÔÀ¸·Î º¯È¯
+	 * ë¬¸ìì—´ì˜ ë‚ ì§œë¥¼ Date íƒ€ì…ìœ¼ë¡œ ë³€í™˜
 	 * 
 	 * @param dateString
-	 *            ¹®ÀÚÇü ³¯Â¥
+	 *            ë¬¸ìí˜• ë‚ ì§œ
 	 * @param dateFormat
-	 *            µ¥ÀÌÅÍ Æ÷¸Ë
+	 *            ë°ì´í„° í¬ë§·
 	 * @return Date
 	 */
 	public static Date getDate(String dateString, String dateFormat) {
@@ -494,12 +494,12 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¹®ÀÚ¿­ÀÇ ³¯Â¥¸¦ Calendar Å¸ÀÔÀ¸·Î º¯È¯
+	 * ë¬¸ìì—´ì˜ ë‚ ì§œë¥¼ Calendar íƒ€ì…ìœ¼ë¡œ ë³€í™˜
 	 * 
 	 * @param dateString
-	 *            ¹®ÀÚÇü ³¯Â¥
+	 *            ë¬¸ìí˜• ë‚ ì§œ
 	 * @param dateFormat
-	 *            µ¥ÀÌÅÍ Æ÷¸Ë
+	 *            ë°ì´í„° í¬ë§·
 	 * @return Date
 	 */
 	public static Calendar getCalendar(String dateString, String dateFormat) {
@@ -517,15 +517,15 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ¹®ÀÚ¿­·ÎµÈ ³¯Â¥¸¦ Æ¯Á¤ Æ÷¸Ë¿¡ ¸Â°Ô ½ºÆ®¸µ ÇüÅÂ·Î º¯È¯ÈÄ ¸®ÅÏ
+	 * ë¬¸ìì—´ë¡œëœ ë‚ ì§œë¥¼ íŠ¹ì • í¬ë§·ì— ë§ê²Œ ìŠ¤íŠ¸ë§ í˜•íƒœë¡œ ë³€í™˜í›„ ë¦¬í„´
 	 * 
 	 * @param dateString
-	 *            ³¯Â¥·ÎµÈ ¸¸ÀÚ¿­
+	 *            ë‚ ì§œë¡œëœ ë§Œìì—´
 	 * @param paramF
-	 *            Àü´ŞµÉ´Â ¹®ÀÚ¿­ Æ÷¸Ë
+	 *            ì „ë‹¬ë ëŠ” ë¬¸ìì—´ í¬ë§·
 	 * @param retF
-	 *            ¸®ÅÏµÉ Æ÷¸Ë
-	 * @return ¸®ÅÏµÉ Æ÷¸Ë
+	 *            ë¦¬í„´ë  í¬ë§·
+	 * @return ë¦¬í„´ë  í¬ë§·
 	 */
 	public static String getDatePart(String dateString, String paramF, String retF) {
 		Date d = getDate(dateString, paramF);
@@ -533,10 +533,10 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ÇöÀç ÀÏ¿¡¼­ diff¸¦ ´õÇÑ °ªÀ» ¸®ÅÏ
+	 * í˜„ì¬ ì¼ì—ì„œ diffë¥¼ ë”í•œ ê°’ì„ ë¦¬í„´
 	 * 
 	 * @param diff
-	 *            ³¯Â¥ Â÷ÀÌ°ª(ÀÏ´ÜÀ§)
+	 *            ë‚ ì§œ ì°¨ì´ê°’(ì¼ë‹¨ìœ„)
 	 * @return
 	 */
 	public static String getDiffDay(int diff) {
@@ -548,10 +548,10 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ÇöÀç ÀÏ¿¡¼­ diff¸¦ ´õÇÑ °ªÀ» ¸®ÅÏ
+	 * í˜„ì¬ ì¼ì—ì„œ diffë¥¼ ë”í•œ ê°’ì„ ë¦¬í„´
 	 * 
 	 * @param diff
-	 *            ³¯Â¥ Â÷ÀÌ°ª(ÀÏ´ÜÀ§)
+	 *            ë‚ ì§œ ì°¨ì´ê°’(ì¼ë‹¨ìœ„)
 	 * @return
 	 */
 	public static String getDiffMonth(int diff) {
@@ -563,16 +563,16 @@ public abstract class DateUtil {
 	}
 
 	/**
-	 * ÇØ´ç ³¯Â¥°¡ Æ÷ÇÔµÈ ÁÖÀÇ Ã¹³¯·Î ÀÌµ¿.<br>
-	 * ¿¹) <br>
-	 * 2011-01-01(Åä¿äÀÏ), ÁÖ ½ÃÀÛ: ÀÏ¿äÀÏ = > 2010-12-26<br>
-	 * 2012-02-08(¼ö¿äÀÏ), ÁÖ ½ÃÀÛ: ¿ù¿äÀÏ = > 2012-02-06<br>
+	 * í•´ë‹¹ ë‚ ì§œê°€ í¬í•¨ëœ ì£¼ì˜ ì²«ë‚ ë¡œ ì´ë™.<br>
+	 * ì˜ˆ) <br>
+	 * 2011-01-01(í† ìš”ì¼), ì£¼ ì‹œì‘: ì¼ìš”ì¼ = > 2010-12-26<br>
+	 * 2012-02-08(ìˆ˜ìš”ì¼), ì£¼ ì‹œì‘: ì›”ìš”ì¼ = > 2012-02-06<br>
 	 * 
 	 * @param cal
-	 *            ³¯Â¥
+	 *            ë‚ ì§œ
 	 * @param fristWeek
-	 *            ÁÖ(week)¿¡ ½ÃÀÛ ¿äÀÏ. Calendar Å¬·¡½º »ó¼ö°ª ÀÌ¿ë
-	 * @return ÁÖÀÇ Ã¹³¯·Î ÀÌµ¿µÈ ³¯Â¥. ½Ã°£µ¥ÀÌÅÍ´Â º¯°æµÇÁö ¾ÊÀ½.
+	 *            ì£¼(week)ì— ì‹œì‘ ìš”ì¼. Calendar í´ë˜ìŠ¤ ìƒìˆ˜ê°’ ì´ìš©
+	 * @return ì£¼ì˜ ì²«ë‚ ë¡œ ì´ë™ëœ ë‚ ì§œ. ì‹œê°„ë°ì´í„°ëŠ” ë³€ê²½ë˜ì§€ ì•ŠìŒ.
 	 */
 	public static Calendar getFirstWeekDate(Calendar cal, int fristWeek) {
 		Calendar rtnValue = (Calendar) cal.clone();

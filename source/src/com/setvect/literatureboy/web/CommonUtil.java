@@ -19,7 +19,7 @@ import com.setvect.literatureboy.boot.ApplicationException;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
- * ÇÁ·ÎÁ§Æ® ÀÇÁ¸ÀûÀÎ °øÅë ¸Ş¼Òµå ¸ğÀ½
+ * í”„ë¡œì íŠ¸ ì˜ì¡´ì ì¸ ê³µí†µ ë©”ì†Œë“œ ëª¨ìŒ
  * 
  * @version $Id$
  */
@@ -29,8 +29,8 @@ public class CommonUtil {
 	/**
 	 * @param request
 	 * @param listName
-	 *            displaytag ID ÀÌ¸§
-	 * @return displaytag ÆÄ¶ó¹ÌÅÍ°¡ ÀÖÀ¸¸é ÇØ´ç ÆÄ¶ó¹ÌÅÍÀÇ ÆäÀÌÁö °ª, ¾øÀ¸¸é "currentPage" ÆÄ¶ó¹ÌÅÍ °ª, ÀÌ°Íµµ ¾øÀ¸¸é 1
+	 *            displaytag ID ì´ë¦„
+	 * @return displaytag íŒŒë¼ë¯¸í„°ê°€ ìˆìœ¼ë©´ í•´ë‹¹ íŒŒë¼ë¯¸í„°ì˜ í˜ì´ì§€ ê°’, ì—†ìœ¼ë©´ "currentPage" íŒŒë¼ë¯¸í„° ê°’, ì´ê²ƒë„ ì—†ìœ¼ë©´ 1
 	 */
 	public static int getCurrentPage(HttpServletRequest request, String listName) {
 		String pageParam = new ParamEncoder(listName).encodeParameterName(TableTagParameters.PARAMETER_PAGE);
@@ -44,10 +44,10 @@ public class CommonUtil {
 	}
 
 	/**
-	 * search·Î ½ÃÀÛµÇ´Â ¸Ş¼Òµå¸¦ ºĞ¼®ÇÏ¿© ÇØ´ç ÀÌ¸§°ú °ªÀ» ¸ÊÀ¸·Î ¸¸µë
+	 * searchë¡œ ì‹œì‘ë˜ëŠ” ë©”ì†Œë“œë¥¼ ë¶„ì„í•˜ì—¬ í•´ë‹¹ ì´ë¦„ê³¼ ê°’ì„ ë§µìœ¼ë¡œ ë§Œë“¬
 	 * 
 	 * @param pageCondition
-	 * @return °Ë»ö ¸Ê
+	 * @return ê²€ìƒ‰ ë§µ
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
@@ -68,27 +68,27 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ÆÄÀÏ ¾÷·Îµå ¹× ´Ù¿î·Îµå °¡´É ¿©ºÎ¸¦ Ã¼Å©ÇÔ.
+	 * íŒŒì¼ ì—…ë¡œë“œ ë° ë‹¤ìš´ë¡œë“œ ê°€ëŠ¥ ì—¬ë¶€ë¥¼ ì²´í¬í•¨.
 	 * 
 	 * @param fileName
-	 *            Ã¼Å©ÇÒ ÆÄÀÏ ÀÌ¸§
+	 *            ì²´í¬í•  íŒŒì¼ ì´ë¦„
 	 * @throws ApplicationException
-	 *             ºÒ°¡´É ÇÒ °æ¿ì ¿¹¿Ü ¹ß»ı
+	 *             ë¶ˆê°€ëŠ¥ í•  ê²½ìš° ì˜ˆì™¸ ë°œìƒ
 	 */
 	public static void checkAllowUploadFile(String fileName) throws ApplicationException {
 		String ext = FileUtil.getExt(fileName).toLowerCase().trim();
 
 		int a = StringUtilAd.indexOfAny(ext, ConstraintWeb.ALLOW_UPLOAD_FILE);
 		if (a == -1) {
-			throw new ApplicationException("[" + fileName + "] Àº Çã°¡µÈ ÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù.");
+			throw new ApplicationException("[" + fileName + "] ì€ í—ˆê°€ëœ íŒŒì¼ì´ ì•„ë‹™ë‹ˆë‹¤.");
 		}
 	}
 
 	/**
-	 * Äí±â Á¤º¸¿¡ ÀÖ´Â ·Î±×ÀÎ ÄÚµå¸¦ °´Ã¤È­ ½ÃÄÑ °¡Á®¿È
+	 * ì¿ ê¸° ì •ë³´ì— ìˆëŠ” ë¡œê·¸ì¸ ì½”ë“œë¥¼ ê°ì±„í™” ì‹œì¼œ ê°€ì ¸ì˜´
 	 * 
 	 * @param request
-	 * @return ·Î±×ÀÎ ¾ÈµÇ¾î ÀÖÀ¸¸é null
+	 * @return ë¡œê·¸ì¸ ì•ˆë˜ì–´ ìˆìœ¼ë©´ null
 	 * @throws Exception
 	 */
 	public static User getLoginSession(HttpServletRequest request) throws Exception {

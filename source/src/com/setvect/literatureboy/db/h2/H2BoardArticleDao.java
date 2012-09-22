@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.setvect.literatureboy.db.common.AbstractBoardDao;
 
 /**
- * H2 DB¿ë °Ô½ÃÆÇ DAO
+ * H2 DBìš© ê²Œì‹œíŒ DAO
  * 
  * @version $Id$
  */

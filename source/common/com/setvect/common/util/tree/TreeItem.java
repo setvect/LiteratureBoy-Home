@@ -1,8 +1,8 @@
 package com.setvect.common.util.tree;
 
 /**
- * tree±¸Á¶¸¦ ³ªÅ¸³»±â À§ÇÑ ±âº» ÀÎÅÍÆäÀÌ½º Ç×¸ñ Á¤º¸<br>
- * Æ®¸® ±¸Á¶¸¦ Ç¥ÇöÇÏ±â À§ÇØ¼­´Â º» ÀÎÅÍÆäÀÌ½º¸¦ ±¸Çö ÇØ¾ß µÊ .
+ * treeêµ¬ì¡°ë¥¼ ë‚˜íƒ€ë‚´ê¸° ìœ„í•œ ê¸°ë³¸ ì¸í„°íŽ˜ì´ìŠ¤ í•­ëª© ì •ë³´<br>
+ * íŠ¸ë¦¬ êµ¬ì¡°ë¥¼ í‘œí˜„í•˜ê¸° ìœ„í•´ì„œëŠ” ë³¸ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ êµ¬í˜„ í•´ì•¼ ë¨ .
  */
 public interface TreeItem<ID> extends Comparable<TreeItem<ID>> {
 	/**

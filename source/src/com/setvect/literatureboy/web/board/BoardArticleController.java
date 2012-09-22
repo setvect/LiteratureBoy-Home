@@ -45,13 +45,13 @@ import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
- * È¯°æ¼³Á¤>¿î¿µÀÚ °ü¸® ¸Ş´º ÄÁÆ®·Ñ·¯
+ * í™˜ê²½ì„¤ì •>ìš´ì˜ì ê´€ë¦¬ ë©”ë‰´ ì»¨íŠ¸ë¡¤ëŸ¬
  */
 @Controller
 @Scope("prototype")
 public class BoardArticleController {
 
-	/** Æ®·¡¹é °æ·Î */
+	/** íŠ¸ë˜ë°± ê²½ë¡œ */
 	private static final String TRACKBACK_PATH = "/servlet/tb/";
 
 	private static final HashMap<JspPageKey, String> DEFAUlT_JSP;
@@ -65,10 +65,10 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * ¼­ºê ¸í·É¾î Á¤ÀÇ
+	 * ì„œë¸Œ ëª…ë ¹ì–´ ì •ì˜
 	 */
 	public static enum Mode {
-		/** USER,AGEN,Menu ¸®½ºÆ® º¸±â */
+		/** USER,AGEN,Menu ë¦¬ìŠ¤íŠ¸ ë³´ê¸° */
 		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, CREATE_ACTION, UPDATE_FORM, UPDATE_ACTION, REMOVE_ACTION,
 		//
 		COMMENT_CREATE_ACTION, COMMENT_REMOVE_ACTION,
@@ -77,43 +77,43 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * ÄÁÆ®·Ñ·¯ È£Ãâ Àü¿¡ Àü´ŞµÉ ÆÄ¶ó¹ÌÅÍ Á¤º¸¿¡ ´ëÇÑ Å°
+	 * ì»¨íŠ¸ë¡¤ëŸ¬ í˜¸ì¶œ ì „ì— ì „ë‹¬ë  íŒŒë¼ë¯¸í„° ì •ë³´ì— ëŒ€í•œ í‚¤
 	 */
 	public static enum Parameter {
 		PAGE_PER_ITEM_COUNT
-		// ÇÑ ÆäÀÌÁö´ç Ç¥½Ã Ç×¸ñ ¼ö
+		// í•œ í˜ì´ì§€ë‹¹ í‘œì‹œ í•­ëª© ìˆ˜
 	}
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
 		MODE,
-		/** ¸®½ºÆ® */
+		/** ë¦¬ìŠ¤íŠ¸ */
 		LIST,
-		/** °Ô½ÃÆÇ Á¤º¸ */
+		/** ê²Œì‹œíŒ ì •ë³´ */
 		BOARD,
 		//
 		ARTICLE, COMMENT,
-		/** ÆäÀÌÁö ¹× °Ë»ö Á¤º¸ */
+		/** í˜ì´ì§€ ë° ê²€ìƒ‰ ì •ë³´ */
 		PAGE_SEARCH,
-		// ±ÇÇÑ Á¤º¸¸¦ Á¦°ø
+		// ê¶Œí•œ ì •ë³´ë¥¼ ì œê³µ
 		AUTH_WRITE,
-		// Æ®·¡¹é ÁÖ¼Ò ¹× ¸ñ·Ï
+		// íŠ¸ë˜ë°± ì£¼ì†Œ ë° ëª©ë¡
 		TRACK_ADDR, TRACK_LIST,
 	}
 
 	@Autowired
 	private BoardService boardService;
 
-	/** jsp ÆäÀÌÁö */
+	/** jsp í˜ì´ì§€ */
 	private HashMap<JspPageKey, String> jspPage = DEFAUlT_JSP;
 
-	/** ´ÙÁß °Ô½Ã¹° °Ë»ö */
+	/** ë‹¤ì¤‘ ê²Œì‹œë¬¼ ê²€ìƒ‰ */
 	private List<String> searchBoards;
 
 	/**
-	 * View¿¡ º¸¿©Áú jsp ÆäÀÌÁö´Â Á¤º¸ ÇØ½¬ Å°
+	 * Viewì— ë³´ì—¬ì§ˆ jsp í˜ì´ì§€ëŠ” ì •ë³´ í•´ì‰¬ í‚¤
 	 */
 	public static enum JspPageKey {
 		LIST, READ, WRITE, ENCODE
@@ -122,7 +122,7 @@ public class BoardArticleController {
 	@RequestMapping("/board/article.do")
 	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = (ModelAndView) request.getAttribute(ConstraintWeb.AttributeKey.MODEL_VIEW.name());
-		// Àü´ŞµÉ ºä ¸ğµ¨¾øÀ¸¸é ±âº» °ªÀ¸·Î
+		// ì „ë‹¬ë  ë·° ëª¨ë¸ì—†ìœ¼ë©´ ê¸°ë³¸ ê°’ìœ¼ë¡œ
 		if (mav == null) {
 			mav = new ModelAndView(ConstraintWeb.LITERATUREBOY_LAYOUT);
 		}
@@ -136,14 +136,14 @@ public class BoardArticleController {
 		else {
 			m = Mode.valueOf(mode);
 		}
-		// ÇÑÆäÀÌÁö´ç Ç¥½Ã °¹¼ö Á¤ÇÏ±â
+		// í•œí˜ì´ì§€ë‹¹ í‘œì‹œ ê°¯ìˆ˜ ì •í•˜ê¸°
 		BoardArticleSearch pageCondition = bindSearch(request);
 		Integer countItem = (Integer) request.getAttribute(BoardArticleController.Parameter.PAGE_PER_ITEM_COUNT.name());
 		if (countItem != null) {
 			pageCondition.setPagePerItemCount(countItem);
 		}
 
-		// ¿©·¯°Ô °Ô½ÃÆÇ¿¡ °Ô½Ã¹° Ç¥½Ã ÇÏ±â À§ÇÔ
+		// ì—¬ëŸ¬ê²Œ ê²Œì‹œíŒì— ê²Œì‹œë¬¼ í‘œì‹œ í•˜ê¸° ìœ„í•¨
 		if (searchBoards != null) {
 			pageCondition.setSearchCodes(searchBoards);
 		}
@@ -308,8 +308,8 @@ public class BoardArticleController {
 
 	/**
 	 * @param article
-	 *            °Ô½Ã¹° Á¤º¸
-	 * @return ÇØ´ç °Ô½Ã¹°¿¡ µî·ÏµÈ Æ®·¡¹é ¸ñ·Ï
+	 *            ê²Œì‹œë¬¼ ì •ë³´
+	 * @return í•´ë‹¹ ê²Œì‹œë¬¼ì— ë“±ë¡ëœ íŠ¸ë˜ë°± ëª©ë¡
 	 */
 	private List<BoardTrackback> getTrackbackList(BoardArticle article) {
 		List<BoardTrackback> listTrackback = boardService.listTrackback(article.getArticleSeq());
@@ -319,7 +319,7 @@ public class BoardArticleController {
 	/**
 	 * @param request
 	 * @param article
-	 * @return ÇØ´ç °Ô½Ã¹°ÀÇ Æ®·¡¹é ÁÖ¼Ò
+	 * @return í•´ë‹¹ ê²Œì‹œë¬¼ì˜ íŠ¸ë˜ë°± ì£¼ì†Œ
 	 */
 	private String getTrackbackAddr(HttpServletRequest request, BoardArticle article) {
 		return HttpUtil.getHomepageUrl(request) + TRACKBACK_PATH + article.getArticleSeq();
@@ -338,7 +338,7 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * ¾²±â ±ÇÇÑÀÌ ÀÖ´ÂÁö Ã¼Å©ÇÔ
+	 * ì“°ê¸° ê¶Œí•œì´ ìˆëŠ”ì§€ ì²´í¬í•¨
 	 * 
 	 * @param request
 	 * @param pageCondition
@@ -371,7 +371,7 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * ¾ÏÈ£È­ ±Û Ã³¸®
+	 * ì•”í˜¸í™” ê¸€ ì²˜ë¦¬
 	 * 
 	 * @param request
 	 * @param article
@@ -379,7 +379,7 @@ public class BoardArticleController {
 	private void processEncrypt(HttpServletRequest request, BoardArticle article) {
 		String encode = request.getParameter("encode");
 
-		// ¾ÏÈ£È­ ±Û
+		// ì•”í˜¸í™” ê¸€
 		if (!StringUtilAd.isEmpty(encode)) {
 			article.setContent(StringEncrypt.encodeJ(article.getContent(), encode));
 			article.setEncodeF(true);
@@ -387,11 +387,11 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * Ã·ºÎÆÄÀÏ ÀúÀå
+	 * ì²¨ë¶€íŒŒì¼ ì €ì¥
 	 * 
 	 * @param request
 	 * @param article
-	 *            °ü°è ±Û
+	 *            ê´€ê³„ ê¸€
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
@@ -426,11 +426,11 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * »õ·Î°íÄ§À» ÅëÇÑ Àç ¾÷·Îµå ¹æÁö¸¦ ÇÏ±âÀ§ÇØ Á¤ÇØÁø ÆäÀÌÁö·Î redirection ÇÏ±â À§ÇÑ ÁÖ¼Ò¸¦ Á¦°ø
+	 * ìƒˆë¡œê³ ì¹¨ì„ í†µí•œ ì¬ ì—…ë¡œë“œ ë°©ì§€ë¥¼ í•˜ê¸°ìœ„í•´ ì •í•´ì§„ í˜ì´ì§€ë¡œ redirection í•˜ê¸° ìœ„í•œ ì£¼ì†Œë¥¼ ì œê³µ
 	 * 
 	 * @param request
 	 * @param pageCondition
-	 * @return redirection ÁÖ¼Ò
+	 * @return redirection ì£¼ì†Œ
 	 * @throws Exception
 	 */
 	private String getRedirectionUrl(HttpServletRequest request, BoardArticleSearch pageCondition) throws Exception {
@@ -444,7 +444,7 @@ public class BoardArticleController {
 
 		String mode = request.getParameter("mode");
 		Mode m = Mode.valueOf(mode);
-		// ÄÚ¸àÆ®, Æ®·¡¹é °ü·Ã ¾×¼ÇÀÌ¸é ÀĞ±â ÆäÀÌÁö·Î ÀÌµ¿
+		// ì½”ë©˜íŠ¸, íŠ¸ë˜ë°± ê´€ë ¨ ì•¡ì…˜ì´ë©´ ì½ê¸° í˜ì´ì§€ë¡œ ì´ë™
 		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_REMOVE_ACTION || m == Mode.TRACKBACK_REMOVE_ACTION) {
 			param.put("mode", Mode.READ_FORM);
 			param.put("articleSeq", request.getParameter("articleSeq"));
@@ -455,10 +455,10 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * request parameter¿¡¼­ ÆäÀÌÂ¡ ¹× °Ë»ö Á¤º¸¸¦ ÃßÃâ ÇÔ
+	 * request parameterì—ì„œ í˜ì´ì§• ë° ê²€ìƒ‰ ì •ë³´ë¥¼ ì¶”ì¶œ í•¨
 	 * 
 	 * @param request
-	 * @return ÆäÀÌÂ¡ ¹× °Ë»ö Á¤º¸
+	 * @return í˜ì´ì§• ë° ê²€ìƒ‰ ì •ë³´
 	 * @throws ServletRequestBindingException
 	 */
 	private BoardArticleSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {
@@ -466,8 +466,8 @@ public class BoardArticleController {
 		BoardArticleSearch searchVO = new BoardArticleSearch(currentPage);
 		Binder.bind(request, searchVO);
 
-		// bind½Ã currentPage ÆÄ¶ó¹ÌÅÍ°¡ ÀÖÀ¸¸é display tag¿¡ °ªÀ» ¹«½Ã ÇÏ±â ¶§¹®¿¡
-		// display Tag¿¡¼­ °¡Á®¿Â °ªÀ» ¿ì¼±ÀûÀ¸·Î ´ëÀÔ(¼³¸íÀÌ Àß ¾ÈµÈ´Ù ¤Ñ¤Ñ);
+		// bindì‹œ currentPage íŒŒë¼ë¯¸í„°ê°€ ìˆìœ¼ë©´ display tagì— ê°’ì„ ë¬´ì‹œ í•˜ê¸° ë•Œë¬¸ì—
+		// display Tagì—ì„œ ê°€ì ¸ì˜¨ ê°’ì„ ìš°ì„ ì ìœ¼ë¡œ ëŒ€ì…(ì„¤ëª…ì´ ì˜ ì•ˆëœë‹¤ ã…¡ã…¡);
 		searchVO.setCurrentPage(currentPage);
 		return searchVO;
 	}
@@ -489,7 +489,7 @@ public class BoardArticleController {
 	}
 
 	/**
-	 * ´ÙÁß °Ô½Ã¹°À» °Ë»öÇÏ±â À§ÇÔ
+	 * ë‹¤ì¤‘ ê²Œì‹œë¬¼ì„ ê²€ìƒ‰í•˜ê¸° ìœ„í•¨
 	 */
 	public void setSearchBoards(List<String> boards) {
 		searchBoards = boards;

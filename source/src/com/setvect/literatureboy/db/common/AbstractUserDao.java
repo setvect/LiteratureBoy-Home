@@ -20,7 +20,7 @@ import com.setvect.literatureboy.vo.user.AuthMapKey;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
- * È¸¿ø°ü¸® DAO
+ * íšŒì›ê´€ë¦¬ DAO
  * 
  * @version $Id: AbstractMemoDao.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
@@ -28,7 +28,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	@Autowired
 	SessionFactory sessionFactory;
 
-	// ---------------- »ç¿ëÀÚ
+	// ---------------- ì‚¬ìš©ì
 	public User getUser(String userId) {
 		Session session = sessionFactory.getCurrentSession();
 		return (User) session.get(User.class, userId);
@@ -62,7 +62,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	private String getUserWhere(UserSearch search) {
 		String where = "where deleteF = 'N' ";
 
-		// µÎ°³°¡ µ¿»õ¿¡ °Ë»ö Á¶°Ç¿¡ Æ÷ÇÔ µÉ ¼ö ¾øÀ½
+		// ë‘ê°œê°€ ë™ìƒˆì— ê²€ìƒ‰ ì¡°ê±´ì— í¬í•¨ ë  ìˆ˜ ì—†ìŒ
 		if (!StringUtilAd.isEmpty(search.getSearchId())) {
 			where += " and userId like " + StringUtilAd.getSqlStringLike(search.getSearchId());
 		}
@@ -90,7 +90,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		session.flush();
 	}
 
-	// ---------------- ±ÇÇÑ
+	// ---------------- ê¶Œí•œ
 	public Auth getAuth(int authSeq) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Auth) session.get(Auth.class, authSeq);
@@ -120,7 +120,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	private String getAuthWhere(AuthSearch search) {
 		String where = "where 1 = 1 ";
 
-		// µÎ°³°¡ µ¿»õ¿¡ °Ë»ö Á¶°Ç¿¡ Æ÷ÇÔ µÉ ¼ö ¾øÀ½
+		// ë‘ê°œê°€ ë™ìƒˆì— ê²€ìƒ‰ ì¡°ê±´ì— í¬í•¨ ë  ìˆ˜ ì—†ìŒ
 		if (!StringUtilAd.isEmpty(search.getSearchUrl())) {
 			where += " and url like " + StringUtilAd.getSqlStringLike(search.getSearchUrl());
 		}
@@ -145,7 +145,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	public void removeAuth(int authSeq) {
 		Session session = sessionFactory.getCurrentSession();
 
-		// Map Á¤º¸ »èÁ¦
+		// Map ì •ë³´ ì‚­ì œ
 		String q = "delete from AuthMap where key.authSeq = ?";
 		Query query = session.createQuery(q);
 		query.setParameter(0, authSeq);
@@ -155,7 +155,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 		session.flush();
 	}
 
-	// ---------------- ±ÇÇÑ ¸ÊÇÎ
+	// ---------------- ê¶Œí•œ ë§µí•‘
 	public AuthMap getAuthMap(AuthMapKey key) {
 		Session session = sessionFactory.getCurrentSession();
 		return (AuthMap) session.get(AuthMap.class, key);
@@ -184,7 +184,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	private String getAuthMapWhere(AuthMapSearch search) {
 		String where = "where 1 = 1 ";
 
-		// µÎ°³°¡ µ¿»õ¿¡ °Ë»ö Á¶°Ç¿¡ Æ÷ÇÔ µÉ ¼ö ¾øÀ½
+		// ë‘ê°œê°€ ë™ìƒˆì— ê²€ìƒ‰ ì¡°ê±´ì— í¬í•¨ ë  ìˆ˜ ì—†ìŒ
 		if (!StringUtilAd.isEmpty(search.getSearchUserId())) {
 			where += " and key.userId = " + StringUtilAd.getSqlString(search.getSearchUserId());
 		}
@@ -209,7 +209,7 @@ public abstract class AbstractUserDao<T, PK extends Serializable> implements Use
 	public void removeAuthMapForUserId(String userId) {
 		Session session = sessionFactory.getCurrentSession();
 
-		// Map Á¤º¸ »èÁ¦
+		// Map ì •ë³´ ì‚­ì œ
 		String q = "delete from AuthMap where key.userId = ?";
 		Query query = session.createQuery(q);
 		query.setParameter(0, userId);

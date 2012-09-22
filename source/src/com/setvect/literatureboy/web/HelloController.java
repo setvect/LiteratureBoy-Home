@@ -28,13 +28,13 @@ public class HelloController extends AbstractController {
 	private String getGreeting() {
 		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 		if (hour >= 6 && hour <= 10) {
-			return "ÁÁÀº ¾ÆÄ§ÀÔ´Ï´Ù.";
+			return "ì¢‹ì€ ì•„ì¹¨ìž…ë‹ˆë‹¤.";
 		} else if (hour >= 12 && hour <= 15) {
-			return "Á¡½É ½Ä»ç´Â ÇÏ¼Ì³ª¿ä?";
+			return "ì ì‹¬ ì‹ì‚¬ëŠ” í•˜ì…¨ë‚˜ìš”?";
 		} else if (hour >= 18 && hour <= 22) {
-			return "ÁÁÀº ¹ã µÇ¼¼¿ä";
+			return "ì¢‹ì€ ë°¤ ë˜ì„¸ìš”";
 		}
-		return "¾È³çÇÏ¼¼¿ä";
+		return "ì•ˆë…•í•˜ì„¸ìš”";
 	}
 
 }

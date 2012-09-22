@@ -4,20 +4,20 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @version $Id$
- * @deprecated com.setvect.common.http.HttpUtil ¶Ç °°Àº ±â´É ÀÖÀ½
+ * @deprecated com.setvect.common.http.HttpUtil ë˜ ê°™ì€ ê¸°ëŠ¥ ìˆìŒ
  */
 public class NetworkUtil {
 	/**
-	 * URLÀ» ¹Ş¾Æ È¨ÆäÀÌÁö ÆÄÀÏ °æ·Î Á¦°ÅÇÏ°í È¨ÆäÀÌÁö ÁÖ¼Ò¸¸ ¸®ÅÏ (³¡¿¡ '/' ¾øÀ½)
+	 * URLì„ ë°›ì•„ í™ˆí˜ì´ì§€ íŒŒì¼ ê²½ë¡œ ì œê±°í•˜ê³  í™ˆí˜ì´ì§€ ì£¼ì†Œë§Œ ë¦¬í„´ (ëì— '/' ì—†ìŒ)
 	 * 
 	 * @param sb
 	 *            request.getRequestURL()
-	 * @return ¼ø¼ö È¨ÆäÀÌÁö ÁÖ¼Ò¸¸
+	 * @return ìˆœìˆ˜ í™ˆí˜ì´ì§€ ì£¼ì†Œë§Œ
 	 */
 	public static String getHomepageUrl(HttpServletRequest req) {
 		StringBuffer rtn = new StringBuffer("http://");
 		rtn.append(req.getServerName());
-		// 80Æ÷Æ®°¡ ¾Æ´Ñ °ÍÀº Æ÷Æ® Ãß°¡
+		// 80í¬íŠ¸ê°€ ì•„ë‹Œ ê²ƒì€ í¬íŠ¸ ì¶”ê°€
 		if (req.getServerPort() != 80) {
 			rtn.append(":");
 			rtn.append(req.getServerPort());

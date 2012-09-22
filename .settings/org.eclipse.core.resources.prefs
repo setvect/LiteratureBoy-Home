@@ -1,6 +1,8 @@
-#Mon Apr 30 22:11:50 KST 2012
 eclipse.preferences.version=1
 encoding//WebContent/common/css/main.css=UTF-8
 encoding//WebContent/common/js/util_class.js=UTF-8
 encoding//WebContent/m/common/css/jquery.mobile-1.1.0.css=UTF-8
 encoding//source/resource/config/config.properties=utf-8
+encoding//source/src=UTF-8
+encoding//source/test=UTF-8
+encoding/<project>=UTF-8

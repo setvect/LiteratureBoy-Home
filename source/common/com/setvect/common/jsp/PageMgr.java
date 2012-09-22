@@ -1,11 +1,11 @@
 package com.setvect.common.jsp;
 
 /**
- * ÆäÀÌÂ¡ Ã³¸® <br>
- * ----»ç¿ë¹æ¹ı----&lt; <br>
- * pageMgr = new PageMgr(ÃÑ ¸®½ºÆ® °¹¼ö, ÇÑÆäÀÌÁö Ç¥½Ã°¹¼ö, ÆäÀÌÁö ³Ñ¹ö(1ºÎÅÍ N±îÁö)) <br>
+ * í˜ì´ì§• ì²˜ë¦¬ <br>
+ * ----ì‚¬ìš©ë°©ë²•----&lt; <br>
+ * pageMgr = new PageMgr(ì´ ë¦¬ìŠ¤íŠ¸ ê°¯ìˆ˜, í•œí˜ì´ì§€ í‘œì‹œê°¯ìˆ˜, í˜ì´ì§€ ë„˜ë²„(1ë¶€í„° Nê¹Œì§€)) <br>
  * <br>
- * ¡Ø JSP´Ü¿¡¼­´Â ¾Æ·¡¿Í °°ÀÌ »ç¿ë <br>
+ * â€» JSPë‹¨ì—ì„œëŠ” ì•„ë˜ì™€ ê°™ì´ ì‚¬ìš© <br>
  * &lt;% <br>
  * PageMgr pageArticle = (PageMgr)request.getAttribute(&quot;pageArticle&quot;); <br>
  * %&gt; <br>
@@ -22,97 +22,97 @@ package com.setvect.common.jsp;
  */
 public class PageMgr {
 
-	/** ÇÑÆäÀÌÁö¿¡ ÂïÈú ·¹ÄÚµå °³¼ö * */
+	/** í•œí˜ì´ì§€ì— ì°í ë ˆì½”ë“œ ê°œìˆ˜ * */
 	private int pageSize;
 
-	/** ¿­°ÅµÇ´Â ÆäÀÌÁö °³¼ö * */
+	/** ì—´ê±°ë˜ëŠ” í˜ì´ì§€ ê°œìˆ˜ * */
 	private int pageLinkCnt = 10;
 
-	/** ÀüÃ¼ ·¹ÄÚµå ¼ö * */
+	/** ì „ì²´ ë ˆì½”ë“œ ìˆ˜ * */
 	private int totCnt = 0;
 
-	/** ÇöÀç ÆäÀÌÁö ¹øÈ£ * */
+	/** í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸ * */
 	private int curPage = 0;
 
-	/** ÀüÃ¼ ÆäÀÌÁö ¼ö * */
+	/** ì „ì²´ í˜ì´ì§€ ìˆ˜ * */
 	private int totPage = 0;
 
-	/** ³ªÅ¸³¯ Ã³À½ ÆäÀÌÁö ¹øÈ£ * */
+	/** ë‚˜íƒ€ë‚  ì²˜ìŒ í˜ì´ì§€ ë²ˆí˜¸ * */
 	private int startPage = 0;
 
-	/** ³ªÅ¸³¯ ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£ * */
+	/** ë‚˜íƒ€ë‚  ë§ˆì§€ë§‰ í˜ì´ì§€ ë²ˆí˜¸ * */
 	private int endPage = 0;
 
-	/** ±×·ì´ÜÀ§ÀÇ ¹­À½ °³¼ö * */
+	/** ê·¸ë£¹ë‹¨ìœ„ì˜ ë¬¶ìŒ ê°œìˆ˜ * */
 	private int groupPageCnt = 0;
 
 	private DesignElement skin = new DesignElement();;
 
 	/***********************************************************************************************
-	 * ÆäÀÌÁö ÀÌµ¿¿¡ °üÇÑ ÀÚ¹Ù½ºÅ©¸³Æ® <br>
-	 * (fuction pageMove('', '')ÇüÅÂÀÇ ½ºÅ©¸³Æ® ¼Ò½º
+	 * í˜ì´ì§€ ì´ë™ì— ê´€í•œ ìë°”ìŠ¤í¬ë¦½íŠ¸ <br>
+	 * (fuction pageMove('', '')í˜•íƒœì˜ ìŠ¤í¬ë¦½íŠ¸ ì†ŒìŠ¤
 	 **********************************************************************************************/
 
-	/** ÆäÀÌÁö submit Æû ÀÌ¸§ */
+	/** í˜ì´ì§€ submit í¼ ì´ë¦„ */
 	private String formName = "listPageForm";
 
-	/** ÀÚ¹Ù½ºÅ©¸³Æ®¸¦ »ç¿ëÇÏÁö ¾Ê°í ÆäÀÌÁö ³×ºñ°ÔÀÌ¼Ç ÁÖ¼Ò¸¦ ¸µÅ© ÇÏ±â À§ÇÔ */
+	/** ìë°”ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šê³  í˜ì´ì§€ ë„¤ë¹„ê²Œì´ì…˜ ì£¼ì†Œë¥¼ ë§í¬ í•˜ê¸° ìœ„í•¨ */
 	private URLParameter param;
 
 	/**
-	 * »ı¼º
+	 * ìƒì„±
 	 */
 	public PageMgr() {
 		init(0, 0, 0);
 	}
 
 	/**
-	 * ÇöÀç ÆäÀÌÁö¿¡ ½ÃÀÛ ¹øÈ£¸¦ ±âÁØÀ¸·Î »ó´ëÀûÀÎ °ª¸¦ ´õÇØ Çà¹øÈ£¸¦ °¡Á®¿È<br>
-	 * ¿À¸§ Â÷¼ø
+	 * í˜„ì¬ í˜ì´ì§€ì— ì‹œì‘ ë²ˆí˜¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ìƒëŒ€ì ì¸ ê°’ë¥¼ ë”í•´ í–‰ë²ˆí˜¸ë¥¼ ê°€ì ¸ì˜´<br>
+	 * ì˜¤ë¦„ ì°¨ìˆœ
 	 * 
 	 * @param relative
-	 *            »ó´ë ÇàÀÇ ¹øÈ£
-	 * @return Çà¹øÈ£
+	 *            ìƒëŒ€ í–‰ì˜ ë²ˆí˜¸
+	 * @return í–‰ë²ˆí˜¸
 	 */
 	public int getRowNum(int relative) {
 		return pageSize * (curPage - 1) + 1 + relative;
 	}
 
 	/**
-	 * ÇöÀç ÆäÀÌÁö¿¡ ½ÃÀÛ ¹øÈ£¸¦ ±âÁØÀ¸·Î »ó´ëÀûÀÎ °ª¸¦ ´õÇØ Çà¹øÈ£¸¦ °¡Á®¿È<br>
-	 * ³»¸² Â÷¼ø
+	 * í˜„ì¬ í˜ì´ì§€ì— ì‹œì‘ ë²ˆí˜¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ìƒëŒ€ì ì¸ ê°’ë¥¼ ë”í•´ í–‰ë²ˆí˜¸ë¥¼ ê°€ì ¸ì˜´<br>
+	 * ë‚´ë¦¼ ì°¨ìˆœ
 	 * 
 	 * @param relative
-	 *            »ó´ë ÇàÀÇ ¹øÈ£
-	 * @return Çà¹øÈ£
+	 *            ìƒëŒ€ í–‰ì˜ ë²ˆí˜¸
+	 * @return í–‰ë²ˆí˜¸
 	 */
 	public int getRowNumDesc(int relative) {
 		return totCnt - (pageSize * (curPage - 1)) - relative;
 	}
 
 	/**
-	 * ÆäÀÌÂ¡ Ã³¸®
+	 * í˜ì´ì§• ì²˜ë¦¬
 	 * 
 	 * @param p_totalCount
-	 *            ÀüÃ¼ ·¹ÄÚµå ¼ö
+	 *            ì „ì²´ ë ˆì½”ë“œ ìˆ˜
 	 * @param p_curPage
-	 *            ÇöÀç ÆäÀÌÁö ¹øÈ£
+	 *            í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸
 	 * @param p_pageSize
-	 *            ÇÑÆäÀÌÁö´ç Ç¥½Ã ¸ñ·Ï °¹¼ö
+	 *            í•œí˜ì´ì§€ë‹¹ í‘œì‹œ ëª©ë¡ ê°¯ìˆ˜
 	 */
 	public PageMgr(int p_totalCount, int p_curPage, int p_pageSize) {
 		init(p_totalCount, p_curPage, p_pageSize);
 	}
 
 	/**
-	 * ÆäÀÌÂ¡ Ã³¸®
+	 * í˜ì´ì§• ì²˜ë¦¬
 	 * 
 	 * @param p_totalCount
-	 *            ÀüÃ¼ ·¹ÄÚµå ¼ö
+	 *            ì „ì²´ ë ˆì½”ë“œ ìˆ˜
 	 * @param p_curPage
-	 *            ÇöÁ¦ ÆäÀÌÁö ¹øÈ£
+	 *            í˜„ì œ í˜ì´ì§€ ë²ˆí˜¸
 	 * @param p_pageSize
-	 *            ÇÑÆäÀÌÁö´ç Ç¥½Ã ¸ñ·Ï °¹¼ö
+	 *            í•œí˜ì´ì§€ë‹¹ í‘œì‹œ ëª©ë¡ ê°¯ìˆ˜
 	 */
 	public void init(int p_totalCount, int p_curPage, int p_pageSize) {
 
@@ -125,7 +125,7 @@ public class PageMgr {
 		pageSize = p_pageSize;
 		totPage = (int) Math.ceil((double) totCnt / pageSize);
 
-		// pageLinkCnt ¿­°ÅµÇ´Â ÆäÀÌÁö °¹¼ö
+		// pageLinkCnt ì—´ê±°ë˜ëŠ” í˜ì´ì§€ ê°¯ìˆ˜
 		groupPageCnt = (int) Math.ceil((double) totPage / pageLinkCnt);
 
 		curPage = p_curPage;
@@ -137,29 +137,29 @@ public class PageMgr {
 	}
 
 	/**
-	 * ¿ÜºÎ¿¡¼­ pageSize ¼¼ÆÃ
+	 * ì™¸ë¶€ì—ì„œ pageSize ì„¸íŒ…
 	 * 
 	 * @param _pageSize
-	 *            ÆäÀÌÁö¿¡ µé¾î°¥ ÇàÀ» ¼¼ÆÃ
+	 *            í˜ì´ì§€ì— ë“¤ì–´ê°ˆ í–‰ì„ ì„¸íŒ…
 	 */
 	public void setPageSize(int _pageSize) {
 		pageSize = _pageSize;
 	}
 
 	/**
-	 * ¿ÜºÎ¿¡¼­ PageLinkCnt ¼¼ÆÃ
+	 * ì™¸ë¶€ì—ì„œ PageLinkCnt ì„¸íŒ…
 	 * 
 	 * @param _pageLinkCnt
-	 *            1 2 3 4 5 6 Ã³·³ ÆäÀÌÁö ¹øÈ£·Î ³ª¿­µÉ °¹¼ö
+	 *            1 2 3 4 5 6 ì²˜ëŸ¼ í˜ì´ì§€ ë²ˆí˜¸ë¡œ ë‚˜ì—´ë  ê°¯ìˆ˜
 	 */
 	public void setPageLinkCnt(int _pageLinkCnt) {
 		pageLinkCnt = _pageLinkCnt;
 	}
 
 	/**
-	 * pageMove ÀÚ¹Ù½ºÅ©¸³Æ® ¼Ò½º¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * pageMove ìë°”ìŠ¤í¬ë¦½íŠ¸ ì†ŒìŠ¤ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public String getScriptSrc() {
 		String tmpLink = "<script language=\"javascript\" text=\"text/javascript\">\n";
@@ -174,84 +174,84 @@ public class PageMgr {
 	}
 
 	/**
-	 * ÇÑ ÆäÀÌÁö¿¡ µé¾î°¥ rowÀÇ °¹¼ö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * í•œ í˜ì´ì§€ì— ë“¤ì–´ê°ˆ rowì˜ ê°¯ìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getPageSize() {
 		return pageSize;
 	}
 
 	/**
-	 * ¿¹¸¦ µé¾î 1 2 3 4 5 6.. °°ÀÌ ÆäÀÌÁö¹øÈ£°¡ ³ª¿­µÇ´Â °¹¼ö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * ì˜ˆë¥¼ ë“¤ì–´ 1 2 3 4 5 6.. ê°™ì´ í˜ì´ì§€ë²ˆí˜¸ê°€ ë‚˜ì—´ë˜ëŠ” ê°¯ìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getPageLinkCnt() {
 		return pageLinkCnt;
 	}
 
 	/**
-	 * Ã¹ ÆäÀÌÁö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * ì²« í˜ì´ì§€ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getStartPage() {
 		return startPage;
 	}
 
 	/**
-	 * ¸¶Áö¸· ÆäÀÌÁö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * ë§ˆì§€ë§‰ í˜ì´ì§€ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getEndPage() {
 		return endPage;
 	}
 
 	/**
-	 * ÀüÃ¼ Ä«¿îÆ®¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * ì „ì²´ ì¹´ìš´íŠ¸ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getTotCnt() {
 		return totCnt;
 	}
 
 	/**
-	 * À§ÂÊ ÆäÀÌÁö ¸µÅ©¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * ìœ„ìª½ í˜ì´ì§€ ë§í¬ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getTotPage() {
 		return totPage;
 	}
 
 	/**
-	 * ÇöÀç ÆäÀÌÁö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+	 * í˜„ì¬ í˜ì´ì§€ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public int getCurPage() {
 		return curPage;
 	}
 
 	/**
-	 * ÀÌÀü ¹­À½ Html ÄÚµå
+	 * ì´ì „ ë¬¶ìŒ Html ì½”ë“œ
 	 * 
 	 * @param imgStr
-	 *            ±¸ÇÒ ÀÌ¹ÌÁö html ÅÂ±×
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 *            êµ¬í•  ì´ë¯¸ì§€ html íƒœê·¸
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public String getHrefPrevGroup(String imgStr) {
 		imgStr = imgStr.trim();
 
 		String pageLink;
-		// ÀÌÀü ÆäÀÌÁö ¹­À½À¸·Î ³Ñ¾î °¥¼ö ¾øÀ¸¸é
+		// ì´ì „ í˜ì´ì§€ ë¬¶ìŒìœ¼ë¡œ ë„˜ì–´ ê°ˆìˆ˜ ì—†ìœ¼ë©´
 		if ((int) Math.ceil((double) curPage / pageLinkCnt) <= 1) {
 			pageLink = skin.getPrevGroup(imgStr);
 		}
-		// ÀÖÀ¸¸é
+		// ìˆìœ¼ë©´
 		else {
 			int v = ((int) (Math.floor((curPage - 0.0001) / pageLinkCnt))) * pageLinkCnt;
 			pageLink = skin.getPrevGroup(skin.getLink(v, imgStr));
@@ -261,11 +261,11 @@ public class PageMgr {
 	}
 
 	/**
-	 * ´ÙÀ½ ÆäÀÌÁö Html ÄÚµå
+	 * ë‹¤ìŒ í˜ì´ì§€ Html ì½”ë“œ
 	 * 
 	 * @param imgStr
-	 *            ±¸ÇÒ ÀÌ¹ÌÁö html ÅÂ±×
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 *            êµ¬í•  ì´ë¯¸ì§€ html íƒœê·¸
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public String getHrefPrev(String imgStr) {
 		imgStr = imgStr.trim();
@@ -274,7 +274,7 @@ public class PageMgr {
 		if (curPage <= 1) {
 			pageLink = skin.getPrev(imgStr);
 		}
-		// ÀÖÀ¸¸é
+		// ìˆìœ¼ë©´
 		else {
 			int v = curPage - 1;
 			pageLink = skin.getPrev(skin.getLink(v, imgStr));
@@ -284,14 +284,14 @@ public class PageMgr {
 	}
 
 	/**
-	 * ¼ıÀÚ ÆäÀÌÁö html ÄÚµå
+	 * ìˆ«ì í˜ì´ì§€ html ì½”ë“œ
 	 * 
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public String getHrefNumber() {
 		String pageLink = "";
 		for (int i = startPage; i <= endPage; i++) {
-			// ÇöÀç ÆäÀÌÁö¿Í °°À¸¸é
+			// í˜„ì¬ í˜ì´ì§€ì™€ ê°™ìœ¼ë©´
 			if (i == curPage) {
 				pageLink += skin.getNumber(skin.getCurrent(String.valueOf(i)));
 			} else {
@@ -302,11 +302,11 @@ public class PageMgr {
 	}
 
 	/**
-	 * ´ÙÀ½ ÆäÀÌÁö html ÄÚµå
+	 * ë‹¤ìŒ í˜ì´ì§€ html ì½”ë“œ
 	 * 
 	 * @param imgStr
-	 *            ±¸ÇÒ ÀÌ¹ÌÁö html ÅÂ±×
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 *            êµ¬í•  ì´ë¯¸ì§€ html íƒœê·¸
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public String getHrefNext(String imgStr) {
 		imgStr = imgStr.trim();
@@ -315,7 +315,7 @@ public class PageMgr {
 		if (curPage >= totPage) {
 			pageLink = skin.getNext(imgStr);
 		}
-		// ÀÖÀ¸¸é
+		// ìˆìœ¼ë©´
 		else {
 			int v = curPage + 1;
 			pageLink = skin.getPrev(skin.getLink(v, imgStr));
@@ -324,19 +324,19 @@ public class PageMgr {
 	}
 
 	/**
-	 * ÀÌÈÄ ¹­À½ Html ÄÚµå
+	 * ì´í›„ ë¬¶ìŒ Html ì½”ë“œ
 	 * 
 	 * @param imgStr
-	 *            ±¸ÇÒ ÀÌ¹ÌÁö html ÅÂ±×
-	 * @return ÇØ´ç ÀÚ·áÀÇ °ª
+	 *            êµ¬í•  ì´ë¯¸ì§€ html íƒœê·¸
+	 * @return í•´ë‹¹ ìë£Œì˜ ê°’
 	 */
 	public String getHrefNextGroup(String imgStr) {
-		// ´ÙÀ½ÆäÀÌÁö ¹­À½À¸·Î ³Ñ¾î °¥¼ö ¾øÀ¸¸é
+		// ë‹¤ìŒí˜ì´ì§€ ë¬¶ìŒìœ¼ë¡œ ë„˜ì–´ ê°ˆìˆ˜ ì—†ìœ¼ë©´
 		String pageLink;
 		if ((int) Math.ceil((double) curPage / pageLinkCnt) >= groupPageCnt) {
 			pageLink = skin.getNextGroup(imgStr);
 		}
-		// ´ÙÀ½ÆäÀÌÁö ¹­À½À¸·Î ³Ñ¾î °¥¼ö ÀÖÀ¸¸é
+		// ë‹¤ìŒí˜ì´ì§€ ë¬¶ìŒìœ¼ë¡œ ë„˜ì–´ ê°ˆìˆ˜ ìˆìœ¼ë©´
 		else {
 			int v = (((int) (Math.floor((curPage - 0.001) / pageLinkCnt)) + 1) * pageLinkCnt) + 1;
 
@@ -346,9 +346,9 @@ public class PageMgr {
 	}
 
 	/**
-	 * ÆäÀÌÁöÃ³¸®½Ã ¸ŞÀÎ ÆäÀÌÁö ¸µÅ©¸¦ ±¸ÇØÁÖ´Âµ¥ »ç¿ëµÇ´Â ¸Ş¼Òµå<br>
+	 * í˜ì´ì§€ì²˜ë¦¬ì‹œ ë©”ì¸ í˜ì´ì§€ ë§í¬ë¥¼ êµ¬í•´ì£¼ëŠ”ë° ì‚¬ìš©ë˜ëŠ” ë©”ì†Œë“œ<br>
 	 * 
-	 * @return µğÀÚÀÎÀÌ Àû¿ëµÇÁö ¾ÊÀº ±âº» ³×ºñ°ÔÀÌ¼Ç html ÄÚµå
+	 * @return ë””ìì¸ì´ ì ìš©ë˜ì§€ ì•Šì€ ê¸°ë³¸ ë„¤ë¹„ê²Œì´ì…˜ html ì½”ë“œ
 	 */
 	public String getPageLink() {
 
@@ -360,30 +360,30 @@ public class PageMgr {
 			return "";
 		}
 
-		// == ÀÌÀü ¹­À½ ==
-		pageLink += getHrefPrevGroup("<font color='#666666'>¢¸I</font>");
+		// == ì´ì „ ë¬¶ìŒ ==
+		pageLink += getHrefPrevGroup("<font color='#666666'>â—€I</font>");
 
-		// == ÀÌÀü ÆäÀÌÁö ==
-		pageLink += getHrefPrev("<font color='#666666'>¢¸</font>");
+		// == ì´ì „ í˜ì´ì§€ ==
+		pageLink += getHrefPrev("<font color='#666666'>â—€</font>");
 
-		// == ¼ıÀÚ·ÎµÈ ÆäÀÌÁö ¸µÅ©==
+		// == ìˆ«ìë¡œëœ í˜ì´ì§€ ë§í¬==
 		pageLink += getHrefNumber();
 
-		// == ´ÙÀ½ ÆäÀÌÁö ==
-		pageLink += getHrefNext("<font color='#666666'>¢º</font>");
+		// == ë‹¤ìŒ í˜ì´ì§€ ==
+		pageLink += getHrefNext("<font color='#666666'>â–¶</font>");
 
-		// == ´ÙÀ½ ¹­À½ ==
-		pageLink += getHrefNextGroup("<font color='#666666'>I¢º</font>");
+		// == ë‹¤ìŒ ë¬¶ìŒ ==
+		pageLink += getHrefNextGroup("<font color='#666666'>Iâ–¶</font>");
 
 		return getScriptSrc() + pageLink.trim();
 	}
 
 	/**
-	 * ÇöÀç ÆäÀÌÁö¸¦ ÀüÃ¼ ÆäÀÌÁö¿Í ºñ±³ÇÏ´Â ¸Ş¼Òµå
+	 * í˜„ì¬ í˜ì´ì§€ë¥¼ ì „ì²´ í˜ì´ì§€ì™€ ë¹„êµí•˜ëŠ” ë©”ì†Œë“œ
 	 * 
 	 * @param _page
-	 *            int »ç¿ëµÇ´Â ÆäÀÌÁö
-	 * @return int 1º¸´Ù ÀÛÀ¸¸é 1, ÀüÃ¼ ÆäÀÌÁöº¸´Ù Å©¸é ÀüÃ¼ ÆäÀÌÁö¹øÈ£
+	 *            int ì‚¬ìš©ë˜ëŠ” í˜ì´ì§€
+	 * @return int 1ë³´ë‹¤ ì‘ìœ¼ë©´ 1, ì „ì²´ í˜ì´ì§€ë³´ë‹¤ í¬ë©´ ì „ì²´ í˜ì´ì§€ë²ˆí˜¸
 	 */
 	public int comparePage(int _page) {
 		int tmp = _page;
@@ -405,47 +405,47 @@ public class PageMgr {
 	}
 
 	/**
-	 * ÀÌÀü ¹­À½
+	 * ì´ì „ ë¬¶ìŒ
 	 * 
 	 * @param html
-	 *            °ü·Ã HTML
+	 *            ê´€ë ¨ HTML
 	 */
 	public void setHtmlPrevGroup(String html) {
 		skin.prevGroup = html;
 	}
 
 	/**
-	 * ÀÌÀü ÆäÀÌÁö
+	 * ì´ì „ í˜ì´ì§€
 	 * 
 	 * @param html
-	 *            °ü·Ã HTML
+	 *            ê´€ë ¨ HTML
 	 */
 	public void setHtmlPrev(String html) {
 		skin.prev = html;
 	}
 
 	/**
-	 * ´ÙÀ½ ÆäÀÌÁö
+	 * ë‹¤ìŒ í˜ì´ì§€
 	 * 
 	 * @param html
-	 *            °ü·Ã HTML
+	 *            ê´€ë ¨ HTML
 	 */
 	public void setHtmlNext(String html) {
 		skin.next = html;
 	}
 
 	/**
-	 * ´ÙÀ½ ±×·ì
+	 * ë‹¤ìŒ ê·¸ë£¹
 	 * 
 	 * @param html
-	 *            °ü·Ã HTML
+	 *            ê´€ë ¨ HTML
 	 */
 	public void setHtmlNextGroup(String html) {
 		skin.nextGroup = html;
 	}
 
 	/**
-	 * ¹øÈ£ ¸µÅ© ¾ÕµÚ
+	 * ë²ˆí˜¸ ë§í¬ ì•ë’¤
 	 * 
 	 * @param tag
 	 */
@@ -454,7 +454,7 @@ public class PageMgr {
 	}
 
 	/**
-	 * ¸µÅ© ÅÂÅ© ¾ÕµÚ
+	 * ë§í¬ íƒœí¬ ì•ë’¤
 	 * 
 	 * @param antor
 	 */
@@ -464,7 +464,7 @@ public class PageMgr {
 
 	/**
 	 * @param cur
-	 *            ÇöÀç ÆäÀÌÁö Ç¥Çö ÅÂ±×
+	 *            í˜„ì¬ í˜ì´ì§€ í‘œí˜„ íƒœê·¸
 	 */
 	public void setHtmlCurrent(String cur) {
 		skin.current = cur;
@@ -483,60 +483,60 @@ public class PageMgr {
 	 */
 	public void setParam(URLParameter param) {
 		this.param = param;
-		// º¯°æµÈ »çÇ×¶§¹®¿¡ ´Ù½Ã »ı¼º
+		// ë³€ê²½ëœ ì‚¬í•­ë•Œë¬¸ì— ë‹¤ì‹œ ìƒì„±
 		skin = new DesignElement();
 	}
 
 	/**
-	 * µğÀÚÀÎ ¿ä¼Ò<br>
-	 * page navigation¿¡ ¸µÅ© µğÀÚÀÎ ¿ä¼Ò¿Í º¯¼ö(¸µÅ© ¹øÈ£, ÁÖ¼Ò)¸¦ µû·Î
+	 * ë””ìì¸ ìš”ì†Œ<br>
+	 * page navigationì— ë§í¬ ë””ìì¸ ìš”ì†Œì™€ ë³€ìˆ˜(ë§í¬ ë²ˆí˜¸, ì£¼ì†Œ)ë¥¼ ë”°ë¡œ
 	 * 
 	 * @version $Id$
 	 */
 	public class DesignElement {
 
-		/** º¯¼ö°ª¿¡ À§Ä¡ ±¸ºĞÀÚ */
+		/** ë³€ìˆ˜ê°’ì— ìœ„ì¹˜ êµ¬ë¶„ì */
 		public final static String HTML_SEPARATOR = "!!";
 
-		/** ÆäÀÌÁö Á¤º¸ À§Ä¡ ±¸ºĞÀÚ */
+		/** í˜ì´ì§€ ì •ë³´ ìœ„ì¹˜ êµ¬ë¶„ì */
 		public final static String PAGE_SEPARATOR = "##";
 
-		/** ÀÌÀü ¹­À½ ¸µÅ© Å×±× */
+		/** ì´ì „ ë¬¶ìŒ ë§í¬ í…Œê·¸ */
 		private String prevGroup;
 
-		/** ÀÌÀü ÆäÀÌÁö */
+		/** ì´ì „ í˜ì´ì§€ */
 		private String prev;
 
-		/** ´ÙÀ½ÆäÀÌÁö */
+		/** ë‹¤ìŒí˜ì´ì§€ */
 		private String next;
 
-		/** ´ÙÀ½ ¹­À½ */
+		/** ë‹¤ìŒ ë¬¶ìŒ */
 		private String nextGroup;
 
-		/** ÆäÀÌÁö ¼ıÀÚ Ç¥½Ã */
+		/** í˜ì´ì§€ ìˆ«ì í‘œì‹œ */
 		private String number;
 
-		/** ¸µÅ© ¿µ¿ª */
+		/** ë§í¬ ì˜ì—­ */
 		private String link;
 
-		/** ÇöÀç ÆäÀÌÁö */
+		/** í˜„ì¬ í˜ì´ì§€ */
 		private String current;
 
 		public DesignElement() {
-			// ÃÊ±â ±âº»°ª ´ëÀÔ
+			// ì´ˆê¸° ê¸°ë³¸ê°’ ëŒ€ì…
 			prevGroup = HTML_SEPARATOR;
 			prev = HTML_SEPARATOR;
 			next = HTML_SEPARATOR;
 			nextGroup = HTML_SEPARATOR;
 			number = HTML_SEPARATOR + "&nbsp;&nbsp;";
 			URLParameter u = PageMgr.this.getParam();
-			// ÆÄ¸®¸ÓÅÍ Á¤º¸°¡ ¾øÀ» °æ¿ì javascript·Î
+			// íŒŒë¦¬ë¨¸í„° ì •ë³´ê°€ ì—†ì„ ê²½ìš° javascriptë¡œ
 			if (u == null) {
 				link = "<a href=\"#\" onkeypress=\"if(event.keyCode == 13){pf_pageMove('" + PAGE_SEPARATOR
 						+ "')}; return false;\" onclick=\"pf_pageMove('" + PAGE_SEPARATOR + "'); return false;\">"
 						+ HTML_SEPARATOR + "</a>";
 			}
-			// ÀÖÀ» °æ¿ì Á÷Á¢ÀûÀÎ url ÁÖ¼Ò ÇüÅÂ·Î
+			// ìˆì„ ê²½ìš° ì§ì ‘ì ì¸ url ì£¼ì†Œ í˜•íƒœë¡œ
 			else {
 				u.put("mode", "listForm");
 				u.remove("curPage");
@@ -547,68 +547,68 @@ public class PageMgr {
 		}
 
 		/**
-		 * ÀÌÀü ¹­À½ Á¤º¸ Html
+		 * ì´ì „ ë¬¶ìŒ ì •ë³´ Html
 		 * 
 		 * @param v
-		 *            º¯¼ö°ª
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 *            ë³€ìˆ˜ê°’
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getPrevGroup(String v) {
 			return prevGroup.replaceAll(HTML_SEPARATOR, v);
 		}
 
 		/**
-		 * ÀÌÀü ÆäÀÌÁö Á¤º¸ Html
+		 * ì´ì „ í˜ì´ì§€ ì •ë³´ Html
 		 * 
 		 * @param v
-		 *            º¯¼ö°ª
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 *            ë³€ìˆ˜ê°’
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getPrev(String v) {
 			return prev.replaceAll(HTML_SEPARATOR, v);
 		}
 
 		/**
-		 * ´ÙÀ½ ÆäÀÌÁö Á¤º¸ Html
+		 * ë‹¤ìŒ í˜ì´ì§€ ì •ë³´ Html
 		 * 
 		 * @param v
-		 *            º¯¼ö°ª
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 *            ë³€ìˆ˜ê°’
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getNext(String v) {
 			return next.replaceAll(HTML_SEPARATOR, v);
 		}
 
 		/**
-		 * ÀÌÀü ¹­À½ Á¤º¸ Html
+		 * ì´ì „ ë¬¶ìŒ ì •ë³´ Html
 		 * 
 		 * @param v
-		 *            º¯¼ö°ª
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 *            ë³€ìˆ˜ê°’
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getNextGroup(String v) {
 			return nextGroup.replaceAll(HTML_SEPARATOR, v);
 		}
 
 		/**
-		 * ÆäÀÌÁö ¼ıÀÚ Ç¥½Ã
+		 * í˜ì´ì§€ ìˆ«ì í‘œì‹œ
 		 * 
 		 * @param v
-		 *            º¯¼ö°ª
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 *            ë³€ìˆ˜ê°’
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getNumber(String v) {
 			return number.replaceAll(HTML_SEPARATOR, v);
 		}
 
 		/**
-		 * ¸µÅ© Á¤º¸ Html
+		 * ë§í¬ ì •ë³´ Html
 		 * 
 		 * @param page
-		 *            ÇöÀç ÆäÀÌÁö Á¤º¸
+		 *            í˜„ì¬ í˜ì´ì§€ ì •ë³´
 		 * @param v
-		 *            º¯¼ö °ª
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 *            ë³€ìˆ˜ ê°’
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getLink(int page, String v) {
 			v = link.replaceAll(HTML_SEPARATOR, v);
@@ -616,9 +616,9 @@ public class PageMgr {
 		}
 
 		/**
-		 * ÇöÀç ÆäÀÌÁö¸¦ ³ªÅ¸³»´Â Html ÅÂ±×
+		 * í˜„ì¬ í˜ì´ì§€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” Html íƒœê·¸
 		 * 
-		 * @return º¯¼ö°ª Á¶ÇÕÇØ¼­ ¸®ÅÏ
+		 * @return ë³€ìˆ˜ê°’ ì¡°í•©í•´ì„œ ë¦¬í„´
 		 */
 		public String getCurrent(String v) {
 			return current.replaceAll(HTML_SEPARATOR, v);

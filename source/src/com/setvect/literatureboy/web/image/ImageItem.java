@@ -3,13 +3,13 @@ package com.setvect.literatureboy.web.image;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * ÀÌ¹ÌÁö Á¤º¸ <br>
- * ÇâÈÄ ÀÌ¹ÌÁö¿¡ ´ëÇÑ ¸ŞÅ¸ Á¤º¸±îÁö Ãß°¡
+ * ì´ë¯¸ì§€ ì •ë³´ <br>
+ * í–¥í›„ ì´ë¯¸ì§€ì— ëŒ€í•œ ë©”íƒ€ ì •ë³´ê¹Œì§€ ì¶”ê°€
  * 
  * @version $Id$
  */
 public class ImageItem {
-	/** ÀÌ¹ÌÁ¤º¸ */
+	/** ì´ë¯¸ì •ë³´ */
 	private MultipartFile[] imageFile;
 
 	/**

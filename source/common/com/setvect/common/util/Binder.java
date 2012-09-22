@@ -15,17 +15,17 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import com.setvect.common.http.MultiFileSupportServletRequestDataBinder;
 
 /**
- * Request °ªÀ» VO Å¬·¡½ºÀÇ ¹ÙÀÎµå
+ * Request ê°’ì„ VO í´ë˜ìŠ¤ì˜ ë°”ì¸ë“œ
  * 
  * @version $Id$
  */
 public class Binder {
 	/**
-	 * ¹ÙÀÎµå
+	 * ë°”ì¸ë“œ
 	 * 
 	 * @param request
 	 * @param object
-	 *            ¹ÙÀÎµåµÉ Object
+	 *            ë°”ì¸ë“œë  Object
 	 * @throws ServletRequestBindingException
 	 */
 	public static void bind(HttpServletRequest request, Object object) throws ServletRequestBindingException {
@@ -36,7 +36,7 @@ public class Binder {
 	 * @param request
 	 * @param object
 	 * @param customEditor
-	 *            bindµÉ ¼Ó¼º Å¬·¡½º¿¡ µû¸¥ request ¹æ¹ı
+	 *            bindë  ì†ì„± í´ë˜ìŠ¤ì— ë”°ë¥¸ request ë°©ë²•
 	 * @throws ServletRequestBindingException
 	 */
 	public static void bind(HttpServletRequest request, Object object, Map<Class<?>, PropertyEditorSupport> customEditor)
@@ -56,7 +56,7 @@ public class Binder {
 
 	/**
 	 * @param dateFormat
-	 * @return ³¯Â¥ ÆĞÅÏ bind
+	 * @return ë‚ ì§œ íŒ¨í„´ bind
 	 */
 	public static PropertyEditorSupport getDateFromatProperty(String dateFormat) {
 

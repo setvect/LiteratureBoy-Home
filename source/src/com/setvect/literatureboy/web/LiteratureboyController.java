@@ -27,7 +27,7 @@ import com.setvect.literatureboy.web.board.BoardArticleController;
 import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
 
 /**
- * È¯°æ¼³Á¤>¿î¿µÀÚ °ü¸® ¸Ş´º ÄÁÆ®·Ñ·¯
+ * í™˜ê²½ì„¤ì •>ìš´ì˜ì ê´€ë¦¬ ë©”ë‰´ ì»¨íŠ¸ë¡¤ëŸ¬
  */
 @Controller
 @Scope("prototype")
@@ -38,7 +38,7 @@ public class LiteratureboyController {
 	@Autowired
 	private BoardService boardService;
 
-	/** °Ô½ÃÆÇ ÄÚµå¿¡ µû¸¥ ÇÑ È­¸é Ç¥½Ã °¹¼ö */
+	/** ê²Œì‹œíŒ ì½”ë“œì— ë”°ë¥¸ í•œ í™”ë©´ í‘œì‹œ ê°¯ìˆ˜ */
 	private static final Map<String, Integer> BOARD_PAGE_PER_ITEM_COUNT;
 	static {
 		BOARD_PAGE_PER_ITEM_COUNT = new HashMap<String, Integer>();
@@ -50,15 +50,15 @@ public class LiteratureboyController {
 		BOARD_PAGE_PER_ITEM_COUNT.put("BDAAAA08", 5);
 	}
 
-	/** ¸ñ·Ï¿¡¼­ ÄÜÅÙÃ÷³»¿ëÀÌ º¸¿©Áö´Â °Ô½ÃÆÇ ÄÚµå */
+	/** ëª©ë¡ì—ì„œ ì½˜í…ì¸ ë‚´ìš©ì´ ë³´ì—¬ì§€ëŠ” ê²Œì‹œíŒ ì½”ë“œ */
 	private static final String[] listContentViewBoard = EnvirmentProperty
 			.getStringArray("com.setvect.literatureboy.board.list_content_view");
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
-		MAIN_ARTICLE, // ¸ŞÀÎÈ­¸é¿¡ Ç¥½ÃµÉ ÃÖ½Å °Ô½Ã¹°
+		MAIN_ARTICLE, // ë©”ì¸í™”ë©´ì— í‘œì‹œë  ìµœì‹  ê²Œì‹œë¬¼
 	}
 
 	@RequestMapping("/literatureboy/*.do")
@@ -81,7 +81,7 @@ public class LiteratureboyController {
 			return mav;
 		}
 
-		// °ü¸®ÀÚ°¡ ·Î±×ÀÎ ÇÏ¸é ¿ŞÂÊ ¸Ş´º¿¡ °Ô½ÃÆÇ ÀüÃ¼ ¸ñ·Ï Ç¥½Ã
+		// ê´€ë¦¬ìê°€ ë¡œê·¸ì¸ í•˜ë©´ ì™¼ìª½ ë©”ë‰´ì— ê²Œì‹œíŒ ì „ì²´ ëª©ë¡ í‘œì‹œ
 		if (user != null && user.isAdminF()) {
 			BoardManagerSearch pageCondition = new BoardManagerSearch(1);
 			pageCondition.setPagePerItemCount(Integer.MAX_VALUE);
@@ -89,7 +89,7 @@ public class LiteratureboyController {
 			request.setAttribute(ConstraintWeb.AttributeKey.BOARD_ITEMS.name(), boards.getList());
 		}
 
-		// ÀÏ¹İ °Ô½ÃÆÇ UI
+		// ì¼ë°˜ ê²Œì‹œíŒ UI
 		if (pageName.equals("bd")) {
 			String boardCode = request.getParameter("searchCode");
 			Integer pageItemCount = BOARD_PAGE_PER_ITEM_COUNT.get(boardCode);
@@ -106,12 +106,12 @@ public class LiteratureboyController {
 			boardArticleController.setJspPage(jsp);
 			return boardArticleController.process(request, response);
 		}
-		// °ü¸®ÀÚ°¡ º¸´Â °Ô½ÃÆÇ UI
+		// ê´€ë¦¬ìê°€ ë³´ëŠ” ê²Œì‹œíŒ UI
 		else if (pageName.equals("bdm")) {
 			return boardArticleController.process(request, response);
 		}
 
-		// ¸ŞÀÎÈ­¸é º¸±â
+		// ë©”ì¸í™”ë©´ ë³´ê¸°
 		else if (pageName.equals("main")) {
 			BoardArticleSearch pageCondition = new BoardArticleSearch(1);
 			pageCondition.setSearchCode(ConstraintWeb.MAIN_BOARD);
@@ -130,20 +130,20 @@ public class LiteratureboyController {
 	}
 
 	/**
-	 * ¸ğ¹ÙÀÏ ºê¶ó¿ìÀú ÇØ´õÀÌ¸é ¸ğ¹ÙÀÏ ÆäÀÌÁö·Î. ´Ü °­Á¦ÀûÀ¸·Î PCÈ­¸éÀ» º»´Ù¸é PC È­¸éÀ¸·Î ³ª¿È
+	 * ëª¨ë°”ì¼ ë¸Œë¼ìš°ì € í•´ë”ì´ë©´ ëª¨ë°”ì¼ í˜ì´ì§€ë¡œ. ë‹¨ ê°•ì œì ìœ¼ë¡œ PCí™”ë©´ì„ ë³¸ë‹¤ë©´ PC í™”ë©´ìœ¼ë¡œ ë‚˜ì˜´
 	 * 
 	 * @param request
 	 * @param response
-	 * @return true ¸ğ¹ÙÀÏ ÆäÀÌÁö·Î ÀÌµ¿, false ±×³É Ã³¸®
+	 * @return true ëª¨ë°”ì¼ í˜ì´ì§€ë¡œ ì´ë™, false ê·¸ëƒ¥ ì²˜ë¦¬
 	 */
 	private boolean checkMobileView(HttpServletRequest request, HttpServletResponse response) {
-		// ¸ğ¹ÙÀÏ ºê¶ó¿ìÀú Ã¼Å©
+		// ëª¨ë°”ì¼ ë¸Œë¼ìš°ì € ì²´í¬
 		boolean mobileBrowser = isMobileBrowser(request);
 		if (!mobileBrowser) {
 			return false;
 		}
 
-		// °­Á¦ º¸±â Äí±â°ª ÀÖ´ÂÁö Ã¼Å©
+		// ê°•ì œ ë³´ê¸° ì¿ ê¸°ê°’ ìˆëŠ”ì§€ ì²´í¬
 		CookieProcess cookie = new CookieProcess(request);
 		String pcView = cookie.get(ConstraintWeb.PC_VIEW_COOKIE_KEY);
 		if (pcView != null && pcView.equals("true")) {
@@ -161,11 +161,11 @@ public class LiteratureboyController {
 	}
 
 	/**
-	 * ¸ğ¹ÙÀÏ ºê¶ó¿ìÀú Ã¼Å©
+	 * ëª¨ë°”ì¼ ë¸Œë¼ìš°ì € ì²´í¬
 	 * 
 	 * @param request
-	 *            ¸ğ¹ÙÀÏ ºê¶ó¿ìÀú Ã¼Å©
-	 * @return ¸ğ¹ÙÀÏ ºê¶ó¿ìÀúÀÌ¸é true, ¾Æ´Ï¸é false
+	 *            ëª¨ë°”ì¼ ë¸Œë¼ìš°ì € ì²´í¬
+	 * @return ëª¨ë°”ì¼ ë¸Œë¼ìš°ì €ì´ë©´ true, ì•„ë‹ˆë©´ false
 	 */
 	private boolean isMobileBrowser(HttpServletRequest request) {
 		String agent = request.getHeader("user-agent");

@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Å×ÀÌºí »ı¼º Á¤º¸
+ * í…Œì´ë¸” ìƒì„± ì •ë³´
  * 
  * @version $Id$
  */
 public class TableCreateInfo {
-	/** Å×ÀÌºí ÀÌ¸§ */
+	/** í…Œì´ë¸” ì´ë¦„ */
 	private String tableName;
-	/** »ı¼º ½ºÅ©¸³Æ® */
+	/** ìƒì„± ìŠ¤í¬ë¦½íŠ¸ */
 	private String script;
-	/** Å×ÀÌºí »ı¼º ÈÄ ½ÇÇàµÉ Äõ¸®¹®(±âº»°ª, Á¦¾àÁ¶°Ç µî) */
+	/** í…Œì´ë¸” ìƒì„± í›„ ì‹¤í–‰ë  ì¿¼ë¦¬ë¬¸(ê¸°ë³¸ê°’, ì œì•½ì¡°ê±´ ë“±) */
 	private List<String> query = new ArrayList<String>();
 
 	public TableCreateInfo(String tName) {
@@ -44,14 +44,14 @@ public class TableCreateInfo {
 
 	/**
 	 * @param q
-	 *            ½ÇÇà query
+	 *            ì‹¤í–‰ query
 	 */
 	public void addQuery(String q) {
 		query.add(q);
 	}
 
 	/**
-	 * @return Äõ¸® ¸ñ·Ï
+	 * @return ì¿¼ë¦¬ ëª©ë¡
 	 */
 	public String[] getQuerise() {
 		return query.toArray(new String[0]);

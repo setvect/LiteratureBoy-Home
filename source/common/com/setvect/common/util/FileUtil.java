@@ -14,14 +14,14 @@ import com.setvect.common.date.DateUtil;
 public class FileUtil extends FileUtils {
 
 	/**
-	 * È®ÀåÀÚ¸¦ Á¦¿ÜÇÑ ÆÄÀÏ¸í ¸®ÅÏ <br>
-	 * ¸¸¾à ÆÄÀÏ¸í¿¡ °æ·Î±îÁö Æ÷ÇÔµÇ¸é ÇØ´ç °æ·Î´Â ¾ø¿¡ ¹ö¸°´Ù. <br>
-	 * ¿¹) abcdef.txt => abcdef<br>
+	 * í™•ì¥ìë¥¼ ì œì™¸í•œ íŒŒì¼ëª… ë¦¬í„´ <br>
+	 * ë§Œì•½ íŒŒì¼ëª…ì— ê²½ë¡œê¹Œì§€ í¬í•¨ë˜ë©´ í•´ë‹¹ ê²½ë¡œëŠ” ì—†ì— ë²„ë¦°ë‹¤. <br>
+	 * ì˜ˆ) abcdef.txt => abcdef<br>
 	 * ads.sdfe.xafe.gif => ads.sdfe.xafe
 	 * 
 	 * @param filename
-	 *            ÆÄÀÏ¸í
-	 * @return ÆÄÀÏ È®ÀåÀÚ¸¦ Á¦¿ÜÇÑ ÆÄÀÏ¸í ¸®ÅÏ
+	 *            íŒŒì¼ëª…
+	 * @return íŒŒì¼ í™•ì¥ìë¥¼ ì œì™¸í•œ íŒŒì¼ëª… ë¦¬í„´
 	 */
 	public static String getFilenameWithoutExt(String filename) {
 
@@ -33,53 +33,53 @@ public class FileUtil extends FileUtils {
 			filename = filename.substring(path + 1);
 		}
 		int len = filename.length();
-		/* ¸¶Áö¸·¿¡ ºÙ¾î ÀÖ´Â Á¡À» À§Ä¡¸¦ . */
+		/* ë§ˆì§€ë§‰ì— ë¶™ì–´ ìˆëŠ” ì ì„ ìœ„ì¹˜ë¥¼ . */
 		int end = filename.lastIndexOf('.', len);
 
-		/* È®ÀåÀÚ¿¡ ´ëÇÑ ¾ÆÀÌÄÜÆÄÀÏ Àü¼Û. */
+		/* í™•ì¥ìì— ëŒ€í•œ ì•„ì´ì½˜íŒŒì¼ ì „ì†¡. */
 		return (end < 0) ? filename : filename.substring(0, end);
 	}
 
 	/**
-	 * È®ÀåÀÚ ±¸ÇÏ±â
+	 * í™•ì¥ì êµ¬í•˜ê¸°
 	 * 
 	 * @param filename
 	 *            filename
-	 * @return È®ÀåÀÚ (.) ºÙÀ½ ex) .jpg, .hwp
+	 * @return í™•ì¥ì (.) ë¶™ìŒ ex) .jpg, .hwp
 	 */
 	public static String getExt(String filename) {
 		int len = filename.length();
 
-		/* ¸¶Áö¸·¿¡ ºÙ¾î ÀÖ´Â Á¡À» À§Ä¡¸¦ . */
+		/* ë§ˆì§€ë§‰ì— ë¶™ì–´ ìˆëŠ” ì ì„ ìœ„ì¹˜ë¥¼ . */
 		int start = filename.lastIndexOf('.', len);
 
-		/* È®ÀåÀÚ¿¡ ´ëÇÑ ¾ÆÀÌÄÜÆÄÀÏ Àü¼Û. */
+		/* í™•ì¥ìì— ëŒ€í•œ ì•„ì´ì½˜íŒŒì¼ ì „ì†¡. */
 		return (start < 0) ? "" : filename.substring(start);
 	}
 
 	/**
-	 * È®ÀåÀÚ ±¸ÇÏ±â. ÂÀ(.) Æ÷ÇÔÇÏÁö ¾ÊÀ½
+	 * í™•ì¥ì êµ¬í•˜ê¸°. ì©œ(.) í¬í•¨í•˜ì§€ ì•ŠìŒ
 	 * 
 	 * @param filename
 	 *            filename
-	 * @return ºÙÀ½ ex) jpg, hwp
+	 * @return ë¶™ìŒ ex) jpg, hwp
 	 */
 	public static String getExtWithoutDot(String filename) {
 		int len = filename.length();
 
-		/* ¸¶Áö¸·¿¡ ºÙ¾î ÀÖ´Â Á¡À» À§Ä¡¸¦ . */
+		/* ë§ˆì§€ë§‰ì— ë¶™ì–´ ìˆëŠ” ì ì„ ìœ„ì¹˜ë¥¼ . */
 		int start = filename.lastIndexOf('.', len);
 
-		/* È®ÀåÀÚ¿¡ ´ëÇÑ ¾ÆÀÌÄÜÆÄÀÏ Àü¼Û. */
+		/* í™•ì¥ìì— ëŒ€í•œ ì•„ì´ì½˜íŒŒì¼ ì „ì†¡. */
 		return (start < 0) ? "" : filename.substring(start + 1);
 	}
 
 	/**
-	 * ¿À´Ã ³¯Â¥(³â/¿ù/ÀÏ)ÅëÇØ µğ·ºÅä¸®¸¦ ¸¸µë
+	 * ì˜¤ëŠ˜ ë‚ ì§œ(ë…„/ì›”/ì¼)í†µí•´ ë””ë ‰í† ë¦¬ë¥¼ ë§Œë“¬
 	 * 
 	 * @param strBasePath
-	 *            ±âÁØ µğ·ºÅä¸®
-	 * @return ¸¸µé¾îÁø µğ·ºÅä¸®
+	 *            ê¸°ì¤€ ë””ë ‰í† ë¦¬
+	 * @return ë§Œë“¤ì–´ì§„ ë””ë ‰í† ë¦¬
 	 */
 	public static File makeDayDir(String strBasePath) {
 		String year = NumberFormat.getNumberString("0000", DateUtil.getYear());
@@ -88,7 +88,7 @@ public class FileUtil extends FileUtils {
 		String dir;
 
 		dir = strBasePath;
-		// µğ·ºÅä¸®°¡ ÀÖ´ÂÁö
+		// ë””ë ‰í† ë¦¬ê°€ ìˆëŠ”ì§€
 		if (!FileUtil.isDirExists(dir)) {
 			throw new RuntimeException(strBasePath + " directory is not exist!");
 		}
@@ -100,18 +100,18 @@ public class FileUtil extends FileUtils {
 		if (!f.exists()) {
 			boolean make = f.mkdirs();
 			if (!make) {
-				throw new RuntimeException("µğ·ºÅä¸® »ı¼º ½ÇÆĞ : " + f.getPath());
+				throw new RuntimeException("ë””ë ‰í† ë¦¬ ìƒì„± ì‹¤íŒ¨ : " + f.getPath());
 			}
 		}
 		return f;
 	}
 
 	/**
-	 * µğ·ºÅä¸® Á¸Àç ¿©ºÎ
+	 * ë””ë ‰í† ë¦¬ ì¡´ì¬ ì—¬ë¶€
 	 * 
 	 * @param path
-	 *            File¸í(Full Path)
-	 * @return bool ¼º°ø(true), ½ÇÆĞ(false)
+	 *            Fileëª…(Full Path)
+	 * @return bool ì„±ê³µ(true), ì‹¤íŒ¨(false)
 	 */
 	public static boolean isDirExists(String path) {
 		boolean bool = false;
@@ -125,11 +125,11 @@ public class FileUtil extends FileUtils {
 	}
 
 	/**
-	 * µğ·ºÅä¸® ¸¸µå´Â ¸Ş¼Òµå
+	 * ë””ë ‰í† ë¦¬ ë§Œë“œëŠ” ë©”ì†Œë“œ
 	 * 
 	 * @param strDir
-	 *            ¸¸µé¾îÁø µğ·ºÅä¸® ÀÌ¸§ (Ç® ÆĞ½º)
-	 * @return ¼º°øÇß´ÂÁö ¾ÈÇß´ÂÁö true¸é ¼º°ø false ½ÇÆĞ
+	 *            ë§Œë“¤ì–´ì§„ ë””ë ‰í† ë¦¬ ì´ë¦„ (í’€ íŒ¨ìŠ¤)
+	 * @return ì„±ê³µí–ˆëŠ”ì§€ ì•ˆí–ˆëŠ”ì§€ trueë©´ ì„±ê³µ false ì‹¤íŒ¨
 	 */
 	public static boolean makeDir(String strDir) {
 		File makeDir = new File(strDir);
@@ -137,17 +137,17 @@ public class FileUtil extends FileUtils {
 	}
 
 	/**
-	 * File »èÁ¦
+	 * File ì‚­ì œ
 	 * 
 	 * @param path
-	 *            File¸í(Full Path)
-	 * @return bool ¼º°ø(true), ½ÇÆĞ(false)
+	 *            Fileëª…(Full Path)
+	 * @return bool ì„±ê³µ(true), ì‹¤íŒ¨(false)
 	 */
 	public static boolean delFile(String path) {
 		boolean bool = false;
 		File f = new File(path);
 
-		// ÆÄÀÏ ÀÏ¶§¸¸ »èÁ¦¸¦ ÇÑ´Ù. ±¦È÷ µğ·ºÅä¸® ±îÁö Áö¿ï ¼ö ÀÖ´Ù.
+		// íŒŒì¼ ì¼ë•Œë§Œ ì‚­ì œë¥¼ í•œë‹¤. ê´œíˆ ë””ë ‰í† ë¦¬ ê¹Œì§€ ì§€ìš¸ ìˆ˜ ìˆë‹¤.
 		if (f.exists() && f.isFile()) {
 			try {
 				bool = f.delete();
@@ -160,11 +160,11 @@ public class FileUtil extends FileUtils {
 	}
 
 	/**
-	 * File Á¸Àç ¿©ºÎ
+	 * File ì¡´ì¬ ì—¬ë¶€
 	 * 
 	 * @param path
-	 *            File¸í(Full Path)
-	 * @return bool ¼º°ø(true), ½ÇÆĞ(false)
+	 *            Fileëª…(Full Path)
+	 * @return bool ì„±ê³µ(true), ì‹¤íŒ¨(false)
 	 */
 	public static boolean isExists(String path) {
 		boolean bool = false;
@@ -178,16 +178,16 @@ public class FileUtil extends FileUtils {
 	}
 
 	/**
-	 * µğ·ºÅä¸®¸¦ Å½»öÇÏ¿© ¿øÇÏ´Â ÆÄÀÏÀ» Ã£À½
+	 * ë””ë ‰í† ë¦¬ë¥¼ íƒìƒ‰í•˜ì—¬ ì›í•˜ëŠ” íŒŒì¼ì„ ì°¾ìŒ
 	 * 
 	 * @param baseDir
-	 *            ÆÄÀÏ Å½»ö ½ÃÀÛ ÁöÁ¡
+	 *            íŒŒì¼ íƒìƒ‰ ì‹œì‘ ì§€ì 
 	 * 
 	 * @param subDirectory
-	 *            ÇÏÀ§ µğ·ºÅä¸® Å½»ö ¿©ºÎ
+	 *            í•˜ìœ„ ë””ë ‰í† ë¦¬ íƒìƒ‰ ì—¬ë¶€
 	 * @param exts
-	 *            È®ÀåÀÚ <br>
-	 * @return °á°ú ÆÄÀÏ ¸ñ·Ï
+	 *            í™•ì¥ì <br>
+	 * @return ê²°ê³¼ íŒŒì¼ ëª©ë¡
 	 */
 	public static List<File> getSubFiles(File baseDir, boolean subDirectory, Set<String> exts) {
 		if (subDirectory) {
@@ -200,11 +200,11 @@ public class FileUtil extends FileUtils {
 
 	/**
 	 * @param baseDir
-	 *            ±âÁØ µğ·ºÅä¸®
+	 *            ê¸°ì¤€ ë””ë ‰í† ë¦¬
 	 * @param exts
-	 *            ¸ÉÄªÇÒ È®ÀåÀÚ<br>
-	 *            ¿¹) hwp,pdf,html
-	 * @return µğ·ºÅä¸® ³»¿¡ ÀÖ´Â ÆÄÀÏ Áß¿¡ È®ÀåÀÚ¿Í ¸ÅÄªµÇ´Â ÆÄÀÏ ¸ñ·Ï
+	 *            ë§´ì¹­í•  í™•ì¥ì<br>
+	 *            ì˜ˆ) hwp,pdf,html
+	 * @return ë””ë ‰í† ë¦¬ ë‚´ì— ìˆëŠ” íŒŒì¼ ì¤‘ì— í™•ì¥ìì™€ ë§¤ì¹­ë˜ëŠ” íŒŒì¼ ëª©ë¡
 	 */
 	public static List<File> getSubFiles(File baseDir, Set<String> exts) {
 		List<File> files = new ArrayList<File>();
@@ -228,8 +228,8 @@ public class FileUtil extends FileUtils {
 	}
 
 	/**
-	 * ÇÏÀ§ Æú´õ¸¦ Å½»öÇÏ¿© Æ¯Á¤ È®ÀåÀÚ¸¦ °®´Â ÆÄÀÏ ¸ñ·ÏÀ» °Ë»ö <br>
-	 * TODO °øÅë ¶óÀÌºê·¯¸®·Î ÀÌµ¿
+	 * í•˜ìœ„ í´ë”ë¥¼ íƒìƒ‰í•˜ì—¬ íŠ¹ì • í™•ì¥ìë¥¼ ê°–ëŠ” íŒŒì¼ ëª©ë¡ì„ ê²€ìƒ‰ <br>
+	 * TODO ê³µí†µ ë¼ì´ë¸ŒëŸ¬ë¦¬ë¡œ ì´ë™
 	 * 
 	 * @version $Id$
 	 */
@@ -240,9 +240,9 @@ public class FileUtil extends FileUtils {
 
 		/**
 		 * @param baseDir
-		 *            °Ë»ö ½ÃÀÛ µğ·ºÅä¸®
+		 *            ê²€ìƒ‰ ì‹œì‘ ë””ë ‰í† ë¦¬
 		 * @param ext
-		 *            °Ë»ö ´ë»ó È®ÀåÀÚ. È®ÀåÀÚ´Â Æ÷ÇÔ <br>
+		 *            ê²€ìƒ‰ ëŒ€ìƒ í™•ì¥ì. í™•ì¥ìëŠ” í¬í•¨ <br>
 		 *            ex) hwp, mp3, ...
 		 */
 		FileFinder(File baseDir, Set<String> ext) {
@@ -252,7 +252,7 @@ public class FileUtil extends FileUtils {
 		}
 
 		/**
-		 * @return ÆÄÀÏ ¸ñ·Ï
+		 * @return íŒŒì¼ ëª©ë¡
 		 */
 		public List<File> getFiles() {
 			return Collections.unmodifiableList(files);

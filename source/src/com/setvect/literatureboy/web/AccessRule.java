@@ -1,18 +1,18 @@
 package com.setvect.literatureboy.web;
 
 /**
- * ¸ğµâ¿¡ µû¸¥ Access ¿©ºÎ¸¦ Ã¼Å©
+ * ëª¨ë“ˆì— ë”°ë¥¸ Access ì—¬ë¶€ë¥¼ ì²´í¬
  * 
  * @version $Id$
  */
 public interface AccessRule {
 	/**
-	 * @return Á¢±Ù °¡´É ¿©ºÎ
+	 * @return ì ‘ê·¼ ê°€ëŠ¥ ì—¬ë¶€
 	 */
 	public boolean isAccess();
 
 	/**
-	 * @return ºÎ°¡ÀûÀÎ »óÅÂ
+	 * @return ë¶€ê°€ì ì¸ ìƒíƒœ
 	 */
 	public int getStatus();
 }

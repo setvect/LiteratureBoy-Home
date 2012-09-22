@@ -10,12 +10,12 @@ import com.setvect.literatureboy.vo.user.AuthMapKey;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
- * °Ô½Ã¹°, Ã·ºÎÆÄÀÏ, ÄÚ¸àÆ® DAO
+ * ê²Œì‹œë¬¼, ì²¨ë¶€íŒŒì¼, ì½”ë©˜íŠ¸ DAO
  * 
  * @version $Id: BoardDao.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
 public interface UserDao {
-	// ---------------- »ç¿ëÀÚ
+	// ---------------- ì‚¬ìš©ì
 	/**
 	 * @param userId
 	 * @return
@@ -45,7 +45,7 @@ public interface UserDao {
 	 */
 	public void removeUser(String userId);
 
-	// ---------------- ±ÇÇÑ
+	// ---------------- ê¶Œí•œ
 	/**
 	 * @param authSeq
 	 * @return
@@ -75,7 +75,7 @@ public interface UserDao {
 	 */
 	public void removeAuth(int authSeq);
 
-	// ---------------- ±ÇÇÑ ¸ÊÇÎ
+	// ---------------- ê¶Œí•œ ë§µí•‘
 	/**
 	 * @param key
 	 * @return

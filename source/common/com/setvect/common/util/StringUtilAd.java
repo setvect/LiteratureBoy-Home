@@ -14,7 +14,7 @@ import sun.misc.BASE64Encoder;
 import com.setvect.common.log.LogPrinter;
 
 /**
- * anyframe.common.util.StringUtil¿¡¼­ »ç¿ëÇÏ°í ÀÖ´Â Methd Delegate
+ * anyframe.common.util.StringUtilì—ì„œ ì‚¬ìš©í•˜ê³  ìˆëŠ” Methd Delegate
  * 
  * @version $Id$
  */
@@ -23,7 +23,7 @@ public class StringUtilAd extends StringUtils {
 	/**
 	 * @param word
 	 * 
-	 * @return sql String °ª¿¡ µé¾î°¡µµ·Ï º¯°æ
+	 * @return sql String ê°’ì— ë“¤ì–´ê°€ë„ë¡ ë³€ê²½
 	 */
 	public static String getSqlString(String word) {
 
@@ -35,8 +35,8 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param word
-	 * @return sql String °ª¿¡ like Çü½ÄÀ¸·Î °Ë»ö µÇµµ·Ï º¯°æ<br>
-	 *         ¿¹) '%´Ü¾î%'
+	 * @return sql String ê°’ì— like í˜•ì‹ìœ¼ë¡œ ê²€ìƒ‰ ë˜ë„ë¡ ë³€ê²½<br>
+	 *         ì˜ˆ) '%ë‹¨ì–´%'
 	 */
 	public static String getSqlStringLike(String word) {
 		word = null2str(word);
@@ -47,8 +47,8 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param word
-	 * @return sql String °ª¿¡ like Çü½ÄÀ¸·Î °Ë»ö µÇµµ·Ï º¯°æ<br>
-	 *         ¿¹) '%´Ü¾î'
+	 * @return sql String ê°’ì— like í˜•ì‹ìœ¼ë¡œ ê²€ìƒ‰ ë˜ë„ë¡ ë³€ê²½<br>
+	 *         ì˜ˆ) '%ë‹¨ì–´'
 	 */
 	public static String getSqlStringLikeLeft(String word) {
 		word = null2str(word);
@@ -59,8 +59,8 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param word
-	 * @return sql String °ª¿¡ like Çü½ÄÀ¸·Î °Ë»ö µÇµµ·Ï º¯°æ<br>
-	 *         ¿¹) '´Ü¾î%'
+	 * @return sql String ê°’ì— like í˜•ì‹ìœ¼ë¡œ ê²€ìƒ‰ ë˜ë„ë¡ ë³€ê²½<br>
+	 *         ì˜ˆ) 'ë‹¨ì–´%'
 	 */
 	public static String getSqlStringLikeRight(String word) {
 		word = null2str(word);
@@ -70,11 +70,11 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * Æû¿¡ ¸Â°Ô ¹®ÀÚ¸¦ ¹Ù²Ù¾î ÁØ´Ù.
+	 * í¼ì— ë§ê²Œ ë¬¸ìë¥¼ ë°”ê¾¸ì–´ ì¤€ë‹¤.
 	 * 
 	 * @param src
 	 *            source String
-	 * @return º¯È¯µÈ String
+	 * @return ë³€í™˜ëœ String
 	 */
 	public static String toForm(String src) {
 		String strBuffer = src;
@@ -85,17 +85,17 @@ public class StringUtilAd extends StringUtils {
 		strBuffer = replace(strBuffer, "\"", "&quot;");
 		strBuffer = replace(strBuffer, "\'", "&#039;");
 
-		// &#33324ÀÇ ±ÛÀÚ¸¦ º¸Á¸ ÇÏ±â À§ÇØ¼­
+		// &#33324ì˜ ê¸€ìë¥¼ ë³´ì¡´ í•˜ê¸° ìœ„í•´ì„œ
 		strBuffer = replace(strBuffer, "&amp;#", "&#");
 		return strBuffer;
 	}
 
 	/**
-	 * Html ÄÚµå¸¦ ÅØ½ºÆ®·Î ÄÚµåÈ­ º¯È¯
+	 * Html ì½”ë“œë¥¼ í…ìŠ¤íŠ¸ë¡œ ì½”ë“œí™” ë³€í™˜
 	 * 
 	 * @param src
-	 *            html¹®ÀÚ¿­
-	 * @return text·Î º¯°æµÈ ¹®ÀÚ¿­
+	 *            htmlë¬¸ìì—´
+	 * @return textë¡œ ë³€ê²½ëœ ë¬¸ìì—´
 	 */
 	public static String toText(String src) {
 		String strBuffer = null2str(src, "");
@@ -108,17 +108,17 @@ public class StringUtilAd extends StringUtils {
 		// strBuffer.replaceAll(" ", "&nbsp;");
 		strBuffer = replace(strBuffer, "\n", "<br>");
 
-		// &#33324ÀÇ ±ÛÀÚ¸¦ º¸Á¸ ÇÏ±â À§ÇØ¼­
+		// &#33324ì˜ ê¸€ìë¥¼ ë³´ì¡´ í•˜ê¸° ìœ„í•´ì„œ
 		strBuffer = replace(strBuffer, "&amp;#", "&#");
 		return strBuffer;
 	}
 
 	/**
-	 * °³Çà¹®ÀÚ¸¦ br Å×±×¸¦ º¯°æ
+	 * ê°œí–‰ë¬¸ìë¥¼ br í…Œê·¸ë¥¼ ë³€ê²½
 	 * 
 	 * @param src
 	 *            source String
-	 * @return º¯È¯µÈ String
+	 * @return ë³€í™˜ëœ String
 	 */
 	public static String toBr(String src) {
 		if (src == null) {
@@ -129,13 +129,13 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * s2 ¹è¿­¿¡Áß¿¡ s1°ú °°Àº ¹®ÀåÀÌ ÀÖ´ÂÁö °Ë»ç
+	 * s2 ë°°ì—´ì—ì¤‘ì— s1ê³¼ ê°™ì€ ë¬¸ì¥ì´ ìˆëŠ”ì§€ ê²€ì‚¬
 	 * 
 	 * @param s1
-	 *            ¿øº»°ª
+	 *            ì›ë³¸ê°’
 	 * @param s2
-	 *            ºñ±³µ¥ÀÌÅÍ
-	 * @return Æ÷ÇÔµÈ ¹®ÀåÀÌ ÀÖÀ¸¸é true
+	 *            ë¹„êµë°ì´í„°
+	 * @return í¬í•¨ëœ ë¬¸ì¥ì´ ìˆìœ¼ë©´ true
 	 */
 	public static boolean isInclude(String s1, String[] s2) {
 		return positionInclude(s1, s2) != -1;
@@ -143,8 +143,8 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param word
-	 *            ¹®ÀÚ¿­
-	 * @return word°¡ null ÀÌ¸é ºó¹®ÀÚ¿­·Î º¯È¯
+	 *            ë¬¸ìì—´
+	 * @return wordê°€ null ì´ë©´ ë¹ˆë¬¸ìì—´ë¡œ ë³€í™˜
 	 */
 	public static String null2str(String word) {
 		return word == null ? "" : word;
@@ -152,10 +152,10 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param word
-	 *            ¹®ÀÚ¿­
+	 *            ë¬¸ìì—´
 	 * @param substitution
-	 *            ´ëÃ¼ ¹®ÀÚ¿­
-	 * @return word°¡ null ÀÌ¸é ´ëÃ¼ ¹®ÀÚ¿­·Î º¯È¯
+	 *            ëŒ€ì²´ ë¬¸ìì—´
+	 * @return wordê°€ null ì´ë©´ ëŒ€ì²´ ë¬¸ìì—´ë¡œ ë³€í™˜
 	 */
 	public static String null2str(String word, String substitution) {
 		if (word == null || word.equals("")) {
@@ -167,13 +167,13 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * s2 ¹è¿­¿¡Áß¿¡ s1°ú °°Àº ¹®ÀåÀÌ ÀÖ´ÂÁö °Ë»ç. ¸¸¾à ÀÖÀ¸¸é Á¸Á¦ÇÏ´Â ¹è¿­À§Ä¡ ¸®ÅÏ
+	 * s2 ë°°ì—´ì—ì¤‘ì— s1ê³¼ ê°™ì€ ë¬¸ì¥ì´ ìˆëŠ”ì§€ ê²€ì‚¬. ë§Œì•½ ìˆìœ¼ë©´ ì¡´ì œí•˜ëŠ” ë°°ì—´ìœ„ì¹˜ ë¦¬í„´
 	 * 
 	 * @param s1
-	 *            ¿øº»°ª
+	 *            ì›ë³¸ê°’
 	 * @param s2
-	 *            ºñ±³µ¥ÀÌÅÍ
-	 * @return Á¸Á¦ÇÏ´Â ¹è¿­ÀÌ ÀÖÀ¸¸é À§Ä¡ ¸®ÅÏ/¾øÀ¸¸é -1¸®ÅÏ
+	 *            ë¹„êµë°ì´í„°
+	 * @return ì¡´ì œí•˜ëŠ” ë°°ì—´ì´ ìˆìœ¼ë©´ ìœ„ì¹˜ ë¦¬í„´/ì—†ìœ¼ë©´ -1ë¦¬í„´
 	 */
 	public static int positionInclude(String s1, String[] s2) {
 
@@ -219,8 +219,8 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param str
-	 *            base64·Î µÈ ¹®ÀÚ¿­
-	 * @return µğÄÚµù µÈ ¹®ÀÚ¿­
+	 *            base64ë¡œ ëœ ë¬¸ìì—´
+	 * @return ë””ì½”ë”© ëœ ë¬¸ìì—´
 	 */
 	public static String decodeString(String str) {
 		BASE64Decoder dec = new BASE64Decoder();
@@ -233,8 +233,8 @@ public class StringUtilAd extends StringUtils {
 
 	/**
 	 * @param str
-	 *            ÀÎÄÚµù ÇÒ ¹®ÀÚ¿­
-	 * @return base64 ¹®ÀÚ¿­
+	 *            ì¸ì½”ë”© í•  ë¬¸ìì—´
+	 * @return base64 ë¬¸ìì—´
 	 */
 	public static String encodeString(String str) {
 		BASE64Encoder encoder = new BASE64Encoder();
@@ -242,13 +242,13 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * ¹ÙÀÌÆ® ´ÜÀ§ ½ºÆ®¸µ Àı»è (ÇÑ±Û ÀÎÄÚµù¿¡ µû¶ó ¾ÈµÉ ¼öµµ ÀÖÀ½)
+	 * ë°”ì´íŠ¸ ë‹¨ìœ„ ìŠ¤íŠ¸ë§ ì ˆì‚­ (í•œê¸€ ì¸ì½”ë”©ì— ë”°ë¼ ì•ˆë  ìˆ˜ë„ ìˆìŒ)
 	 * 
 	 * @param str
-	 *            ½ºÆ®¸µ
+	 *            ìŠ¤íŠ¸ë§
 	 * @param sz
-	 *            ÀÚ¸¦ ¹ÙÀÌÆ®¼ö
-	 * @return Àß¶óÁø ½ºÆ®¸µ
+	 *            ìë¥¼ ë°”ì´íŠ¸ìˆ˜
+	 * @return ì˜ë¼ì§„ ìŠ¤íŠ¸ë§
 	 */
 	public static String substringByte(String str, int limit) {
 
@@ -259,10 +259,10 @@ public class StringUtilAd extends StringUtils {
 		int cnt = 0, index = 0;
 
 		while (index < len && cnt < limit) {
-			if (str.charAt(index++) < 256) // 1¹ÙÀÌÆ® ¹®ÀÚ¶ó¸é...
-				cnt++; // ±æÀÌ 1 Áõ°¡
+			if (str.charAt(index++) < 256) // 1ë°”ì´íŠ¸ ë¬¸ìë¼ë©´...
+				cnt++; // ê¸¸ì´ 1 ì¦ê°€
 			else {
-				cnt += 2; // ±æÀÌ 2 Áõ°¡
+				cnt += 2; // ê¸¸ì´ 2 ì¦ê°€
 			}
 		}
 
@@ -274,18 +274,18 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * Á¦¸ñµî¿¡ Ç¥½ÃÇÒ¶§ ½ºÆ®¸µ ÁÙÀÓÀ» Ç¥Çö (...)<br>
-	 * ¹ÙÀÌÆ® ´ÜÀ§
+	 * ì œëª©ë“±ì— í‘œì‹œí• ë•Œ ìŠ¤íŠ¸ë§ ì¤„ì„ì„ í‘œí˜„ (...)<br>
+	 * ë°”ì´íŠ¸ ë‹¨ìœ„
 	 * 
 	 * @param s
-	 *            ¿øº»½ºÆ®¸µ
+	 *            ì›ë³¸ìŠ¤íŠ¸ë§
 	 * @param limit
-	 *            Ç¥Çö ÇÑ°è
-	 * @return ÁÙÀÓ Ã³¸®µÈ ½ºÆ®¸µ
+	 *            í‘œí˜„ í•œê³„
+	 * @return ì¤„ì„ ì²˜ë¦¬ëœ ìŠ¤íŠ¸ë§
 	 */
 	public static String lessen(String s, int limit) {
 		String t;
-		// ... ¹®ÀÚ¿­ »çÀÌÁî
+		// ... ë¬¸ìì—´ ì‚¬ì´ì¦ˆ
 		t = substringByte(s, limit - 3);
 		if (s == null || s.equals(t)) {
 			return t;
@@ -296,11 +296,11 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * html Å×±× Á¦°Å
+	 * html í…Œê·¸ ì œê±°
 	 * 
 	 * @param src
-	 *            Html ÄÚµå°¡ µé¾î°£ ÅØ½ºÆ® µ¥ÀÌÅÍ
-	 * @return ¼ø¼ö TEXT µ¥ÀÌÅÍ¸¸ ¸®ÅÏ
+	 *            Html ì½”ë“œê°€ ë“¤ì–´ê°„ í…ìŠ¤íŠ¸ ë°ì´í„°
+	 * @return ìˆœìˆ˜ TEXT ë°ì´í„°ë§Œ ë¦¬í„´
 	 */
 	public static String clearHtml(String src) {
 		Pattern pa = Pattern.compile("<style>.+?</style>", Pattern.CASE_INSENSITIVE);
@@ -313,7 +313,7 @@ public class StringUtilAd extends StringUtils {
 		// "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
 		String clearStr = ma.replaceAll("").replaceAll("&nbsp;", " ").replaceAll("&quot;", "\"").replaceAll("&gt;", "")
 				.replaceAll("&lt;", "").replaceAll("&amp;", "");
-		// Áß°£ ºÎºĞ¿¡ ½ºÆäÀÌ½º ¿µ¿ªÀ» ÇÏ³ª·Î Ãà¼Ò
+		// ì¤‘ê°„ ë¶€ë¶„ì— ìŠ¤í˜ì´ìŠ¤ ì˜ì—­ì„ í•˜ë‚˜ë¡œ ì¶•ì†Œ
 		// "bcde    feafg" ===> "bcde feafg"
 		StringTokenizer st = new StringTokenizer(clearStr, " \r\n");
 		String rtnValue = "";
@@ -324,7 +324,7 @@ public class StringUtilAd extends StringUtils {
 	}
 
 	/**
-	 * Æ¯¼ö ¹®ÀÚ Á¦°Å
+	 * íŠ¹ìˆ˜ ë¬¸ì ì œê±°
 	 * 
 	 * @param str
 	 * @return

@@ -1,8 +1,8 @@
 package com.setvect.common.http;
 
 /**
- * request¿¡¼­ ÄíÅ° °ªÀ» ÆÄ½ÌÇÑµÚ ÄíÅ° ¸í°ú ÀÌ¸§À» Hashtable¿¡ ÀúÀå ½ÃÄÑ ³õ°í get()À» ÀÌ¿ëÇÏ¿© ÄíÅ°ÀÌ¸§¿¡ ÇØ´çÇÏ´Â °ªÀ»
- * °¡Á®¿Â´Ù.
+ * requestì—ì„œ ì¿ í‚¤ ê°’ì„ íŒŒì‹±í•œë’¤ ì¿ í‚¤ ëª…ê³¼ ì´ë¦„ì„ Hashtableì— ì €ì¥ ì‹œì¼œ ë†“ê³  get()ì„ ì´ìš©í•˜ì—¬ ì¿ í‚¤ì´ë¦„ì— í•´ë‹¹í•˜ëŠ” ê°’ì„
+ * ê°€ì ¸ì˜¨ë‹¤.
  * 
  * @version $Id: CookieProcess.java,v 1.5 2005/06/20 09:25:46 setvect Exp $
  */
@@ -16,19 +16,19 @@ public class CookieProcess {
 	private Map<String, Cookie> cook = new HashMap<String, Cookie>();
 
 	/**
-	 * ÄíÅ° ÆÄ½Ì
+	 * ì¿ í‚¤ íŒŒì‹±
 	 * 
 	 * @param request
 	 */
 	public CookieProcess(HttpServletRequest request) {
 		Cookie ck[] = request.getCookies();
 
-		// ÄíÅ°°ªÀÌ Á¸Á¦ ÇÏÁö ¾ÊÀ¸¸é.
+		// ì¿ í‚¤ê°’ì´ ì¡´ì œ í•˜ì§€ ì•Šìœ¼ë©´.
 		if (ck == null) {
 			ck = new Cookie[0];
 		}
 
-		// ÄíÅ°°ªÀ» ÀúÀåÇÑ´Ù.
+		// ì¿ í‚¤ê°’ì„ ì €ì¥í•œë‹¤.
 		for (int i = 0; i < ck.length; i++) {
 			cook.put(ck[i].getName(), ck[i]);
 		}
@@ -36,11 +36,11 @@ public class CookieProcess {
 
 	/**
 	 * @param name
-	 *            ÄíÅ°ÀÌ¸§
-	 * @return ÄíÅ°ÀÌ¸§¿¡ ´ëÇÑ °ª. ÀÌ¸§¿¡ ÇØ´çÇÏ´Â °ªÀÌ ¾øÀ¸¸é null
+	 *            ì¿ í‚¤ì´ë¦„
+	 * @return ì¿ í‚¤ì´ë¦„ì— ëŒ€í•œ ê°’. ì´ë¦„ì— í•´ë‹¹í•˜ëŠ” ê°’ì´ ì—†ìœ¼ë©´ null
 	 */
 	public String get(String name) {
-		// ÄíÅ°¿¡ ÇØ´çÇÏ´Â °ªÀÌ null
+		// ì¿ í‚¤ì— í•´ë‹¹í•˜ëŠ” ê°’ì´ null
 		Cookie c = cook.get(name);
 
 		if (c == null) {
@@ -51,8 +51,8 @@ public class CookieProcess {
 
 	/**
 	 * @param name
-	 *            ÄíÅ°ÀÌ¸§
-	 * @return ÄíÅ° °´Ã¼ , ¾øÀ¸¸é null
+	 *            ì¿ í‚¤ì´ë¦„
+	 * @return ì¿ í‚¤ ê°ì²´ , ì—†ìœ¼ë©´ null
 	 */
 	public Cookie getCookie(String name) {
 		return cook.get(name);

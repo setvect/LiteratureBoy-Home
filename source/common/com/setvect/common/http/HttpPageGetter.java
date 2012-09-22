@@ -33,7 +33,7 @@ import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.StringUtilAd;
 
 /**
- * À¥ÆäÀÌÁö ÁÖµµ¿¡ ´ëÇÑ ³»¿ëÀ» °¡Á®¿È
+ * ì›¹í˜ì´ì§€ ì£¼ë„ì— ëŒ€í•œ ë‚´ìš©ì„ ê°€ì ¸ì˜´
  * 
  * @version $Id: HttpPageGetter.java 131 2010-11-02 06:21:57Z setvect@naver.com
  *          $
@@ -43,31 +43,31 @@ public class HttpPageGetter {
 	public static final String METHOD_GET = "GET";
 	public static final String METHOD_POST = "POST";
 
-	/** ±âº» Ä³¸¯ÅÍ ¼Â(µ¥ÀÌÅÍ ¹Ş´Â »óÈ²¿¡¼­) */
+	/** ê¸°ë³¸ ìºë¦­í„° ì…‹(ë°ì´í„° ë°›ëŠ” ìƒí™©ì—ì„œ) */
 	private static final String DEFAULT_BODY_CHARSET = "utf-8";
 
-	/** URL ÁÖ¼Ò */
+	/** URL ì£¼ì†Œ */
 	private String url;
 
-	/** ÆÄ¶ó¹ÌÅÍ Á¤º¸ */
+	/** íŒŒë¼ë¯¸í„° ì •ë³´ */
 	private Map<String, String> parameter = new HashMap<String, String>();
 
 	/** request property */
 	private Map<String, String> requestProperty = new HashMap<String, String>();
 
-	/** º»¹® ÀÎÄÚµå Ä³¸¯ÅÍ ¼Â */
+	/** ë³¸ë¬¸ ì¸ì½”ë“œ ìºë¦­í„° ì…‹ */
 	private String bodyCharset;
 
-	/** url ÆÄ¶ó¹ÌÅÍ ÀÎÄÚµå Ä³¸¯ÅÍ ¼Â */
+	/** url íŒŒë¼ë¯¸í„° ì¸ì½”ë“œ ìºë¦­í„° ì…‹ */
 	private String urlCharset = "euc-kr";
 
-	/** URL Ä¿³Ø¼Ç */
+	/** URL ì»¤ë„¥ì…˜ */
 	private URL urlinfo;
 
-	/** URL ¿ÀÇÂ Ä¿³Ø¼Ç */
+	/** URL ì˜¤í”ˆ ì»¤ë„¥ì…˜ */
 	private HttpURLConnection conn;
 
-	/** ¿¬°á Á¦ÇÑ ½Ã°£, ±âº»°ª 0, ´ÜÀ§ ¹Ğ¸®¼¼ÄÁµå */
+	/** ì—°ê²° ì œí•œ ì‹œê°„, ê¸°ë³¸ê°’ 0, ë‹¨ìœ„ ë°€ë¦¬ì„¸ì»¨ë“œ */
 	private int conntionTimeout = 0;
 
 	/**
@@ -75,12 +75,12 @@ public class HttpPageGetter {
 	 * @see #METHOD_POST
 	 */
 	private String method = METHOD_GET;
-	/** method°¡ POSTÀÎ °æ¿ì¿¡¸¸ »ç¿ë °¡´É */
+	/** methodê°€ POSTì¸ ê²½ìš°ì—ë§Œ ì‚¬ìš© ê°€ëŠ¥ */
 	private String sendBody;
 
 	/**
 	 * @param url
-	 *            URL ÁÖ¼Ò <br>
+	 *            URL ì£¼ì†Œ <br>
 	 *            ex)http://www.naver.com/index.html
 	 */
 	public HttpPageGetter(String url) {
@@ -90,10 +90,10 @@ public class HttpPageGetter {
 
 	/**
 	 * @param url
-	 *            URL ÁÖ¼Ò <br>
+	 *            URL ì£¼ì†Œ <br>
 	 *            ex)http://www.naver.com/index.html
 	 * @param urlCharset
-	 *            url ÆÄ¶ó¹ÌÅÍ Ä³¸¯ÅÍ ¼Â
+	 *            url íŒŒë¼ë¯¸í„° ìºë¦­í„° ì…‹
 	 */
 	public HttpPageGetter(String url, String urlCharset) {
 		this.url = url;
@@ -102,19 +102,19 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * ÀÏ¹İÀûÀ¸·Î UrlPageInfo(String, String)¸¦ »ç¿ë<br>
-	 * »ó½ÄÀûÀ¸·Î µ¥ÀÌÅÍ¸¦ ¹ŞÀ»¶§ Ä³¸¯ÅÍ³İÀ» Á¤ÀÇÇÒ ÇÊ¿ä´Â ¾ø´Ù.<br>
-	 * http ÇØ´õ¸¦ ºĞ¼®ÇØ¼­ ¹Ş´Â url¿¡ charset¸¦ ¾Ë¾Æ¾ß µÈ´Ù. <br>
-	 * ±×·¯³ª getContentType()¿¡¼­ charsetÁ¤º¸¸¦ ÁÖÁö ¾Ê´Â °æ¿ì°¡ ÀÖÀ½.<br>
-	 * ÀÌ¶§´Â È£Ãâ ÇÏ´Â ÂÊ¿¡¼­ Ã³¸®
+	 * ì¼ë°˜ì ìœ¼ë¡œ UrlPageInfo(String, String)ë¥¼ ì‚¬ìš©<br>
+	 * ìƒì‹ì ìœ¼ë¡œ ë°ì´í„°ë¥¼ ë°›ì„ë•Œ ìºë¦­í„°ë„·ì„ ì •ì˜í•  í•„ìš”ëŠ” ì—†ë‹¤.<br>
+	 * http í•´ë”ë¥¼ ë¶„ì„í•´ì„œ ë°›ëŠ” urlì— charsetë¥¼ ì•Œì•„ì•¼ ëœë‹¤. <br>
+	 * ê·¸ëŸ¬ë‚˜ getContentType()ì—ì„œ charsetì •ë³´ë¥¼ ì£¼ì§€ ì•ŠëŠ” ê²½ìš°ê°€ ìˆìŒ.<br>
+	 * ì´ë•ŒëŠ” í˜¸ì¶œ í•˜ëŠ” ìª½ì—ì„œ ì²˜ë¦¬
 	 * 
 	 * @param url
-	 *            URL ÁÖ¼Ò <br>
+	 *            URL ì£¼ì†Œ <br>
 	 *            ex)http://www.google.com/page/main.asp
 	 * @param bodyCharset
-	 *            º»¹® Ä³¸¯ÅÍ ¼Â
+	 *            ë³¸ë¬¸ ìºë¦­í„° ì…‹
 	 * @param urlCharset
-	 *            url ÆÄ¶ó¹ÌÅÍ Ä³¸¯ÅÍ ¼Â
+	 *            url íŒŒë¼ë¯¸í„° ìºë¦­í„° ì…‹
 	 * 
 	 */
 	public HttpPageGetter(String url, String bodyCharset, String urlCharset) {
@@ -138,7 +138,7 @@ public class HttpPageGetter {
 	 * 
 	 */
 	private void conn() {
-		// ÀÌ¹Ì ÇÑ¹ø ÃÊ±âÈ­ µÇ¾î ÀÖÀ¸¸é ´Ù½Ã ÇÏÁö ¾ÊÀ½
+		// ì´ë¯¸ í•œë²ˆ ì´ˆê¸°í™” ë˜ì–´ ìˆìœ¼ë©´ ë‹¤ì‹œ í•˜ì§€ ì•ŠìŒ
 		if (urlinfo != null) {
 			return;
 		}
@@ -176,9 +176,9 @@ public class HttpPageGetter {
 				}
 			}
 
-			// º»¹® Ä³¸¯ÅÍ ¼ÂÀÌ ¾øÀ» °æ¿ì ÇØ´õ ºĞ¼®
+			// ë³¸ë¬¸ ìºë¦­í„° ì…‹ì´ ì—†ì„ ê²½ìš° í•´ë” ë¶„ì„
 			if (bodyCharset == null) {
-				// application/x-msdownload; charset=utf-8 ÀÌ·±½ÄÀ¸·Î ¿Å
+				// application/x-msdownload; charset=utf-8 ì´ëŸ°ì‹ìœ¼ë¡œ ì˜®
 				String t = conn.getContentType();
 				if (t != null && t.contains("charset=")) {
 					int st = t.indexOf("charset=") + "charset=".length();
@@ -200,8 +200,8 @@ public class HttpPageGetter {
 
 	/**
 	 * @param charset
-	 *            Ä³¸¯ÅÍ ¼Â
-	 * @return º»¹® ÆäÀÌÁö ³»¿ë
+	 *            ìºë¦­í„° ì…‹
+	 * @return ë³¸ë¬¸ í˜ì´ì§€ ë‚´ìš©
 	 * @throws IOException
 	 */
 	public String getBody() throws IOException {
@@ -231,18 +231,18 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * º»¹® ³»¿ëÀ» ÁöÁ¤µÈ ÀÌ¸§À¸·Î ÀúÀå ÇÑ´Ù. <br>
-	 * ¸¸¾à ÁöÁ¤µÈ °÷¿¡ ÀÌÀü ÆÄÀÏÀÌ ÀÖÀ¸¸é µ¤¾î ¾¯¿î´Ù.
+	 * ë³¸ë¬¸ ë‚´ìš©ì„ ì§€ì •ëœ ì´ë¦„ìœ¼ë¡œ ì €ì¥ í•œë‹¤. <br>
+	 * ë§Œì•½ ì§€ì •ëœ ê³³ì— ì´ì „ íŒŒì¼ì´ ìˆìœ¼ë©´ ë®ì–´ ì’¸ìš´ë‹¤.
 	 * 
 	 * @param saveFileName
-	 *            ÆÄÀÏ °æ·Î¸¦ Æ÷ÇÔÇÑ ÀÌ¸§
+	 *            íŒŒì¼ ê²½ë¡œë¥¼ í¬í•¨í•œ ì´ë¦„
 	 * @throws IOException
 	 */
 	public void saveBody(String saveFileName) throws IOException {
 		conn();
 		InputStream in = conn.getInputStream();
 
-		// ÆÄÀÏÀÌ Á¸Àç ÇÏ¸é »èÁ¦ÇÑ´Ù.
+		// íŒŒì¼ì´ ì¡´ì¬ í•˜ë©´ ì‚­ì œí•œë‹¤.
 		if (FileUtil.isExists(saveFileName)) {
 			FileUtil.delFile(saveFileName);
 		}
@@ -264,11 +264,11 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * ÆÄÀÏ ÀúÀå. Áßº¹ ÆÄÀÏÀÌ ÀÖÀ» °æ¿ì µ¤¾î ¾¯¿ìÁö ¾Ê°í »õ·Î¿î ÀÌ¸§À¸·Î ÀúÀå
+	 * íŒŒì¼ ì €ì¥. ì¤‘ë³µ íŒŒì¼ì´ ìˆì„ ê²½ìš° ë®ì–´ ì’¸ìš°ì§€ ì•Šê³  ìƒˆë¡œìš´ ì´ë¦„ìœ¼ë¡œ ì €ì¥
 	 * 
 	 * @param savePath
-	 *            ÆÄÀÏ ÀúÀå °æ·Î
-	 * @return ÀúÀåµÈ ÆÄÀÏ, ÆÄÀÏ ÀúÀåÀ» ½ÇÆĞÇÏ¸é null
+	 *            íŒŒì¼ ì €ì¥ ê²½ë¡œ
+	 * @return ì €ì¥ëœ íŒŒì¼, íŒŒì¼ ì €ì¥ì„ ì‹¤íŒ¨í•˜ë©´ null
 	 * @throws IOException
 	 */
 	public File saveFileDownload(String savePath) throws IOException {
@@ -276,13 +276,13 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * ÆÄÀÏ ÀúÀå. Áßº¹ ÆÄÀÏÀÌ ÀÖÀ» °æ¿ì µ¤¾î ¾¯¿ìÁö ¾Ê°í »õ·Î¿î ÀÌ¸§À¸·Î ÀúÀå
+	 * íŒŒì¼ ì €ì¥. ì¤‘ë³µ íŒŒì¼ì´ ìˆì„ ê²½ìš° ë®ì–´ ì’¸ìš°ì§€ ì•Šê³  ìƒˆë¡œìš´ ì´ë¦„ìœ¼ë¡œ ì €ì¥
 	 * 
 	 * @param savePath
-	 *            ÆÄÀÏ ÀúÀå °æ·Î
+	 *            íŒŒì¼ ì €ì¥ ê²½ë¡œ
 	 * @param fileEnd
-	 *            ÀúÀåµÈ ÆÄÀÏ µÚ¿¡ ºÙ´Â ±¸ºĞÀÚ,
-	 * @return ÆÄÀÏ ÀúÀåÀ» ½ÇÆĞÇÏ¸é null
+	 *            ì €ì¥ëœ íŒŒì¼ ë’¤ì— ë¶™ëŠ” êµ¬ë¶„ì,
+	 * @return íŒŒì¼ ì €ì¥ì„ ì‹¤íŒ¨í•˜ë©´ null
 	 * @throws IOException
 	 */
 	public File saveFileDownload(String savePath, String fileEnd) throws IOException {
@@ -319,7 +319,7 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * @return ÀúÀåÇÒ Ã·ºÎÆÄÀÏ ÀÌ¸§
+	 * @return ì €ì¥í•  ì²¨ë¶€íŒŒì¼ ì´ë¦„
 	 * @throws IOException
 	 */
 	public String getFilename() throws IOException {
@@ -339,11 +339,11 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * url ¸¶Áö¸· Á¤º¸¸¦ ÆÄÀÏ¸íÀ¸·Î »ç¿ë
+	 * url ë§ˆì§€ë§‰ ì •ë³´ë¥¼ íŒŒì¼ëª…ìœ¼ë¡œ ì‚¬ìš©
 	 * 
 	 * @param url
-	 *            °æ·Î¸¦ ÀÌ¿ëÇÏ¿© ÆÄÀÏ¸í ÃßÃâ
-	 * @return url °æ·Î »ó¿¡ ÆÄÀÏ¸í
+	 *            ê²½ë¡œë¥¼ ì´ìš©í•˜ì—¬ íŒŒì¼ëª… ì¶”ì¶œ
+	 * @return url ê²½ë¡œ ìƒì— íŒŒì¼ëª…
 	 */
 	private String urlFileName(String url) {
 		int stp = url.lastIndexOf("/");
@@ -355,21 +355,21 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * Content-Disposition ÇüÅÂ·Î ÆÄÀÏ ´Ù¿î·Îµå ÇÒ °æ¿ì ÆÄÀÏ ¸í ÃßÃâ
+	 * Content-Disposition í˜•íƒœë¡œ íŒŒì¼ ë‹¤ìš´ë¡œë“œ í•  ê²½ìš° íŒŒì¼ ëª… ì¶”ì¶œ
 	 * 
 	 * @param fi
-	 *            Content-Disposition ÇØ´õÀÇ °ª
-	 * @return ÆÄÀÏ¸í
+	 *            Content-Disposition í•´ë”ì˜ ê°’
+	 * @return íŒŒì¼ëª…
 	 * @throws UnsupportedEncodingException
 	 */
 	private String dispositionFileName(String fi) throws UnsupportedEncodingException {
-		// ÆÄÀÏ ÀÌ¸§ ½ÃÀÛ~Á¾·á ½ÃÁ¡ ±¸ÇÏ±â
+		// íŒŒì¼ ì´ë¦„ ì‹œì‘~ì¢…ë£Œ ì‹œì  êµ¬í•˜ê¸°
 		int fileStartPos = fi.indexOf("filename=");
 		int fileEndPos = fi.indexOf(";", fileStartPos);
 
 		// Content-Disposition=[attachment;filename=SW stack
 		// %ED%86%B5%ED%95%A9%EB%B8%8C%EB%A1%9C%EC%85%94.pdf],
-		// ÀÌ·±½ÄÀ¸·Î ÀúÀå µÇ´Â °æ¿ìµµ ÀÖ´Ù. ±×·¡¼­ ;¼¼¹ÌÄİ·ĞÀÌ ¾øÀ» °æ¿ìµµ ¹ß»ı
+		// ì´ëŸ°ì‹ìœ¼ë¡œ ì €ì¥ ë˜ëŠ” ê²½ìš°ë„ ìˆë‹¤. ê·¸ë˜ì„œ ;ì„¸ë¯¸ì½œë¡ ì´ ì—†ì„ ê²½ìš°ë„ ë°œìƒ
 		if (fileEndPos == -1) {
 			fileEndPos = fi.length();
 		}
@@ -387,8 +387,8 @@ public class HttpPageGetter {
 
 	/**
 	 * @param ilePathschemaFilePath
-	 *            XML ½ºÅ°¸¶ Á¤º¸
-	 * @return ¹®¼­ ³»¿ëÀÌ XML ÆÄÀÏ °æ¿ì ÃÖ»óÀ§ Document·Îµå¸¦ ¸®ÅÏ
+	 *            XML ìŠ¤í‚¤ë§ˆ ì •ë³´
+	 * @return ë¬¸ì„œ ë‚´ìš©ì´ XML íŒŒì¼ ê²½ìš° ìµœìƒìœ„ Documentë¡œë“œë¥¼ ë¦¬í„´
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
@@ -405,8 +405,8 @@ public class HttpPageGetter {
 
 	/**
 	 * @param schemaUrl
-	 *            URL »óÀÇ ½ºÅ°¸¶ Á¤º¸
-	 * @return ¹®¼­ ³»¿ëÀÌ XML ÆÄÀÏ °æ¿ì ÃÖ»óÀ§ Document·Îµå¸¦ ¸®ÅÏ
+	 *            URL ìƒì˜ ìŠ¤í‚¤ë§ˆ ì •ë³´
+	 * @return ë¬¸ì„œ ë‚´ìš©ì´ XML íŒŒì¼ ê²½ìš° ìµœìƒìœ„ Documentë¡œë“œë¥¼ ë¦¬í„´
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
@@ -419,8 +419,8 @@ public class HttpPageGetter {
 
 	/**
 	 * @param schema
-	 *            XML ½ºÅ°¸¶
-	 * @return ¹®¼­ ³»¿ëÀÌ XML ÆÄÀÏ °æ¿ì ÃÖ»óÀ§ Document·Îµå¸¦ ¸®ÅÏ
+	 *            XML ìŠ¤í‚¤ë§ˆ
+	 * @return ë¬¸ì„œ ë‚´ìš©ì´ XML íŒŒì¼ ê²½ìš° ìµœìƒìœ„ Documentë¡œë“œë¥¼ ë¦¬í„´
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 * @throws SAXException
@@ -432,7 +432,7 @@ public class HttpPageGetter {
 		InputStream in = null;
 		try {
 
-			// DOM ÆÄ¼­ »ı¼º
+			// DOM íŒŒì„œ ìƒì„±
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setIgnoringElementContentWhitespace(true);
 			factory.setSchema(schema);
@@ -441,7 +441,7 @@ public class HttpPageGetter {
 			in = new ByteArrayInputStream(body.getBytes(bodyCharset));
 			bis = new BufferedInputStream(in);
 
-			// XML ¹®¼­ ÆÄ½ÌÇÏ±â
+			// XML ë¬¸ì„œ íŒŒì‹±í•˜ê¸°
 			document = builder.parse(bis);
 		} finally {
 			if (bis != null) {
@@ -456,25 +456,25 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * URL¿¡ ³Ñ±æ ÆÄ¶ó¹ÌÅÍ Á¤º¸¸¦ ¼³Á¤
+	 * URLì— ë„˜ê¸¸ íŒŒë¼ë¯¸í„° ì •ë³´ë¥¼ ì„¤ì •
 	 * 
 	 * @param key
-	 *            Å° Á¤º¸
+	 *            í‚¤ ì •ë³´
 	 * @param value
-	 *            °ª
-	 * @deprecated ³×ÀÌ¹ÖÀÌ ¸ÂÁö ¾ÊÀ½ addParameter()»ç¿ë
+	 *            ê°’
+	 * @deprecated ë„¤ì´ë°ì´ ë§ì§€ ì•ŠìŒ addParameter()ì‚¬ìš©
 	 */
 	public void setParameter(String key, String value) {
 		parameter.put(key, value);
 	}
 
 	/**
-	 * URL¿¡ ³Ñ±æ ÆÄ¶ó¹ÌÅÍ Á¤º¸¸¦ ¼³Á¤
+	 * URLì— ë„˜ê¸¸ íŒŒë¼ë¯¸í„° ì •ë³´ë¥¼ ì„¤ì •
 	 * 
 	 * @param key
-	 *            Å° Á¤º¸
+	 *            í‚¤ ì •ë³´
 	 * @param value
-	 *            °ª
+	 *            ê°’
 	 */
 	public void addParameter(String key, String value) {
 		parameter.put(key, value);
@@ -501,7 +501,7 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * @return ÁÖ¼Ò+ÆÄ¶ó¹ÌÅÍ
+	 * @return ì£¼ì†Œ+íŒŒë¼ë¯¸í„°
 	 */
 	public String getUrl() {
 		if (method.equals(METHOD_POST)) {
@@ -518,7 +518,7 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * @return ÆÄ¶ó¹ÌÅÍ Á¤º¸¸¦ ¹®ÀÚ¿­·Î º¯°æ
+	 * @return íŒŒë¼ë¯¸í„° ì •ë³´ë¥¼ ë¬¸ìì—´ë¡œ ë³€ê²½
 	 */
 	private String getParameterString() {
 		Set<String> enum1 = parameter.keySet();
@@ -540,10 +540,10 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * ±âÁ¸¿¡ ¼³Á¤µÈ ÆÄ¶ó¹ÌÅÍ Á¤º¸°¡ ÀÖ´Ù¸é ÇØ´ç ¸Ş¼Òµå¸¦ ½ÇÇàÇÏ¸é ¾ø¾îÁø´Ù.
+	 * ê¸°ì¡´ì— ì„¤ì •ëœ íŒŒë¼ë¯¸í„° ì •ë³´ê°€ ìˆë‹¤ë©´ í•´ë‹¹ ë©”ì†Œë“œë¥¼ ì‹¤í–‰í•˜ë©´ ì—†ì–´ì§„ë‹¤.
 	 * 
 	 * @param parameter
-	 *            URL ÆÄ¶ó¹ÌÅÍ Á¤º¸
+	 *            URL íŒŒë¼ë¯¸í„° ì •ë³´
 	 */
 	public void setParameter(Map<String, String> parameter) {
 		this.parameter = parameter;
@@ -557,10 +557,10 @@ public class HttpPageGetter {
 	}
 
 	/**
-	 * method°¡ POSTÀÎ °æ¿ì¿¡¸¸ »ç¿ë °¡´É
+	 * methodê°€ POSTì¸ ê²½ìš°ì—ë§Œ ì‚¬ìš© ê°€ëŠ¥
 	 * 
 	 * @param sendBody
-	 *            ¼­¹ö¿¡ Àü´ŞÇÒ µ¥ÀÌÅÍ
+	 *            ì„œë²„ì— ì „ë‹¬í•  ë°ì´í„°
 	 */
 	public void setSendBody(String sendBody) {
 		this.sendBody = sendBody;

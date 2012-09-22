@@ -16,22 +16,22 @@ import com.setvect.literatureboy.vo.user.User;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
- * È¯°æ¼³Á¤>¿î¿µÀÚ °ü¸® ¸Ş´º ÄÁÆ®·Ñ·¯
+ * í™˜ê²½ì„¤ì •>ìš´ì˜ì ê´€ë¦¬ ë©”ë‰´ ì»¨íŠ¸ë¡¤ëŸ¬
  */
 @Controller
 public class LoginController {
 	/**
-	 * ¼­ºê ¸í·É¾î Á¤ÀÇ
+	 * ì„œë¸Œ ëª…ë ¹ì–´ ì •ì˜
 	 */
 	public static enum Mode {
 		LOGIN_FORM, LOGIN_ACTION
 	}
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
-		// ·Î±×ÀÎ °á°ú
+		// ë¡œê·¸ì¸ ê²°ê³¼
 		LOGIN_FAIL,
 	}
 
@@ -69,14 +69,14 @@ public class LoginController {
 				String passwdEncode = StringUtilAd.encodePassword(passwd, ConstraintWeb.PASSWD_ALGORITHM);
 				loginStat = user.getPasswd().equals(passwdEncode);
 			}
-			// ·Î±×ÀÎ ¼º°ø
+			// ë¡œê·¸ì¸ ì„±ê³µ
 			if (loginStat) {
-				// ºñ¹Ğ¹øÈ£´Â ³ëÃâ µÇÁö ¾Ê°Ô ÇÏ±â À§ÇÔ
+				// ë¹„ë°€ë²ˆí˜¸ëŠ” ë…¸ì¶œ ë˜ì§€ ì•Šê²Œ í•˜ê¸° ìœ„í•¨
 				user.setPasswd(null);
 
 				String cookieData = SerializerUtil.makeBase64Encode(user);
 
-				// iis¿¡¼­´Â ÁÙ¹Ù²Ş ¹®Á¦°¡ ÀÖÀ¸¸é ÄíÅ°°¡ ¼ÂÆÃÀÌ ¾ÈµÈ´Ù. ±×·¡¼­ ÁÙ ¹Ù²ŞÀ» Á¦°Å
+				// iisì—ì„œëŠ” ì¤„ë°”ê¿ˆ ë¬¸ì œê°€ ìˆìœ¼ë©´ ì¿ í‚¤ê°€ ì…‹íŒ…ì´ ì•ˆëœë‹¤. ê·¸ë˜ì„œ ì¤„ ë°”ê¿ˆì„ ì œê±°
 				cookieData = cookieData.replaceAll("\r", "");
 				cookieData = cookieData.replaceAll("\n", "");
 
@@ -89,7 +89,7 @@ public class LoginController {
 				mav.setViewName("redirect:" + returnUrl);
 				return mav;
 			}
-			// ·Î±×ÀÎ ½ÇÆĞ
+			// ë¡œê·¸ì¸ ì‹¤íŒ¨
 			else {
 				mav.addObject(AttributeKey.LOGIN_FAIL.name(), true);
 				m = Mode.LOGIN_FORM;

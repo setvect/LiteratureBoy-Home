@@ -15,7 +15,7 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
- * Á÷·ÄÈ­ °´Ã¼¸¦ ¸¸µé°í, Á÷·ÄÈ­µÈ °´Ã¼¸¦ º¹¿ø ½ÃÅ²´Ù.
+ * ì§ë ¬í™” ê°ì²´ë¥¼ ë§Œë“¤ê³ , ì§ë ¬í™”ëœ ê°ì²´ë¥¼ ë³µì› ì‹œí‚¨ë‹¤.
  * 
  * @version $Id: SerializerUtil.java,v 1.1 2006/07/12 05:33:59 setvect Exp $
  */
@@ -29,12 +29,12 @@ public class SerializerUtil {
 	}
 
 	/**
-	 * °´Ã¼À» Á¤º¸¸¦ ÆÄÀÏ·Î Á÷·ÄÈ­¸¦ ¸¸µç´Ù.
+	 * ê°ì²´ì„ ì •ë³´ë¥¼ íŒŒì¼ë¡œ ì§ë ¬í™”ë¥¼ ë§Œë“ ë‹¤.
 	 * 
 	 * @param obj
-	 *            Á÷·ÄÈ­ ÇÒ °´Ã¼
+	 *            ì§ë ¬í™” í•  ê°ì²´
 	 * @param path
-	 *            Á÷·ÄÈ­µÈ Á¤º¸¸¦ ÀúÀåÇÒ ÆÄÀÏÀÇ Ç® ÆĞ½º(ÆÄÀÏ¸í Æ÷ÇÔ)
+	 *            ì§ë ¬í™”ëœ ì •ë³´ë¥¼ ì €ì¥í•  íŒŒì¼ì˜ í’€ íŒ¨ìŠ¤(íŒŒì¼ëª… í¬í•¨)
 	 * @throws IOException
 	 */
 	public static void makeSerializer(Object obj, String path) throws IOException {
@@ -44,12 +44,12 @@ public class SerializerUtil {
 	}
 
 	/**
-	 * °´Ã¼À» Á¤º¸¸¦ Á÷·ÄÈ­ ÇÑ´Ù.
+	 * ê°ì²´ì„ ì •ë³´ë¥¼ ì§ë ¬í™” í•œë‹¤.
 	 * 
 	 * @param obj
-	 *            Á÷·ÄÈ­ ÇÒ °´Ã¼
+	 *            ì§ë ¬í™” í•  ê°ì²´
 	 * @param os
-	 *            Á÷·ÄÈ­ µ¥ÀÌÅÍ°¡ ³ª°¥ ½ºÆ®¸²
+	 *            ì§ë ¬í™” ë°ì´í„°ê°€ ë‚˜ê°ˆ ìŠ¤íŠ¸ë¦¼
 	 * @throws IOException
 	 */
 	public static void makeSerializer(Object obj, OutputStream os) throws IOException {
@@ -60,11 +60,11 @@ public class SerializerUtil {
 	}
 
 	/**
-	 * °´Ã¼¸¦ Á÷·ÄÈ­ ÇÏ¿© ±× Byte µ¥ÀÌÅÍ¸¦ BASE64ÄÚµå·Î º¯°æÇØ ¹®ÀÚ¿­·Î Á¦°øÇÑ´Ù.
+	 * ê°ì²´ë¥¼ ì§ë ¬í™” í•˜ì—¬ ê·¸ Byte ë°ì´í„°ë¥¼ BASE64ì½”ë“œë¡œ ë³€ê²½í•´ ë¬¸ìì—´ë¡œ ì œê³µí•œë‹¤.
 	 * 
 	 * @param obj
-	 *            Á÷·ÄÈ­ ÇÒ °´Ã¼
-	 * @return BASE64·Î ÀÎÄÚµùµÈ ¹®ÀÚ¿­
+	 *            ì§ë ¬í™” í•  ê°ì²´
+	 * @return BASE64ë¡œ ì¸ì½”ë”©ëœ ë¬¸ìì—´
 	 * @throws IOException
 	 */
 	public static String makeBase64Encode(Object obj) throws IOException {
@@ -74,10 +74,10 @@ public class SerializerUtil {
 		String encode;
 		try {
 			os = new ByteArrayOutputStream();
-			// °´Ã¼¸¦ Á¤º¸¸¦ ½ºÆ®¸² ÇüÅÂ·Î °¡Á®¿È
+			// ê°ì²´ë¥¼ ì •ë³´ë¥¼ ìŠ¤íŠ¸ë¦¼ í˜•íƒœë¡œ ê°€ì ¸ì˜´
 			SerializerUtil.makeSerializer(obj, os);
 
-			// BASE64 ÇüÅÂ·Î ¹ÙÀÌÅÍ¸¦ µ¥ÀÌÅÍ¸¦ TEXT ÇüÅÂ·Î °¡Á®¿È
+			// BASE64 í˜•íƒœë¡œ ë°”ì´í„°ë¥¼ ë°ì´í„°ë¥¼ TEXT í˜•íƒœë¡œ ê°€ì ¸ì˜´
 			BASE64Encoder encoder = new BASE64Encoder();
 			sourceIn = new BufferedInputStream(new ByteArrayInputStream(os.toByteArray()));
 			sourceOut = new ByteArrayOutputStream();
@@ -99,11 +99,11 @@ public class SerializerUtil {
 	}
 
 	/**
-	 * ÆÄÀÏ·Î °¡Áö°í ÀÖ´Â Á÷·ÄÈ­ Á¤º¸¸¦ ÀÌ¿ëÇÏ¿© °´Ã¼¸¦ »ı¼ºÇÑ´Ù.
+	 * íŒŒì¼ë¡œ ê°€ì§€ê³  ìˆëŠ” ì§ë ¬í™” ì •ë³´ë¥¼ ì´ìš©í•˜ì—¬ ê°ì²´ë¥¼ ìƒì„±í•œë‹¤.
 	 * 
 	 * @param path
-	 *            Á÷·ÄÈ­ Á¤º¸¸¦ ´ã°í ÀÖ´Â ÆÄÀÏ °æ·Î (ÆÄÀÏ¸í Æ÷ÇÔ)
-	 * @return Á÷·ÄÈ­ º¯°æµÈ°Í
+	 *            ì§ë ¬í™” ì •ë³´ë¥¼ ë‹´ê³  ìˆëŠ” íŒŒì¼ ê²½ë¡œ (íŒŒì¼ëª… í¬í•¨)
+	 * @return ì§ë ¬í™” ë³€ê²½ëœê²ƒ
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -115,11 +115,11 @@ public class SerializerUtil {
 	}
 
 	/**
-	 * ½ºÆ®¸²À¸·Î ºÎÅÍ Á÷·ÄÈ­ µ¥ÀÌÅÍ¸¦ °¡Á®¿Í °´Ã¼¸¦ ¸¸µç´Ù.
+	 * ìŠ¤íŠ¸ë¦¼ìœ¼ë¡œ ë¶€í„° ì§ë ¬í™” ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ê°ì²´ë¥¼ ë§Œë“ ë‹¤.
 	 * 
 	 * @param is
-	 *            Á÷·ÄÈ­ µ¥ÀÌÅÍ°¡ ÀÖ´Â ½ºÆ®¸²
-	 * @return Á÷·ÄÈ­ º¯°æµÈ°Í
+	 *            ì§ë ¬í™” ë°ì´í„°ê°€ ìˆëŠ” ìŠ¤íŠ¸ë¦¼
+	 * @return ì§ë ¬í™” ë³€ê²½ëœê²ƒ
 	 * @throws Exception
 	 */
 	public static Object restoreSerializer(InputStream is) throws Exception {
@@ -130,11 +130,11 @@ public class SerializerUtil {
 	}
 
 	/**
-	 * Base64 ÄÚµå¸¦ ÅëÇØ ¹ÙÀÌÆ® Á¤º¸¸¦ ¾ò¾î³»¾î °´Ã¼ Á¤º¸·Î º¯È¯ÇÑ´Ù.
+	 * Base64 ì½”ë“œë¥¼ í†µí•´ ë°”ì´íŠ¸ ì •ë³´ë¥¼ ì–»ì–´ë‚´ì–´ ê°ì²´ ì •ë³´ë¡œ ë³€í™˜í•œë‹¤.
 	 * 
 	 * @param base64
-	 *            °´Ã¼ Á÷·ÄÈ­ Á¤º¸¸¦ ´ã°í ÀÖ´Â base64 µ¥ÀÌÅÍ
-	 * @return º¯È¯µÈ °´Ã¼
+	 *            ê°ì²´ ì§ë ¬í™” ì •ë³´ë¥¼ ë‹´ê³  ìˆëŠ” base64 ë°ì´í„°
+	 * @return ë³€í™˜ëœ ê°ì²´
 	 * @throws Exception
 	 */
 	public static Object restoreBase64Decode(String base64) throws Exception {

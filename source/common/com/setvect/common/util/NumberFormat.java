@@ -2,7 +2,7 @@
 package com.setvect.common.util;
 
 /**
- *  ¼ıÀÚ Æ÷¸Ê º¯È¯ °ü·Ã Å¬·¡½º
+ *  ìˆ«ì í¬ë§µ ë³€í™˜ ê´€ë ¨ í´ë˜ìŠ¤
  * 
  * @version $Id: NumberFormat.java,v 1.5 2006/06/28 06:28:23 setvect Exp $
  */
@@ -10,10 +10,10 @@ public class NumberFormat {
 
 	/**
 	 * @param pattern
-	 *            Ç¥Çö ÆĞÅÏ
+	 *            í‘œí˜„ íŒ¨í„´
 	 * @param number
-	 *            Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
-	 * @return Æ÷¸ËÀ» Àû¿ëÇÑ ¼ıÀÚ
+	 *            í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
+	 * @return í¬ë§·ì„ ì ìš©í•œ ìˆ«ì
 	 */
 	public static String getNumberString(String pattern, int number) {
 
@@ -25,10 +25,10 @@ public class NumberFormat {
 
 	/**
 	 * @param pattern
-	 *            Ç¥Çö ÆĞÅÏ
+	 *            í‘œí˜„ íŒ¨í„´
 	 * @param number
-	 *            Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
-	 * @return Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
+	 *            í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
+	 * @return í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
 	 */
 	public static String getNumberString(String pattern, long number) {
 
@@ -40,10 +40,10 @@ public class NumberFormat {
 
 	/**
 	 * @param pattern
-	 *            Ç¥Çö ÆĞÅÏ
+	 *            í‘œí˜„ íŒ¨í„´
 	 * @param number
-	 *            Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
-	 * @return Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
+	 *            í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
+	 * @return í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
 	 */
 	public static String getNumberString(String pattern, double number) {
 
@@ -55,10 +55,10 @@ public class NumberFormat {
 
 	/**
 	 * @param pattern
-	 *            Ç¥Çö ÆĞÅÏ
+	 *            í‘œí˜„ íŒ¨í„´
 	 * @param number
-	 *            Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
-	 * @return Æ÷¸ËÀ» ¿øÇÑ´Â ¼ıÀÚ
+	 *            í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
+	 * @return í¬ë§·ì„ ì›í•œëŠ” ìˆ«ì
 	 */
 	public static String getNumberString(String pattern, float number) {
 

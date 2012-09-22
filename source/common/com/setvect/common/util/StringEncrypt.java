@@ -6,9 +6,9 @@ import java.io.OutputStreamWriter;
 import java.util.BitSet;
 
 /**
- * ¾Æ·¡ ±¸Á¶·Î ½ºÆ®¸µ¿¡ Æ¯Á¤ Å°°ªÀ» ÇÕÄ¡¸é HEX·Î º¯È¯µÈ ½ºÆ®¸µ ÄÚµå°¡ ³ª¿Â´Ù. encode, decode°¡ °¡´ÉÇÏ´Ù.
+ * ì•„ë˜ êµ¬ì¡°ë¡œ ìŠ¤íŠ¸ë§ì— íŠ¹ì • í‚¤ê°’ì„ í•©ì¹˜ë©´ HEXë¡œ ë³€í™˜ëœ ìŠ¤íŠ¸ë§ ì½”ë“œê°€ ë‚˜ì˜¨ë‹¤. encode, decodeê°€ ê°€ëŠ¥í•˜ë‹¤.
  * 
- * ½ºÆ®¸µ + Å°°ªÀ» = HEX·Î º¯È¯µÈ ½ºÆ®¸µ
+ * ìŠ¤íŠ¸ë§ + í‚¤ê°’ì„ = HEXë¡œ ë³€í™˜ëœ ìŠ¤íŠ¸ë§
  * 
  * @version $Id: StringEncrypt.java,v 1.7 2006/10/24 13:47:42 setvect Exp $
  */
@@ -38,10 +38,10 @@ public class StringEncrypt {
 	/**
 	 * 
 	 * @param pm_sStr
-	 *            ¿øº» ¹®ÀÚ¿­
+	 *            ì›ë³¸ ë¬¸ìì—´
 	 * @param pm_sKey
-	 *            Å° ¹®ÀÚ¿­
-	 * @return ¾ÏÈ£È­µÈ ¹®ÀÚ¿­
+	 *            í‚¤ ë¬¸ìì—´
+	 * @return ì•”í˜¸í™”ëœ ë¬¸ìì—´
 	 */
 	public static String encodeJ(String pm_sStr, String pm_sKey) {
 		int i, s;
@@ -57,7 +57,7 @@ public class StringEncrypt {
 		s = lm_sValue.length();
 
 		StringBuffer lm_sbT = new StringBuffer();
-		// 80ÄÃ·³¾¿ ÁÙ²÷±â
+		// 80ì»¬ëŸ¼ì”© ì¤„ëŠê¸°
 		for (i = 0; i < s; i += CUT_STRING_LEN) {
 			if (i + CUT_STRING_LEN < s) {
 				lm_sbT.append(lm_sValue.substring(i, i + CUT_STRING_LEN));
@@ -74,10 +74,10 @@ public class StringEncrypt {
 	/**
 	 * 
 	 * @param pm_sStr
-	 *            ¾ÏÈ£È¯ µÈ ¹®ÀÚ¿­
+	 *            ì•”í˜¸í™˜ ëœ ë¬¸ìì—´
 	 * @param pm_sKey
-	 *            Å° ¹®ÀÚ¿­
-	 * @return ¿øº» ¹®ÀÚ¿­
+	 *            í‚¤ ë¬¸ìì—´
+	 * @return ì›ë³¸ ë¬¸ìì—´
 	 */
 	public static String decodeJ(String pm_sStr, String pm_sKey) {
 		char lm_cT;
@@ -89,7 +89,7 @@ public class StringEncrypt {
 
 		for (i = 0; i < s; i++) {
 			lm_cT = pm_sStr.charAt(i);
-			// ¼ıÀÚ ¶Ç´Â ¿µ¹®ÀÚÀÌ¸é ½ºÆ®¸µ ¹öÆÛ¿¡ µî·Ï
+			// ìˆ«ì ë˜ëŠ” ì˜ë¬¸ìì´ë©´ ìŠ¤íŠ¸ë§ ë²„í¼ì— ë“±ë¡
 			if (Character.isLetterOrDigit(lm_cT)) {
 				lm_sbT.append(lm_cT);
 			}
@@ -104,10 +104,10 @@ public class StringEncrypt {
 	/**
 	 * 
 	 * @param pm_sEncode
-	 *            Hex·Î ÀÎÄÚµù µÈ ¹®ÀÚ
+	 *            Hexë¡œ ì¸ì½”ë”© ëœ ë¬¸ì
 	 * @param pm_sKeyEncode
-	 *            Hex·Î ÀÎÄÚµù µÈ Å°
-	 * @return º¯È¯µÈ ¹®ÀÚ¿­ (Hex°ª)
+	 *            Hexë¡œ ì¸ì½”ë”© ëœ í‚¤
+	 * @return ë³€í™˜ëœ ë¬¸ìì—´ (Hexê°’)
 	 */
 	private static String maxing(String pm_sEncode, String pm_sKeyEncode) {
 		byte lm_bSum = 0x00;
@@ -122,7 +122,7 @@ public class StringEncrypt {
 		StringBuffer lm_sbTemp = new StringBuffer();
 
 		lm_iLen = pm_sKeyEncode.length();
-		// Å°°ªÀ» ÇÕÇÏ¿© ÇÏ³ªÀÇ Ä³¸¯ÅÍ ¹®ÀÚ¸¦ ¸¸µç´Ù.
+		// í‚¤ê°’ì„ í•©í•˜ì—¬ í•˜ë‚˜ì˜ ìºë¦­í„° ë¬¸ìë¥¼ ë§Œë“ ë‹¤.
 		for (i = 0; i < lm_iLen; i += 2) {
 			lm_bSum += Integer.parseInt(pm_sKeyEncode.substring(i, i + 2), 16);
 		}
@@ -138,7 +138,7 @@ public class StringEncrypt {
 			lm_sbTemp.append(lm_cTemp);
 		}
 
-		// ¿Ï¼ºµÈ Å°°ª
+		// ì™„ì„±ëœ í‚¤ê°’
 		pm_sKeyEncode2 = lm_sbTemp.toString();
 
 		lm_sbTemp = new StringBuffer();
@@ -148,11 +148,11 @@ public class StringEncrypt {
 		lm_iLenKeyIndex = 0;
 
 		for (i = 0; i < lm_iLen; i += 2) {
-			// Å° ÀÎÅØ½º ÃÊ±âÈ­
+			// í‚¤ ì¸í…ìŠ¤ ì´ˆê¸°í™”
 			if (lm_iLenKey <= lm_iLenKeyIndex) {
 				lm_iLenKeyIndex = 0;
 			}
-			// XOR Æ¯Â¡: ¾î´ÀÇÑ µ¥ÀÌÅÍ¿¡ ¶Ç°°Àº °ªÀ¸·Î XOR¿¬»êÀ» µÎ¹øÇÏ¸é ¿øº» µ¥ÀÌÅÍ°¡ ³ª¿Â´Ù.
+			// XOR íŠ¹ì§•: ì–´ëŠí•œ ë°ì´í„°ì— ë˜ê°™ì€ ê°’ìœ¼ë¡œ XORì—°ì‚°ì„ ë‘ë²ˆí•˜ë©´ ì›ë³¸ ë°ì´í„°ê°€ ë‚˜ì˜¨ë‹¤.
 			lm_iTemp = Integer.parseInt(pm_sEncode.substring(i, i + 2), 16)
 					^ Integer.parseInt(pm_sKeyEncode2.substring(lm_iLenKeyIndex, lm_iLenKeyIndex + 2), 16);
 
@@ -169,11 +169,11 @@ public class StringEncrypt {
 	}
 
 	/**
-	 * URL Decode ÇÏ±âÀ§ÇÑ ¸Ş¼Òµå
+	 * URL Decode í•˜ê¸°ìœ„í•œ ë©”ì†Œë“œ
 	 * 
 	 * @param s
-	 *            String typeÀÇ µ¥ÀÌÅÍ
-	 * @return º¯È¯µÈ String
+	 *            String typeì˜ ë°ì´í„°
+	 * @return ë³€í™˜ëœ String
 	 */
 	public static String encode(String s) {
 		byte byte0 = 10;
@@ -197,7 +197,7 @@ public class StringEncrypt {
 			byte abyte0[] = bytearrayoutputstream.toByteArray();
 			for (int j = 0; j < abyte0.length; j++) {
 				char c1 = Character.forDigit(abyte0[j] >> 4 & 0xf, 16);
-				// ¹®ÀÚÀÌ¸é ' '¸¦ »©¼­ ´ë¹®ÀÚ ¸¸µç´Ù.
+				// ë¬¸ìì´ë©´ ' 'ë¥¼ ë¹¼ì„œ ëŒ€ë¬¸ì ë§Œë“ ë‹¤.
 				if (Character.isLetter(c1))
 					c1 -= ' ';
 				stringbuffer.append(c1);
@@ -214,11 +214,11 @@ public class StringEncrypt {
 	}
 
 	/**
-	 * µğÄÚµåÇÏ±âÀ§ÇÑ ¸Ş¼Òµå
+	 * ë””ì½”ë“œí•˜ê¸°ìœ„í•œ ë©”ì†Œë“œ
 	 * 
 	 * @param s
-	 *            String typeÀÇ µ¥ÀÌÅÍ
-	 * @return º¯È¯µÈ String
+	 *            String typeì˜ ë°ì´í„°
+	 * @return ë³€í™˜ëœ String
 	 */
 	public static String decode(String s) {
 		byte abyte0[] = null;

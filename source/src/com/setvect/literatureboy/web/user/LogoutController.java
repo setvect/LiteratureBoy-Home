@@ -12,7 +12,7 @@ import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
- * È¯°æ¼³Á¤>¿î¿µÀÚ °ü¸® ¸Ş´º ÄÁÆ®·Ñ·¯
+ * í™˜ê²½ì„¤ì •>ìš´ì˜ì ê´€ë¦¬ ë©”ë‰´ ì»¨íŠ¸ë¡¤ëŸ¬
  */
 @Controller
 public class LogoutController {

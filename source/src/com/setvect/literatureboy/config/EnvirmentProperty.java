@@ -12,7 +12,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 
 /**
- * ÇÁ·ÎÁ§Æ® ¼³Á¤ Á¤º¸ Á¦°ø
+ * í”„ë¡œì íŠ¸ ì„¤ì • ì •ë³´ ì œê³µ
  * 
  * @version $Id$
  */
@@ -21,12 +21,12 @@ public class EnvirmentProperty {
 
 	/**
 	 * @param propertise
-	 *            propertise ÆÄÀÏ
+	 *            propertise íŒŒì¼
 	 */
 	public static void init(File propertise) {
 		try {
 			PropertiesConfiguration conf = new PropertiesConfiguration(propertise);
-			// ÆÄÀÏ ¼öÁ¤ ÀÚµ¿ °¨Áö
+			// íŒŒì¼ ìˆ˜ì • ìë™ ê°ì§€
 			conf.setReloadingStrategy(new FileChangedReloadingStrategy());
 			config = conf;
 		}
@@ -37,12 +37,12 @@ public class EnvirmentProperty {
 
 	/**
 	 * @param propertise
-	 *            propertise ÆÄÀÏ
+	 *            propertise íŒŒì¼
 	 */
 	public static void init(URL propertise) {
 		try {
 			PropertiesConfiguration conf = new PropertiesConfiguration(propertise);
-			// ÆÄÀÏ ¼öÁ¤ ÀÚµ¿ °¨Áö
+			// íŒŒì¼ ìˆ˜ì • ìë™ ê°ì§€
 			conf.setReloadingStrategy(new FileChangedReloadingStrategy());
 			config = conf;
 		}

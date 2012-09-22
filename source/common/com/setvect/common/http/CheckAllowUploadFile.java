@@ -1,15 +1,15 @@
 package com.setvect.common.http;
 
 /**
- * ¾÷·Îµå ÆÄÀÏ À¯Çü Ã¼Å©
+ * ì—…ë¡œë“œ íŒŒì¼ ìœ í˜• ì²´í¬
  * 
  * @version $Id$
  */
 public interface CheckAllowUploadFile {
 	/**
 	 * @param filename
-	 *            ¾÷·Îµå ÆÄÀÏ ¸í
-	 * @return true ÆÄÀÏ ¾÷·Îµå Çã¶ô, false ÆÄÀÏ ¾÷·Îµå ±İÁö
+	 *            ì—…ë¡œë“œ íŒŒì¼ ëª…
+	 * @return true íŒŒì¼ ì—…ë¡œë“œ í—ˆë½, false íŒŒì¼ ì—…ë¡œë“œ ê¸ˆì§€
 	 */
 	public boolean check(String filename);
 }

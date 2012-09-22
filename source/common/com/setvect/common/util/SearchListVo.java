@@ -3,37 +3,37 @@ package com.setvect.common.util;
 import java.io.Serializable;
 
 /**
- * °¢Á¾ °Ë»ö Á¶°ÇÀ» Ç¥ÇöÇÔ
+ * ê°ì¢… ê²€ìƒ‰ ì¡°ê±´ì„ í‘œí˜„í•¨
  */
 public class SearchListVo implements Serializable {
 	/** */
 	private static final long serialVersionUID = 4784964094940288037L;
 
-	/** ÇÑÆäÀÌÁö´ç Ç¥½Ã Ç×¸ñ ¼ö */
+	/** í•œí˜ì´ì§€ë‹¹ í‘œì‹œ í•­ëª© ìˆ˜ */
 	private static final int DEFAULT_PAGE_VIEW_COUNT = 15;
 
-	/** ÆäÀÌÁö ¹­À½ */
+	/** í˜ì´ì§€ ë¬¶ìŒ */
 	private static final int DEFAULT_PAGE_UNIT = 10;
 
-	/** ÇöÀç ÆäÀÌÁö */
+	/** í˜„ì¬ í˜ì´ì§€ */
 	private int currentPage;
 
-	/** ÇÑÆäÀÌÁö´ç Ç¥½Ã Ç×¸ñ ¼ö */
+	/** í•œí˜ì´ì§€ë‹¹ í‘œì‹œ í•­ëª© ìˆ˜ */
 	private int pagePerItemCount = DEFAULT_PAGE_VIEW_COUNT;
 
-	/** ÆäÀÌÁö ¹­À½ °¹¼ö */
+	/** í˜ì´ì§€ ë¬¶ìŒ ê°¯ìˆ˜ */
 	private int pageUnit = DEFAULT_PAGE_UNIT;
 
 	/**
 	 * @param currentPage
-	 *            Çö ÆäÀÌÁö. 1ºÎÅÍ ½ÃÀÛ
+	 *            í˜„ í˜ì´ì§€. 1ë¶€í„° ì‹œì‘
 	 */
 	public SearchListVo(int currentPage) {
 		this.currentPage = currentPage;
 	}
 
 	/**
-	 * @return Çö ÆäÀÌÁö. 1ºÎÅÍ ½ÃÀÛ
+	 * @return í˜„ í˜ì´ì§€. 1ë¶€í„° ì‹œì‘
 	 */
 	public int getCurrentPage() {
 		return this.currentPage;
@@ -41,14 +41,14 @@ public class SearchListVo implements Serializable {
 
 	/**
 	 * @param currentPage
-	 *            Çö ÆäÀÌÁö. 1ºÎÅÍ ½ÃÀÛ
+	 *            í˜„ í˜ì´ì§€. 1ë¶€í„° ì‹œì‘
 	 */
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
 
 	/**
-	 * @return ÇÑÆäÀÌÁö´ç Ç¥½Ã Ç×¸ñ ¼ö
+	 * @return í•œí˜ì´ì§€ë‹¹ í‘œì‹œ í•­ëª© ìˆ˜
 	 */
 	public int getPagePerItemCount() {
 		return this.pagePerItemCount;
@@ -56,16 +56,16 @@ public class SearchListVo implements Serializable {
 
 	/**
 	 * @param pagePerItemCount
-	 *            ÇÑÆäÀÌÁö´ç Ç¥½Ã Ç×¸ñ ¼ö
+	 *            í•œí˜ì´ì§€ë‹¹ í‘œì‹œ í•­ëª© ìˆ˜
 	 */
 	public void setPagePerItemCount(int pagePerItemCount) {
 		this.pagePerItemCount = pagePerItemCount;
 	}
 
 	/**
-	 * ÆäÀÌÁö ¹­À½¿¡¼­ º¸¿©ÁÙ ÆäÀÌÁö °¹¼ö<br>
-	 * ¿¹) ¾Æ·¡¿Í °°Àº °æ¿ì ¹­À½ÀÇ Å©±â´Â 3<br>
-	 * [ÀÌÀü] 3, 4, 5 [´ÙÀ½]<br>
+	 * í˜ì´ì§€ ë¬¶ìŒì—ì„œ ë³´ì—¬ì¤„ í˜ì´ì§€ ê°¯ìˆ˜<br>
+	 * ì˜ˆ) ì•„ë˜ì™€ ê°™ì€ ê²½ìš° ë¬¶ìŒì˜ í¬ê¸°ëŠ” 3<br>
+	 * [ì´ì „] 3, 4, 5 [ë‹¤ìŒ]<br>
 	 * 
 	 * @return the pageUnit
 	 */
@@ -75,18 +75,18 @@ public class SearchListVo implements Serializable {
 
 	/**
 	 * @param pageUnit
-	 *            ÆäÀÌÁö ¹­À½ °¹¼ö
+	 *            í˜ì´ì§€ ë¬¶ìŒ ê°¯ìˆ˜
 	 */
 	public void setPageUnit(int pageUnit) {
 		this.pageUnit = pageUnit;
 	}
 
 	/**
-	 * ¿¹¸¦ µé¾î ÇÑ ÆäÀÌÁö´ç 10°³ÀÇ Ç×¸ñÀ» Ç¥½Ã ÇÏ°í ÀÖ°í, ÇöÀç 3¹øÂ° ÆäÀÌÁö¸¦ ºÁ¾ß µÈ´Ù¸é<br>
+	 * ì˜ˆë¥¼ ë“¤ì–´ í•œ í˜ì´ì§€ë‹¹ 10ê°œì˜ í•­ëª©ì„ í‘œì‹œ í•˜ê³  ìˆê³ , í˜„ì¬ 3ë²ˆì§¸ í˜ì´ì§€ë¥¼ ë´ì•¼ ëœë‹¤ë©´<br>
 	 * 10 * 3 = 30<br>
-	 * Áï 30¹øÂ° ºÎÅÍ Ç×¸ñÀ» °¡Á®¿Í¾ß µÊ
+	 * ì¦‰ 30ë²ˆì§¸ ë¶€í„° í•­ëª©ì„ ê°€ì ¸ì™€ì•¼ ë¨
 	 * 
-	 * @return °¡Á® ¿Í¾ß µÉ Ç×¸ñ ½ÃÀÛ ¹øÈ£(0ºÎÅÍ ½ÃÀÛ)
+	 * @return ê°€ì ¸ ì™€ì•¼ ë  í•­ëª© ì‹œì‘ ë²ˆí˜¸(0ë¶€í„° ì‹œì‘)
 	 */
 	public int getStartNumber() {
 		return (getCurrentPage() - 1) * getPagePerItemCount();

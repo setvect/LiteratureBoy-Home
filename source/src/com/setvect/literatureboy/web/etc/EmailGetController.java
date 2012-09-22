@@ -16,7 +16,7 @@ import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 
 /**
- * ÀÌ¸ŞÀÏ ÁÖ¼Ò ¾Ë¾Æ ³»±â
+ * ì´ë©”ì¼ ì£¼ì†Œ ì•Œì•„ ë‚´ê¸°
  * 
  * @version $Id$
  */
@@ -27,14 +27,14 @@ public class EmailGetController extends HttpServlet {
 	private static final long serialVersionUID = -7894468662893018437L;
 
 	/**
-	 * ¼­ºê ¸í·É¾î Á¤ÀÇ
+	 * ì„œë¸Œ ëª…ë ¹ì–´ ì •ì˜
 	 */
 	public static enum Mode {
 		INPUT_FORM, VIEW_FORM,
 	}
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
 		MODE, EMAIL_NUMBER, EMAIL
@@ -75,7 +75,7 @@ public class EmailGetController extends HttpServlet {
 				mav.addObject(AttributeKey.EMAIL.name(), EMAIL);
 			}
 			else {
-				// ÀÔ·Â°ªÀÌ Æ²¸®¸é null
+				// ì…ë ¥ê°’ì´ í‹€ë¦¬ë©´ null
 				mav.addObject(AttributeKey.EMAIL.name(), null);
 			}
 			mav.setViewName("/app/emailget/emailget_view");

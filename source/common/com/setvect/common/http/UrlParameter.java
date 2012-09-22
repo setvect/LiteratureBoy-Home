@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Map¿¡ ÀÖ´Â °ªÀ» GetÇü½ÄÀÇ ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸µÀ¸·Î º¯È¯<br>
- * ¡Ø ÆÄ¶ó¹ÌÅÍ Å° °ªÀÌ 2°³ ÀÌ»óÀÎ °æ¿ì´Â Áö¿ø ÇÏÁö ¾ÊÀ½.<br>
+ * Mapì— ìˆëŠ” ê°’ì„ Getí˜•ì‹ì˜ íŒŒë¼ë¯¸í„° ìŠ¤íŠ¸ë§ìœ¼ë¡œ ë³€í™˜<br>
+ * â€» íŒŒë¼ë¯¸í„° í‚¤ ê°’ì´ 2ê°œ ì´ìƒì¸ ê²½ìš°ëŠ” ì§€ì› í•˜ì§€ ì•ŠìŒ.<br>
  * 
  * @version $Id$
- * @deprecated com.setvect.common.jsp.URLParameter »ç¿ëÇÏ±â ¹Ù¶÷
+ * @deprecated com.setvect.common.jsp.URLParameter ì‚¬ìš©í•˜ê¸° ë°”ëŒ
  */
 public class UrlParameter {
 	private static final long serialVersionUID = 7246368964117438269L;
@@ -19,7 +19,7 @@ public class UrlParameter {
 	private Map<String, Object> parameter = new HashMap<String, Object>();
 
 	/**
-	 * @return utf-8·Î ÀÎÄÚµù µÈ ÆÄ¶ó¹ÌÅÍ
+	 * @return utf-8ë¡œ ì¸ì½”ë”© ëœ íŒŒë¼ë¯¸í„°
 	 * @throws UnsupportedEncodingException
 	 */
 	public String getParameter() throws UnsupportedEncodingException {
@@ -28,8 +28,8 @@ public class UrlParameter {
 
 	/**
 	 * @param charset
-	 *            ÆÄ¶ó¹ÌÅÍ ÀÎÄÚµù chartset
-	 * @return get¹æ½Ä URL ÆÄ¶ó¹ÌÅÍ
+	 *            íŒŒë¼ë¯¸í„° ì¸ì½”ë”© chartset
+	 * @return getë°©ì‹ URL íŒŒë¼ë¯¸í„°
 	 * @throws UnsupportedEncodingException
 	 */
 	public String getParameter(String charset) throws UnsupportedEncodingException {

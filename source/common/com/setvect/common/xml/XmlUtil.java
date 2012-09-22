@@ -16,7 +16,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 /**
- * XML ÄÁÆ®·Ñ °ü·Ã util¼º ¸Ş¼Òµå ¸ğÀ½
+ * XML ì»¨íŠ¸ë¡¤ ê´€ë ¨ utilì„± ë©”ì†Œë“œ ëª¨ìŒ
  * 
  * @version $Id$
  */
@@ -27,12 +27,12 @@ public class XmlUtil {
 	}
 
 	/**
-	 * DOM °´Ã¼¸¦ ÁöÁ¤µÈ Àå¼Ò¿¡ ÀúÀåÇÑ´Ù.
+	 * DOM ê°ì²´ë¥¼ ì§€ì •ëœ ì¥ì†Œì— ì €ì¥í•œë‹¤.
 	 * 
 	 * @param docRootDOM
-	 *            °´Ã¼
+	 *            ê°ì²´
 	 * @param saveFile
-	 *            ÀúÀåÇÒ ÆÄÀÏ(XML)
+	 *            ì €ì¥í•  íŒŒì¼(XML)
 	 * @param charset
 	 *            charset
 	 */
@@ -67,19 +67,19 @@ public class XmlUtil {
 	}
 
 	/**
-	 * JDK 6¿¡¼­ ´ÙÀ½°ú °°Àº ¿¡·¯°¡ ³ªÅ¸³¯ ¼ö ÀÖ´Ù.<br>
+	 * JDK 6ì—ì„œ ë‹¤ìŒê³¼ ê°™ì€ ì—ëŸ¬ê°€ ë‚˜íƒ€ë‚  ìˆ˜ ìˆë‹¤.<br>
 	 * <strong> com.sun.org.apache.xerces.internal.dom.DeferredTextImpl cannot
 	 * be cast to org.w3c.dom.Element</strong><br>
-	 * ÀÌ ¹®Á¦¸¦ ÇØ°á ÇÏ°Ô À§ÇØ¼­ ÇØ´ç ¸Ş¼Òµå »ç¿ë<br>
-	 * ÇÏÀ§ ¿¤¸®¸ÕÆ®¿¡ whitespace¸¦ Á¦°Å<br>
-	 * JDK 5¿¡¼­´Â whitespace Á¦°ÅµÉ ¼ö ÀÖ´Ù. ±×·¯³ª JDK 6¿¡¼­´Â whitespace Á¦°Å µÇÁö ¾Ê´Â´Ù.<br>
-	 * ±× ÀÌÀ¯´Â ³ªµµ ¸ğ¸¥´Ù.<br>
-	 * === °ü·Ã ÀÚ·á === <br>
+	 * ì´ ë¬¸ì œë¥¼ í•´ê²° í•˜ê²Œ ìœ„í•´ì„œ í•´ë‹¹ ë©”ì†Œë“œ ì‚¬ìš©<br>
+	 * í•˜ìœ„ ì—˜ë¦¬ë¨¼íŠ¸ì— whitespaceë¥¼ ì œê±°<br>
+	 * JDK 5ì—ì„œëŠ” whitespace ì œê±°ë  ìˆ˜ ìˆë‹¤. ê·¸ëŸ¬ë‚˜ JDK 6ì—ì„œëŠ” whitespace ì œê±° ë˜ì§€ ì•ŠëŠ”ë‹¤.<br>
+	 * ê·¸ ì´ìœ ëŠ” ë‚˜ë„ ëª¨ë¥¸ë‹¤.<br>
+	 * === ê´€ë ¨ ìë£Œ === <br>
 	 * http://forums.java.net/jive/message.jspa?messageID=260761<br>
 	 * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6564400 <br>
 	 * 
 	 * @param e
-	 *            ¿¤¸®¸ÕÆ®
+	 *            ì—˜ë¦¬ë¨¼íŠ¸
 	 */
 	public static void removeWhitespaceNodes(org.w3c.dom.Element e) {
 		NodeList children = e.getChildNodes();

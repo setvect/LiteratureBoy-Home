@@ -12,19 +12,19 @@ import com.setvect.literatureboy.vo.board.BoardComment;
 import com.setvect.literatureboy.vo.board.BoardTrackback;
 
 /**
- * °Ô½Ã¹°, Ã·ºÎÆÄÀÏ, ÄÚ¸àÆ® DAO
+ * ê²Œì‹œë¬¼, ì²¨ë¶€íŒŒì¼, ì½”ë©˜íŠ¸ DAO
  * 
  * @version $Id$
  */
 public interface BoardDao {
 
-	// --------------- °ü¸®
+	// --------------- ê´€ë¦¬
 
 	public Board getBoard(String code);
 
 	/**
 	 * @param pageCondition
-	 * @return °Ô½ÃÆÇ»ı¼º Á¤º¸ Ç×¸ñ
+	 * @return ê²Œì‹œíŒìƒì„± ì •ë³´ í•­ëª©
 	 */
 	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition);
 
@@ -43,7 +43,7 @@ public interface BoardDao {
 	 */
 	public void removeBoard(String code);
 
-	// --------------- °Ô½Ã¹°
+	// --------------- ê²Œì‹œë¬¼
 	/**
 	 * @param articleSeq
 	 * @return
@@ -52,35 +52,35 @@ public interface BoardDao {
 
 	/**
 	 * @param pageCondition
-	 *            °Ô½Ã¹° °Ë»ö Á¤º¸
-	 * @return °Ô½Ã¹° ÆäÀÌÁö °ª
+	 *            ê²Œì‹œë¬¼ ê²€ìƒ‰ ì •ë³´
+	 * @return ê²Œì‹œë¬¼ í˜ì´ì§€ ê°’
 	 */
 	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition);
 
 	/**
-	 * °Ô½Ã¹° µî·Ï
+	 * ê²Œì‹œë¬¼ ë“±ë¡
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 */
 	public void createArticle(BoardArticle article);
 
 	/**
-	 * ´äº¯ µî·Ï
+	 * ë‹µë³€ ë“±ë¡
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 * @param parentId
-	 *            ºÎ¸ğ °Ô½Ã¹°
+	 *            ë¶€ëª¨ ê²Œì‹œë¬¼
 	 */
 	public void createArticleReply(BoardArticle article, int parentId);
 
 	/**
-	 * idx °ü·Ã ¿¬»ê¾øÀ½ <br>
-	 * ¸¶ÀÌ±×·¹ÀÌ¼Ç ¿ë
+	 * idx ê´€ë ¨ ì—°ì‚°ì—†ìŒ <br>
+	 * ë§ˆì´ê·¸ë ˆì´ì…˜ ìš©
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹° Á¤º¸
+	 *            ê²Œì‹œë¬¼ ì •ë³´
 	 */
 	public void createArticleMigration(BoardArticle article);
 
@@ -102,33 +102,33 @@ public interface BoardDao {
 	// ----- comment
 	/**
 	 * @param seq
-	 *            ÄÚ¸àÆ® ÀÏ·Ã¹øÈ£
-	 * @return ÄÚ¸àÆ®
+	 *            ì½”ë©˜íŠ¸ ì¼ë ¨ë²ˆí˜¸
+	 * @return ì½”ë©˜íŠ¸
 	 */
 	public BoardComment getComment(int seq);
 
 	/**
 	 * @param boardItemSeq
-	 *            °Ô½Ã¹° Ç×¸ñ ¹øÈ£
-	 * @return °Ô½Ã¹° Ç×¸ñ¿¡ ´ëÇÑ ÄÚ¸àÆ® ¸ñ·Ï
+	 *            ê²Œì‹œë¬¼ í•­ëª© ë²ˆí˜¸
+	 * @return ê²Œì‹œë¬¼ í•­ëª©ì— ëŒ€í•œ ì½”ë©˜íŠ¸ ëª©ë¡
 	 */
 	public List<BoardComment> listComment(int boardItemSeq);
 
 	/**
 	 * @param comment
-	 *            ÄÚ¸àÆ® Á¤º¸
+	 *            ì½”ë©˜íŠ¸ ì •ë³´
 	 */
 	public void createComment(BoardComment comment);
 
 	/**
 	 * @param comment
-	 *            ÄÚ¸àÆ®
+	 *            ì½”ë©˜íŠ¸
 	 */
 	public void updateComment(BoardComment comment);
 
 	/**
 	 * @param seq
-	 *            ÄÚ¸àÆ® ¹øÈ£
+	 *            ì½”ë©˜íŠ¸ ë²ˆí˜¸
 	 */
 	public void removeComment(int seq);
 
@@ -136,44 +136,44 @@ public interface BoardDao {
 
 	/**
 	 * @param boardItemSeq
-	 *            °Ô½Ã¹° ¹øÈ£
-	 * @return °Ô½Ã¹°¿¡ µî·ÏµÈ Ã·ºÎÆÄÀÏ ¸ñ·Ï
+	 *            ê²Œì‹œë¬¼ ë²ˆí˜¸
+	 * @return ê²Œì‹œë¬¼ì— ë“±ë¡ëœ ì²¨ë¶€íŒŒì¼ ëª©ë¡
 	 */
 	public List<BoardAttachFile> listAttachFile(int boardItemSeq);
 
 	/**
 	 * @param attachFile
-	 *            Ã·ºÎÆÄÀÏ ÀúÀå
+	 *            ì²¨ë¶€íŒŒì¼ ì €ì¥
 	 */
 	public void createAttachFile(BoardAttachFile attachFile);
 
 	/**
 	 * @param seq
-	 *            Ã·ºÎÆÄÀÏ ¹øÈ£
+	 *            ì²¨ë¶€íŒŒì¼ ë²ˆí˜¸
 	 */
 	public void removeAttachFile(int seq);
 
 	// ----- Trackback 
 	/**
 	 * @param boardItemSeq
-	 *            °Ô½Ã¹° ¹øÈ£
-	 * @return °Ô½Ã¹°¿¡ µî·ÏµÈ Æ®·¡¹é ¸ñ·Î
+	 *            ê²Œì‹œë¬¼ ë²ˆí˜¸
+	 * @return ê²Œì‹œë¬¼ì— ë“±ë¡ëœ íŠ¸ë˜ë°± ëª©ë¡œ
 	 */
 	public List<BoardTrackback> listTrackback(int boardItemSeq);
 
 	/**
-	 * Æ®·¡¹é µî·Ï
+	 * íŠ¸ë˜ë°± ë“±ë¡
 	 * 
 	 * @param trackback
-	 *            Æ®·¡¹é Á¤º¸
+	 *            íŠ¸ë˜ë°± ì •ë³´
 	 */
 	public void createTrackback(BoardTrackback trackback);
 
 	/**
-	 * Æ®·¡¹é »èÁ¦
+	 * íŠ¸ë˜ë°± ì‚­ì œ
 	 * 
 	 * @param seq
-	 *            Æ®·¡¹é ¹øÈ£
+	 *            íŠ¸ë˜ë°± ë²ˆí˜¸
 	 */
 	public void removeTrackback(int seq);
 

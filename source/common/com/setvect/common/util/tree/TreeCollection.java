@@ -7,23 +7,23 @@ import java.util.Hashtable;
 import java.util.TreeSet;
 
 /**
- * Ä«Å×°í¸®, ¸Ş´º, ±ÇÇÑ Á¤º¸¸¦ Ä³½ÌÇÑ´Ù.
+ * ì¹´í…Œê³ ë¦¬, ë©”ë‰´, ê¶Œí•œ ì •ë³´ë¥¼ ìºì‹±í•œë‹¤.
  */
 public class TreeCollection<OBJ extends TreeItem<?>> {
-	/** Ä«Å×°í¸® Á¤º¸ */
+	/** ì¹´í…Œê³ ë¦¬ ì •ë³´ */
 	private Hashtable<Object, OBJ> category = new Hashtable<Object, OBJ>();
 
-	/** ÃÖ»ó´Ü Ä«Å×°í¸® ·çÆ® ¾ÆÀÌµğ */
+	/** ìµœìƒë‹¨ ì¹´í…Œê³ ë¦¬ ë£¨íŠ¸ ì•„ì´ë”” */
 	private final Object categoryRootID;
 
-	/** toArray() ¸Ş¼Òµå¸¦ »ç¿ëÇÏ±â À§ÇØ¼­ ¹è¿­ ÇüÅÂ ÀÎ½ºÅÏ½º */
+	/** toArray() ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œ ë°°ì—´ í˜•íƒœ ì¸ìŠ¤í„´ìŠ¤ */
 	private final OBJ[] _obj_empty_array;
 
 	/**
 	 * @param itmes
-	 *            ±âÃÊ µ¥ÀÌÅÍ
+	 *            ê¸°ì´ˆ ë°ì´í„°
 	 * @param rootID
-	 *            Ä«Å×°í¸® root ¾ÆÀÌµğ
+	 *            ì¹´í…Œê³ ë¦¬ root ì•„ì´ë””
 	 */
 	@SuppressWarnings("unchecked")
 	public TreeCollection(OBJ[] items, Object rootID) {
@@ -38,14 +38,14 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	}
 
 	/**
-	 * @return ·çÆ® Ä«Å×°í¸® ¾ÆÀÌµğ
+	 * @return ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ ì•„ì´ë””
 	 */
 	public Object getRootID() {
 		return categoryRootID;
 	}
 
 	/**
-	 * ±âÁ¸¿¡ ÀúÀåµÇ¾î ÀÖ´Â °´Ã¼¸¦ Áö¿ì°í, µ¥ÀÌÅÍ °´Ã¼ Á¤º¸¸¦ º¯°æ
+	 * ê¸°ì¡´ì— ì €ì¥ë˜ì–´ ìˆëŠ” ê°ì²´ë¥¼ ì§€ìš°ê³ , ë°ì´í„° ê°ì²´ ì •ë³´ë¥¼ ë³€ê²½
 	 * 
 	 * @param items
 	 */
@@ -58,8 +58,8 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 
 	/**
 	 * @param categoryID
-	 *            Ä«Å×°í¸® ¾ÆÀÌµğ
-	 * @return Ä«Å×°í¸® Á¤º¸
+	 *            ì¹´í…Œê³ ë¦¬ ì•„ì´ë””
+	 * @return ì¹´í…Œê³ ë¦¬ ì •ë³´
 	 */
 	public OBJ get(Object categoryID) {
 		return category.get(categoryID);
@@ -68,8 +68,8 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	/**
 	 * 
 	 * @param baseRootCategoryID
-	 *            Æ®¸® ½ÃÀÛ ÁöÁ¡
-	 * @return ÀÚ½Ä °´Ã¼ Á¤º¸, Æ®¸®ÇüÅÂ ¾Æ´Ô
+	 *            íŠ¸ë¦¬ ì‹œì‘ ì§€ì 
+	 * @return ìì‹ ê°ì²´ ì •ë³´, íŠ¸ë¦¬í˜•íƒœ ì•„ë‹˜
 	 */
 	public OBJ[] getChild(Object baseRootCategoryID) {
 		Enumeration<OBJ> e = category.elements();
@@ -85,70 +85,70 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	}
 
 	/**
-	 * Æ®¸® Ç¥½Ã ¼ø¼­´ë·Î Ä«Å×°í¸®¸¦ Á¤·Ä ÇØ¼­ °¡Á®¿È
+	 * íŠ¸ë¦¬ í‘œì‹œ ìˆœì„œëŒ€ë¡œ ì¹´í…Œê³ ë¦¬ë¥¼ ì •ë ¬ í•´ì„œ ê°€ì ¸ì˜´
 	 * 
-	 * @return Ä«Å×°í¸® ÀüÃ¼ ±¸Á¶(·çÆ® Ä«Å×°í¸® Á¦¿Ü )
+	 * @return ì¹´í…Œê³ ë¦¬ ì „ì²´ êµ¬ì¡°(ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ ì œì™¸ )
 	 */
 	public OBJ[] getTree() {
 		return getTree(categoryRootID);
 	}
 
 	/**
-	 * Æ®¸® Ç¥½Ã ¼ø¼­´ë·Î Ä«Å×°í¸®¸¦ Á¤·Ä ÇØ¼­ °¡Á®¿È
+	 * íŠ¸ë¦¬ í‘œì‹œ ìˆœì„œëŒ€ë¡œ ì¹´í…Œê³ ë¦¬ë¥¼ ì •ë ¬ í•´ì„œ ê°€ì ¸ì˜´
 	 * 
 	 * @param rootCategory
-	 *            ½ÃÀÛµÇ´Â Ä«Å×°í¸®
-	 * @return Á¤·ÄµÈ Ä«Å×°í¸® ¹è¿­
+	 *            ì‹œì‘ë˜ëŠ” ì¹´í…Œê³ ë¦¬
+	 * @return ì •ë ¬ëœ ì¹´í…Œê³ ë¦¬ ë°°ì—´
 	 */
 	public OBJ[] getTree(Object rootCategory) {
 		return getTree(rootCategory, false);
 	}
 
 	/**
-	 * Æ®¸® Ç¥½Ã ¼ø¼­´ë·Î Ä«Å×°í¸®¸¦ Á¤·Ä ÇØ¼­ °¡Á®¿È
+	 * íŠ¸ë¦¬ í‘œì‹œ ìˆœì„œëŒ€ë¡œ ì¹´í…Œê³ ë¦¬ë¥¼ ì •ë ¬ í•´ì„œ ê°€ì ¸ì˜´
 	 * 
 	 * @param rootCategory
-	 *            ½ÃÀÛµÇ´Â Ä«Å×°í¸®
+	 *            ì‹œì‘ë˜ëŠ” ì¹´í…Œê³ ë¦¬
 	 * @param rootSave
-	 *            ·çÆ® Ä«Å×°í¸® Æ÷ÇÔ ¿©ºÎ
-	 * @return Á¤·ÄµÈ Ä«Å×°í¸® ¹è¿­
+	 *            ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ í¬í•¨ ì—¬ë¶€
+	 * @return ì •ë ¬ëœ ì¹´í…Œê³ ë¦¬ ë°°ì—´
 	 */
 	public OBJ[] getTree(Object rootCategory, boolean rootSave) {
 		return getTree(rootCategory, 0, true, rootSave, null);
 	}
 
 	/**
-	 * Æ®¸® Ç¥½Ã ¼ø¼­´ë·Î Ä«Å×°í¸®¸¦ Á¤·Ä ÇØ¼­ °¡Á®¿È
+	 * íŠ¸ë¦¬ í‘œì‹œ ìˆœì„œëŒ€ë¡œ ì¹´í…Œê³ ë¦¬ë¥¼ ì •ë ¬ í•´ì„œ ê°€ì ¸ì˜´
 	 * 
 	 * @param rootCategory
-	 *            ½ÃÀÛµÇ´Â Ä«Å×°í¸®
+	 *            ì‹œì‘ë˜ëŠ” ì¹´í…Œê³ ë¦¬
 	 * @param rootSave
-	 *            ·çÆ® Ä«Å×°í¸® Æ÷ÇÔ ¿©ºÎ
+	 *            ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ í¬í•¨ ì—¬ë¶€
 	 * @param excludeCategory
-	 *            Á¦¿Ü ÇÒ ¸Ş´º(ÇÏÀ§ ±×·ì±îÁö ´Ù Á¦¿Ü)
-	 * @return Á¤·ÄµÈ Ä«Å×°í¸® ¹è¿­
+	 *            ì œì™¸ í•  ë©”ë‰´(í•˜ìœ„ ê·¸ë£¹ê¹Œì§€ ë‹¤ ì œì™¸)
+	 * @return ì •ë ¬ëœ ì¹´í…Œê³ ë¦¬ ë°°ì—´
 	 */
 	public OBJ[] getTree(Object rootCategory, boolean rootSave, Object excludeCategory) {
 		return getTree(rootCategory, 0, true, rootSave, excludeCategory);
 	}
 
 	/**
-	 * ·çÆ® Ä«Å×°í¸®¸® ºÎÅÍ ÇöÀç Ä«Å×°í¸®±îÁö °æ·Î¸¦ ±¸ÇÑ´Ù.
+	 * ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ë¦¬ ë¶€í„° í˜„ì¬ ì¹´í…Œê³ ë¦¬ê¹Œì§€ ê²½ë¡œë¥¼ êµ¬í•œë‹¤.
 	 * 
 	 * @param formCategoryID
-	 *            ·çÆ®·Î ºÎÅÍ formCategoryIDÄ«Å×°í¸® ±îÁö °æ·Î¸¦ ±¸ÇÔ
-	 * @return Ä«Å×°í¸® °æ·Î
+	 *            ë£¨íŠ¸ë¡œ ë¶€í„° formCategoryIDì¹´í…Œê³ ë¦¬ ê¹Œì§€ ê²½ë¡œë¥¼ êµ¬í•¨
+	 * @return ì¹´í…Œê³ ë¦¬ ê²½ë¡œ
 	 */
 	public OBJ[] getPath(Object formCategoryID) {
 		ArrayList<OBJ> saveCategory = new ArrayList<OBJ>();
 		path(formCategoryID, saveCategory);
 
-		// ±¸ÇÏ°íÀÚ ÇÏ´Â Ä«Å×°í¸® -> Root Ä«Å×°í¸® ¼ø¼­·Î µÇ¾î ÀÖ´Ù.
+		// êµ¬í•˜ê³ ì í•˜ëŠ” ì¹´í…Œê³ ë¦¬ -> Root ì¹´í…Œê³ ë¦¬ ìˆœì„œë¡œ ë˜ì–´ ìˆë‹¤.
 		OBJ[] descCategory = (OBJ[]) saveCategory.toArray(_obj_empty_array);
 
-		// Á¤·Ä ¼ø¼­¸¦ º¯°æ
-		// Root Ä«Å×°í¸® ->±¸ÇÏ°íÀÚ ÇÏ´Â Ä«Å×°í¸® ¼ø¼­·Î º¯°æ
-		// ÀÌ·¸°Ô ÇØ¾ßÁö ÇÁ·Î±×·¥¿¡¼­ °¡Á®´Ù ¾²±â°¡ Á¶±İ ÀÌ¶óµµ ÆíÇÑ´Ù.
+		// ì •ë ¬ ìˆœì„œë¥¼ ë³€ê²½
+		// Root ì¹´í…Œê³ ë¦¬ ->êµ¬í•˜ê³ ì í•˜ëŠ” ì¹´í…Œê³ ë¦¬ ìˆœì„œë¡œ ë³€ê²½
+		// ì´ë ‡ê²Œ í•´ì•¼ì§€ í”„ë¡œê·¸ë¨ì—ì„œ ê°€ì ¸ë‹¤ ì“°ê¸°ê°€ ì¡°ê¸ˆ ì´ë¼ë„ í¸í•œë‹¤.
 		@SuppressWarnings("unchecked")
 		OBJ[] ascCategory = (OBJ[]) Array.newInstance(saveCategory.get(0).getClass(), descCategory.length);
 
@@ -161,15 +161,15 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 
 	/**
 	 * @param currentCategoryID
-	 *            ÇöÀç Ä«Å×°í¸® ¾ÆÀÌµğ
+	 *            í˜„ì¬ ì¹´í…Œê³ ë¦¬ ì•„ì´ë””
 	 * @param saveCategory
-	 *            Àç±Í È£ÃâÀ» ÅëÇØ Ä«Å×°í¸® Á¤º¸¸¦ ´ã´Â º¯¼ö
+	 *            ì¬ê·€ í˜¸ì¶œì„ í†µí•´ ì¹´í…Œê³ ë¦¬ ì •ë³´ë¥¼ ë‹´ëŠ” ë³€ìˆ˜
 	 */
 	private void path(Object currentCategoryID, ArrayList<OBJ> saveCategory) {
 		OBJ mc = get(currentCategoryID);
 		saveCategory.add(mc);
 
-		// ·çÆ® Ä«Å×°í¸®°¡ ¾Æ´Ï¸é ÇÏÀ§ Ä«Å×°í¸®¸¦ ´õ Ã£À½
+		// ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ê°€ ì•„ë‹ˆë©´ í•˜ìœ„ ì¹´í…Œê³ ë¦¬ë¥¼ ë” ì°¾ìŒ
 		if (!currentCategoryID.equals(categoryRootID)) {
 			path(mc.getParentId(), saveCategory);
 		}
@@ -177,16 +177,16 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 
 	/**
 	 * @param rootCategory
-	 *            ½ÃÀÛ Ä«Å×°í¸®
+	 *            ì‹œì‘ ì¹´í…Œê³ ë¦¬
 	 * @param level
-	 *            ÇöÀç ÁøÇà Ä«Å×°í¸® ±íÀÌ
+	 *            í˜„ì¬ ì§„í–‰ ì¹´í…Œê³ ë¦¬ ê¹Šì´
 	 * @param modifyLevel
-	 *            ture ±íÀÌ Á¤º¸ º¯°æ, false º¯°æÇÏÁö ¾ÊÀ½
+	 *            ture ê¹Šì´ ì •ë³´ ë³€ê²½, false ë³€ê²½í•˜ì§€ ì•ŠìŒ
 	 * @param rootSave
-	 *            ·çÆ® Ä«Å×°í¸® Æ÷ÇÔ ¿©ºÎ
+	 *            ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ í¬í•¨ ì—¬ë¶€
 	 * @param excludeCategory
-	 *            Á¦¿Ü ÇÒ ¸Ş´º(ÇÏÀ§ ±×·ì±îÁö ´Ù Á¦¿Ü)
-	 * @return Á¤·ÄµÈ Ä«Å×°í¸® ¹è¿­
+	 *            ì œì™¸ í•  ë©”ë‰´(í•˜ìœ„ ê·¸ë£¹ê¹Œì§€ ë‹¤ ì œì™¸)
+	 * @return ì •ë ¬ëœ ì¹´í…Œê³ ë¦¬ ë°°ì—´
 	 */
 	private OBJ[] getTree(Object rootCategory, int level, boolean modifyLevel, boolean rootSave, Object excludeCategory) {
 		ArrayList<OBJ> saveCategory = new ArrayList<OBJ>();
@@ -198,7 +198,7 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 			map.add(e.nextElement());
 		}
 
-		// ·çÆ® Ä«Å×°í¸® ÁöÁ¤
+		// ë£¨íŠ¸ ì¹´í…Œê³ ë¦¬ ì§€ì •
 		OBJ root = get(rootCategory);
 		if (modifyLevel) {
 			root.setLevel(level);
@@ -213,21 +213,21 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 	}
 
 	/**
-	 * Àç±Í È£ÃâÀ» ÅëÇØ Ä«Å×°í¸® ¾ÆÀÌµğ ÀúÀå
+	 * ì¬ê·€ í˜¸ì¶œì„ í†µí•´ ì¹´í…Œê³ ë¦¬ ì•„ì´ë”” ì €ì¥
 	 * 
 	 * @param cat
-	 *            Ä«Å×°í¸® Á¤º¸°ª
+	 *            ì¹´í…Œê³ ë¦¬ ì •ë³´ê°’
 	 * 
 	 * @param currentCategoryID
-	 *            ÇöÀç Ä«Å×°í¸® ¾ÆÀÌµğ
+	 *            í˜„ì¬ ì¹´í…Œê³ ë¦¬ ì•„ì´ë””
 	 * @param saveCategory
-	 *            Àç±Í È£ÃâÀ» ÅëÇØ Ä«Å×°í¸® Á¤º¸¸¦ ´ã´Â º¯¼ö
+	 *            ì¬ê·€ í˜¸ì¶œì„ í†µí•´ ì¹´í…Œê³ ë¦¬ ì •ë³´ë¥¼ ë‹´ëŠ” ë³€ìˆ˜
 	 * @param level
-	 *            ÇöÀç ÁøÇà Ä«Å×°í¸® ±íÀÌ
+	 *            í˜„ì¬ ì§„í–‰ ì¹´í…Œê³ ë¦¬ ê¹Šì´
 	 * @param modifyLevel
-	 *            ture ±íÀÌ Á¤º¸ º¯°æ, false º¯°æÇÏÁö ¾ÊÀ½
+	 *            ture ê¹Šì´ ì •ë³´ ë³€ê²½, false ë³€ê²½í•˜ì§€ ì•ŠìŒ
 	 * @param excludeCategory
-	 *            Á¦¿Ü ÇÒ ¸Ş´º(ÇÏÀ§ ±×·ì±îÁö ´Ù Á¦¿Ü)
+	 *            ì œì™¸ í•  ë©”ë‰´(í•˜ìœ„ ê·¸ë£¹ê¹Œì§€ ë‹¤ ì œì™¸)
 	 */
 	private void recurrence(OBJ[] cat, Object currentCategoryID, ArrayList<OBJ> saveCategory, int level,
 			boolean modifyLevel, Object excludeCategory) {
@@ -237,7 +237,7 @@ public class TreeCollection<OBJ extends TreeItem<?>> {
 				if (modifyLevel) {
 					mc.setLevel(level);
 				}
-				// Á¦¿Ü Ä«Å×°í¸® °Ë»ç
+				// ì œì™¸ ì¹´í…Œê³ ë¦¬ ê²€ì‚¬
 				if (!mc.getId().equals(excludeCategory)) {
 					saveCategory.add(mc);
 					recurrence(cat, mc.getId(), saveCategory, level + 1, modifyLevel, excludeCategory);

@@ -24,28 +24,28 @@ import com.setvect.literatureboy.web.CommonUtil;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
- * È¯°æ¼³Á¤>¿î¿µÀÚ °ü¸® ¸Ş´º ÄÁÆ®·Ñ·¯
+ * í™˜ê²½ì„¤ì •>ìš´ì˜ì ê´€ë¦¬ ë©”ë‰´ ì»¨íŠ¸ë¡¤ëŸ¬
  */
 @Controller
 public class BoardManagerController {
 	/**
-	 * ¼­ºê ¸í·É¾î Á¤ÀÇ
+	 * ì„œë¸Œ ëª…ë ¹ì–´ ì •ì˜
 	 */
 	public static enum Mode {
-		/** USER,AGEN,Menu ¸®½ºÆ® º¸±â */
+		/** USER,AGEN,Menu ë¦¬ìŠ¤íŠ¸ ë³´ê¸° */
 		LIST_FORM, SEARCH_FORM, READ_FORM, CREATE_FORM, UPDATE_FORM, CREATE_ACTION, UPDATE_ACTION, REMOVE_ACTION
 	}
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
 		MODE,
-		/** ¸®½ºÆ® */
+		/** ë¦¬ìŠ¤íŠ¸ */
 		LIST,
 		//
 		ITEM,
-		/** ÆäÀÌÁö ¹× °Ë»ö Á¤º¸ */
+		/** í˜ì´ì§€ ë° ê²€ìƒ‰ ì •ë³´ */
 		PAGE_SEARCH
 	}
 
@@ -99,7 +99,7 @@ public class BoardManagerController {
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
-		// ¼öÁ¤ Æû
+		// ìˆ˜ì • í¼
 		else if (m == Mode.UPDATE_FORM) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
@@ -114,7 +114,7 @@ public class BoardManagerController {
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
-		// »èÁ¦ Ã³¸®
+		// ì‚­ì œ ì²˜ë¦¬
 		else if (m == Mode.REMOVE_ACTION) {
 			String code = request.getParameter("boardCode");
 			Board b = boardService.getBoard(code);
@@ -123,7 +123,7 @@ public class BoardManagerController {
 			mav.setViewName("redirect:" + getRedirectionUrl(request, pageCondition));
 			return mav;
 		}
-		// ¸ñ·ÏÆû
+		// ëª©ë¡í¼
 		if (m == Mode.LIST_FORM) {
 			GenericPage<Board> boardPagingList = boardService.getBoardPagingList(pageCondition);
 			mav.addObject(AttributeKey.LIST.name(), boardPagingList);
@@ -136,11 +136,11 @@ public class BoardManagerController {
 	}
 
 	/**
-	 * »õ·Î°íÄ§À» ÅëÇÑ Àç ¾÷·Îµå ¹æÁö¸¦ ÇÏ±âÀ§ÇØ Á¤ÇØÁø ÆäÀÌÁö·Î redirection ÇÏ±â À§ÇÑ ÁÖ¼Ò¸¦ Á¦°ø
+	 * ìƒˆë¡œê³ ì¹¨ì„ í†µí•œ ì¬ ì—…ë¡œë“œ ë°©ì§€ë¥¼ í•˜ê¸°ìœ„í•´ ì •í•´ì§„ í˜ì´ì§€ë¡œ redirection í•˜ê¸° ìœ„í•œ ì£¼ì†Œë¥¼ ì œê³µ
 	 * 
 	 * @param request
 	 * @param pageCondition
-	 * @return redirection ÁÖ¼Ò
+	 * @return redirection ì£¼ì†Œ
 	 * @throws Exception
 	 */
 	private String getRedirectionUrl(HttpServletRequest request, BoardManagerSearch pageCondition) throws Exception {
@@ -156,10 +156,10 @@ public class BoardManagerController {
 	}
 
 	/**
-	 * request parameter¿¡¼­ ÆäÀÌÂ¡ ¹× °Ë»ö Á¤º¸¸¦ ÃßÃâ ÇÔ
+	 * request parameterì—ì„œ í˜ì´ì§• ë° ê²€ìƒ‰ ì •ë³´ë¥¼ ì¶”ì¶œ í•¨
 	 * 
 	 * @param request
-	 * @return ÆäÀÌÂ¡ ¹× °Ë»ö Á¤º¸
+	 * @return í˜ì´ì§• ë° ê²€ìƒ‰ ì •ë³´
 	 * @throws ServletRequestBindingException
 	 */
 	private BoardManagerSearch bindSearch(HttpServletRequest request) throws ServletRequestBindingException {

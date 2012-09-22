@@ -6,24 +6,24 @@ import com.setvect.literatureboy.vo.user.Auth;
 import com.setvect.literatureboy.vo.user.AuthMap;
 
 /**
- * ±ÇÇÑ ¼öÁ¤ ¿©ºÎ
+ * ê¶Œí•œ ìˆ˜ì • ì—¬ë¶€
  * 
  * @version $Id$
  */
 public interface AuthChangeListener {
 	/**
-	 * ±ÇÇÑ Á¤º¸ ¼öÁ¤
+	 * ê¶Œí•œ ì •ë³´ ìˆ˜ì •
 	 * 
 	 * @param auth
-	 *            ±ÇÇÑ ¸ñ·Ï
+	 *            ê¶Œí•œ ëª©ë¡
 	 */
 	public void updateAuth(Collection<Auth> auth);
 
 	/**
-	 * ±ÇÇÑ ¸ÅÇÎ Á¤º¸ ¼öÁ¤
+	 * ê¶Œí•œ ë§¤í•‘ ì •ë³´ ìˆ˜ì •
 	 * 
 	 * @param authMap
-	 *            ±ÇÇÑ ¸ÉÇÎ Á¤º¸
+	 *            ê¶Œí•œ ë§´í•‘ ì •ë³´
 	 */
 	public void updateAuthMap(Collection<AuthMap> authMap);
 

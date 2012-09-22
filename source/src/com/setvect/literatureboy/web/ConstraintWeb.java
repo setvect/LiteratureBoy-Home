@@ -5,39 +5,39 @@ import java.util.List;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 
 /**
- * Web UI¿¡¼­ »ç¿ëµÇ´Â »ó¼ö ¸ğÀ½
+ * Web UIì—ì„œ ì‚¬ìš©ë˜ëŠ” ìƒìˆ˜ ëª¨ìŒ
  * 
  * @version $Id$
  */
 public class ConstraintWeb {
-	/** ¹®ÇĞ¼Ò³â: ±âº» Æ²À» °¡Áø ºä ÀÌ¸§ */
+	/** ë¬¸í•™ì†Œë…„: ê¸°ë³¸ í‹€ì„ ê°€ì§„ ë·° ì´ë¦„ */
 	public final static String LITERATUREBOY_LAYOUT = "literatureboy/layout";
 
-	/** ¹®ÇĞ¼Ò³â(¸ğ¹ÙÀÏ): ±âº» Æ²À» °¡Áø ºä ÀÌ¸§ */
+	/** ë¬¸í•™ì†Œë…„(ëª¨ë°”ì¼): ê¸°ë³¸ í‹€ì„ ê°€ì§„ ë·° ì´ë¦„ */
 	public final static String MOBILE_LAYOUT = "m/layout";
 
-	/** °³¹ß: ±âº» Æ²À» °¡Áø ºä ÀÌ¸§ */
+	/** ê°œë°œ: ê¸°ë³¸ í‹€ì„ ê°€ì§„ ë·° ì´ë¦„ */
 	public final static String DEVLOP_LAYOUT = "devlop/layout";
 
-	/** ¾÷·Îµå ±âÁØ URL */
+	/** ì—…ë¡œë“œ ê¸°ì¤€ URL */
 	public final static String UPLOAD_URL_BASE = EnvirmentProperty
 			.getString("com.setvect.literatureboy.file_upload_url");
 
 	public enum AttributeKey {
-		// jsp¿¡ Àü´ŞÇÒ ÀÎÄğ·çµå ÆäÀÌÁö Á¤º¸
+		// jspì— ì „ë‹¬í•  ì¸ì¿¨ë£¨ë“œ í˜ì´ì§€ ì •ë³´
 		INCLUDE_PAGE,
-		// ¼­ºñ½º ÁÖ¼Ò ÀúÀå
+		// ì„œë¹„ìŠ¤ ì£¼ì†Œ ì €ì¥
 		SERVLET_URL,
-		// °Ô½ÃÆÇ ÀüÃ¼ Á¤º¸
+		// ê²Œì‹œíŒ ì „ì²´ ì •ë³´
 		BOARD_ITEMS,
-		// »óÀ§ ÄÁÆ®·Ñ·¯¿¡¼­ Àü´ŞÇÏ´Â ºä ¸ğµ¨
+		// ìƒìœ„ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ì „ë‹¬í•˜ëŠ” ë·° ëª¨ë¸
 		MODEL_VIEW,
 
 	}
 
-	/** ¾÷·Îµå ÆÄÀÏ È®ÀåÀÚ */
+	/** ì—…ë¡œë“œ íŒŒì¼ í™•ì¥ì */
 	public final static String[] ALLOW_UPLOAD_FILE;
-	/** ÀÌ¹ÌÁö È®ÀåÀÚ */
+	/** ì´ë¯¸ì§€ í™•ì¥ì */
 	public final static List<String> IMAGE_EXT;
 
 	static {
@@ -51,27 +51,27 @@ public class ConstraintWeb {
 		IMAGE_EXT = EnvirmentProperty.getList("com.setvect.literatureboy.image_ext");
 	}
 
-	/** ÆĞ½º¿öµå ¾ÏÈ£È­ ¾Ë°í¸®Áò */
+	/** íŒ¨ìŠ¤ì›Œë“œ ì•”í˜¸í™” ì•Œê³ ë¦¬ì¦˜ */
 	public final static String PASSWD_ALGORITHM = "MD5";
 
-	/** ·Î±×ÀÎ ÄíÅ° Å°°ª */
+	/** ë¡œê·¸ì¸ ì¿ í‚¤ í‚¤ê°’ */
 	public static final String USER_COOKIE_KEY = "_user_cookie_key";
 
-	/** ·Î±×ÀÎ attribute Å°°ª */
+	/** ë¡œê·¸ì¸ attribute í‚¤ê°’ */
 	public static final String USER_SESSION_KEY = "_user_session_key";
 
-	/** ¸®ÅÏ URL ÆÄ¶ó¹ÌÅÍ ÀÌ¸§ */
+	/** ë¦¬í„´ URL íŒŒë¼ë¯¸í„° ì´ë¦„ */
 	public static final String RETURN_URL = "returnUrl";
 
-	/** ¸ŞÀÎÈ­¸é °Ô½ÃÆÇ ÄÚµå */
+	/** ë©”ì¸í™”ë©´ ê²Œì‹œíŒ ì½”ë“œ */
 	public static final String MAIN_BOARD = "BDAAAA00";
 
-	/** ¸ğ¹ÙÀÏ¿¡¼­ PC È­¸é º¸±â »ç¿ë */
+	/** ëª¨ë°”ì¼ì—ì„œ PC í™”ë©´ ë³´ê¸° ì‚¬ìš© */
 	public static final String PC_VIEW_COOKIE_KEY = "pc_view_key";
 
 	/**
-	 * ¸ğ¹ÙÀÏ ºê¶ó¿ìÀú Agent <br>
-	 * request.getHeader("user-agent") È®ÀÎÇÑ °ª
+	 * ëª¨ë°”ì¼ ë¸Œë¼ìš°ì € Agent <br>
+	 * request.getHeader("user-agent") í™•ì¸í•œ ê°’
 	 */
 	public static final String[] MOBILE_BROWSER_AGENT = { "iPhone", "iPod", "Android", "Windows CE", "BlackBerry",
 			"Symbian", "Windows Phone", "webOS", "Opera Mini", "Opera Mobi", "POLARIS", "IEMobile", "lgtelecom",

@@ -18,7 +18,7 @@ import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 
 /**
- * ¸¶ÀÌ±×·¹ÀÌ¼Ç ÇÁ·Î±×·¥
+ * ë§ˆì´ê·¸ë ˆì´ì…˜ í”„ë¡œê·¸ë¨
  * 
  * @version $Id: MemoTestCase.java 63 2010-08-16 12:24:44Z setvect@naver.com $
  */
@@ -29,7 +29,7 @@ public class MigrationTestCase extends TestSystem {
 	private SessionFactory sessionFactory;
 
 	/**
-	 * CRUD Å×½ºÆ®
+	 * CRUD í…ŒìŠ¤íŠ¸
 	 * 
 	 * @throws Exception
 	 */

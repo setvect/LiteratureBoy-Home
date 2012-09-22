@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.setvect.literatureboy.boot.EnvirmentInit;
 
 /**
- * Å×½ºÆ® ÇÏ±âÀ§ÇÑ ¾îÇÃ¸®ÄÉÀÌ¼Ç bootup °úÁ¤ ÁøÇà
+ * í…ŒìŠ¤íŠ¸ í•˜ê¸°ìœ„í•œ ì–´í”Œë¦¬ì¼€ì´ì…˜ bootup ê³¼ì • ì§„í–‰
  * 
  * @version $Id$
  */
@@ -30,7 +30,7 @@ public class TestSystem {
 		URL a = TestSystem.class.getResource("");
 		File currentPath = new File(a.getFile());
 
-		// ÇöÀç Å¬·¡½º °æ·Î¸¦ ÃßÀûÇØ À¥·çÆ® µğ·ºÅä¸®¸¦ Ã£À½. ²Ä¼öÀÓ
+		// í˜„ì¬ í´ë˜ìŠ¤ ê²½ë¡œë¥¼ ì¶”ì í•´ ì›¹ë£¨íŠ¸ ë””ë ‰í† ë¦¬ë¥¼ ì°¾ìŒ. ê¼¼ìˆ˜ì„
 		File projectRoot = currentPath.getParentFile().getParentFile().getParentFile().getParentFile();
 		EnvirmentInit.bootUp();
 	}

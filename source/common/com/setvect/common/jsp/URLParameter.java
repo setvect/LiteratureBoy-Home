@@ -9,20 +9,20 @@ import java.util.Hashtable;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Áßº¹µÇ´Â URL ÆÄ¶ó¹ÌÅÍ¸¦ °£¼ÒÈ­ ½ÃÄÑ¼­ Àç »ç¿ëÀ» Æí¸®ÇÏ°Ô ÇÏ±â À§ÇØ¼­ ¸¸µë
+ * ì¤‘ë³µë˜ëŠ” URL íŒŒë¼ë¯¸í„°ë¥¼ ê°„ì†Œí™” ì‹œì¼œì„œ ì¬ ì‚¬ìš©ì„ í¸ë¦¬í•˜ê²Œ í•˜ê¸° ìœ„í•´ì„œ ë§Œë“¬
  * 
  */
 public class URLParameter {
 
 	private final static String AMP = "&amp;";
 
-	/** ÆÄ¶ó¹ÌÅÍ ÀúÀå */
+	/** íŒŒë¼ë¯¸í„° ì €ì¥ */
 	private Hashtable<String, ArrayList<String>> param = new Hashtable<String, ArrayList<String>>();
 
-	/** url °æ·Î */
+	/** url ê²½ë¡œ */
 	private String url;
 
-	/** ÀÎÄÚµù Å¸ÀÔ */
+	/** ì¸ì½”ë”© íƒ€ì… */
 	private String encode;
 
 	private URLParameter() {
@@ -31,9 +31,9 @@ public class URLParameter {
 
 	/**
 	 * @param url
-	 *            URL °æ·Î
+	 *            URL ê²½ë¡œ
 	 * @param encode
-	 *            URL ÀÎÄÚµù
+	 *            URL ì¸ì½”ë”©
 	 */
 	public URLParameter(String url, String encode) {
 		this.encode = encode;
@@ -42,10 +42,10 @@ public class URLParameter {
 
 	/**
 	 * @param key
-	 *            Å°
+	 *            í‚¤
 	 * @param value
-	 *            ÆÄ¶ó¹ÌÅÍ°ª
-	 * @return URLParamter °´Ã¼ Á¤º¸. put() ¿¬»êÀ» Æí¸® ÇÏ°Ô ÇÏ±â À§ÇØ
+	 *            íŒŒë¼ë¯¸í„°ê°’
+	 * @return URLParamter ê°ì²´ ì •ë³´. put() ì—°ì‚°ì„ í¸ë¦¬ í•˜ê²Œ í•˜ê¸° ìœ„í•´
 	 */
 	public URLParameter put(String key, String value) {
 		ArrayList<String> s = param.get(key);
@@ -63,23 +63,23 @@ public class URLParameter {
 
 	/**
 	 * @param key
-	 *            Å°
+	 *            í‚¤
 	 * @param value
-	 *            ÆÄ¶ó¹ÌÅÍ°ª
-	 * @return URLParamter °´Ã¼ Á¤º¸. put() ¿¬»êÀ» Æí¸® ÇÏ°Ô ÇÏ±â À§ÇØ
+	 *            íŒŒë¼ë¯¸í„°ê°’
+	 * @return URLParamter ê°ì²´ ì •ë³´. put() ì—°ì‚°ì„ í¸ë¦¬ í•˜ê²Œ í•˜ê¸° ìœ„í•´
 	 */
 	public URLParameter put(String key, int value) {
 		return put(key, String.valueOf(value));
 	}
 
 	/**
-	 * Å° Áßº¹Çã¿ë
+	 * í‚¤ ì¤‘ë³µí—ˆìš©
 	 * 
 	 * @param key
-	 *            Å°
+	 *            í‚¤
 	 * @param value
-	 *            ÆÄ¶ó¹ÌÅÍ°ª
-	 * @return URLParamter °´Ã¼ Á¤º¸. put() ¿¬»êÀ» Æí¸® ÇÏ°Ô ÇÏ±â À§ÇØ
+	 *            íŒŒë¼ë¯¸í„°ê°’
+	 * @return URLParamter ê°ì²´ ì •ë³´. put() ì—°ì‚°ì„ í¸ë¦¬ í•˜ê²Œ í•˜ê¸° ìœ„í•´
 	 */
 	public URLParameter putOverlap(String key, String value) {
 		ArrayList<String> s = param.get(key);
@@ -95,8 +95,8 @@ public class URLParameter {
 	}
 
 	/**
-	 * request ÆÄ¶ó¹ÌÅÍ Á¤º¸¸¦ ±×´ë·Î ¼ÂÆÃ<br>
-	 * ÆÄ¶ó¹ÌÅÍ ¹è¿­(°°Àº ÀÌ¸§ÀÌ µÎ°³ ÀÌ»óÀÎ ÆÄ¶ó¹ÌÅÍ)´Â Áö¿ø ÇÏÁö ¾ÊÀ½
+	 * request íŒŒë¼ë¯¸í„° ì •ë³´ë¥¼ ê·¸ëŒ€ë¡œ ì…‹íŒ…<br>
+	 * íŒŒë¼ë¯¸í„° ë°°ì—´(ê°™ì€ ì´ë¦„ì´ ë‘ê°œ ì´ìƒì¸ íŒŒë¼ë¯¸í„°)ëŠ” ì§€ì› í•˜ì§€ ì•ŠìŒ
 	 * 
 	 * @param request
 	 */
@@ -111,19 +111,19 @@ public class URLParameter {
 
 	/**
 	 * @param key
-	 *            Å°
+	 *            í‚¤
 	 * @param value
-	 *            ÆÄ¶ó¹ÌÅÍ°ª
-	 * @return URLParamter °´Ã¼ Á¤º¸. put() ¿¬»êÀ» Æí¸® ÇÏ°Ô ÇÏ±â À§ÇØ
+	 *            íŒŒë¼ë¯¸í„°ê°’
+	 * @return URLParamter ê°ì²´ ì •ë³´. put() ì—°ì‚°ì„ í¸ë¦¬ í•˜ê²Œ í•˜ê¸° ìœ„í•´
 	 */
 	public URLParameter putOverlap(String key, int value) {
 		return putOverlap(key, String.valueOf(value));
 	}
 
 	/** 
-	 * Æ¯Á¤ Å° °ªÀ» Á¦°Å 
-	 * @param key  Å°
-	 * @return URLParamter °´Ã¼ Á¤º¸. chain Çü½Ä
+	 * íŠ¹ì • í‚¤ ê°’ì„ ì œê±° 
+	 * @param key  í‚¤
+	 * @return URLParamter ê°ì²´ ì •ë³´. chain í˜•ì‹
 	 */
 	public URLParameter clearParam(String key){
 		param.remove(key);
@@ -139,17 +139,17 @@ public class URLParameter {
 	}
 
 	/**
-	 * ¸¸¾à Å°¿¡ Áßº¹ ÆÄ¶ó¹ÌÅÍÀÌ¸é ¸ğµÎ »èÁ¦
+	 * ë§Œì•½ í‚¤ì— ì¤‘ë³µ íŒŒë¼ë¯¸í„°ì´ë©´ ëª¨ë‘ ì‚­ì œ
 	 * 
 	 * @param key
-	 *            Å°
+	 *            í‚¤
 	 */
 	public void remove(String key) {
 		param.remove(key);
 	}
 
 	/**
-	 * @return ÆÄ¸®¸ÓÅÍ¸¦ Æ÷ÇÔÇÑ ÀüÃ¼ ÁÖ¼Ò
+	 * @return íŒŒë¦¬ë¨¸í„°ë¥¼ í¬í•¨í•œ ì „ì²´ ì£¼ì†Œ
 	 */
 	public String getParam() {
 		StringBuffer s = new StringBuffer();
@@ -178,7 +178,7 @@ public class URLParameter {
 				throw new RuntimeException(e);
 			}
 		}
-		// ¸Ç ³¡ÀÇ "&amp;"¸¦ »èÁ¦ÇÑ ÈÄ ¸®ÅÏ ÇÑ´Ù.
+		// ë§¨ ëì˜ "&amp;"ë¥¼ ì‚­ì œí•œ í›„ ë¦¬í„´ í•œë‹¤.
 		String rtnParam = s.toString();
 		if (rtnParam.contains(AMP)) {
 			rtnParam = rtnParam.substring(0, rtnParam.length() - AMP.length());
@@ -187,7 +187,7 @@ public class URLParameter {
 	}
 
 	/**
-	 * Á¤º¸°ª º¹Á¦
+	 * ì •ë³´ê°’ ë³µì œ
 	 */
 	@SuppressWarnings("unchecked")
 	public URLParameter clone() {

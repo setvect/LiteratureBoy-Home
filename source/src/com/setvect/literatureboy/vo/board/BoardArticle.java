@@ -18,7 +18,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * °Ô½Ã¹° VO
+ * ê²Œì‹œë¬¼ VO
  * 
  * @version $Id$
  */
@@ -53,7 +53,7 @@ public class BoardArticle {
 	@Column(name = "IDX3")
 	private int idx3;
 
-	/** ±íÀÌ 1ºÎÅÍ ½ÃÀÛ */
+	/** ê¹Šì´ 1ë¶€í„° ì‹œì‘ */
 	@Column(name = "DEPTH_LEVEL")
 	private int depthLevel;
 
@@ -81,11 +81,11 @@ public class BoardArticle {
 	@Column(name = "IP")
 	private String ip;
 
-	/** Á¶È¸¼ö */
+	/** ì¡°íšŒìˆ˜ */
 	@Column(name = "HIT_COUNT")
 	private int hitCount;
 
-	/** ¾ÏÈ£È­µÈ ±Û ¿©ºÎ */
+	/** ì•”í˜¸í™”ëœ ê¸€ ì—¬ë¶€ */
 	@Column(name = "ENCODE_F")
 	@Type(type = "yes_no")
 	private boolean encodeF;
@@ -94,7 +94,7 @@ public class BoardArticle {
 	@Column(name = "REG_DATE")
 	private Date regDate;
 
-	/** °Ô½Ã¹° »èÁ¦ ¿©ºÎ */
+	/** ê²Œì‹œë¬¼ ì‚­ì œ ì—¬ë¶€ */
 	@Column(name = "DELETE_F")
 	@Type(type = "yes_no")
 	private boolean deleteF;
@@ -102,7 +102,7 @@ public class BoardArticle {
 	@Transient
 	private MultipartFile[] attachFile;
 
-	/** Ã·ºÎÆÄÀÏ */
+	/** ì²¨ë¶€íŒŒì¼ */
 	@Transient
 	private List<BoardAttachFile> attach;
 

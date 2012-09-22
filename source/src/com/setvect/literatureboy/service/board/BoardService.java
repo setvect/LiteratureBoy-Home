@@ -19,19 +19,19 @@ import com.setvect.literatureboy.vo.board.BoardTrackback;
  */
 @Service("BoardService")
 public class BoardService {
-	/** À¥ ·çÆ®¸¦ ±âÁØÀ¸·Î ÀúÀå °æ·Î */
+	/** ì›¹ ë£¨íŠ¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì €ì¥ ê²½ë¡œ */
 	public static final String SAVE_PATH = EnvirmentProperty
 			.getString("com.setvect.literatureboy.board.file_upload_dir");
 
 	@Autowired
 	private BoardDao boardDao;
 
-	// --------------- °ü¸®
+	// --------------- ê´€ë¦¬
 
 	/**
 	 * @param code
-	 *            ÄÚµå
-	 * @return Á¤º¸
+	 *            ì½”ë“œ
+	 * @return ì •ë³´
 	 */
 	public Board getBoard(String code) {
 		return boardDao.getBoard(code);
@@ -39,7 +39,7 @@ public class BoardService {
 
 	/**
 	 * @param pageCondition
-	 * @return Á¤º¸ Ç×¸ñ
+	 * @return ì •ë³´ í•­ëª©
 	 */
 	public GenericPage<Board> getBoardPagingList(BoardManagerSearch pageCondition) {
 		return boardDao.getBoardPagingList(pageCondition);
@@ -54,7 +54,7 @@ public class BoardService {
 
 	/**
 	 * @param board
-	 *            °Ô½Ã¹° ¾ÆÀÌµğ
+	 *            ê²Œì‹œë¬¼ ì•„ì´ë””
 	 */
 	public void updateBoard(Board board) {
 		boardDao.updateBoard(board);
@@ -62,13 +62,13 @@ public class BoardService {
 
 	/**
 	 * @param code
-	 *            °Ô½Ã¹° ÄÚµå
+	 *            ê²Œì‹œë¬¼ ì½”ë“œ
 	 */
 	public void removeBoard(String code) {
 		boardDao.removeBoard(code);
 	}
 
-	// --------------- °Ô½Ã¹°
+	// --------------- ê²Œì‹œë¬¼
 	/**
 	 * @param articleSeq
 	 * @return
@@ -79,41 +79,41 @@ public class BoardService {
 
 	/**
 	 * @param pageCondition
-	 *            °Ô½Ã¹° °Ë»ö Á¤º¸
-	 * @return °Ô½Ã¹° ÆäÀÌÁö °ª
+	 *            ê²Œì‹œë¬¼ ê²€ìƒ‰ ì •ë³´
+	 * @return ê²Œì‹œë¬¼ í˜ì´ì§€ ê°’
 	 */
 	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondition) {
 		return boardDao.getArticlePagingList(pageCondition);
 	}
 
 	/**
-	 * °Ô½Ã¹° µî·Ï
+	 * ê²Œì‹œë¬¼ ë“±ë¡
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 */
 	public void createArticle(BoardArticle article) {
 		boardDao.createArticle(article);
 	}
 
 	/**
-	 * ´äº¯ µî·Ï
+	 * ë‹µë³€ ë“±ë¡
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 * @param parentId
-	 *            ºÎ¸ğ °Ô½Ã¹°
+	 *            ë¶€ëª¨ ê²Œì‹œë¬¼
 	 */
 	public void createArticleReply(BoardArticle article, int parentId) {
 		boardDao.createArticleReply(article, parentId);
 	}
 
 	/**
-	 * idx °ü·Ã ¿¬»ê¾øÀ½ <br>
-	 * ¸¶ÀÌ±×·¹ÀÌ¼Ç ¿ë
+	 * idx ê´€ë ¨ ì—°ì‚°ì—†ìŒ <br>
+	 * ë§ˆì´ê·¸ë ˆì´ì…˜ ìš©
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹°
+	 *            ê²Œì‹œë¬¼
 	 */
 	public void createArticleMigration(BoardArticle article) {
 		boardDao.createArticleMigration(article);
@@ -127,7 +127,7 @@ public class BoardService {
 	}
 
 	/**
-	 * Á¶È¸¼ö Áõ°¡
+	 * ì¡°íšŒìˆ˜ ì¦ê°€
 	 * 
 	 * @param articleSeq
 	 */
@@ -145,8 +145,8 @@ public class BoardService {
 	// ----- comment
 	/**
 	 * @param seq
-	 *            ÄÚ¸àÆ® ÀÏ·Ã¹øÈ£
-	 * @return ÄÚ¸àÆ®
+	 *            ì½”ë©˜íŠ¸ ì¼ë ¨ë²ˆí˜¸
+	 * @return ì½”ë©˜íŠ¸
 	 */
 	public BoardComment getComment(int seq) {
 		return boardDao.getComment(seq);
@@ -154,8 +154,8 @@ public class BoardService {
 
 	/**
 	 * @param boardItemSeq
-	 *            °Ô½Ã¹° Ç×¸ñ ¹øÈ£
-	 * @return °Ô½Ã¹° Ç×¸ñ¿¡ ´ëÇÑ ÄÚ¸àÆ® ¸ñ·Ï
+	 *            ê²Œì‹œë¬¼ í•­ëª© ë²ˆí˜¸
+	 * @return ê²Œì‹œë¬¼ í•­ëª©ì— ëŒ€í•œ ì½”ë©˜íŠ¸ ëª©ë¡
 	 */
 	public List<BoardComment> listComment(int boardItemSeq) {
 		return boardDao.listComment(boardItemSeq);
@@ -163,7 +163,7 @@ public class BoardService {
 
 	/**
 	 * @param comment
-	 *            ÄÚ¸àÆ® Á¤º¸
+	 *            ì½”ë©˜íŠ¸ ì •ë³´
 	 */
 	public void createComment(BoardComment comment) {
 		boardDao.createComment(comment);
@@ -171,7 +171,7 @@ public class BoardService {
 
 	/**
 	 * @param comment
-	 *            ÄÚ¸àÆ®
+	 *            ì½”ë©˜íŠ¸
 	 */
 	public void updateComment(BoardComment comment) {
 		boardDao.updateComment(comment);
@@ -179,7 +179,7 @@ public class BoardService {
 
 	/**
 	 * @param seq
-	 *            ÄÚ¸àÆ® ¹øÈ£
+	 *            ì½”ë©˜íŠ¸ ë²ˆí˜¸
 	 */
 	public void removeComment(int seq) {
 		boardDao.removeComment(seq);
@@ -189,8 +189,8 @@ public class BoardService {
 
 	/**
 	 * @param boardItemSeq
-	 *            °Ô½Ã¹° ¹øÈ£
-	 * @return °Ô½Ã¹°¿¡ µî·ÏµÈ Ã·ºÎÆÄÀÏ ¸ñ·Ï
+	 *            ê²Œì‹œë¬¼ ë²ˆí˜¸
+	 * @return ê²Œì‹œë¬¼ì— ë“±ë¡ëœ ì²¨ë¶€íŒŒì¼ ëª©ë¡
 	 */
 	public List<BoardAttachFile> listAttachFile(int boardItemSeq) {
 		return boardDao.listAttachFile(boardItemSeq);
@@ -198,7 +198,7 @@ public class BoardService {
 
 	/**
 	 * @param attachFile
-	 *            Ã·ºÎÆÄÀÏ ÀúÀå
+	 *            ì²¨ë¶€íŒŒì¼ ì €ì¥
 	 */
 	public void createAttachFile(BoardAttachFile attachFile) {
 		boardDao.createAttachFile(attachFile);
@@ -206,7 +206,7 @@ public class BoardService {
 
 	/**
 	 * @param seq
-	 *            Ã·ºÎÆÄÀÏ ¹øÈ£
+	 *            ì²¨ë¶€íŒŒì¼ ë²ˆí˜¸
 	 */
 	public void removeAttachFile(int seq) {
 		boardDao.removeAttachFile(seq);
@@ -215,24 +215,24 @@ public class BoardService {
 	// ----- Attach File
 	/**
 	 * @param boardItemSeq
-	 *            °Ô½Ã¹° ¹øÈ£
-	 * @return °Ô½Ã¹°¿¡ µî·ÏµÈ Æ®·¡¹é ¸ñ·Î
+	 *            ê²Œì‹œë¬¼ ë²ˆí˜¸
+	 * @return ê²Œì‹œë¬¼ì— ë“±ë¡ëœ íŠ¸ë˜ë°± ëª©ë¡œ
 	 */
 	public List<BoardTrackback> listTrackback(int boardItemSeq) {
 		return boardDao.listTrackback(boardItemSeq);
 	}
 
 	/**
-	 * Æ®·¡¹é µî·Ï  
-	 * @param trackback Æ®·¡¹é Á¤º¸  
+	 * íŠ¸ë˜ë°± ë“±ë¡  
+	 * @param trackback íŠ¸ë˜ë°± ì •ë³´  
 	 */
 	public void createTrackback(BoardTrackback trackback) {
 		boardDao.createTrackback(trackback);
 	}
 	
 	/**
-	 * Æ®·¡¹é »èÁ¦ 
-	 * @param seq Æ®·¡¹é ¹øÈ£ 
+	 * íŠ¸ë˜ë°± ì‚­ì œ 
+	 * @param seq íŠ¸ë˜ë°± ë²ˆí˜¸ 
 	 */
 	public void removeTrackback(int seq) {
 		boardDao.removeTrackback(seq);

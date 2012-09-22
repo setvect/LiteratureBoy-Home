@@ -18,12 +18,12 @@ public class FileUtilTestCase {
 		Set<String> ext = new HashSet<String>();
 		ext.add("docx");
 		ext.add("pptx");
-		List<File> files = FileUtil.getSubFiles(new File("D:\\04.¹®¼­"), false, ext);
+		List<File> files = FileUtil.getSubFiles(new File("D:\\04.ë¬¸ì„œ"), false, ext);
 		for (File f : files) {
 			System.out.println(f);
 		}
 
-		files = FileUtil.getSubFiles(new File("D:\\04.¹®¼­"), true, ext);
+		files = FileUtil.getSubFiles(new File("D:\\04.ë¬¸ì„œ"), true, ext);
 		for (File f : files) {
 			System.out.println(f);
 		}
@@ -31,7 +31,7 @@ public class FileUtilTestCase {
 
 	@Test
 	public void test_getMd5() {
-		String md5 = Md5Util.getMD5Checksum(new File("D:\\04.¹®¼­\\DOR¿¡·¯ ¸Ş½ÃÁö Á¤¸®_Á¤È£.docx"));
+		String md5 = Md5Util.getMD5Checksum(new File("D:\\04.ë¬¸ì„œ\\DORì—ëŸ¬ ë©”ì‹œì§€ ì •ë¦¬_ì •í˜¸.docx"));
 		System.out.println(md5);
 	}
 }

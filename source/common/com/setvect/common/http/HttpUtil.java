@@ -7,18 +7,18 @@ import com.setvect.common.util.StringUtilAd;
 public class HttpUtil {
 
 	/**
-	 * URLÀ» ¹Ş¾Æ È¨ÆäÀÌÁö ÆÄÀÏ °æ·Î Á¦°ÅÇÏ°í È¨ÆäÀÌÁö ÁÖ¼Ò¸¸ ¸®ÅÏ (³¡¿¡ '/' ¾øÀ½)<br>
+	 * URLì„ ë°›ì•„ í™ˆí˜ì´ì§€ íŒŒì¼ ê²½ë¡œ ì œê±°í•˜ê³  í™ˆí˜ì´ì§€ ì£¼ì†Œë§Œ ë¦¬í„´ (ëì— '/' ì—†ìŒ)<br>
 	 * ex) http://www.abcd.com<br>
 	 * ex) http://www.abcd.com:2311<br>
 	 * ex) http://127.0.0.1:2311<br>
 	 * 
 	 * @param request
-	 * @return ¼ø¼ö È¨ÆäÀÌÁö ÁÖ¼Ò¸¸
+	 * @return ìˆœìˆ˜ í™ˆí˜ì´ì§€ ì£¼ì†Œë§Œ
 	 */
 	public static String getHomepageUrl(HttpServletRequest request) {
 		StringBuffer rtn = new StringBuffer("http://");
 		rtn.append(request.getServerName());
-		// 80Æ÷Æ®°¡ ¾Æ´Ñ °ÍÀº Æ÷Æ® Ãß°¡
+		// 80í¬íŠ¸ê°€ ì•„ë‹Œ ê²ƒì€ í¬íŠ¸ ì¶”ê°€
 		if (request.getServerPort() != 80) {
 			rtn.append(":");
 			rtn.append(request.getServerPort());
@@ -27,13 +27,13 @@ public class HttpUtil {
 	}
 
 	/**
-	 * ÇöÀç ÆäÀÌÁö¿¡ Äõ¸® ½ºÆ®¸µ°ªÀ» Æ÷ÇÔÇÑ °æ·Î¸¦ ¹İÈ¯<br>
-	 * ¸®ÅÏ URL ÇüÅÂ·Î »ç¿ëÇÏ¸é µÊ<br>
+	 * í˜„ì¬ í˜ì´ì§€ì— ì¿¼ë¦¬ ìŠ¤íŠ¸ë§ê°’ì„ í¬í•¨í•œ ê²½ë¡œë¥¼ ë°˜í™˜<br>
+	 * ë¦¬í„´ URL í˜•íƒœë¡œ ì‚¬ìš©í•˜ë©´ ë¨<br>
 	 * 
 	 * ex) http://www.abcd.com/abc.jsp?aaa=data1&aaa=data2&bbb=data3
 	 * 
 	 * @param request
-	 * @return ÇöÀç ÆäÀÌÁö URL
+	 * @return í˜„ì¬ í˜ì´ì§€ URL
 	 */
 	public static String getCurrentPageURL(HttpServletRequest request) {
 		String ctPath = request.getContextPath();

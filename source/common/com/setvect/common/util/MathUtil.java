@@ -2,14 +2,14 @@ package com.setvect.common.util;
 
 public class MathUtil {
 	/**
-	 * ÇØ´ç ¼öÀÇ¸¦ ÀÌÁø¼ö·Î Ç¥ÇöÇßÀ»¶§ '1'ÀÇ °¹¼ö¸¦ ±¸ÇÔ<br>
-	 * ¿¹) n = 0, 1<br>
+	 * í•´ë‹¹ ìˆ˜ì˜ë¥¼ ì´ì§„ìˆ˜ë¡œ í‘œí˜„í–ˆì„ë•Œ '1'ì˜ ê°¯ìˆ˜ë¥¼ êµ¬í•¨<br>
+	 * ì˜ˆ) n = 0, 1<br>
 	 * n=3, 2<br>
 	 * n=11, 3
 	 * 
 	 * @param num
-	 *            ¾ç¼ö°ª
-	 * @return '1' °¹¼ö
+	 *            ì–‘ìˆ˜ê°’
+	 * @return '1' ê°¯ìˆ˜
 	 */
 	public static int getSetBitCount(int num) {
 		int bitCount = 0;

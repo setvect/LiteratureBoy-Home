@@ -4,7 +4,7 @@ import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
 
 /**
- * °Ô½Ã¹° °ü¸® ¸ñ·Ï ÆäÀÌÂ¡ ¹× °Ë»ö Á¶°Ç
+ * ê²Œì‹œë¬¼ ê´€ë¦¬ ëª©ë¡ í˜ì´ì§• ë° ê²€ìƒ‰ ì¡°ê±´
  * 
  * @version $Id$
  */
@@ -50,7 +50,7 @@ public class BoardManagerSearch extends SearchListVo {
 	}
 
 	/**
-	 * @return °Ë»ö ´Ü¾îÁß °ªÀÌ ÀÖ´Â ÇÏ³ª¸¦ ¹İÈ¯. ¾Æ¹«µµ ¾øÀ¸¸é null. 2°³ ÀÌ»ó °ªÀÌ ÀÖÀ» °æ¿ì ¾î¶²°É ¹İÈ¯ ÇÒÁö ¸ğ¸§
+	 * @return ê²€ìƒ‰ ë‹¨ì–´ì¤‘ ê°’ì´ ìˆëŠ” í•˜ë‚˜ë¥¼ ë°˜í™˜. ì•„ë¬´ë„ ì—†ìœ¼ë©´ null. 2ê°œ ì´ìƒ ê°’ì´ ìˆì„ ê²½ìš° ì–´ë–¤ê±¸ ë°˜í™˜ í• ì§€ ëª¨ë¦„
 	 */
 	public String getWord() {
 		if (!StringUtilAd.isEmpty(searchCode)) {

@@ -10,7 +10,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 /**
- * °Ô½ÃÆÇ ¼³Á¤
+ * ê²Œì‹œíŒ ì„¤ì •
  * 
  * @version $Id$
  */
@@ -25,7 +25,7 @@ public class Board {
 	@Column(name = "NAME")
 	private String name;
 
-	/** ÃÑ °Ô½Ã¹° ÆÄÀÏ ¾÷·Îµå Á¦ÇÑ */
+	/** ì´ ê²Œì‹œë¬¼ íŒŒì¼ ì—…ë¡œë“œ ì œí•œ */
 	@Column(name = "UPLOAD_LIMIT")
 	private int uploadLimit;
 
@@ -41,12 +41,12 @@ public class Board {
 	@Type(type = "yes_no")
 	private boolean attachF;
 
-	/** ¾ÏÈ£È­ °Ô½Ã¹° Çã¿ë ¿©ºÎ */
+	/** ì•”í˜¸í™” ê²Œì‹œë¬¼ í—ˆìš© ì—¬ë¶€ */
 	@Column(name = "ENCODE_F")
 	@Type(type = "yes_no")
 	private boolean encodeF;
 
-	/** °Ô½ÃÆÇ »èÁ¦ ¿©ºÎ */
+	/** ê²Œì‹œíŒ ì‚­ì œ ì—¬ë¶€ */
 	@Column(name = "DELETE_F")
 	@Type(type = "yes_no")
 	private boolean deleteF;

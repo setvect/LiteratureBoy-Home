@@ -14,7 +14,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * �Խù� �ڸ�Ʈ
+ * 게시물 코멘트
  * 
  * @version $Id$
  */

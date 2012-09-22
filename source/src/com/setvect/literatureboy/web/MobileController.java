@@ -23,7 +23,7 @@ import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
 import com.setvect.literatureboy.web.etc.EmailGetController;
 
 /**
- * ¸ğ¹ÙÀÏ ÆäÀÌÁö
+ * ëª¨ë°”ì¼ í˜ì´ì§€
  */
 @Controller
 @Scope("prototype")
@@ -38,26 +38,26 @@ public class MobileController {
 	private EmailGetController emailGetController;
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
-		STATUS, // »óÅÂ Á¤º¸
-		LINK_PARAMETER, // ÇöÁ¦ ÆäÀÌÁö ¸µÅ© ÁÖ¼Ò¿Í ÆÄ¶ó¹ÌÅÍ Á¤º¸
-		BOARD_MAP, // °Ô½ÃÆÇ Á¤º¸ Map
+		STATUS, // ìƒíƒœ ì •ë³´
+		LINK_PARAMETER, // í˜„ì œ í˜ì´ì§€ ë§í¬ ì£¼ì†Œì™€ íŒŒë¼ë¯¸í„° ì •ë³´
+		BOARD_MAP, // ê²Œì‹œíŒ ì •ë³´ Map
 	}
 
 	public static enum Menu {
-		MAIN, // ¸ŞÀÎ ¸Ş´º
-		ALL, // ÀüÃ¼ º¸±â
+		MAIN, // ë©”ì¸ ë©”ë‰´
+		ALL, // ì „ì²´ ë³´ê¸°
 	}
 
-	/** ÀüÃ¼ º¸±â¿¡ Æ÷ÇÔµÉ °Ô½ÃÆÇ ÄÚµå */
+	/** ì „ì²´ ë³´ê¸°ì— í¬í•¨ë  ê²Œì‹œíŒ ì½”ë“œ */
 	private static final String[] ALL_VIEW_BOARD = EnvirmentProperty
 			.getStringArray("com.setvect.literatureboy.board.all_view");
 
 	public static final List<String> ALL_VIEW_BOARD_LIST = new ArrayList<String>();
 
-	/** ÀüÃ¼ °Ô½ÃÆÇ */
+	/** ì „ì²´ ê²Œì‹œíŒ */
 	private final List<Board> ALL_BOARD = new ArrayList<Board>();
 
 	public final Map<String, Board> ALL_BOARD_MAP = new HashMap<String, Board>();
@@ -79,9 +79,9 @@ public class MobileController {
 		int posEnd = requestURI.lastIndexOf(".do");
 		String pageName = requestURI.substring(posStart, posEnd);
 
-		// ÀÏ¹İ °Ô½ÃÆÇ UI
+		// ì¼ë°˜ ê²Œì‹œíŒ UI
 		if (pageName.equals("bd") || pageName.equals("bdAll")) {
-			// ÀüÃ¼ °Ô½Ã¹°
+			// ì „ì²´ ê²Œì‹œë¬¼
 			if (pageName.equals("bdAll")) {
 				boardArticleController.setSearchBoards(ALL_VIEW_BOARD_LIST);
 			}
@@ -99,7 +99,7 @@ public class MobileController {
 			Board board = (Board) mav.getModel().get(BoardArticleController.AttributeKey.BOARD.name());
 			MobilePageStatus ps;
 			if (pageName.equals("bdAll")) {
-				ps = new MobilePageStatus("ÀüÃ¼º¸±â", Menu.ALL);
+				ps = new MobilePageStatus("ì „ì²´ë³´ê¸°", Menu.ALL);
 			}
 			else {
 				ps = new MobilePageStatus(board.getName(), Menu.MAIN);
@@ -110,22 +110,22 @@ public class MobileController {
 			return mav;
 		}
 
-		// ÀÌ¸ŞÀÏ ÁÖ¼Ò ¾Ë±â
+		// ì´ë©”ì¼ ì£¼ì†Œ ì•Œê¸°
 		else if (pageName.equals("emailget")) {
 			ModelAndView modelAndView = emailGetController.process(request, response);
 
-			// ¸®ÅÏ ¹ŞÀ» ºä ÀÌ¸§À» Á¶ÀÛÇØ ¸ğ¹ÙÀÏ ÆäÀÌÁö¿¡ ·Îµù µÇ°Ô ÇÔ.
-			// À¥ ÆäÀÌÁö ±¸¼ºÀÇ ¸Å¿ì ÀÇÁ¸ÀûÀÌ±â ¶§¹®¿¡ º°·Î ÁÁÀº ¹æ¹ıÀº ¾Æ´Ô.
+			// ë¦¬í„´ ë°›ì„ ë·° ì´ë¦„ì„ ì¡°ì‘í•´ ëª¨ë°”ì¼ í˜ì´ì§€ì— ë¡œë”© ë˜ê²Œ í•¨.
+			// ì›¹ í˜ì´ì§€ êµ¬ì„±ì˜ ë§¤ìš° ì˜ì¡´ì ì´ê¸° ë•Œë¬¸ì— ë³„ë¡œ ì¢‹ì€ ë°©ë²•ì€ ì•„ë‹˜.
 			String viewName = modelAndView.getViewName();
 
-			MobilePageStatus ps = new MobilePageStatus("¹®ÇĞ¼Ò³â ÀÌ¸ŞÀÏ ¾Ë±â", Menu.MAIN);
+			MobilePageStatus ps = new MobilePageStatus("ë¬¸í•™ì†Œë…„ ì´ë©”ì¼ ì•Œê¸°", Menu.MAIN);
 			modelAndView.addObject(AttributeKey.STATUS.name(), ps);
 			modelAndView.setViewName(ConstraintWeb.MOBILE_LAYOUT);
 			modelAndView.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/" + viewName + ".jsp");
 			return modelAndView;
 		}
 		else {
-			// ¸ŞÀÎÈ­¸é
+			// ë©”ì¸í™”ë©´
 			ModelAndView modelAndView = new ModelAndView(ConstraintWeb.MOBILE_LAYOUT);
 			MobilePageStatus ps = new MobilePageStatus("Literature Boy", Menu.MAIN);
 			modelAndView.addObject(AttributeKey.STATUS.name(), ps);
@@ -136,10 +136,10 @@ public class MobileController {
 	}
 
 	/**
-	 * ÇöÀç ÁÖ¼Ò¿Í ÆÄ¸¶¸®ÅÍ °ªÀ» ÀÌ¿ëÇØ¼­ ¸µÅ© °ªÀ» ¼öÁ¤ ÇÏ±â À§ÇÔ
+	 * í˜„ì¬ ì£¼ì†Œì™€ íŒŒë§ˆë¦¬í„° ê°’ì„ ì´ìš©í•´ì„œ ë§í¬ ê°’ì„ ìˆ˜ì • í•˜ê¸° ìœ„í•¨
 	 * 
 	 * @urlParam request
-	 * @return ÇöÀç ÁÖ¼Ò¿Í ÆÄ¶ó¹ÌÅÍ Á¤º¸¸¦ ±×´ë·Î ¼ÂÆÃ
+	 * @return í˜„ì¬ ì£¼ì†Œì™€ íŒŒë¼ë¯¸í„° ì •ë³´ë¥¼ ê·¸ëŒ€ë¡œ ì…‹íŒ…
 	 */
 	private URLParameter getUrlParam(HttpServletRequest request) {
 		String current = (String) request.getAttribute(ConstraintWeb.AttributeKey.SERVLET_URL.name());
@@ -150,7 +150,7 @@ public class MobileController {
 	}
 
 	/**
-	 * Ç¥½Ã°Ô½ÃÆÇ ÀüÃ¼ ·Îµå
+	 * í‘œì‹œê²Œì‹œíŒ ì „ì²´ ë¡œë“œ
 	 */
 	private void loadViewBoardList() {
 		ALL_BOARD.clear();
@@ -163,21 +163,21 @@ public class MobileController {
 	}
 
 	/**
-	 * ¸ğ¹ÙÀÏ ÆäÀÌÁö »óÅÂ °ª
+	 * ëª¨ë°”ì¼ í˜ì´ì§€ ìƒíƒœ ê°’
 	 */
 	public static class MobilePageStatus {
-		/** ÆäÀÌÁö »ó´Ü Á¦¸ñ */
+		/** í˜ì´ì§€ ìƒë‹¨ ì œëª© */
 		private String title;
 
-		/** ¼±ÅÃµÈ ¸Ş´º */
+		/** ì„ íƒëœ ë©”ë‰´ */
 		private Menu menu;
 
-		/** ÇöÀç ÆäÀÌÁö ÁÖ¼Ò¿Í, ÆÄ¶ó¹ÌÅÍ */
+		/** í˜„ì¬ í˜ì´ì§€ ì£¼ì†Œì™€, íŒŒë¼ë¯¸í„° */
 		private URLParameter urlParam;
 
 		/**
-		 * @urlParam t ÆäÀÌÁö Á¦¸ñ
-		 * @urlParam m ¼±ÅÃ ¸Ş´º
+		 * @urlParam t í˜ì´ì§€ ì œëª©
+		 * @urlParam m ì„ íƒ ë©”ë‰´
 		 */
 		public MobilePageStatus(String t, Menu m) {
 			title = t;
@@ -185,28 +185,28 @@ public class MobileController {
 		}
 
 		/**
-		 * @return ÆäÀÌÁö »ó´Ü Á¦¸ñ
+		 * @return í˜ì´ì§€ ìƒë‹¨ ì œëª©
 		 */
 		public String getTitle() {
 			return title;
 		}
 
 		/**
-		 * @urlParam title ÆäÀÌÁö »ó´Ü Á¦¸ñ
+		 * @urlParam title í˜ì´ì§€ ìƒë‹¨ ì œëª©
 		 */
 		public void setTitle(String title) {
 			this.title = title;
 		}
 
 		/**
-		 * @return ¼±ÅÃµÈ ¸Ş´º
+		 * @return ì„ íƒëœ ë©”ë‰´
 		 */
 		public Menu getMenu() {
 			return menu;
 		}
 
 		/**
-		 * @urlParam menu ¼±ÅÃµÈ ¸Ş´º
+		 * @urlParam menu ì„ íƒëœ ë©”ë‰´
 		 */
 		public void setMenu(Menu menu) {
 			this.menu = menu;

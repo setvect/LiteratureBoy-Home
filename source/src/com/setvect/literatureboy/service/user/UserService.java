@@ -18,19 +18,19 @@ import com.setvect.literatureboy.vo.user.User;
  */
 @Service(value = "UserService")
 public class UserService {
-	/** DB ÄÁÆ®·Ñ ÀÎ½ºÅÏ½º */
+	/** DB ì»¨íŠ¸ë¡¤ ì¸ìŠ¤í„´ìŠ¤ */
 	@Autowired
 	private UserDao userDao;
 
-	/** ±ÇÇÑ º¯°æ ÀÌº¥Æ® */
+	/** ê¶Œí•œ ë³€ê²½ ì´ë²¤íŠ¸ */
 	@Autowired
 	private List<AuthChangeListener> authChangeListener = new ArrayList<AuthChangeListener>();
 
-	// ---------------- »ç¿ëÀÚ
+	// ---------------- ì‚¬ìš©ì
 	/**
 	 * @param id
-	 *            È¸¿ø ¾ÆÀÌµğ
-	 * @return ¾ÆÀÌµğ¿¡ ¸Â´Â È¸¿øÁ¤º¸ ¾øÀ¸¸é null
+	 *            íšŒì› ì•„ì´ë””
+	 * @return ì•„ì´ë””ì— ë§ëŠ” íšŒì›ì •ë³´ ì—†ìœ¼ë©´ null
 	 * @throws Exception
 	 */
 	public User getUser(String id) throws Exception {
@@ -42,10 +42,10 @@ public class UserService {
 	}
 
 	/**
-	 * È¸¿ø Á¤º¸ µî·Ï
+	 * íšŒì› ì •ë³´ ë“±ë¡
 	 * 
 	 * @param user
-	 *            È¸¿ø
+	 *            íšŒì›
 	 * @throws Exception
 	 */
 	public void createUser(User user) throws Exception {
@@ -68,7 +68,7 @@ public class UserService {
 		userDao.removeUser(id);
 	}
 
-	// ---------------- ±ÇÇÑ
+	// ---------------- ê¶Œí•œ
 	public Auth getAuth(int authSeq) {
 		return userDao.getAuth(authSeq);
 	}
@@ -92,7 +92,7 @@ public class UserService {
 		fireEventAuth();
 	}
 
-	// ---------------- ±ÇÇÑ ¸ÊÇÎ
+	// ---------------- ê¶Œí•œ ë§µí•‘
 	public AuthMap getAuthMap(AuthMapKey key) {
 		return userDao.getAuthMap(key);
 	}
@@ -111,7 +111,7 @@ public class UserService {
 	}
 
 	/**
-	 * È¸¿øÀÌ °¡Áö°í ÀÖ´Â ±ÇÇÑ ¸ÊÇÎ Á¤º¸ »èÁ¦
+	 * íšŒì›ì´ ê°€ì§€ê³  ìˆëŠ” ê¶Œí•œ ë§µí•‘ ì •ë³´ ì‚­ì œ
 	 * 
 	 * @param userId
 	 */
@@ -119,37 +119,37 @@ public class UserService {
 		userDao.removeAuthMapForUserId(userId);
 	}
 
-	// ---------------- ±ÇÇÑ º¯°æ ÀÌº¥Æ®
+	// ---------------- ê¶Œí•œ ë³€ê²½ ì´ë²¤íŠ¸
 
 	/**
-	 * ±ÇÇÑ ÀÌº¥Æ® µî·Ï
+	 * ê¶Œí•œ ì´ë²¤íŠ¸ ë“±ë¡
 	 * 
 	 * @param listener
-	 *            ±ÇÇÑ º¯°æ ÀÌº¥Æ®
+	 *            ê¶Œí•œ ë³€ê²½ ì´ë²¤íŠ¸
 	 */
 	public void addAuthChangeListener(AuthChangeListener listener) {
 		authChangeListener.add(listener);
 	}
 
 	/**
-	 * ±ÇÇÑ º¯°æ ÀÌº¥Æ® »èÁ¦
+	 * ê¶Œí•œ ë³€ê²½ ì´ë²¤íŠ¸ ì‚­ì œ
 	 * 
 	 * @param listener
-	 *            »èÁ¦ÇÑ ±ÇÇÑ º¯°æ ÀÌº¥Æ®
+	 *            ì‚­ì œí•œ ê¶Œí•œ ë³€ê²½ ì´ë²¤íŠ¸
 	 */
 	public void removeAuthChangeListener(AuthChangeListener listener) {
 		authChangeListener.remove(listener);
 	}
 
 	/**
-	 * ±ÇÇÑ ÀÌº¥Æ® ÀüÃ¼ »èÁ¦
+	 * ê¶Œí•œ ì´ë²¤íŠ¸ ì „ì²´ ì‚­ì œ
 	 */
 	public void clearAuthChangeListener() {
 		authChangeListener.clear();
 	}
 
 	/**
-	 * ±ÇÇÑ Á¤º¸¸¦ ·Îµù
+	 * ê¶Œí•œ ì •ë³´ë¥¼ ë¡œë”©
 	 */
 	public void initAuth() {
 		fireEventAuth();
@@ -157,7 +157,7 @@ public class UserService {
 	}
 
 	/**
-	 * ±ÇÇÑ Á¤º¸ ¼öÁ¤ notify
+	 * ê¶Œí•œ ì •ë³´ ìˆ˜ì • notify
 	 */
 	private void fireEventAuth() {
 		AuthSearch search = new AuthSearch(1);
@@ -170,7 +170,7 @@ public class UserService {
 	}
 
 	/**
-	 * ±ÇÇÑ ¸ÊÇÎ Á¤º¸ ¼öÁ¤ notify
+	 * ê¶Œí•œ ë§µí•‘ ì •ë³´ ìˆ˜ì • notify
 	 */
 	private void fireEventAuthMap() {
 		AuthMapSearch search = new AuthMapSearch(1);

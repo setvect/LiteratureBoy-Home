@@ -22,16 +22,16 @@ public class AccessChecker {
 
 	static final String LOGOUT = "/user/logout.do";
 	/**
-	 * ·Î±×ÀÎ Ã¼Å© Á¦¿Ü ÁÖ¼Ò
+	 * ë¡œê·¸ì¸ ì²´í¬ ì œì™¸ ì£¼ì†Œ
 	 */
 	private static final String[] EXCUSE_URL = { LOGIN_URL, LOGOUT };
 
 	/**
-	 * ·Î±×ÀÎµÈ »ç¿ëÀÚ°¡ URL°ú ±×¿¡ µû¸¥ ÆÄ¶ó¹ÌÅÍ¿¡ Á¢±Ù °¡´ÉÇÏÁö ¿©ºÎ È®ÀÎ
+	 * ë¡œê·¸ì¸ëœ ì‚¬ìš©ìê°€ URLê³¼ ê·¸ì— ë”°ë¥¸ íŒŒë¼ë¯¸í„°ì— ì ‘ê·¼ ê°€ëŠ¥í•˜ì§€ ì—¬ë¶€ í™•ì¸
 	 * 
 	 * @param request
 	 * @param param
-	 * @return Á¢±Ù °¡´ÉÇÏ¸é true, ¾Æ´Ï¸é false
+	 * @return ì ‘ê·¼ ê°€ëŠ¥í•˜ë©´ true, ì•„ë‹ˆë©´ false
 	 * @throws Exception
 	 */
 	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param) throws Exception {
@@ -39,12 +39,12 @@ public class AccessChecker {
 	}
 
 	/**
-	 * ·Î±×ÀÎµÈ »ç¿ëÀÚ°¡ URL°ú ±×¿¡ µû¸¥ ÆÄ¶ó¹ÌÅÍ¿¡ Á¢±Ù °¡´ÉÇÏÁö ¿©ºÎ È®ÀÎ
+	 * ë¡œê·¸ì¸ëœ ì‚¬ìš©ìê°€ URLê³¼ ê·¸ì— ë”°ë¥¸ íŒŒë¼ë¯¸í„°ì— ì ‘ê·¼ ê°€ëŠ¥í•˜ì§€ ì—¬ë¶€ í™•ì¸
 	 * 
 	 * @param request
 	 * @param param
 	 * @param appendAccess
-	 *            URL Ã¼Å© º°µµ·Î ¸ğµâ ¼º°İ¿¡ µû¸¥ Access Ã¼Å© ·ÎÁ÷
+	 *            URL ì²´í¬ ë³„ë„ë¡œ ëª¨ë“ˆ ì„±ê²©ì— ë”°ë¥¸ Access ì²´í¬ ë¡œì§
 	 * @return
 	 * @throws Exception
 	 */
@@ -56,13 +56,13 @@ public class AccessChecker {
 	}
 
 	/**
-	 * ·Î±×ÀÎµÈ »ç¿ëÀÚ°¡ URL°ú ±×¿¡ µû¸¥ ÆÄ¶ó¹ÌÅÍ¿¡ Á¢±Ù °¡´ÉÇÏÁö ¿©ºÎ È®ÀÎ
+	 * ë¡œê·¸ì¸ëœ ì‚¬ìš©ìê°€ URLê³¼ ê·¸ì— ë”°ë¥¸ íŒŒë¼ë¯¸í„°ì— ì ‘ê·¼ ê°€ëŠ¥í•˜ì§€ ì—¬ë¶€ í™•ì¸
 	 * 
 	 * @param user
 	 * @param currentUrl
 	 * @param param
-	 *            URL ÆÄ¶ó¹ÌÅÍ
-	 * @return Á¢±Ù °¡´ÉÇÏ¸é true, ¾Æ´Ï¸é false
+	 *            URL íŒŒë¼ë¯¸í„°
+	 * @return ì ‘ê·¼ ê°€ëŠ¥í•˜ë©´ true, ì•„ë‹ˆë©´ false
 	 * @throws Exception
 	 */
 	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param) throws Exception {
@@ -70,21 +70,21 @@ public class AccessChecker {
 	}
 
 	/**
-	 * ·Î±×ÀÎµÈ »ç¿ëÀÚ°¡ URL°ú ±×¿¡ µû¸¥ ÆÄ¶ó¹ÌÅÍ¿¡ Á¢±Ù °¡´ÉÇÏÁö ¿©ºÎ È®ÀÎ
+	 * ë¡œê·¸ì¸ëœ ì‚¬ìš©ìê°€ URLê³¼ ê·¸ì— ë”°ë¥¸ íŒŒë¼ë¯¸í„°ì— ì ‘ê·¼ ê°€ëŠ¥í•˜ì§€ ì—¬ë¶€ í™•ì¸
 	 * 
 	 * @param user
 	 * @param currentUrl
 	 * @param param
-	 *            URL ÆÄ¶ó¹ÌÅÍ
+	 *            URL íŒŒë¼ë¯¸í„°
 	 * @param appendAccess
-	 *            URL Ã¼Å© º°µµ·Î ¸ğµâ ¼º°İ¿¡ µû¸¥ Access Ã¼Å© ·ÎÁ÷
-	 * @return Á¢±Ù °¡´ÉÇÏ¸é true, ¾Æ´Ï¸é false
+	 *            URL ì²´í¬ ë³„ë„ë¡œ ëª¨ë“ˆ ì„±ê²©ì— ë”°ë¥¸ Access ì²´í¬ ë¡œì§
+	 * @return ì ‘ê·¼ ê°€ëŠ¥í•˜ë©´ true, ì•„ë‹ˆë©´ false
 	 * @throws Exception
 	 */
 	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param, AccessRule appendAccess)
 			throws Exception {
 		List<Auth> matchAuthList = getMathAuth(currentUrl, param);
-		// Á¢±Ù ±ÇÇÑ Á¤º¸°¡ ¾øÀ¸¸é Åë°ú
+		// ì ‘ê·¼ ê¶Œí•œ ì •ë³´ê°€ ì—†ìœ¼ë©´ í†µê³¼
 		if (StringUtilAd.isInclude(currentUrl, EXCUSE_URL) || matchAuthList.size() == 0) {
 			return true;
 		}
@@ -93,12 +93,12 @@ public class AccessChecker {
 			return false;
 		}
 
-		// ÀüÃ¼°ü¸®ÀÚ¸é ºÎ¿©µÈ ±ÇÇÑ È®ÀÎ ¾ÈÇÔ
+		// ì „ì²´ê´€ë¦¬ìë©´ ë¶€ì—¬ëœ ê¶Œí•œ í™•ì¸ ì•ˆí•¨
 		if (user.isAdminF()) {
 			return true;
 		}
 
-		// ÇØ´ç »ç¿ëÀÚ°¡ °¡Áö°í ÀÖ´Â ¸ÉÇÎ Á¤º¸
+		// í•´ë‹¹ ì‚¬ìš©ìê°€ ê°€ì§€ê³  ìˆëŠ” ë§´í•‘ ì •ë³´
 		Collection<AuthMap> authMap = AuthCache.getAuthMapCache(user.getUserId());
 		for (Auth auth : matchAuthList) {
 			for (AuthMap map : authMap) {
@@ -116,16 +116,16 @@ public class AccessChecker {
 	}
 
 	/**
-	 * URL°ú ÆÄ¶ó¹ÌÅÍ Á¤º¸°¡ ¸ÅÄ¡µÇ´Â ±ÇÇÑ Á¤º¸¸¦ Ã£À½
+	 * URLê³¼ íŒŒë¼ë¯¸í„° ì •ë³´ê°€ ë§¤ì¹˜ë˜ëŠ” ê¶Œí•œ ì •ë³´ë¥¼ ì°¾ìŒ
 	 * 
 	 * @param currentUrl
-	 *            Çö URL ÁÖ¼Ò
+	 *            í˜„ URL ì£¼ì†Œ
 	 * @param param
-	 *            query string ÆÄ¶ó¹ÌÅÍ
-	 * @return ÇöÀç URL¿¡ ¸Â´Â Á¢±Ù ±ÇÇÑ Á¤º¸. ÇØ´ç »çÇ× ¾øÀ¸¸é ºó List
+	 *            query string íŒŒë¼ë¯¸í„°
+	 * @return í˜„ì¬ URLì— ë§ëŠ” ì ‘ê·¼ ê¶Œí•œ ì •ë³´. í•´ë‹¹ ì‚¬í•­ ì—†ìœ¼ë©´ ë¹ˆ List
 	 */
 	private static List<Auth> getMathAuth(String currentUrl, Map<String, String> param) {
-		// Çö Á¢±Ù URLÀÌ ±ÇÇÑ ¸Ê¸®½ºÆ®¿¡ Æ÷ÇÔµÇ¾î ÀÖ´ÂÁö ¿©ºÎ
+		// í˜„ ì ‘ê·¼ URLì´ ê¶Œí•œ ë§µë¦¬ìŠ¤íŠ¸ì— í¬í•¨ë˜ì–´ ìˆëŠ”ì§€ ì—¬ë¶€
 		List<Auth> matchAuthList = new ArrayList<Auth>();
 		Collection<Auth> authList = AuthCache.getAuthCache();
 		for (Auth auth : authList) {
@@ -143,10 +143,10 @@ public class AccessChecker {
 	}
 
 	/**
-	 * ÇöÀç Àü´Ş ÆÄ¶ó¹ÌÅÍ¸¦ ±âÁØÀ¸·Î ±ÇÇÑ Á¤º¸ ¼³Á¤°ªÀÌ ¸ÅÄª µÇ´ÂÁ÷ °Ë»ç
+	 * í˜„ì¬ ì „ë‹¬ íŒŒë¼ë¯¸í„°ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ê¶Œí•œ ì •ë³´ ì„¤ì •ê°’ì´ ë§¤ì¹­ ë˜ëŠ”ì§ ê²€ì‚¬
 	 * 
 	 * @param param
-	 *            ÆÄ¶ó¹ÌÅÍ Á¤º¸
+	 *            íŒŒë¼ë¯¸í„° ì •ë³´
 	 * @param auth
 	 * @return
 	 */
@@ -158,7 +158,7 @@ public class AccessChecker {
 		String urlSplit[] = paramString.split("[&]");
 		for (String token : urlSplit) {
 			String[] t = token.split("[=]");
-			// "Å°=°ª" ÇüÅÂ°¡ ¾Æ´Ï¸é ¹«½Ã
+			// "í‚¤=ê°’" í˜•íƒœê°€ ì•„ë‹ˆë©´ ë¬´ì‹œ
 			if (t.length != 2) {
 				continue;
 			}
@@ -187,10 +187,10 @@ public class AccessChecker {
 
 	/**
 	 * @param currentUrl
-	 *            Çö URL
+	 *            í˜„ URL
 	 * @param auth
-	 *            ¸ÅÄ¡¸¦ ºñ±³ÇÒ ±ÇÇÑ Á¤º¸
-	 * @return URLÀÌ ¸ÅÄ¡ µÇ¸é true
+	 *            ë§¤ì¹˜ë¥¼ ë¹„êµí•  ê¶Œí•œ ì •ë³´
+	 * @return URLì´ ë§¤ì¹˜ ë˜ë©´ true
 	 */
 	private static boolean isUrlMatch(String currentUrl, Auth auth) {
 		boolean urlMatch = false;

@@ -14,7 +14,7 @@ import org.hibernate.annotations.Type;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
- * È¸¿ø
+ * íšŒì›
  * 
  * @version $Id: Board.java 54 2010-08-09 14:25:54Z setvect@naver.com $
  */
@@ -33,7 +33,7 @@ public class User implements Serializable {
 	private String name;
 
 	/**
-	 * MD5·Î ¾ÏÈ£È­
+	 * MD5ë¡œ ì•”í˜¸í™”
 	 * 
 	 * @see ConstraintWeb#PASSWD_ALGORITHM
 	 */
@@ -43,7 +43,7 @@ public class User implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
-	/** °ü¸®ÀÚ ¿©ºÎ */
+	/** ê´€ë¦¬ì ì—¬ë¶€ */
 	@Column(name = "ADMIN_F")
 	@Type(type = "yes_no")
 	private boolean adminF;

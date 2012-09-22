@@ -19,7 +19,7 @@ import com.setvect.literatureboy.vo.board.BoardComment;
 import com.setvect.literatureboy.vo.board.BoardTrackback;
 
 /**
- * °Ô½Ã¹° DAO
+ * ê²Œì‹œë¬¼ DAO
  * 
  * @version $Id: AbstractBoardDao.java 121 2010-10-03 05:59:11Z
  *          setvect@naver.com $
@@ -28,7 +28,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	// --------------- °ü¸®
+	// --------------- ê´€ë¦¬
 	public Board getBoard(String code) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Board) session.get(Board.class, code);
@@ -64,13 +64,13 @@ public abstract class AbstractBoardDao implements BoardDao {
 
 	/**
 	 * @param pageCondition
-	 *            °Ë»ö Á¶°Ç
-	 * @return select where Àı Á¶°Ç
+	 *            ê²€ìƒ‰ ì¡°ê±´
+	 * @return select where ì ˆ ì¡°ê±´
 	 */
 	private String getManagerWhereClause(BoardManagerSearch pageCondition) {
 		String where = "where deleteF = 'N'";
 
-		// µÎ°³°¡ µ¿»õ¿¡ °Ë»ö Á¶°Ç¿¡ Æ÷ÇÔ µÉ ¼ö ¾øÀ½
+		// ë‘ê°œê°€ ë™ìƒˆì— ê²€ìƒ‰ ì¡°ê±´ì— í¬í•¨ ë  ìˆ˜ ì—†ìŒ
 		if (!StringUtilAd.isEmpty(pageCondition.getSearchCode())) {
 			where += " and boardCode like " + StringUtilAd.getSqlStringLike(pageCondition.getSearchCode());
 		}
@@ -108,7 +108,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 		session.flush();
 	}
 
-	// --------------- °Ô½Ã¹°
+	// --------------- ê²Œì‹œë¬¼
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -126,7 +126,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 	 * com.setvect.literatureboy.db.MemoDao#getPagingList(com.setvect.literatureboy
 	 * .service.memo.MemoSearchVO)
 	 */
-	// TODO ¸ñ·Ï °Ë»ö½Ã ºÒÇÊ¿äÇÑ Ç×¸ñ(³»¿ë TEXT)±îÁö °¡Á®¿À´Â °æ¿ì ¹ß»ı. ¼º´É ¹®Á¦ ¹ß»ı½Ã ¼öÁ¤
+	// TODO ëª©ë¡ ê²€ìƒ‰ì‹œ ë¶ˆí•„ìš”í•œ í•­ëª©(ë‚´ìš© TEXT)ê¹Œì§€ ê°€ì ¸ì˜¤ëŠ” ê²½ìš° ë°œìƒ. ì„±ëŠ¥ ë¬¸ì œ ë°œìƒì‹œ ìˆ˜ì •
 	public GenericPage<BoardArticle> getArticlePagingList(BoardArticleSearch pageCondtion) {
 		Session session = sessionFactory.getCurrentSession();
 
@@ -149,14 +149,14 @@ public abstract class AbstractBoardDao implements BoardDao {
 	}
 
 	/**
-	 * Á¤·Ä Á¶°Ç
+	 * ì •ë ¬ ì¡°ê±´
 	 * 
 	 * @param search
-	 *            °Ë»ö Á¶°Ç
+	 *            ê²€ìƒ‰ ì¡°ê±´
 	 * @return
 	 */
 	private String getOrder(BoardArticleSearch search) {
-		// °Ô½ÃÆÇ µÎ°³ ÀÌ»óÀÎ °æ¿ì °èÃşÇü ±¸Á¶·Î Á¤·ÄÀº ÇÏÁö ¾Ê°í ÀÔ·Â¼ø À¸·Î Á¤·Ä
+		// ê²Œì‹œíŒ ë‘ê°œ ì´ìƒì¸ ê²½ìš° ê³„ì¸µí˜• êµ¬ì¡°ë¡œ ì •ë ¬ì€ í•˜ì§€ ì•Šê³  ì…ë ¥ìˆœ ìœ¼ë¡œ ì •ë ¬
 		if (search.getSearchCodes() != null) {
 			return " order by articleSeq desc";
 		}
@@ -167,8 +167,8 @@ public abstract class AbstractBoardDao implements BoardDao {
 
 	/**
 	 * @param search
-	 *            °Ë»ö Á¶°Ç
-	 * @return select where Àı Á¶°Ç
+	 *            ê²€ìƒ‰ ì¡°ê±´
+	 * @return select where ì ˆ ì¡°ê±´
 	 */
 	private String getArticleWhereClause(BoardArticleSearch search) {
 		String where = " where ";
@@ -185,11 +185,11 @@ public abstract class AbstractBoardDao implements BoardDao {
 		}
 
 		if (!search.isDeleteView()) {
-			// »èÁ¦ °Ô½Ã¹° º¸¿© ÁÖÁö ¾ÊÀ½
+			// ì‚­ì œ ê²Œì‹œë¬¼ ë³´ì—¬ ì£¼ì§€ ì•ŠìŒ
 			where += " and deleteF = 'N' ";
 		}
 
-		// µÎ°³ ÀÌ»ó µ¿½Ã¿¡ °Ë»ö Á¶°Ç¿¡ Æ÷ÇÔ µÉ ¼ö ¾øÀ½
+		// ë‘ê°œ ì´ìƒ ë™ì‹œì— ê²€ìƒ‰ ì¡°ê±´ì— í¬í•¨ ë  ìˆ˜ ì—†ìŒ
 		if (!StringUtilAd.isEmpty(search.getSearchName())) {
 			where += " and name like " + StringUtilAd.getSqlStringLike(search.getSearchName());
 		}
@@ -213,7 +213,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 		Session session = sessionFactory.getCurrentSession();
 		String q;
 
-		// ÀÎµ¦½º ¼ø¼­
+		// ì¸ë±ìŠ¤ ìˆœì„œ
 		q = "select COALESCE(max(idx1) + 1, 1)  from BoardArticle WHERE boardCode = ?";
 		Query query = session.createQuery(q);
 		query.setParameter(0, article.getBoardCode());
@@ -226,7 +226,7 @@ public abstract class AbstractBoardDao implements BoardDao {
 		int idx2 = ((Integer) query.uniqueResult()).intValue();
 		article.setIdx2(idx2);
 
-		// ±âº» °ª
+		// ê¸°ë³¸ ê°’
 		article.setIdx3(1);
 		article.setDepthLevel(1);
 
@@ -255,13 +255,13 @@ public abstract class AbstractBoardDao implements BoardDao {
 		// IDX2
 		article.setIdx2(target.getIdx2());
 
-		// °Ô½Ã¹°ÀÇ ´ÙÀ½ ¹øÈ£
+		// ê²Œì‹œë¬¼ì˜ ë‹¤ìŒ ë²ˆí˜¸
 		article.setIdx3(target.getIdx3() + 1);
 
-		// ´ä±Û ´ë»ó ±Û ±íÀÌ + 1
+		// ë‹µê¸€ ëŒ€ìƒ ê¸€ ê¹Šì´ + 1
 		article.setDepthLevel(target.getDepthLevel() + 1);
 
-		// ÇöÀç ´äº¯ÀÌ ´Ş¸± °Ô½ÃÆÇÀ¸·Î ºÎÅÍ ÀÌÇÏÀÇ ÀÌÀü ´äº¯ °Ô½ÃÆÇ¿¡ idx3¸¦ +1¸¦ ÇØÁØ´Ù.
+		// í˜„ì¬ ë‹µë³€ì´ ë‹¬ë¦´ ê²Œì‹œíŒìœ¼ë¡œ ë¶€í„° ì´í•˜ì˜ ì´ì „ ë‹µë³€ ê²Œì‹œíŒì— idx3ë¥¼ +1ë¥¼ í•´ì¤€ë‹¤.
 		q = " UPDATE BoardArticle SET                                 "
 				+ " 	idx3 = idx3 + 1                               "
 				+ " WHERE	boardCode = ? AND idx2 = ? AND idx3 >=	? ";
@@ -276,11 +276,11 @@ public abstract class AbstractBoardDao implements BoardDao {
 	}
 
 	/**
-	 * idx °ü·Ã ¿¬»ê¾øÀ½ <br>
-	 * ¸¶ÀÌ±×·¹ÀÌ¼Ç ¿ë
+	 * idx ê´€ë ¨ ì—°ì‚°ì—†ìŒ <br>
+	 * ë§ˆì´ê·¸ë ˆì´ì…˜ ìš©
 	 * 
 	 * @param article
-	 *            °Ô½Ã¹° Á¤º¸
+	 *            ê²Œì‹œë¬¼ ì •ë³´
 	 */
 	public void createArticleMigration(BoardArticle article) {
 		Session session = sessionFactory.getCurrentSession();

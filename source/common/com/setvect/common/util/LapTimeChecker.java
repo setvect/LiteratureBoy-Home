@@ -4,44 +4,44 @@ import java.io.PrintStream;
 import java.text.DecimalFormat;
 
 /**
- * ½Ã°£À» Ã¼Å© ÇÑ´Ù.<br>
- * ÇÁ·Î±×·¥ ÄÚµå ÁøÇà ½Ã°£À» Ã¼Å© ÇÒ¶§ »ç¿ëÇÑ´Ù.
+ * ì‹œê°„ì„ ì²´í¬ í•œë‹¤.<br>
+ * í”„ë¡œê·¸ë¨ ì½”ë“œ ì§„í–‰ ì‹œê°„ì„ ì²´í¬ í• ë•Œ ì‚¬ìš©í•œë‹¤.
  * 
  * @version $Id$
  */
 public class LapTimeChecker {
 
-	/** 1ÃÊ¸¦ ¹Ğ¸®¼¼ÄÁµå·Î */
+	/** 1ì´ˆë¥¼ ë°€ë¦¬ì„¸ì»¨ë“œë¡œ */
 	private static final int SEC_FOR_MS = 1000;
-	/** 1ºĞÀ» ¹Ğ¸®¼¼ÄÁµå·Î */
+	/** 1ë¶„ì„ ë°€ë¦¬ì„¸ì»¨ë“œë¡œ */
 	private static final int MIN_FOR_MS = SEC_FOR_MS * 60;
-	/** 1½Ã°£À» ¹Ğ¸®¼¼ÄÁµå·Î */
+	/** 1ì‹œê°„ì„ ë°€ë¦¬ì„¸ì»¨ë“œë¡œ */
 	private static final int HOUR_FOR_MS = MIN_FOR_MS * 60;
-	/** ÇÏ·ç¸¦ ¹Ğ¸®¼¼ÄÁµå·Î */
+	/** í•˜ë£¨ë¥¼ ë°€ë¦¬ì„¸ì»¨ë“œë¡œ */
 	private static final int DAY_FOR_MS = HOUR_FOR_MS * 24;
 
 	private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
 	private static final DecimalFormat NUMBER_COMMA_FORMAT = new DecimalFormat(",###");
 	private static final DecimalFormat NUMBER_TIME_FORMAT = new DecimalFormat("00");
 
-	/** Ã¼Å© ½ÃÀÛ ½Ã°£ */
+	/** ì²´í¬ ì‹œì‘ ì‹œê°„ */
 	private long startTime;
 
-	/** Ãâ·Â ½ºÆ®¸² */
+	/** ì¶œë ¥ ìŠ¤íŠ¸ë¦¼ */
 	private PrintStream out;
 
-	/** Ã¼Å© Ä«¿îÆ® */
+	/** ì²´í¬ ì¹´ìš´íŠ¸ */
 	private int checkCount;
 
-	/** ÀÌ¸§ */
+	/** ì´ë¦„ */
 	private String name;
 
-	/** ÀüÃ¼ Ä«¿îÆ® */
+	/** ì „ì²´ ì¹´ìš´íŠ¸ */
 	private int totalCount;
 
 	/**
-	 * ±âº» »ı¼ºÀÚ<br>
-	 * ¸Ş¼¼Áö Ãâ·ÂÀº System.out ¿¡¼­ ÇÔ
+	 * ê¸°ë³¸ ìƒì„±ì<br>
+	 * ë©”ì„¸ì§€ ì¶œë ¥ì€ System.out ì—ì„œ í•¨
 	 */
 	public LapTimeChecker(String name) {
 		this(System.out, name);
@@ -49,7 +49,7 @@ public class LapTimeChecker {
 
 	/**
 	 * @param out
-	 *            Ãâ·Â ½ºÆ®¸²
+	 *            ì¶œë ¥ ìŠ¤íŠ¸ë¦¼
 	 */
 	public LapTimeChecker(PrintStream out, String name) {
 		this.name = name;
@@ -59,27 +59,27 @@ public class LapTimeChecker {
 	}
 
 	/**
-	 * ½Ã°£ Ã¼Å©
+	 * ì‹œê°„ ì²´í¬
 	 */
 	public void check() {
 		check("");
 	}
 
 	/**
-	 * ½Ã°£ Ã¼Å©
+	 * ì‹œê°„ ì²´í¬
 	 * 
 	 * @param message
-	 *            Ãâ·Â ¸Ş½ÃÁö
+	 *            ì¶œë ¥ ë©”ì‹œì§€
 	 */
 	public void check(String message) {
 		out.println(getCheckMessage(message));
 	}
 
 	/**
-	 * ½Ã°£ Ã¼Å© Ãâ·Â ¸Ş¼¼Áö¸¦ ¹®ÀÚ¿­·Î ¹İÈ¯
+	 * ì‹œê°„ ì²´í¬ ì¶œë ¥ ë©”ì„¸ì§€ë¥¼ ë¬¸ìì—´ë¡œ ë°˜í™˜
 	 * 
 	 * @param message
-	 *            Ãâ·Â ¸Ş½ÃÁö
+	 *            ì¶œë ¥ ë©”ì‹œì§€
 	 * @return
 	 */
 	public String getCheckMessage(String message) {
@@ -92,8 +92,8 @@ public class LapTimeChecker {
 
 	/**
 	 * @param processCount
-	 *            Ã³¸®µÈ °Ç¼ö
-	 * @return ¿¹»ó ³²Àº ½Ã°£À» ms ´ÜÀ§·Î ¸®ÅÏ
+	 *            ì²˜ë¦¬ëœ ê±´ìˆ˜
+	 * @return ì˜ˆìƒ ë‚¨ì€ ì‹œê°„ì„ ms ë‹¨ìœ„ë¡œ ë¦¬í„´
 	 */
 	public long getRemainTime(int processCount) {
 		long running = System.currentTimeMillis() - startTime;
@@ -102,10 +102,10 @@ public class LapTimeChecker {
 
 	/**
 	 * @param processCount
-	 *            Ã³¸®µÈ °Ç¼ö
+	 *            ì²˜ë¦¬ëœ ê±´ìˆ˜
 	 * @param pattern
-	 *            Ãâ·Â ÆĞÅÏ, ³¯Â¥ ÆĞÅÏ
-	 * @return ¿¹»ó ³²Àº ½Ã°£À» Á¤ÇØÁø Æ÷¸Ë¿¡ ÀÇÇØ ¹®ÀÚ¿­·Î Á¦°ø
+	 *            ì¶œë ¥ íŒ¨í„´, ë‚ ì§œ íŒ¨í„´
+	 * @return ì˜ˆìƒ ë‚¨ì€ ì‹œê°„ì„ ì •í•´ì§„ í¬ë§·ì— ì˜í•´ ë¬¸ìì—´ë¡œ ì œê³µ
 	 */
 	public String getRemainTimeFormat(int processCount) {
 		long time = getRemainTime(processCount);
@@ -113,7 +113,7 @@ public class LapTimeChecker {
 	}
 
 	/**
-	 * @return ¼öÇà ½Ã°£À» ³¯Â¥/½Ã°£ Æ÷¸ËÀ¸·Î
+	 * @return ìˆ˜í–‰ ì‹œê°„ì„ ë‚ ì§œ/ì‹œê°„ í¬ë§·ìœ¼ë¡œ
 	 */
 	public String getRunningTimeFormat() {
 		long runningTime = System.currentTimeMillis() - startTime;
@@ -143,10 +143,10 @@ public class LapTimeChecker {
 	}
 
 	/**
-	 * ÇöÀç ÁøÇà ½Ã°£ ´ëºñ ÀüÃ¼ Ä«¿îÆ®¸¦ °è»êÇÏ¿© ÃÑ ¿¹»ó ½Ã°£À» ±¸ÇÔ
+	 * í˜„ì¬ ì§„í–‰ ì‹œê°„ ëŒ€ë¹„ ì „ì²´ ì¹´ìš´íŠ¸ë¥¼ ê³„ì‚°í•˜ì—¬ ì´ ì˜ˆìƒ ì‹œê°„ì„ êµ¬í•¨
 	 * 
 	 * @param totalCount
-	 *            ÃÑ ÀÛ¾÷ °Ç¼ö
+	 *            ì´ ì‘ì—… ê±´ìˆ˜
 	 */
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;

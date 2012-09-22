@@ -8,7 +8,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * ±ÇÇÑ ¸ÊÇÎ
+ * ê¶Œí•œ ë§µí•‘
  * 
  * @version $Id: ConnStat.java 619 2009-06-16 01:28:32Z setvect $
  */
@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AuthMap {
 
-	/** º¹ÇÕÅ° Á¤º¸ */
+	/** ë³µí•©í‚¤ ì •ë³´ */
 	@Id
 	private AuthMapKey key = new AuthMapKey();
 

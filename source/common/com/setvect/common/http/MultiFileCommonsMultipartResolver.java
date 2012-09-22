@@ -16,9 +16,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.setvect.common.util.StringUtilAd;
 
 /**
- * Spring 2.5¿¡¼­´Â µ¿ÀÏÇÑ ÀÌ¸§À¸·Î Ã·ºÎÆÄÀÏ µî·Ï ÆûÀÌ 2°³ ÀÌ»óÀÌ °æ¿ì ¿¡·¯³² spring mvc 2.5.5 multipart
- * multi file upload Áö¿ø<br>
- * Âü°í: http://nezah.egloos.com/3994564<br>
+ * Spring 2.5ì—ì„œëŠ” ë™ì¼í•œ ì´ë¦„ìœ¼ë¡œ ì²¨ë¶€íŒŒì¼ ë“±ë¡ í¼ì´ 2ê°œ ì´ìƒì´ ê²½ìš° ì—ëŸ¬ë‚¨ spring mvc 2.5.5 multipart
+ * multi file upload ì§€ì›<br>
+ * ì°¸ê³ : http://nezah.egloos.com/3994564<br>
  * 
  * @version $Id$
  */
@@ -116,7 +116,7 @@ public class MultiFileCommonsMultipartResolver extends CommonsMultipartResolver 
 
 	/**
 	 * @param ckFile
-	 *            ÆÄÀÏ ¾÷·Îµå Ã¼Å©
+	 *            íŒŒì¼ ì—…ë¡œë“œ ì²´í¬
 	 */
 	public void setCkFile(CheckAllowUploadFile ckFile) {
 		this.ckFile = ckFile;

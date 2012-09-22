@@ -7,23 +7,23 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 /**
- * log4j¸¦ »ç¿ëÇÒ¶§ ÀÏÀÏÀÌ ÀÎ½ºÅÏ½º ¾È¸¸µé°í staticÇÏ°Ô »ç¿ëÇÏ±â ¾ÖÇØ¼­ ÀÌ·¯Ã· º°µµÀÇ Å¬·¡½º¸¦ ¸¸µé¾ú´Ù.
+ * log4jë¥¼ ì‚¬ìš©í• ë•Œ ì¼ì¼ì´ ì¸ìŠ¤í„´ìŠ¤ ì•ˆë§Œë“¤ê³  staticí•˜ê²Œ ì‚¬ìš©í•˜ê¸° ì• í•´ì„œ ì´ëŸ¬ì²¨ ë³„ë„ì˜ í´ë˜ìŠ¤ë¥¼ ë§Œë“¤ì—ˆë‹¤.
  * 
  * @version $Id$
  */
 public class LogPrinter {
 
-	/** ·Î±× ±â·Ï */
+	/** ë¡œê·¸ ê¸°ë¡ */
 	public static Logger out;
 
-	/** ÃÊ±âÈ­ ¿©ºÎ */
+	/** ì´ˆê¸°í™” ì—¬ë¶€ */
 	private static boolean init = false;
 
 	/**
-	 * ·Î±× ¼³Á¤À» ÃÊ±âÈ­ ÇÔ
+	 * ë¡œê·¸ ì„¤ì •ì„ ì´ˆê¸°í™” í•¨
 	 * 
 	 * @param logFilePath
-	 *            ·Î±× ÆÄÀÏ ¼³Á¤ °æ·Î
+	 *            ë¡œê·¸ íŒŒì¼ ì„¤ì • ê²½ë¡œ
 	 */
 	public synchronized static void init(File logFilePath) {
 		if (init) {
@@ -35,10 +35,10 @@ public class LogPrinter {
 	}
 
 	/**
-	 * ·Î±× ¼³Á¤À» ÃÊ±âÈ­ ÇÔ
+	 * ë¡œê·¸ ì„¤ì •ì„ ì´ˆê¸°í™” í•¨
 	 * 
 	 * @param logFilePath
-	 *            ·Î±× ÆÄÀÏ ¼³Á¤ °æ·Î
+	 *            ë¡œê·¸ íŒŒì¼ ì„¤ì • ê²½ë¡œ
 	 */
 	public static void init(URL logFilePath) {
 		if (init) {

@@ -15,7 +15,7 @@ import com.setvect.literatureboy.web.board.BoardArticleController;
 import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
 
 /**
- * È¯°æ¼³Á¤>¿î¿µÀÚ °ü¸® ¸Ş´º ÄÁÆ®·Ñ·¯
+ * í™˜ê²½ì„¤ì •>ìš´ì˜ì ê´€ë¦¬ ë©”ë‰´ ì»¨íŠ¸ë¡¤ëŸ¬
  */
 @Controller
 @Scope("prototype")
@@ -24,10 +24,10 @@ public class DevlopController {
 	private BoardArticleController boardArticleController;
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
-		MAIN_ARTICLE, // ¸ŞÀÎÈ­¸é¿¡ Ç¥½ÃµÉ ÃÖ½Å °Ô½Ã¹°
+		MAIN_ARTICLE, // ë©”ì¸í™”ë©´ì— í‘œì‹œë  ìµœì‹  ê²Œì‹œë¬¼
 	}
 
 	@RequestMapping("/devlop/*.do")

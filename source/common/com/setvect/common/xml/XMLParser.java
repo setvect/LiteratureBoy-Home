@@ -22,17 +22,17 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- * XML, XSD¸¦ ÀÌ¿ëÇÏ¿© Docuemnt °´Ã¼¸¦ ¸¸µé¾îÁÜ
+ * XML, XSDë¥¼ ì´ìš©í•˜ì—¬ Docuemnt ê°ì²´ë¥¼ ë§Œë“¤ì–´ì¤Œ
  * 
  * @version $Id$
  */
 public class XMLParser {
 	/**
 	 * @param xmlFile
-	 *            XML ÆÄÀÏ
+	 *            XML íŒŒì¼
 	 * @param xmlSchema
-	 *            ½ºÅ°¸¶ ÆÄÀÏ
-	 * @return ÇØ´ç XML Root Document
+	 *            ìŠ¤í‚¤ë§ˆ íŒŒì¼
+	 * @return í•´ë‹¹ XML Root Document
 	 * 
 	 * @throws XPathExpressionException
 	 * @throws ParserConfigurationException
@@ -49,10 +49,10 @@ public class XMLParser {
 
 	/**
 	 * @param xmlFile
-	 *            XML ÆÄÀÏ
+	 *            XML íŒŒì¼
 	 * @param xmlSchema
-	 *            ½ºÅ°¸¶ ÆÄÀÏ
-	 * @return ÇØ´ç XML Root Document
+	 *            ìŠ¤í‚¤ë§ˆ íŒŒì¼
+	 * @return í•´ë‹¹ XML Root Document
 	 * 
 	 * @throws XPathExpressionException
 	 * @throws ParserConfigurationException
@@ -69,10 +69,10 @@ public class XMLParser {
 
 	/**
 	 * @param xmlFile
-	 *            XML ÆÄÀÏ °æ·Î
+	 *            XML íŒŒì¼ ê²½ë¡œ
 	 * @param xmlSchema
-	 *            XML ½ºÅ°¸¶ ÆÄÀÏ °æ·Î
-	 * @return ÇØ´ç XML Root Document
+	 *            XML ìŠ¤í‚¤ë§ˆ íŒŒì¼ ê²½ë¡œ
+	 * @return í•´ë‹¹ XML Root Document
 	 * @throws XPathExpressionException
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
@@ -85,10 +85,10 @@ public class XMLParser {
 
 	/**
 	 * @param xmlFile
-	 *            XML ÆÄÀÏ
+	 *            XML íŒŒì¼
 	 * @param xmlSchema
-	 *            ½ºÅ°¸¶ ÆÄÀÏ
-	 * @return ÇØ´ç XML Root Document
+	 *            ìŠ¤í‚¤ë§ˆ íŒŒì¼
+	 * @return í•´ë‹¹ XML Root Document
 	 * 
 	 * @throws XPathExpressionException
 	 * @throws ParserConfigurationException
@@ -104,9 +104,9 @@ public class XMLParser {
 
 	/**
 	 * @param xmlFile
-	 *            XML ÆÄÀÏ
+	 *            XML íŒŒì¼
 	 * @param schema
-	 *            ½ºÅ°¸¶ Á¤º¸
+	 *            ìŠ¤í‚¤ë§ˆ ì •ë³´
 	 * @return
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
@@ -119,9 +119,9 @@ public class XMLParser {
 
 	/**
 	 * @param openStream
-	 *            XML ½ºÆ®¸²
+	 *            XML ìŠ¤íŠ¸ë¦¼
 	 * @param schema
-	 *            ½ºÅ°¸¶ Á¤º¸
+	 *            ìŠ¤í‚¤ë§ˆ ì •ë³´
 	 * @return
 	 * @throws ParserConfigurationException
 	 * @throws IOException
@@ -133,7 +133,7 @@ public class XMLParser {
 		DocumentBuilder builder = null;
 		try {
 
-			// DOM ÆÄ¼­ »ı¼º
+			// DOM íŒŒì„œ ìƒì„±
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 			factory.setIgnoringElementContentWhitespace(true);

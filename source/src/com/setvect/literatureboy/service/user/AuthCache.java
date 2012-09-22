@@ -9,7 +9,7 @@ import com.setvect.literatureboy.vo.user.Auth;
 import com.setvect.literatureboy.vo.user.AuthMap;
 
 /**
- * ±ÇÇÑ ¸ÉÇÎ Á¤º¸¸¦ Ä³½ÌÇÏ°í ÀÖ´Ù. È¸¿øÀÌ Æ¯Á¤ URL°ú mode ÆÄ¶ó¹ÌÅÍ¿¡ Á¢±ÙÇØ Á¢±Ù Çã°¡ ¿©ºÎ¸¦ Á¦°øÇÔ
+ * ê¶Œí•œ ë§´í•‘ ì •ë³´ë¥¼ ìºì‹±í•˜ê³  ìˆë‹¤. íšŒì›ì´ íŠ¹ì • URLê³¼ mode íŒŒë¼ë¯¸í„°ì— ì ‘ê·¼í•´ ì ‘ê·¼ í—ˆê°€ ì—¬ë¶€ë¥¼ ì œê³µí•¨
  * 
  * @version $Id$
  */
@@ -53,7 +53,7 @@ public class AuthCache implements AuthChangeListener {
 	}
 
 	/**
-	 * ÇØ´ç »ç¿ëÀÚ°¡ °¡Áö°í ÀÖ´Â ¸ÉÇÎ Á¤º¸
+	 * í•´ë‹¹ ì‚¬ìš©ìê°€ ê°€ì§€ê³  ìˆëŠ” ë§´í•‘ ì •ë³´
 	 * 
 	 * @param userId
 	 * @return

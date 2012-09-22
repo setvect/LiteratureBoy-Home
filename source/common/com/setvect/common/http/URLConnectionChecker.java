@@ -6,16 +6,16 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * url ÁÖ¼Ò¸¦ ÅëÇØ Á¤»óÀûÀÎ °æ·ÎÀÎÁö ÆÄ¾Ç
+ * url ì£¼ì†Œë¥¼ í†µí•´ ì •ìƒì ì¸ ê²½ë¡œì¸ì§€ íŒŒì•…
  * @version $Id$
  */
 public class URLConnectionChecker {
 	
 	/**
 	 * @param url
-	 *            URL ÀüÃ¼ ÁÖ¼Ò<br>
+	 *            URL ì „ì²´ ì£¼ì†Œ<br>
 	 *            ex) http://www.naver.com/index.html
-	 * @return Á¢±Ù °¡´ÉÇÏ¸é true ¾Æ´Ï¸é false;
+	 * @return ì ‘ê·¼ ê°€ëŠ¥í•˜ë©´ true ì•„ë‹ˆë©´ false;
 	 */
 	public static boolean isConnectionable(String url) {
 		return isConnectionable(url, null);
@@ -23,12 +23,12 @@ public class URLConnectionChecker {
 
 	/**
 	 * @param url
-	 *            È£½ºÆ® ÁÖ¼Ò ¿µ¿ªÀ» Á¦¿ÜÇÑ URL ÁÖ¼Ò <br>
+	 *            í˜¸ìŠ¤íŠ¸ ì£¼ì†Œ ì˜ì—­ì„ ì œì™¸í•œ URL ì£¼ì†Œ <br>
 	 *            ex) /page/main.html
 	 * @param host
-	 *            È£½ºÆ® ÁÖ¼Ò<br>
+	 *            í˜¸ìŠ¤íŠ¸ ì£¼ì†Œ<br>
 	 *            ex)http://www.google.co.kr
-	 * @return Á¢±Ù °¡´ÉÇÏ¸é true ¾Æ´Ï¸é false;
+	 * @return ì ‘ê·¼ ê°€ëŠ¥í•˜ë©´ true ì•„ë‹ˆë©´ false;
 	 */
 	public static boolean isConnectionable(String url, String host) {
 		String address;

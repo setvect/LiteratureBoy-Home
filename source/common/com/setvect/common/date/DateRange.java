@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * ³¯Â¥ÀÇ ¹üÀ§¸¦ ³ªÅ¸³»ÁÜ <br>
- * ³¯Â¥ ¹üÀ§ °Ë»ö¿¡ ÇÊ¿äÇÑ ÆÄ¶ó¹ÌÅÍ ¿ªÈ°À» ÇÒ ¼ö ÀÖÀ½
+ * ë‚ ì§œì˜ ë²”ìœ„ë¥¼ ë‚˜íƒ€ë‚´ì¤Œ <br>
+ * ë‚ ì§œ ë²”ìœ„ ê²€ìƒ‰ì— í•„ìš”í•œ íŒŒë¼ë¯¸í„° ì—­í™œì„ í•  ìˆ˜ ìˆìŒ
  * 
  */
 public class DateRange implements Serializable {
@@ -14,20 +14,20 @@ public class DateRange implements Serializable {
 	/** */
 	private static final long serialVersionUID = -4338839600919085275L;
 
-	/** ½ÃÀÛ ³¯Â¥ */
+	/** ì‹œì‘ ë‚ ì§œ */
 	private Date start;
 
-	/** Á¾·á ³¯Â¥ */
+	/** ì¢…ë£Œ ë‚ ì§œ */
 	private Date end;
 
-	/** ±â°£ Á¦ÇÑ ¾ø´Â ³¯Â¥ ½ÃÀÛÀÏ */
+	/** ê¸°ê°„ ì œí•œ ì—†ëŠ” ë‚ ì§œ ì‹œì‘ì¼ */
 	public static final String UNLIMITE_DATE_START = "1990-01-01";
 
-	/** ±â°£ Á¦ÇÑ ¾ø´Â ³¯Â¥ Á¾·áÀÏ */
+	/** ê¸°ê°„ ì œí•œ ì—†ëŠ” ë‚ ì§œ ì¢…ë£Œì¼ */
 	public static final String UNLIMITE_DATE_END = "2100-12-31";
 
 	/**
-	 * @return 1990-01-01 ~ 2100-12-31 ³¯Â¥ ¹üÀ§ ¸®ÅÏ
+	 * @return 1990-01-01 ~ 2100-12-31 ë‚ ì§œ ë²”ìœ„ ë¦¬í„´
 	 * @see #UNLIMITE_DATE_START
 	 * @see #UNLIMITE_DATE_END
 	 */
@@ -36,7 +36,7 @@ public class DateRange implements Serializable {
 	}
 
 	/**
-	 * ¿À´Ã ³¯Â¥¸¦ ±âÁØÀ¸·Î ÇØ¼­ Â÷ÀÌ °ªÀ» »ı¼º ÇÑ´Ù.
+	 * ì˜¤ëŠ˜ ë‚ ì§œë¥¼ ê¸°ì¤€ìœ¼ë¡œ í•´ì„œ ì°¨ì´ ê°’ì„ ìƒì„± í•œë‹¤.
 	 * 
 	 * @param diff
 	 */
@@ -46,14 +46,14 @@ public class DateRange implements Serializable {
 
 		Calendar cal;
 
-		// ¾ç¼ö
+		// ì–‘ìˆ˜
 		if (diff > 0) {
 			cal = Calendar.getInstance();
 			st = DateUtil.getFormatString(cal);
 			cal.add(Calendar.DAY_OF_YEAR, diff);
 			ed = DateUtil.getFormatString(cal);
 		}
-		// À½¼ö
+		// ìŒìˆ˜
 		else {
 			cal = Calendar.getInstance();
 			ed = DateUtil.getFormatString(cal);
@@ -67,19 +67,19 @@ public class DateRange implements Serializable {
 	}
 
 	/**
-	 * ³¯Â¥ ¹üÀ§¸¦ ÇØ´ç ³âµµÀÇ ´Ş¿¡ 1ºÎÅÍ ±×´ŞÀÇ ¸¶Áö¸·À¸·Î ÇÑ´Ù.
+	 * ë‚ ì§œ ë²”ìœ„ë¥¼ í•´ë‹¹ ë…„ë„ì˜ ë‹¬ì— 1ë¶€í„° ê·¸ë‹¬ì˜ ë§ˆì§€ë§‰ìœ¼ë¡œ í•œë‹¤.
 	 * 
 	 * @param year
-	 *            ³âµµ
+	 *            ë…„ë„
 	 * @param ed
-	 *            ´Ş 0: 1¿ù´Ş, 1: 2¿ù´Ş, ..., 11: 12¿ù´Ş
+	 *            ë‹¬ 0: 1ì›”ë‹¬, 1: 2ì›”ë‹¬, ..., 11: 12ì›”ë‹¬
 	 */
 	public DateRange(int year, int month) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month);
 
-		// ÇØ´ç ´ŞÀÇ ¸Ç ³¡¿¡ ³¯Â¥·Î °¡±âÀ§ÇØ¼­
+		// í•´ë‹¹ ë‹¬ì˜ ë§¨ ëì— ë‚ ì§œë¡œ ê°€ê¸°ìœ„í•´ì„œ
 		cal.set(Calendar.DATE, 1);
 		cal.add(Calendar.MONTH, 1);
 		cal.add(Calendar.DATE, -1);
@@ -90,26 +90,26 @@ public class DateRange implements Serializable {
 	}
 
 	/**
-	 * ³¯Â¥¿µ¿ª °´Ã¼ »ı¼º. ±âº» ³¯Â¥ Æ÷¸Ë (yyyy-MM-dd)À¸·Î ³¯Â¥ º¯È¯
+	 * ë‚ ì§œì˜ì—­ ê°ì²´ ìƒì„±. ê¸°ë³¸ ë‚ ì§œ í¬ë§· (yyyy-MM-dd)ìœ¼ë¡œ ë‚ ì§œ ë³€í™˜
 	 * 
 	 * @param st
-	 *            ½ÃÀÛ³¯Â¥
+	 *            ì‹œì‘ë‚ ì§œ
 	 * @param ed
-	 *            Á¾·á³¯Â¥
+	 *            ì¢…ë£Œë‚ ì§œ
 	 */
 	public DateRange(String st, String ed) {
 		this(st, ed, "yyyy-MM-dd");
 	}
 
 	/**
-	 * ³¯Â¥¿µ¿ª °´Ã¼ »ı¼º. ±âº» ³¯Â¥ Æ÷¸Ë (yyyy-MM-dd)À¸·Î ³¯Â¥ º¯È¯
+	 * ë‚ ì§œì˜ì—­ ê°ì²´ ìƒì„±. ê¸°ë³¸ ë‚ ì§œ í¬ë§· (yyyy-MM-dd)ìœ¼ë¡œ ë‚ ì§œ ë³€í™˜
 	 * 
 	 * @param st
-	 *            ½ÃÀÛ³¯Â¥
+	 *            ì‹œì‘ë‚ ì§œ
 	 * @param ed
-	 *            Á¾·á³¯Â¥
+	 *            ì¢…ë£Œë‚ ì§œ
 	 * @param format
-	 *            ³¯Â¥ ÆĞÅÏ "yyyy, MM, dd, HH, mm, ss and more"
+	 *            ë‚ ì§œ íŒ¨í„´ "yyyy, MM, dd, HH, mm, ss and more"
 	 */
 	public DateRange(String st, String ed, String format) {
 		start = DateUtil.getDate(st, format);
@@ -117,12 +117,12 @@ public class DateRange implements Serializable {
 	}
 
 	/**
-	 * ³¯Â¥¿µ¿ª °´Ã¼ »ı¼º.
+	 * ë‚ ì§œì˜ì—­ ê°ì²´ ìƒì„±.
 	 * 
 	 * @param st
-	 *            ½ÃÀÛÀÏ
+	 *            ì‹œì‘ì¼
 	 * @param ed
-	 *            Á¾·áÀÏ
+	 *            ì¢…ë£Œì¼
 	 */
 	public DateRange(Date st, Date ed) {
 		start = st;
@@ -130,28 +130,28 @@ public class DateRange implements Serializable {
 	}
 
 	/**
-	 * @return Á¾·á³¯Â¥¸¦ ¸®ÅÏÇÕ´Ï´Ù.
+	 * @return ì¢…ë£Œë‚ ì§œë¥¼ ë¦¬í„´í•©ë‹ˆë‹¤.
 	 */
 	public Date getEnd() {
 		return end;
 	}
 
 	/**
-	 * @return ½ÃÀÛ³¯Â¥¸¦ ¸®ÅÏÇÕ´Ï´Ù.
+	 * @return ì‹œì‘ë‚ ì§œë¥¼ ë¦¬í„´í•©ë‹ˆë‹¤.
 	 */
 	public Date getStart() {
 		return start;
 	}
 
 	/**
-	 * @return Á¾·á³¯Â¥¸¦ "yyyy-MM-dd" ÇüÅÂ·Î ¸®ÅÏÇÕ´Ï´Ù.
+	 * @return ì¢…ë£Œë‚ ì§œë¥¼ "yyyy-MM-dd" í˜•íƒœë¡œ ë¦¬í„´í•©ë‹ˆë‹¤.
 	 */
 	public String getEndString() {
 		return DateUtil.getFormatString(end);
 	}
 
 	/**
-	 * @return ½ÃÀÛ³¯Â¥¸¦ "yyyy-MM-dd" ÇüÅÂ·Î ¸®ÅÏÇÕ´Ï´Ù.
+	 * @return ì‹œì‘ë‚ ì§œë¥¼ "yyyy-MM-dd" í˜•íƒœë¡œ ë¦¬í„´í•©ë‹ˆë‹¤.
 	 */
 	public String getStartString() {
 		return DateUtil.getFormatString(start);
@@ -159,8 +159,8 @@ public class DateRange implements Serializable {
 
 	/**
 	 * @param format
-	 *            ³¯Â¥ ÆĞÅÏ "yyyy, MM, dd, HH, mm, ss and more"
-	 * @return Á¾·á³¯Â¥¸¦ Æ÷¸Ë ÇüÅÂ·Î ¸®ÅÏÇÕ´Ï´Ù.
+	 *            ë‚ ì§œ íŒ¨í„´ "yyyy, MM, dd, HH, mm, ss and more"
+	 * @return ì¢…ë£Œë‚ ì§œë¥¼ í¬ë§· í˜•íƒœë¡œ ë¦¬í„´í•©ë‹ˆë‹¤.
 	 */
 	public String getEndString(String format) {
 		return DateUtil.getFormatString(end, format);
@@ -168,8 +168,8 @@ public class DateRange implements Serializable {
 
 	/**
 	 * @param format
-	 *            ³¯Â¥ ÆĞÅÏ "yyyy, MM, dd, HH, mm, ss and more"
-	 * @return Á¾·á³¯Â¥¸¦ Æ÷¸Ë ÇüÅÂ·Î ¸®ÅÏÇÕ´Ï´Ù.
+	 *            ë‚ ì§œ íŒ¨í„´ "yyyy, MM, dd, HH, mm, ss and more"
+	 * @return ì¢…ë£Œë‚ ì§œë¥¼ í¬ë§· í˜•íƒœë¡œ ë¦¬í„´í•©ë‹ˆë‹¤.
 	 */
 	public String getStartString(String format) {
 		return DateUtil.getFormatString(start, format);

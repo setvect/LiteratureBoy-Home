@@ -19,7 +19,7 @@ import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
 
 /**
- * DB¿¬µ¿ Å×½ºÆ®
+ * DBì—°ë™ í…ŒìŠ¤íŠ¸
  * 
  * @version $Id$
  */
@@ -29,7 +29,7 @@ public class BoardTestCase extends TestSystem {
 	private BoardService service;
 
 	/**
-	 * CRUD Å×½ºÆ®
+	 * CRUD í…ŒìŠ¤íŠ¸
 	 * 
 	 * @throws Exception
 	 */
@@ -40,7 +40,7 @@ public class BoardTestCase extends TestSystem {
 		bd.setBoardCode(CODE);
 		bd.setCommentF(false);
 		bd.setEncodeF(false);
-		bd.setName("¿¬½À");
+		bd.setName("ì—°ìŠµ");
 		bd.setAttachF(false);
 		bd.setReplyF(false);
 		bd.setUploadLimit(500000);
@@ -64,13 +64,13 @@ public class BoardTestCase extends TestSystem {
 
 		String content = "";
 		for (int i = 0; i < 2000; i++) {
-			content += "¹«±ÃÈ­²ÉÀÌÇÇ¾ú½À´Ï´Ù.";
+			content += "ë¬´ê¶í™”ê½ƒì´í”¼ì—ˆìŠµë‹ˆë‹¤.";
 		}
 		article.setContent(content);
 		article.setEncodeF(false);
 		article.setIp("127.0.0.1");
-		article.setName("º¹½½ÀÌ");
-		article.setTitle("Á¦¸ñÀÓ");
+		article.setName("ë³µìŠ¬ì´");
+		article.setTitle("ì œëª©ì„");
 		article.setRegDate(new Date());
 
 		service.createArticle(article);
@@ -80,7 +80,7 @@ public class BoardTestCase extends TestSystem {
 
 		service.createArticleReply(article2, article.getArticleSeq());
 
-		article.setTitle("¸Ş··");
+		article.setTitle("ë©”ë ");
 		service.updateArticle(article);
 
 		BoardArticleSearch pageCondition = new BoardArticleSearch(1);

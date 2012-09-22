@@ -16,8 +16,8 @@ import com.setvect.literatureboy.boot.ApplicationException;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
- * ·Î±×ÀÎ Ã¼Å©<br>
- * ¸ğµç ¾×¼Ç¿¡ ´ëÇØ¼­ ·Î±×ÀÎ ¿©ºÎ¸¦ °Ë»çÇÏ¿© ·Î±×ÀÎÀÌ µÇÁö ¾ÊÀ¸¸é ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿
+ * ë¡œê·¸ì¸ ì²´í¬<br>
+ * ëª¨ë“  ì•¡ì…˜ì— ëŒ€í•´ì„œ ë¡œê·¸ì¸ ì—¬ë¶€ë¥¼ ê²€ì‚¬í•˜ì—¬ ë¡œê·¸ì¸ì´ ë˜ì§€ ì•Šìœ¼ë©´ ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™
  */
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
@@ -26,12 +26,12 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
 		LogPrinter.out.info("[Connect] IP: " + request.getRemoteAddr() + ", " + request.getHeader("User-Agent"));
 
-		// È£ÃâÇÑ ¼­ºí¸´ ÁÖ¼Ò(~~.do ½ÃÀÛÇÏ´Â)¸¦ ÀúÀå
-		// JSP¿¡¼­ form action¿¡ ÁÖ¼Ò·Î »ç¿ë
+		// í˜¸ì¶œí•œ ì„œë¸”ë¦¿ ì£¼ì†Œ(~~.do ì‹œì‘í•˜ëŠ”)ë¥¼ ì €ì¥
+		// JSPì—ì„œ form actionì— ì£¼ì†Œë¡œ ì‚¬ìš©
 		request.setAttribute(ConstraintWeb.AttributeKey.SERVLET_URL.name(), currentUrl);
 		User user = CommonUtil.getLoginSession(request);
 
-		// °³¹ßÁß¿¡´Â ÀÚµ¿ ·Î±×ÀÎ
+		// ê°œë°œì¤‘ì—ëŠ” ìë™ ë¡œê·¸ì¸
 		// if(user == null){
 		// user = userService.getUser("setvect");
 		// }
@@ -51,14 +51,14 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 
-		// ·Î±×ÀÎ Çß´Âµ¥ ±ÇÇÑÀÌ ¾øÀ¸¸é ¿¡·¯ ¸Ş½ÃÁö Ç¥½Ã
-		throw new ApplicationException(user.getUserId() + "´Â ÇØ´ç °æ·ÎÀÇ Á¢±Ù ±ÇÇÑÀÌ ¾ø½À´Ï´Ù.");
+		// ë¡œê·¸ì¸ í–ˆëŠ”ë° ê¶Œí•œì´ ì—†ìœ¼ë©´ ì—ëŸ¬ ë©”ì‹œì§€ í‘œì‹œ
+		throw new ApplicationException(user.getUserId() + "ëŠ” í•´ë‹¹ ê²½ë¡œì˜ ì ‘ê·¼ ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤.");
 		// return true;
 	}
 
 	/**
-	 * ÆÄ¶ó¹ÌÅÍ ¸ÊÀ» ¸¸µë <br>
-	 * Âü°í·Î request.getParameterMap()À» »ç¿ëÇÏ¸é °ª¿¡ Å¸ÀÔÀÌ String[] µÊ
+	 * íŒŒë¼ë¯¸í„° ë§µì„ ë§Œë“¬ <br>
+	 * ì°¸ê³ ë¡œ request.getParameterMap()ì„ ì‚¬ìš©í•˜ë©´ ê°’ì— íƒ€ì…ì´ String[] ë¨
 	 * 
 	 * @param request
 	 * @return

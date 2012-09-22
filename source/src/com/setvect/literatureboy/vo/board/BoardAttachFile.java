@@ -21,7 +21,7 @@ import com.setvect.literatureboy.service.board.BoardService;
 import com.setvect.literatureboy.web.ConstraintWeb;
 
 /**
- * Ã·ºÎÆÄÀÏ
+ * ì²¨ë¶€íŒŒì¼
  * 
  * @version $Id: BoardAttachFile.java 105 2010-09-23 14:52:48Z setvect@naver.com
  *          $
@@ -31,7 +31,7 @@ import com.setvect.literatureboy.web.ConstraintWeb;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BoardAttachFile {
 
-	/** ¾÷·Îµå ±âÁØ URL */
+	/** ì—…ë¡œë“œ ê¸°ì¤€ URL */
 	private final static String ATTACH_UPLOAD_URL = EnvirmentProperty
 			.getString("com.setvect.literatureboy.board.file_upload_url");
 
@@ -54,7 +54,7 @@ public class BoardAttachFile {
 	private int size;
 
 	@Transient
-	/** ¿¬°üµÈ °Ô½Ã¹° */
+	/** ì—°ê´€ëœ ê²Œì‹œë¬¼ */
 	private BoardArticle article;
 
 	/**
@@ -95,7 +95,7 @@ public class BoardAttachFile {
 	}
 
 	/**
-	 * @return Base64·Î º¯È¯ µÈ Ã·ºÎÆÄÀÏ ½ÇÁ¦ ÀÌ¸§
+	 * @return Base64ë¡œ ë³€í™˜ ëœ ì²¨ë¶€íŒŒì¼ ì‹¤ì œ ì´ë¦„
 	 */
 	public String getOriginalNameEncode() {
 		return StringUtilAd.encodeString(originalName);
@@ -117,7 +117,7 @@ public class BoardAttachFile {
 	}
 
 	/**
-	 * @return À¥·çÆ®¸¦ ±âÁØÀ¸·Î Ã·ºÎÆÄÀÏ °æ·Î.(ÆÄÀÏ¸í Æ÷ÇÔ)
+	 * @return ì›¹ë£¨íŠ¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì²¨ë¶€íŒŒì¼ ê²½ë¡œ.(íŒŒì¼ëª… í¬í•¨)
 	 */
 	public String getSavePath() {
 		File basePath = new File(BoardService.SAVE_PATH, article.getBoardCode());
@@ -126,14 +126,14 @@ public class BoardAttachFile {
 	}
 
 	/**
-	 * @return Base64·Î º¯È¯ µÈ Ã·ºÎÆÄÀÏ °æ·Î
+	 * @return Base64ë¡œ ë³€í™˜ ëœ ì²¨ë¶€íŒŒì¼ ê²½ë¡œ
 	 */
 	public String getSavePathEncode() {
 		return StringUtilAd.encodeString(getSavePath());
 	}
 
 	/**
-	 * @return ÆÄÀÏ URL °æ·Î
+	 * @return íŒŒì¼ URL ê²½ë¡œ
 	 */
 	public String getUrl() {
 		return "/" + ATTACH_UPLOAD_URL + "/" + article.getBoardCode() + "/" + saveName;
@@ -171,9 +171,9 @@ public class BoardAttachFile {
 	}
 
 	/**
-	 * È®ÀåÀÚ¸¦ ±âÁØÀ¸·Î ÀÌ¹ÌÁö ÆÄÀÏ ¿©ºÎ Ã¼Å©
+	 * í™•ì¥ìë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì´ë¯¸ì§€ íŒŒì¼ ì—¬ë¶€ ì²´í¬
 	 * 
-	 * @return ÀÌ¹ÌÁö ÆÄÀÏÀÌ¸é true
+	 * @return ì´ë¯¸ì§€ íŒŒì¼ì´ë©´ true
 	 */
 	public boolean isImage() {
 		String ext = FileUtil.getExt(originalName);

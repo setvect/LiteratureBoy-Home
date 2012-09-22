@@ -12,23 +12,23 @@ import javax.media.jai.RenderedOp;
 import com.setvect.common.util.FileUtil;
 
 /**
- * ¼¶³×ÀÏ ÀÌ¹ÌÁö Á¦ÀÛ
+ * ì„¬ë„¤ì¼ ì´ë¯¸ì§€ ì œìž‘
  * 
  * @version $Id$
  */
 public class ThumbnailImageConvert {
 
 	/**
-	 * ÆÄÀÏ È®ÀåÀÚ¸¦ º¸°í gif->jpg, jpg->jpg °áÁ¤
+	 * íŒŒì¼ í™•ìž¥ìžë¥¼ ë³´ê³  gif->jpg, jpg->jpg ê²°ì •
 	 * 
 	 * @param orgFile
-	 *            ¿øº» ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ì›ë³¸ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toJPEGAny(String orgFile, String destFile,
 			int wishSizeW, int wishSizeH) {
@@ -46,16 +46,16 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * ÇØ´ç »çÀÌÁî¿¡ ¸Â´Â ¼¶³×ÀÏ JPEG ÀÌ¹ÌÁö·Î »ý¼º
+	 * í•´ë‹¹ ì‚¬ì´ì¦ˆì— ë§žëŠ” ì„¬ë„¤ì¼ JPEG ì´ë¯¸ì§€ë¡œ ìƒì„±
 	 * 
 	 * @param orgFile
-	 *            ¿øº» ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ì›ë³¸ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toJPEG(String orgFile, String destFile, int wishSizeW,
 			int wishSizeH) {
@@ -65,16 +65,16 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * * ÇØ´ç »çÀÌÁî¿¡ ¸Â´Â ¼¶³×ÀÏ JPEG ÀÌ¹ÌÁö·Î »ý¼º
+	 * * í•´ë‹¹ ì‚¬ì´ì¦ˆì— ë§žëŠ” ì„¬ë„¤ì¼ JPEG ì´ë¯¸ì§€ë¡œ ìƒì„±
 	 * 
 	 * @param orgURL
-	 *            ¿øº» ÀÌ¹ÌÁö URL °æ·Î
+	 *            ì›ë³¸ ì´ë¯¸ì§€ URL ê²½ë¡œ
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toJPEG(URL orgURL, String destFile, int wishSizeW,
 			int wishSizeH) {
@@ -84,16 +84,16 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * GIF ÀÌ¹ÌÁö¸¦ ÇØ´ç »çÀÌÁî¿¡ ¸Â´Â ¼¶³×ÀÏ JPEG ÀÌ¹ÌÁö·Î »ý¼º
+	 * GIF ì´ë¯¸ì§€ë¥¼ í•´ë‹¹ ì‚¬ì´ì¦ˆì— ë§žëŠ” ì„¬ë„¤ì¼ JPEG ì´ë¯¸ì§€ë¡œ ìƒì„±
 	 * 
 	 * @param orgFile
-	 *            ¿øº» ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ì›ë³¸ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toJPEGfromGIF(String orgFile, String destFile,
 			int wishSizeW, int wishSizeH) {
@@ -105,16 +105,16 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * GIF ÀÌ¹ÌÁö¸¦ ÇØ´ç »çÀÌÁî¿¡ ¸Â´Â ¼¶³×ÀÏ JPEG ÀÌ¹ÌÁö·Î »ý¼º
+	 * GIF ì´ë¯¸ì§€ë¥¼ í•´ë‹¹ ì‚¬ì´ì¦ˆì— ë§žëŠ” ì„¬ë„¤ì¼ JPEG ì´ë¯¸ì§€ë¡œ ìƒì„±
 	 * 
 	 * @param srcURL
-	 *            ¿øº» ÀÌ¹ÌÁö URL °æ·Î
+	 *            ì›ë³¸ ì´ë¯¸ì§€ URL ê²½ë¡œ
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toJPEGfromGIF(URL srcURL, String destFile,
 			int wishSizeW, int wishSizeH) {
@@ -125,16 +125,16 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * ÇØ´ç »çÀÌÁî¿¡ ¸Â´Â ¼¶³×ÀÏ PNG ÀÌ¹ÌÁö·Î »ý¼º
+	 * í•´ë‹¹ ì‚¬ì´ì¦ˆì— ë§žëŠ” ì„¬ë„¤ì¼ PNG ì´ë¯¸ì§€ë¡œ ìƒì„±
 	 * 
 	 * @param orgFile
-	 *            ¿øº» ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ì›ë³¸ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toPNG(String orgFile, String destFile, int wishSizeW,
 			int wishSizeH) {
@@ -145,16 +145,16 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * ÇØ´ç »çÀÌÁî¿¡ ¸Â´Â ¼¶³×ÀÏ PNG ÀÌ¹ÌÁö·Î »ý¼º
+	 * í•´ë‹¹ ì‚¬ì´ì¦ˆì— ë§žëŠ” ì„¬ë„¤ì¼ PNG ì´ë¯¸ì§€ë¡œ ìƒì„±
 	 * 
 	 * @param srcURL
-	 *            ¿øº» ÀÌ¹ÌÁö URL °æ·Î
+	 *            ì›ë³¸ ì´ë¯¸ì§€ URL ê²½ë¡œ
 	 * @param destFile
-	 *            ¸ñÀûÁö ÆÄÀÏ ÀÌ¸§(°æ·Î Æ÷ÇÔ)
+	 *            ëª©ì ì§€ íŒŒì¼ ì´ë¦„(ê²½ë¡œ í¬í•¨)
 	 * @param wishSizeW
-	 *            ÃÖ´ë ³ÐÀÌ
+	 *            ìµœëŒ€ ë„“ì´
 	 * @param wishSizeH
-	 *            ÃÖ´ë ³ôÀÌ
+	 *            ìµœëŒ€ ë†’ì´
 	 */
 	public static void toPNG(URL orgURL, String destFile, int wishSizeW,
 			int wishSizeH) {
@@ -164,11 +164,11 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * ¹ºÁö Àß ¸ð¸£°Ú´Ù. GIF ¿¡´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓ¿¡ °ü·ÃµÈ ¸Þ¼Òµå ÀÎ°Í °°´Ù.
+	 * ë­”ì§€ ìž˜ ëª¨ë¥´ê² ë‹¤. GIF ì—ë‹ˆë©”ì´ì…˜ í”„ë ˆìž„ì— ê´€ë ¨ëœ ë©”ì†Œë“œ ì¸ê²ƒ ê°™ë‹¤.
 	 * 
 	 * @param src
-	 *            ÀÌ¹ÌÁö Á¤º¸
-	 * @return ÀÌ¹ÌÁö Á¤º¸
+	 *            ì´ë¯¸ì§€ ì •ë³´
+	 * @return ì´ë¯¸ì§€ ì •ë³´
 	 */
 	private static RenderedOp bandSelectGIF(RenderedOp src) {
 		ParameterBlock pb = null;
@@ -196,15 +196,15 @@ public class ThumbnailImageConvert {
 	}
 
 	/**
-	 * ¿øº» ÀÌ¹ÌÁö¿¡ Ãà¼ÒÇÒ °¡·Î, ¼¼·Î ÇÈ¼¿À» ÀÔ·Â ¹Þ¾Æ, ÃÖ´ë ºñÀ²·Î Ãà¼ÒµÇ´Â ºñÀ²À» ±¸ÇØ °¡·Î ¼¼·Î ºñÀ²À» ¸ÂÃá´Ù.
+	 * ì›ë³¸ ì´ë¯¸ì§€ì— ì¶•ì†Œí•  ê°€ë¡œ, ì„¸ë¡œ í”½ì…€ì„ ìž…ë ¥ ë°›ì•„, ìµœëŒ€ ë¹„ìœ¨ë¡œ ì¶•ì†Œë˜ëŠ” ë¹„ìœ¨ì„ êµ¬í•´ ê°€ë¡œ ì„¸ë¡œ ë¹„ìœ¨ì„ ë§žì¶˜ë‹¤.
 	 * 
 	 * @param src
-	 *            ÀÌ¹ÌÁö ¼Ò½º
+	 *            ì´ë¯¸ì§€ ì†ŒìŠ¤
 	 * @param wishSizeW
-	 *            ¿øÇÏ´Â °¡·Î Å©±â(ÇÈ¼¿)
+	 *            ì›í•˜ëŠ” ê°€ë¡œ í¬ê¸°(í”½ì…€)
 	 * @param wishSizeH
-	 *            ¿øÇÏ´Â ¼¼·Î Å©±â(ÇÈ¼¿)
-	 * @return »çÀÌÁî°¡ Á¶Á¤µÈ ÀÌ¹ÌÁö Á¤º¸
+	 *            ì›í•˜ëŠ” ì„¸ë¡œ í¬ê¸°(í”½ì…€)
+	 * @return ì‚¬ì´ì¦ˆê°€ ì¡°ì •ëœ ì´ë¯¸ì§€ ì •ë³´
 	 */
 	private static RenderedOp changeWidthScale(RenderedOp src, int wishSizeW,
 			int wishSizeH) {
@@ -213,10 +213,10 @@ public class ThumbnailImageConvert {
 		int realH = src.getHeight();
 		float ratioH = (float) wishSizeH / (float) realH;
 
-		// °¡·Î, ¼¼·Î Ãà¼Ò ºñÀ²Áß ÃÖ¼Ò ºñÀ²·Î ÀüÃ¼ ºñÀ² °áÁ¤
+		// ê°€ë¡œ, ì„¸ë¡œ ì¶•ì†Œ ë¹„ìœ¨ì¤‘ ìµœì†Œ ë¹„ìœ¨ë¡œ ì „ì²´ ë¹„ìœ¨ ê²°ì •
 		float ratio = Math.min(ratioW, ratioH);
 
-		// ¿øº» ÀÌ¹ÌÁö°¡ ½æ³×ÀÏ ¸¸µé ÀÌ¹ÌÁö º¸´Ù ÀÛÀ» °æ¿ì ¿øº» ÀÌ¹ÌÁö ºñÀ²·Î ¸¸µé¾î ÁÖ±â
+		// ì›ë³¸ ì´ë¯¸ì§€ê°€ ì¸ë„¤ì¼ ë§Œë“¤ ì´ë¯¸ì§€ ë³´ë‹¤ ìž‘ì„ ê²½ìš° ì›ë³¸ ì´ë¯¸ì§€ ë¹„ìœ¨ë¡œ ë§Œë“¤ì–´ ì£¼ê¸°
 		if (ratio > 1.0f) {
 			ratio = 1.0f;
 		}

@@ -18,7 +18,7 @@ import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 
 /**
- * ÀÌ¹ÌÁö ¾÷·Îµå
+ * ì´ë¯¸ì§€ ì—…ë¡œë“œ
  * 
  * @version $Id$
  */
@@ -26,24 +26,24 @@ import com.setvect.literatureboy.config.EnvirmentProperty;
 public class ImageUploadController {
 
 	/**
-	 * ¼­ºê ¸í·É¾î Á¤ÀÇ
+	 * ì„œë¸Œ ëª…ë ¹ì–´ ì •ì˜
 	 */
 	public static enum Mode {
 		UPLOAD_FORM, UPLOAD_ACTION
 	}
 
 	/**
-	 * ºä¿¡ Àü´ŞÇÒ °´Ã¼¸¦ °¡¸£Å°´Â Å°
+	 * ë·°ì— ì „ë‹¬í•  ê°ì²´ë¥¼ ê°€ë¥´í‚¤ëŠ” í‚¤
 	 */
 	public static enum AttributeKey {
 		MODE, IMAGE_URL
 	}
 
-	/** À¥ ·çÆ®¸¦ ±âÁØÀ¸·Î ÀúÀå °æ·Î */
+	/** ì›¹ ë£¨íŠ¸ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì €ì¥ ê²½ë¡œ */
 	private static final String SAVE_PATH = EnvirmentProperty
 			.getString("com.setvect.literatureboy.image.file_upload_dir");
 
-	/** ÀÌ¹ÌÁö ¾÷·Îµå Á¦ÇÑ */
+	/** ì´ë¯¸ì§€ ì—…ë¡œë“œ ì œí•œ */
 	public static final int LIMIT_SIZE = EnvirmentProperty.getInt("com.setvect.literatureboy.image.limit_size") * 1024;
 
 	@RequestMapping("/image/upload.do")
@@ -74,7 +74,7 @@ public class ImageUploadController {
 			File destination = File.createTempFile("image", saveName, targetDir);
 			FileCopyUtils.copy(imageFile.getInputStream(), new FileOutputStream(destination));
 
-			// À¥·çÆ® µğ·ºÅä¸®¸¦ ±âÁØÀ¸·Î ÀÌ¹ÌÁö Á¢±Ù URL¸¦ ÃßÃâ
+			// ì›¹ë£¨íŠ¸ ë””ë ‰í† ë¦¬ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì´ë¯¸ì§€ ì ‘ê·¼ URLë¥¼ ì¶”ì¶œ
 			String webbaseDirString = request.getSession().getServletContext().getRealPath("/");
 			String savePathString = destination.getPath();
 			int pos = savePathString.indexOf(webbaseDirString);

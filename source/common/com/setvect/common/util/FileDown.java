@@ -18,7 +18,7 @@ public class FileDown extends FileUtils {
 	 * file download method
 	 * 
 	 * @param file
-	 *            ´Ù¿î·ÎµåÇÒ ÆÄÀÏ °æ·Î
+	 *            ë‹¤ìš´ë¡œë“œí•  íŒŒì¼ ê²½ë¡œ
 	 * 
 	 * @param strDownloadFileName
 	 *            Download file name from client computer
@@ -35,7 +35,7 @@ public class FileDown extends FileUtils {
 		BufferedOutputStream outs = null;
 		int read = 0;
 		byte[] b = new byte[1024];
-		// ¹öÆÛ Å¬¸®¾î
+		// ë²„í¼ í´ë¦¬ì–´
 		response.reset();
 		try {
 			if (file.exists()) {
@@ -43,7 +43,7 @@ public class FileDown extends FileUtils {
 				outs = new BufferedOutputStream(response.getOutputStream());
 				response.setContentType("application/x-force-download");
 
-				// ÇÑ±Û ±úÁü Çö»óÀº java.net.URLEncoder.encode()¸¦ ¾²¸é ÇØ°á µÊ
+				// í•œê¸€ ê¹¨ì§ í˜„ìƒì€ java.net.URLEncoder.encode()ë¥¼ ì“°ë©´ í•´ê²° ë¨
 				// response.setHeader("Content-Disposition", option + ";
 				// filename=" + java.net.URLEncoder.encode(orgFileName) + ";");
 
@@ -61,7 +61,7 @@ public class FileDown extends FileUtils {
 				}
 			}
 			else {
-				throw new IOException("ÆÄÀÏÀÌ ¾ø½À´Ï´Ù. : " + file);
+				throw new IOException("íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤. : " + file);
 			}
 		} catch (IOException e) {
 			throw e;

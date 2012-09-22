@@ -6,7 +6,7 @@ import com.setvect.common.util.SearchListVo;
 import com.setvect.common.util.StringUtilAd;
 
 /**
- * °Ô½Ã¹° °ü¸® ¸ñ·Ï ÆäÀÌÂ¡ ¹× °Ë»ö Á¶°Ç
+ * ê²Œì‹œë¬¼ ê´€ë¦¬ ëª©ë¡ í˜ì´ì§• ë° ê²€ìƒ‰ ì¡°ê±´
  * 
  * @version $Id$
  */
@@ -18,14 +18,14 @@ public class BoardArticleSearch extends SearchListVo {
 	private String searchName;
 	private String searchCode;
 	/**
-	 * º¹¼öÀÇ °Ô½Ã¹° Á¶È¸<br>
-	 * º» ÇÊµå¿¡ °ªÀÌ ÀÖÀ¸¸é searchCode °ªÀº ¹«½ÃÇÔ
+	 * ë³µìˆ˜ì˜ ê²Œì‹œë¬¼ ì¡°íšŒ<br>
+	 * ë³¸ í•„ë“œì— ê°’ì´ ìˆìœ¼ë©´ searchCode ê°’ì€ ë¬´ì‹œí•¨
 	 */
 	private List<String> searchCodes;
 	private String searchTitle;
 	private String searchContent;
 
-	/** »èÁ¦µÈ °Ô½Ã¹°µµ º¸¿© ÁÙ °ÍÀÌÁö */
+	/** ì‚­ì œëœ ê²Œì‹œë¬¼ë„ ë³´ì—¬ ì¤„ ê²ƒì´ì§€ */
 	private boolean deleteView;
 
 	public BoardArticleSearch(int currentPage) {
@@ -48,7 +48,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * Á¶È¸ÇÒ °Ô½ÃÆÇ ÄÚµå<br>
+	 * ì¡°íšŒí•  ê²Œì‹œíŒ ì½”ë“œ<br>
 	 * 
 	 * @return the searchCode
 	 */
@@ -57,7 +57,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * Á¶È¸ÇÒ °Ô½ÃÆÇ ÄÚµå<br>
+	 * ì¡°íšŒí•  ê²Œì‹œíŒ ì½”ë“œ<br>
 	 * 
 	 * @param searchCode
 	 *            the searchCode to set
@@ -67,7 +67,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * º¹¼öÀÇ °Ô½Ã¹° Á¶È¸
+	 * ë³µìˆ˜ì˜ ê²Œì‹œë¬¼ ì¡°íšŒ
 	 * 
 	 * @return the searchCodes
 	 */
@@ -76,7 +76,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * º¹¼öÀÇ °Ô½Ã¹° Á¶È¸
+	 * ë³µìˆ˜ì˜ ê²Œì‹œë¬¼ ì¡°íšŒ
 	 * 
 	 * @param searchCodes
 	 *            the searchCodes to set
@@ -116,7 +116,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * »èÁ¦µÈ °Ô½Ã¹°µµ º¸¿© ÁÙ °ÍÀÌÁö. true »èÁ¦ °Ô½Ã¹°µµ º¸¿©ÁÜ.
+	 * ì‚­ì œëœ ê²Œì‹œë¬¼ë„ ë³´ì—¬ ì¤„ ê²ƒì´ì§€. true ì‚­ì œ ê²Œì‹œë¬¼ë„ ë³´ì—¬ì¤Œ.
 	 * 
 	 * @return the deleteView
 	 */
@@ -125,7 +125,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * »èÁ¦µÈ °Ô½Ã¹°µµ º¸¿© ÁÙ °ÍÀÌÁö. true »èÁ¦ °Ô½Ã¹°µµ º¸¿©ÁÜ.
+	 * ì‚­ì œëœ ê²Œì‹œë¬¼ë„ ë³´ì—¬ ì¤„ ê²ƒì´ì§€. true ì‚­ì œ ê²Œì‹œë¬¼ë„ ë³´ì—¬ì¤Œ.
 	 * 
 	 * @param deleteView
 	 *            the deleteView to set
@@ -135,7 +135,7 @@ public class BoardArticleSearch extends SearchListVo {
 	}
 
 	/**
-	 * @return °Ë»ö ´Ü¾îÁß °ªÀÌ ÀÖ´Â ÇÏ³ª¸¦ ¹İÈ¯. ¾Æ¹«µµ ¾øÀ¸¸é null. 2°³ ÀÌ»ó °ªÀÌ ÀÖÀ» °æ¿ì ¾î¶²°É ¹İÈ¯ ÇÒÁö ¸ğ¸§
+	 * @return ê²€ìƒ‰ ë‹¨ì–´ì¤‘ ê°’ì´ ìˆëŠ” í•˜ë‚˜ë¥¼ ë°˜í™˜. ì•„ë¬´ë„ ì—†ìœ¼ë©´ null. 2ê°œ ì´ìƒ ê°’ì´ ìˆì„ ê²½ìš° ì–´ë–¤ê±¸ ë°˜í™˜ í• ì§€ ëª¨ë¦„
 	 */
 	public String getWord() {
 

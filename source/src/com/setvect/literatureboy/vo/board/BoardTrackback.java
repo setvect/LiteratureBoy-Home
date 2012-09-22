@@ -14,7 +14,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * Ã·ºÎÆÄÀÏ
+ * ì²¨ë¶€íŒŒì¼
  * 
  * @version $Id$
  */
@@ -23,22 +23,22 @@ import org.hibernate.annotations.GenericGenerator;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BoardTrackback {
 
-	/** Å° */
+	/** í‚¤ */
 	@Id
 	@Column(name = "RELATION_SEQ")
 	@GenericGenerator(name = "hibernate-increment", strategy = "increment")
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "hibernate-increment")
 	private int relationSeq;
 
-	/** °Ô½Ã¹° ¹øÈ£ */
+	/** ê²Œì‹œë¬¼ ë²ˆí˜¸ */
 	@Column(name = "ARTICLE_SEQ")
 	private int articleSeq;
 
-	/** °Ô½Ã¹° Á¦¸ñ */
+	/** ê²Œì‹œë¬¼ ì œëª© */
 	@Column(name = "TITLE")
 	private String title;
 
-	/** º»¹® ¿ä¾à */
+	/** ë³¸ë¬¸ ìš”ì•½ */
 	@Column(name = "EXCERPT")
 	private String excerpt;
 
@@ -46,11 +46,11 @@ public class BoardTrackback {
 	@Column(name = "URL")
 	private String url;
 
-	/** ºí·Î±× ÀÌ¸§ */
+	/** ë¸”ë¡œê·¸ ì´ë¦„ */
 	@Column(name = "BLOG_NAME")
 	private String blogName;
 
-	/** µî·ÏÀÏ */
+	/** ë“±ë¡ì¼ */
 	@Column(name = "REG_DATE")
 	private Date regDate;
 

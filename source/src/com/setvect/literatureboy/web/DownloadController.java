@@ -14,7 +14,7 @@ import com.setvect.common.util.FileDown;
 import com.setvect.common.util.StringUtilAd;
 
 /**
- * ÆÄÀÏ ´Ù¿î·Îµå ÆÄ¶ó¹ÌÅÍ
+ * íŒŒì¼ ë‹¤ìš´ë¡œë“œ íŒŒë¼ë¯¸í„°
  * 
  * @version $Id$
  */
@@ -30,15 +30,15 @@ public class DownloadController extends HttpServlet {
 	 */
 	@RequestMapping("/download.do")
 	public void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// ¼­¹ö¿¡ ÀúÀåµÈ ÆÄÀÏÀÌ¸§ Ç® °æ·Î
+		// ì„œë²„ì— ì €ì¥ëœ íŒŒì¼ì´ë¦„ í’€ ê²½ë¡œ
 		String saveName = StringUtilAd.decodeString(request.getParameter("s"));
 
 		CommonUtil.checkAllowUploadFile(saveName);
 
 		String downName;
-		// º°µµÀÇ µğÄÚµå ÆÄÀÏÀÌ ¾øÀ¸¸é ÀúÀåÆÄÀÏ ÀÌ¸§À» ´Ù¿î·Îµå
+		// ë³„ë„ì˜ ë””ì½”ë“œ íŒŒì¼ì´ ì—†ìœ¼ë©´ ì €ì¥íŒŒì¼ ì´ë¦„ì„ ë‹¤ìš´ë¡œë“œ
 		if (StringUtilAd.isEmpty(request.getParameter("d"))) {
-			// ´Ù¿î·ÎµµµÉ ÆÄÀÏÀÌ¸§
+			// ë‹¤ìš´ë¡œë„ë  íŒŒì¼ì´ë¦„
 			int n = saveName.lastIndexOf("/");
 			if (n == -1) {
 				n = saveName.lastIndexOf("\\");
@@ -46,7 +46,7 @@ public class DownloadController extends HttpServlet {
 			downName = saveName.substring(n + 1);
 		}
 		else {
-			// ´Ù¿î·ÎµµµÉ ÆÄÀÏÀÌ¸§
+			// ë‹¤ìš´ë¡œë„ë  íŒŒì¼ì´ë¦„
 			downName = StringUtilAd.decodeString(request.getParameter("d"));
 		}
 		String webBase = request.getSession().getServletContext().getRealPath("");
