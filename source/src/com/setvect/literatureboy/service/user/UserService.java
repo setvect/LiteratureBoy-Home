@@ -33,11 +33,11 @@ public class UserService {
 	 * @return 아이디에 맞는 회원정보 없으면 null
 	 * @throws Exception
 	 */
-	public User getUser(String id) throws Exception {
+	public User getUser(String id) {
 		return userDao.getUser(id);
 	}
 
-	public GenericPage<User> getPageList(UserSearch searchVo) throws Exception {
+	public GenericPage<User> getPageList(UserSearch searchVo) {
 		return userDao.getUserPagingList(searchVo);
 	}
 
@@ -48,7 +48,7 @@ public class UserService {
 	 *            회원
 	 * @throws Exception
 	 */
-	public void createUser(User user) throws Exception {
+	public void createUser(User user) {
 		userDao.createUser(user);
 	}
 
@@ -56,7 +56,7 @@ public class UserService {
 	 * @param user
 	 * @throws Exception
 	 */
-	public void updateUser(User user) throws Exception {
+	public void updateUser(User user) {
 		userDao.updateUser(user);
 	}
 
@@ -64,7 +64,7 @@ public class UserService {
 	 * @param id
 	 * @throws Exception
 	 */
-	public void removeUser(String id) throws Exception {
+	public void removeUser(String id) {
 		userDao.removeUser(id);
 	}
 

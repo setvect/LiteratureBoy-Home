@@ -152,6 +152,21 @@
 		</defaultValue>		
 	</table>
 
+	<table name="TBGA_COMMENT">
+		<creation>
+			CREATE TABLE TBGA_COMMENT(
+				COMMENT_SEQ		int NOT NULL,
+				MODULE_NAME		varchar(20) NOT NULL,
+				MODULE_ID			varchar(50) NOT NULL,		
+				USER_ID				varchar(20) NOT NULL,
+				CONTENT				varchar(4000) NOT NULL,
+				REG_DATE			date NOT NULL,
+			  PRIMARY KEY  (COMMENT_SEQ)
+			)
+		</creation>
+		<defaultValue>
+		</defaultValue>			
+	</table>		
 
 	<table name="TBZZ_MEMO">
 		<creation>

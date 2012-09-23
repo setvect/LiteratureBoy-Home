@@ -91,13 +91,17 @@ public class CommonUtil {
 	 * @return 로그인 안되어 있으면 null
 	 * @throws Exception
 	 */
-	public static User getLoginSession(HttpServletRequest request) throws Exception {
+	public static User getLoginSession(HttpServletRequest request) {
 		User user = null;
 		CookieProcess cookie = new CookieProcess(request);
 		String encode = cookie.get(ConstraintWeb.USER_COOKIE_KEY);
 		if (!StringUtilAd.isEmpty(encode)) {
 			encode = encode.replaceAll("  ", "\n");
-			user = (User) SerializerUtil.restoreBase64Decode(encode);
+			try {
+				user = (User) SerializerUtil.restoreBase64Decode(encode);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 		}
 		return user;
 	}

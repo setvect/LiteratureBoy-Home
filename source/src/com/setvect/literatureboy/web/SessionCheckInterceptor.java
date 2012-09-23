@@ -1,5 +1,7 @@
 package com.setvect.literatureboy.web;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -21,7 +23,8 @@ import com.setvect.literatureboy.vo.user.User;
  */
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws UnsupportedEncodingException, IOException {
 		String currentUrl = request.getRequestURI();
 
 		LogPrinter.out.info("[Connect] IP: " + request.getRemoteAddr() + ", " + request.getHeader("User-Agent"));

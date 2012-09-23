@@ -34,7 +34,7 @@ public class AccessChecker {
 	 * @return 접근 가능하면 true, 아니면 false
 	 * @throws Exception
 	 */
-	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param) throws Exception {
+	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param) {
 		return isAccessToUrl(request, param, null);
 	}
 
@@ -48,8 +48,7 @@ public class AccessChecker {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param, AccessRule appendAccess)
-			throws Exception {
+	public static boolean isAccessToUrl(HttpServletRequest request, Map<String, String> param, AccessRule appendAccess) {
 		User user = CommonUtil.getLoginSession(request);
 		String currentUrl = (String) request.getAttribute(ConstraintWeb.AttributeKey.SERVLET_URL.name());
 		return isAccessToUrl(user, currentUrl, param, appendAccess);
@@ -65,7 +64,7 @@ public class AccessChecker {
 	 * @return 접근 가능하면 true, 아니면 false
 	 * @throws Exception
 	 */
-	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param) throws Exception {
+	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param)  {
 		return isAccessToUrl(user, currentUrl, param, null);
 	}
 
@@ -81,8 +80,7 @@ public class AccessChecker {
 	 * @return 접근 가능하면 true, 아니면 false
 	 * @throws Exception
 	 */
-	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param, AccessRule appendAccess)
-			throws Exception {
+	public static boolean isAccessToUrl(User user, String currentUrl, Map<String, String> param, AccessRule appendAccess) {
 		List<Auth> matchAuthList = getMathAuth(currentUrl, param);
 		// 접근 권한 정보가 없으면 통과
 		if (StringUtilAd.isInclude(currentUrl, EXCUSE_URL) || matchAuthList.size() == 0) {

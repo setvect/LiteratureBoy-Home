@@ -344,7 +344,7 @@ public class BoardArticleController {
 	 * @param pageCondition
 	 * @throws Exception
 	 */
-	private void checkWrite(HttpServletRequest request, BoardArticleSearch pageCondition) throws Exception {
+	private void checkWrite(HttpServletRequest request, BoardArticleSearch pageCondition) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("searchCode", pageCondition.getSearchCode());
 		param.put("mode", Mode.CREATE_FORM.name());

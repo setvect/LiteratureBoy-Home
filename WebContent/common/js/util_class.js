@@ -690,6 +690,106 @@
 			return false;
 		}
 	};
+
+	$.FORM.eventComma = function (szName){
+		var elements = document.getElementsByName(szName);  // Element[]을 리턴
+		for(var i=0; i<elements.length; i++){
+			elements[i].onkeyup = function(ev){     // keyup 이벤트
+				// 브라우저에 따른 이벤트 처리
+				var target = null;        // 이벤트가 발생된 녀석을 담을 변수   
+				if(ev)           
+					target = ev.target;       // 모질라 파이어폭스
+				else
+					target = window.event.srcElement;   // 익스플로어
+    
+				// 숫자를 원단위로 변환
+				target.value = $.FORM.changeComma(target.value);
+			};
+			elements[i].value = $.FORM.changeComma(elements[i].value);
+		} 
+	};
+
+	$.FORM.changeComma = function(szNumber){
+		if(szNumber == "" || szNumber == "0")
+			return "";
+	  
+		var returnValue = 0;
+		var temp1 = szNumber.replace(/,/g,"");   // 입력 데이터를 숫자 형태로 변환
+		var temp = temp1.split('.');
+	 
+		// 정수자리 원단위로 만들기
+		var num1 = "";
+		var comma = 1;
+		for(var i = temp[0].length -1; i >= 0; i--){
+			num1 += temp[0].charAt(i);
+
+			if(comma % 3 == 0 && comma != 0){
+				num1 += ",";
+			} // end if
+			comma++;
+		} // end for
+	 
+
+		var num2 = "";
+		for(var i = num1.length -1; i >= 0; i--){
+			num2 += num1.charAt(i);
+		} // end for
+	 
+		// 소수점이 있다면...
+		if(temp.length > 1){
+
+			// 소수점 자리 원 단위로 만들어서 리턴..!!
+			var num3 = "";
+			for(var i=1; i <= temp[1].length; i++){
+				num3 += temp[1].charAt(i-1);
+	   
+				if((i%3 == 0) && (i != 0)){
+					num3 += ",";
+				}
+			} // end for
+	  
+			var num4 = num2 + "." + num3;
+			returnValue = num4.replace(/(^,)|(,$)/g,"");
+		} // end if
+		else
+			returnValue = num2.replace(/(^,)|(,$)/g,"");; // 앞,뒤 콤마 제거
+	  
+		if(returnValue == "" || returnValue == ".")
+			return "";
+		else
+			return returnValue;
+	};
+		
+
+	// 실시간 글자수 체크
+	// 이벤트는 onkeyup로
+	// input : 입력객체
+	// maxSize : 글자 입력 사이즈 byte단위
+	// out: 출력객체, 파라미터 전달 안해됨 (<span id="blogInfoSize"></span> 이런식으로 사용하면 된다.)
+
+	// <textarea name="info" onkeyup="$.FORM.inputLimitSize(this, 200, 'contentSize');;"></textarea>
+	$.FORM.inputLimitSize = function(input, maxSize, outObject)	{
+		var str = input.value;
+		var len = $.STR.strLeng(str);
+
+		if (maxSize < len) {
+		  alert("한글 " + (maxSize/2) +"자 이내, 영문 " + maxSize + "자 이내로 입력하세요.");
+			input.value = $.STR.cutAbsStr(str, maxSize);
+		}
+		var out = $("#" + outObject)[0];
+		if(out != null)
+			out.innerHTML = $.STR.strLeng(input.value);
+	};
+	
+
+	// 숫자 입력 체크 
+	$.FORM.checkNumber = function(textObj){
+		if(!$.STR.isNumber(textObj.value, ",")){
+			$.FORM.selectMsg(textObj, "숫자로 입력해주세요.");
+			textObj.value="";;
+		}
+	};	
+	
 	
 }
 
