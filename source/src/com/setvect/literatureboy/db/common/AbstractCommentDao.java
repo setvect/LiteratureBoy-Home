@@ -12,7 +12,7 @@ import com.setvect.literatureboy.service.common.CommentModule;
 import com.setvect.literatureboy.vo.Comment;
 
 /**
- * ÷������
+ * 첨부파일
  * 
  * @version $Id$
  */
@@ -28,7 +28,7 @@ public abstract class AbstractCommentDao implements CommentDao {
 	public List<Comment> listComment(CommentModule moduleName, String moduleItemId) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String q = " from Comment where moduleName = ? and moduleId = ? order by commentSeq ";
+		String q = " from Comment where moduleName = ? and moduleId = ? order by commentSeq desc";
 		Query query = session.createQuery(q);
 
 		query.setString(0, moduleName.name());
@@ -57,5 +57,4 @@ public abstract class AbstractCommentDao implements CommentDao {
 		session.delete(getComment(commentSeq));
 		session.flush();
 	}
-
 }
