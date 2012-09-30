@@ -11,8 +11,10 @@
 	<c:if test="${empty MAIN_ARTICLE}">
 		내용없음
 	</c:if>
+	<br/><br/><br/><br/><br/>
 	<jsp:include page="/app/common/comment.portlet.jsp">
 		<jsp:param name="moduleName" value="<%=CommentModule.MAIN%>"/>
-		<jsp:param name="moduleId" value="${ITEM.issueItemSeq}"/>
+		<jsp:param name="moduleId" value="0"/>
+		<jsp:param name="writerForm" value="false"/>
 	</jsp:include>	
 </div>

@@ -33,7 +33,7 @@
 		class="org.springframework.context.support.ResourceBundleMessageSource">	
 		<property name="basenames">
 			<list>
-				<value>message/message</value>
+				<value>config/message</value>
 			</list>
 		</property>
 	</bean>	       
