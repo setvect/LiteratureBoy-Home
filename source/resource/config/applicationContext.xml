@@ -37,8 +37,15 @@
 			</list>
 		</property>
 	</bean>	       
-	       
+	
+	<bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg ref="messageSource" />
+ 	</bean>
+
+  <bean id="messageSourceAccessorHolder" class="com.setvect.literatureboy.util.DateDiff" autowire="byName" lazy-init="false"/>
+  
 	<!-- DB Connection -->
+
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 		lazy-init="true">
 		<property name="hibernateProperties">

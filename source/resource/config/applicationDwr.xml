@@ -29,8 +29,6 @@
 		<dwr:convert type="bean" class="com.setvect.literatureboy.vo.user.User">
 		</dwr:convert>
 	</dwr:configuration>
-	
-	
 
 	<bean id="commentService"
 		class="com.setvect.literatureboy.service.common.CommentDwrService">
