@@ -1,7 +1,8 @@
-package com.setvect.literatureboy.service.common;
+package com.setvect.literatureboy.service.comment;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +10,7 @@ import org.directwebremoting.WebContext;
 import org.directwebremoting.WebContextFactory;
 import org.springframework.stereotype.Controller;
 
+import com.setvect.common.util.GenericPage;
 import com.setvect.literatureboy.boot.EnvirmentInit;
 import com.setvect.literatureboy.vo.Comment;
 import com.setvect.literatureboy.vo.user.User;
@@ -33,9 +35,10 @@ public class CommentDwrService {
 	 *            모듈 아이디
 	 * @return 코멘트 목록
 	 */
-	public Collection<Comment> getCommentList(CommentModule moduleName, String moduleItemId) {
-		Collection<Comment> comments = commentService.listComment(moduleName, moduleItemId);
-		return comments;
+	public List<Comment> getCommentList(CommentModule moduleName, String moduleItemId) {
+		CommentSearch pageCondition = new CommentSearch(1, moduleName, moduleItemId);
+		GenericPage<Comment> comments = commentService.getCommentPagingList(pageCondition);
+		return comments.getList();
 	}
 
 	public void createComment(Comment comment) {

@@ -4,6 +4,7 @@
 <script type="text/javascript" src="/common/js/jquery.dateFormat-1.0.js"></script>
 <script type='text/javascript' src='/dwr/engine.js'></script>
 <script type='text/javascript' src='/dwr/util.js'></script>
+
 <%
 	boolean writerForm = Boolean.getBoolean(request.getParameter("writerForm"));	 
 %>
@@ -43,29 +44,9 @@
 	};	
 	
 	Comment.display = function(){
-		commentService.getCommentList(moduleName, moduleId, function(commentList){
-			var commentLength = commentList.length;
-			var html="";
-			html += "<ul>";
-			for(var i=0; i< commentLength; i++){
-				html += "<li>";
-				html += commentList[i].content.replace("\n","<br/>");
-				html += commentList[i].user.name;
-	
-				html += $.format.date(commentList[i].regDate, "yyyy/MM/dd");
-				
-				if(loginId == commentList[i].userId){
-					html += "<span class='button blue small'><input type='button' value='삭제' onclick='Comment.removeAction("+commentList[i].commentSeq+")'></span>";
-				}
-				else{
-					html.innerHTML = "&nbsp;";
-				}
-				html += "</li>";
-			}
-			html += "</ul>";
-			
-			$("#commentList").html(html);
-		});
+		$.get("/comment.do", "moduleName=" + moduleName + "&moduleId=" + moduleId, function(data){
+      $("#commentList").html(data);
+  	});
 	};
 </script>
 <%

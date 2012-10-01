@@ -1,12 +1,14 @@
 package com.setvect.common.util;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
-public class Page implements Serializable {
-	public static final Page EMPTY_PAGE = new Page(Collections.EMPTY_LIST, 1, 0, "", "");
-	private Collection objects;
+public class Page<T> implements Serializable {
+	/** */
+	private static final long serialVersionUID = 444871409440367735L;
+	public static final Page<Object> EMPTY_PAGE = new Page<Object>(Collections.emptyList(), 1, 0, "", "");
+	private List<T> objects;
 	private int currentPage;
 	private int totalCount;
 	private int pageunit;
@@ -27,7 +29,7 @@ public class Page implements Serializable {
 		this.condition = "";
 	}
 
-	public Page(Collection objects, int currentPage, int totalCount) {
+	public Page(List<T> objects, int currentPage, int totalCount) {
 		this.pageunit = 10;
 
 		this.pagesize = 10;
@@ -45,13 +47,13 @@ public class Page implements Serializable {
 		this.endUnitPage = (this.beginUnitPage + this.pageunit - 1);
 	}
 
-	public Page(Collection objects, int currentPage, int totalCount, String condition, String search) {
+	public Page(List<T> objects, int currentPage, int totalCount, String condition, String search) {
 		this(objects, currentPage, totalCount);
 		this.condition = condition;
 		this.search = search;
 	}
 
-	public Page(Collection objects, int currentPage, int totalCount, int pageunit, int pagesize) {
+	public Page(List<T> objects, int currentPage, int totalCount, int pageunit, int pagesize) {
 		this.pageunit = 10;
 
 		this.pagesize = 10;
@@ -74,11 +76,8 @@ public class Page implements Serializable {
 		this.endUnitPage = (this.beginUnitPage + pageunit - 1);
 	}
 
-	public Collection getList() {
+	public List<T> getList() {
 		return this.objects;
-	}
-
-	public void setList(Collection val) {
 	}
 
 	public boolean hasNextPage() {
@@ -182,14 +181,6 @@ public class Page implements Serializable {
 
 	public void setPagesize(int pagesize) {
 		this.pagesize = pagesize;
-	}
-
-	public Collection getObjects() {
-		return this.objects;
-	}
-
-	public void setObjects(Collection objects) {
-		this.objects = objects;
 	}
 
 	public int getTotalCount() {

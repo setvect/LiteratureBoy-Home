@@ -1,11 +1,11 @@
 package com.setvect.common.util;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Page에서 검색된 객체들의 타입을 지정함
  */
-public class GenericPage<T> extends Page {
+public class GenericPage<T> extends Page<T> {
 
 	/** */
 	private static final long serialVersionUID = -5941168763829250384L;
@@ -22,12 +22,11 @@ public class GenericPage<T> extends Page {
 	 * @param pagesize
 	 *            페이지당 표시 갯수
 	 */
-	public GenericPage(Collection<T> objects, int currentPage, int totalCount, int pageunit, int pagesize) {
+	public GenericPage(List<T> objects, int currentPage, int totalCount, int pageunit, int pagesize) {
 		super(objects, currentPage, totalCount, pageunit, pagesize);
 	}
 
-	@SuppressWarnings("unchecked")
-	public Collection<T> getList() {
+	public List<T> getList() {
 		return super.getList();
 	}
 

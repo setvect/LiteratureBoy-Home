@@ -1,4 +1,4 @@
-<%@page import="com.setvect.literatureboy.service.common.CommentModule"%>
+<%@page import="com.setvect.literatureboy.service.comment.CommentModule"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@include file="/common/taglib.inc.jsp"%>
 <div class="main_content">
@@ -12,7 +12,7 @@
 		내용없음
 	</c:if>
 	<br/><br/><br/><br/><br/>
-	<jsp:include page="/app/common/comment.portlet.jsp">
+	<jsp:include page="/app/comment/comment.portlet.jsp">
 		<jsp:param name="moduleName" value="<%=CommentModule.MAIN%>"/>
 		<jsp:param name="moduleId" value="0"/>
 		<jsp:param name="writerForm" value="false"/>

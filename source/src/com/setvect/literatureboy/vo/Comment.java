@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.EnvirmentInit;
-import com.setvect.literatureboy.service.common.CommentModule;
+import com.setvect.literatureboy.service.comment.CommentModule;
 import com.setvect.literatureboy.service.user.UserService;
 import com.setvect.literatureboy.vo.user.User;
 

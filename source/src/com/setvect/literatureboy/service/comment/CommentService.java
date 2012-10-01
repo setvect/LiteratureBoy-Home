@@ -1,10 +1,11 @@
-package com.setvect.literatureboy.service.common;
+package com.setvect.literatureboy.service.comment;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.setvect.common.util.GenericPage;
 import com.setvect.literatureboy.db.CommentDao;
 import com.setvect.literatureboy.vo.Comment;
 
@@ -21,12 +22,8 @@ public class CommentService {
 		return commentDao.getComment(commentSeq);
 	}
 
-	public List<Comment> listComment(CommentModule moduleName, String moduleItemId) {
-		return commentDao.listComment(moduleName, moduleItemId);
-	}
-
-	public List<Comment> listComment(CommentModule moduleName, int moduleItemId) {
-		return commentDao.listComment(moduleName, String.valueOf(moduleItemId));
+	public GenericPage<Comment> getCommentPagingList(CommentSearch pageCondition) {
+		return commentDao.getCommentPagingList(pageCondition);
 	}
 
 	public void createComment(Comment comment) {

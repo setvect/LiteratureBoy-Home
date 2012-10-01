@@ -31,9 +31,9 @@
 	</dwr:configuration>
 
 	<bean id="commentService"
-		class="com.setvect.literatureboy.service.common.CommentDwrService">
+		class="com.setvect.literatureboy.service.comment.CommentDwrService">
 		<dwr:remote javascript="commentService">
-			<dwr:convert type="enum" class="com.setvect.literatureboy.service.common.CommentModule"/>
+			<dwr:convert type="enum" class="com.setvect.literatureboy.service.comment.CommentModule"/>
 		</dwr:remote>
 	</bean>
 

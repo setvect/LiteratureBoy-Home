@@ -1,8 +1,7 @@
 package com.setvect.literatureboy.db;
 
-import java.util.List;
-
-import com.setvect.literatureboy.service.common.CommentModule;
+import com.setvect.common.util.GenericPage;
+import com.setvect.literatureboy.service.comment.CommentSearch;
 import com.setvect.literatureboy.vo.Comment;
 
 /**
@@ -19,13 +18,11 @@ public interface CommentDao {
 	public Comment getComment(int commentSeq);
 
 	/**
-	 * @param moduleName
-	 *            모듈 이름
-	 * @param moduleItemId
-	 *            모듈 아이디
+	 * @param pageCondition
+	 *            가져올 갯수
 	 * @return 코멘트 목록
 	 */
-	public List<Comment> listComment(CommentModule moduleName, String moduleItemId);
+	public GenericPage<Comment> getCommentPagingList(CommentSearch pageCondition);
 
 	/**
 	 * @param comment
