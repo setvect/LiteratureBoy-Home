@@ -1,14 +1,14 @@
+<%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
+<%@page import="com.setvect.literatureboy.vo.user.User"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%@include file="/common/taglib.inc.jsp"%>
+<%
+	User loginUser = (User)request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
+%>
 <script type='text/javascript' src='/dwr/interface/commentService.js'></script>
 <script type="text/javascript" src="/common/js/jquery.dateFormat-1.0.js"></script>
 <script type='text/javascript' src='/dwr/engine.js'></script>
 <script type='text/javascript' src='/dwr/util.js'></script>
-
-<%
-	boolean writerForm = Boolean.getBoolean(request.getParameter("writerForm"));	 
-%>
-
 <script type='text/javascript'>
 	// 아래 구문이 없으면 DWR util.js과 충돌 되어 jquery를 사용 할 수 없다.
 	var $ = jQuery.noConflict();
@@ -50,7 +50,7 @@
 	};
 </script>
 <%
-	if(writerForm){
+	if(loginUser != null ){
 %>
 <form action="${SERVLET_URL}" method="post" name="commentCreateAction" style="clear: both;">
 	<table class="table_list1">

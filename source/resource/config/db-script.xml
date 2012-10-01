@@ -160,7 +160,7 @@
 				MODULE_ID			varchar(50) NOT NULL,		
 				USER_ID				varchar(20) NOT NULL,
 				CONTENT				varchar(4000) NOT NULL,
-				REG_DATE			date NOT NULL,
+				REG_DATE			datetime NOT NULL,
 			  PRIMARY KEY  (COMMENT_SEQ)
 			)
 		</creation>

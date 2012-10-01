@@ -1,3 +1,4 @@
+<%@page import="com.setvect.literatureboy.vo.user.User"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.setvect.literatureboy.util.DateDiff"%>
@@ -8,7 +9,7 @@
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <%
 	List<Comment> list = (List<Comment>)request.getAttribute(CommentController.AttributeKey.LIST.name());
-	String loginId = (String)request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
+	User loginUser = (User)request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
 %>
 <ul>	
 <%
@@ -16,11 +17,10 @@
 	for(Comment comment : list){
 %>
 	<li>
-		<%=StringUtilAd.toBr(comment.getContent())%>
-		<%=comment.getUser().getName() %>
-		<%=DateDiff.diff(now, comment.getRegDate()) %>
+		<%=StringUtilAd.toBr(comment.getContent().trim())%>
+		<span style="float: right"><%=DateDiff.diff(now, comment.getRegDate()) %></span>
 <%
-		if(comment.getUserId().equals(loginId) ){
+		if(loginUser != null && comment.getUserId().equals(loginUser.getUserId()) ){
 %>
 		<span class='button blue small'><input type='button' value='삭제' onclick='Comment.removeAction(<%=comment.getCommentSeq()%>)'></span>
 <%
