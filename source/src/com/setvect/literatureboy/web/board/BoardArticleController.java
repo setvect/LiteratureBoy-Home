@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.setvect.common.http.HttpUtil;
-import com.setvect.common.http.UrlParameter;
+import com.setvect.common.jsp.URLParameter;
 import com.setvect.common.util.Binder;
 import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.GenericPage;
@@ -435,9 +436,12 @@ public class BoardArticleController {
 	 */
 	private String getRedirectionUrl(HttpServletRequest request, BoardArticleSearch pageCondition) throws Exception {
 
-		UrlParameter param = new UrlParameter();
+		URLParameter param = new URLParameter(request.getRequestURI(), "utf-8");
 		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
-		param.putAll(searchParam);
+
+		for (Entry<String, Object> item : searchParam.entrySet()) {
+			param.put(item.getKey(), item.getValue().toString());
+		}
 
 		String pageParam = new ParamEncoder("articleList").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
 		param.put(pageParam, pageCondition.getCurrentPage());
@@ -446,11 +450,11 @@ public class BoardArticleController {
 		Mode m = Mode.valueOf(mode);
 		// 코멘트, 트래백 관련 액션이면 읽기 페이지로 이동
 		if (m == Mode.COMMENT_CREATE_ACTION || m == Mode.COMMENT_REMOVE_ACTION || m == Mode.TRACKBACK_REMOVE_ACTION) {
-			param.put("mode", Mode.READ_FORM);
+			param.put("mode", Mode.READ_FORM.name());
 			param.put("articleSeq", request.getParameter("articleSeq"));
 		}
 
-		String url = request.getRequestURI() + "?" + param.getParameter();
+		String url = param.getParam();
 		return url;
 	}
 

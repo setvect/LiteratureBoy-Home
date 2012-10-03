@@ -11,10 +11,11 @@
 	<c:if test="${empty MAIN_ARTICLE}">
 		내용없음
 	</c:if>
-	<br/><br/><br/>
-	지금생각..<br/>
-	<jsp:include page="/app/comment/comment.portlet.jsp">
-		<jsp:param name="moduleName" value="<%=CommentModule.MAIN%>"/>
-		<jsp:param name="moduleId" value="0"/>
-	</jsp:include>	
+	<div style="padding: 30px;padding-top: 60px;">
+		<span class="button blue"><a>순간의 생각들</a></span>
+		<jsp:include page="/app/comment/comment.portlet.jsp">
+			<jsp:param name="moduleName" value="<%=CommentModule.MAIN%>"/>
+			<jsp:param name="moduleId" value="0"/>
+		</jsp:include>
+	</div>	
 </div>

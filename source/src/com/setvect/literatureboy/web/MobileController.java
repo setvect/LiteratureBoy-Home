@@ -1,6 +1,7 @@
 package com.setvect.literatureboy.web;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.setvect.common.jsp.URLParameter;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.board.BoardService;
+import com.setvect.literatureboy.service.comment.CommentService;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.web.board.BoardArticleController;
 import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
+import com.setvect.literatureboy.web.comment.CommentController;
 import com.setvect.literatureboy.web.etc.EmailGetController;
 
 /**
@@ -37,6 +40,9 @@ public class MobileController {
 	@Autowired
 	private EmailGetController emailGetController;
 
+	@Autowired
+	private CommentController commentController;
+
 	/**
 	 * 뷰에 전달할 객체를 가르키는 키
 	 */
@@ -49,22 +55,19 @@ public class MobileController {
 	public static enum Menu {
 		MAIN, // 메인 메뉴
 		ALL, // 전체 보기
+		THINK, // 순간의 생각들
 	}
 
 	/** 전체 보기에 포함될 게시판 코드 */
-	private static final String[] ALL_VIEW_BOARD = EnvirmentProperty
-			.getStringArray("com.setvect.literatureboy.board.all_view");
-
-	public static final List<String> ALL_VIEW_BOARD_LIST = new ArrayList<String>();
+	public static final List<String> ALL_VIEW_BOARD_LIST;
 
 	/** 전체 게시판 */
 	private final List<Board> ALL_BOARD = new ArrayList<Board>();
 
 	public final Map<String, Board> ALL_BOARD_MAP = new HashMap<String, Board>();
 	static {
-		for (String s : ALL_VIEW_BOARD) {
-			ALL_VIEW_BOARD_LIST.add(s);
-		}
+		String[] boardList = EnvirmentProperty.getStringArray("com.setvect.literatureboy.board.all_view");
+		ALL_VIEW_BOARD_LIST = Arrays.asList(boardList);
 	}
 
 	@RequestMapping("/m/*.do")
@@ -91,11 +94,11 @@ public class MobileController {
 			jsp.put(BoardArticleController.JspPageKey.LIST, "/m/app/board/board_article_list.jsp");
 			jsp.put(BoardArticleController.JspPageKey.READ, "/m/app/board/board_article_read.jsp");
 			boardArticleController.setJspPage(jsp);
+
 			ModelAndView mav = new ModelAndView(ConstraintWeb.MOBILE_LAYOUT);
 			request.setAttribute(ConstraintWeb.AttributeKey.MODEL_VIEW.name(), mav);
 
 			mav = boardArticleController.process(request, response);
-
 			Board board = (Board) mav.getModel().get(BoardArticleController.AttributeKey.BOARD.name());
 			MobilePageStatus ps;
 			if (pageName.equals("bdAll")) {
@@ -109,29 +112,37 @@ public class MobileController {
 			mav.addObject(AttributeKey.BOARD_MAP.name(), ALL_BOARD_MAP);
 			return mav;
 		}
-
+		else if (pageName.equals("think")) {
+			// 순간의 생각들
+			ModelAndView mav = commentController.process(request, response);
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/app/comment/comment.jsp");
+			MobilePageStatus ps = new MobilePageStatus("순간의 생각", Menu.THINK);
+			mav.addObject(AttributeKey.STATUS.name(), ps);
+			mav.setViewName(ConstraintWeb.MOBILE_LAYOUT);
+			return mav;
+		}
 		// 이메일 주소 알기
 		else if (pageName.equals("emailget")) {
-			ModelAndView modelAndView = emailGetController.process(request, response);
+			ModelAndView mav = emailGetController.process(request, response);
 
 			// 리턴 받을 뷰 이름을 조작해 모바일 페이지에 로딩 되게 함.
 			// 웹 페이지 구성의 매우 의존적이기 때문에 별로 좋은 방법은 아님.
-			String viewName = modelAndView.getViewName();
+			String viewName = mav.getViewName();
 
 			MobilePageStatus ps = new MobilePageStatus("문학소년 이메일 알기", Menu.MAIN);
-			modelAndView.addObject(AttributeKey.STATUS.name(), ps);
-			modelAndView.setViewName(ConstraintWeb.MOBILE_LAYOUT);
-			modelAndView.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/" + viewName + ".jsp");
-			return modelAndView;
+			mav.addObject(AttributeKey.STATUS.name(), ps);
+			mav.setViewName(ConstraintWeb.MOBILE_LAYOUT);
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/" + viewName + ".jsp");
+			return mav;
 		}
 		else {
 			// 메인화면
-			ModelAndView modelAndView = new ModelAndView(ConstraintWeb.MOBILE_LAYOUT);
+			ModelAndView mav = new ModelAndView(ConstraintWeb.MOBILE_LAYOUT);
 			MobilePageStatus ps = new MobilePageStatus("Literature Boy", Menu.MAIN);
-			modelAndView.addObject(AttributeKey.STATUS.name(), ps);
-			modelAndView.addObject(ConstraintWeb.AttributeKey.BOARD_ITEMS.name(), ALL_BOARD);
-			modelAndView.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/main.jsp");
-			return modelAndView;
+			mav.addObject(AttributeKey.STATUS.name(), ps);
+			mav.addObject(ConstraintWeb.AttributeKey.BOARD_ITEMS.name(), ALL_BOARD);
+			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/main.jsp");
+			return mav;
 		}
 	}
 
@@ -155,7 +166,7 @@ public class MobileController {
 	private void loadViewBoardList() {
 		ALL_BOARD.clear();
 		ALL_BOARD_MAP.clear();
-		for (String bd : ALL_VIEW_BOARD) {
+		for (String bd : ALL_VIEW_BOARD_LIST) {
 			Board a = boardService.getBoard(bd);
 			ALL_BOARD.add(a);
 			ALL_BOARD_MAP.put(a.getBoardCode(), a);

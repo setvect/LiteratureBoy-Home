@@ -19,6 +19,7 @@ import com.setvect.common.util.StringUtilAd;
 import com.setvect.literatureboy.boot.EnvirmentInit;
 import com.setvect.literatureboy.service.comment.CommentModule;
 import com.setvect.literatureboy.service.user.UserService;
+import com.setvect.literatureboy.util.DateDiff;
 import com.setvect.literatureboy.vo.user.User;
 
 /**
@@ -103,6 +104,10 @@ public class Comment {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+
+	public String getRegDateDiff() {
+		return DateDiff.diff(new Date(), regDate);
 	}
 
 	/**

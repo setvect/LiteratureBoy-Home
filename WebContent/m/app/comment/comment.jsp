@@ -11,7 +11,7 @@
 	List<Comment> list = (List<Comment>)request.getAttribute(CommentController.AttributeKey.LIST.name());
 	User loginUser = (User)request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
 %>
-<ul style="list-style: none;">	
+<ul style="list-style: none; padding: 0px;">	
 <%
 	Date now = new Date();
 	for(Comment comment : list){
@@ -22,7 +22,7 @@
 <%
 		if(loginUser != null && comment.getUserId().equals(loginUser.getUserId()) ){
 %>
-		<span class='button blue small'><input type='button' value='삭제' onclick='Comment.removeAction(<%=comment.getCommentSeq()%>)'></span>
+		<a href="" onclick="Comment.removeAction(<%=comment.getCommentSeq()%>)">삭제</a>
 <%
 		}
 %>		
@@ -31,11 +31,3 @@
 	}
 %>
 </ul>
-<%
-	boolean existNextData = (Boolean)request.getAttribute(CommentController.AttributeKey.EXIST_DATA.name());
-	if(existNextData){
-%>
-<div>더보기</div>
-<%
-	}
-%>	

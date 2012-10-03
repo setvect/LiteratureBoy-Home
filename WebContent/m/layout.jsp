@@ -1,3 +1,4 @@
+<%@page import="com.setvect.literatureboy.service.comment.CommentModule"%>
 <%@page import="com.setvect.literatureboy.web.MobileController"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
 <!DOCTYPE html>
@@ -21,6 +22,7 @@
 				<ul>
 					<li><a href="/m/main.do" class="${STATUS.menu == 'MAIN' ? 'ui-btn-active' : ''}">메뉴들..</a></li>
 					<li><a href="/m/bdAll.do?searchCode=<%=MobileController.ALL_VIEW_BOARD_LIST.get(0)%>" class="${STATUS.menu == 'ALL' ? 'ui-btn-active' : ''}">전체 글 모아 보기</a></li>
+					<li><a href="/m/think.do?moduleName=<%=CommentModule.MAIN%>&moduleId=0" class="${STATUS.menu == 'ALL' ? 'ui-btn-active' : ''}">순간의 생각</a></li>
 				</ul>
 			</div>			
 		</div>

@@ -1,3 +1,4 @@
+<%@page import="com.setvect.literatureboy.web.comment.CommentController"%>
 <%@page import="com.setvect.literatureboy.web.ConstraintWeb"%>
 <%@page import="com.setvect.literatureboy.vo.user.User"%>
 <%@ page language="java" pageEncoding="utf-8" isELIgnored="false" %>
@@ -17,10 +18,11 @@
 	var loginId = "${ _user_session_key.userId}"; 
 	
 	$(function(){
-		Comment.display();
+		Comment.append();
 	});
 	
 	var Comment = new Object();
+	Comment.curretPage = 1;
 	Comment.createAction = function(){
 		if($.FORM.isEmptyRtnMsg(document.commentCreateAction.content, "내용을 입력해 주세요")){
 			return;
@@ -43,10 +45,31 @@
 		}
 	};	
 	
-	Comment.display = function(){
-		$.get("/comment.do", "moduleName=" + moduleName + "&moduleId=" + moduleId, function(data){
-      $("#commentList").html(data);
-  	});
+	Comment.append = function(){
+		commentService.getCommentList(moduleName, moduleId, Comment.curretPage, function(commentList){
+			var commentLength = commentList.length;
+			if(commentLength == 0){
+				$("#commentListNext").html("더 이상 없음");
+			}
+			
+			var html="";
+			for(var i=0; i< commentLength; i++){
+				html += "<li>";
+				html += commentList[i].content.replace("\n","<br/>");
+				html += "&nbsp;&nbsp;";
+				html += "<span style='font-size: 10pt'>" + commentList[i].regDateDiff + "</span>";
+				
+				if(loginId == commentList[i].userId){
+					html += "<span style='float:right' class='button blue small'><input type='button' value='삭제' onclick='Comment.removeAction("+commentList[i].commentSeq+")'></span>";
+				}
+				else{
+					html.innerHTML = "&nbsp;";
+				}
+				html += "</li>";
+			}
+			$("#commentList").append(html);
+			Comment.curretPage = Comment.curretPage + 1; 
+		});
 	};
 </script>
 <%
@@ -68,5 +91,9 @@
 <%
 	}
 %>
-<div id="commentList">
+<div>
+	<ul id="commentList">
+	</ul>
 </div>
+<br/>
+<div id="commentListNext"><a href="javascript:Comment.append()">더보기</a></div>

@@ -33,10 +33,12 @@ public class CommentDwrService {
 	 *            모듈 이름
 	 * @param moduleItemId
 	 *            모듈 아이디
+	 * @param currentPage
+	 *            현재 페이지
 	 * @return 코멘트 목록
 	 */
-	public List<Comment> getCommentList(CommentModule moduleName, String moduleItemId) {
-		CommentSearch pageCondition = new CommentSearch(1, moduleName, moduleItemId);
+	public List<Comment> getCommentList(CommentModule moduleName, String moduleItemId, int currentPage) {
+		CommentSearch pageCondition = new CommentSearch(currentPage, moduleName, moduleItemId);
 		GenericPage<Comment> comments = commentService.getCommentPagingList(pageCondition);
 		return comments.getList();
 	}
