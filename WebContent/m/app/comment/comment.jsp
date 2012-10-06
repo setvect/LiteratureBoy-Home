@@ -25,9 +25,9 @@
 		height:20px;
 	}
 </style>
-<script type='text/javascript' src='/dwr/interface/commentService.js'></script>
-<script type='text/javascript' src='/dwr/engine.js'></script>
-<script type='text/javascript' src='/dwr/util.js'></script>
+<script type='text/javascript' src='/servlet/dwr/interface/commentService.js'></script>
+<script type='text/javascript' src='/servlet/dwr/engine.js'></script>
+<script type='text/javascript' src='/servlet/dwr/util.js'></script>
 <script type='text/javascript' src='/app/comment/comment.js'></script>
 
 <script type='text/javascript'>

@@ -39,6 +39,7 @@ public class CommentDwrService {
 	 */
 	public List<Comment> getCommentList(CommentModule moduleName, String moduleItemId, int currentPage) {
 		CommentSearch pageCondition = new CommentSearch(currentPage, moduleName, moduleItemId);
+		pageCondition.setPagePerItemCount(5);
 		GenericPage<Comment> comments = commentService.getCommentPagingList(pageCondition);
 		return comments.getList();
 	}

@@ -6,9 +6,9 @@
 <%
 	User loginUser = (User)request.getAttribute(ConstraintWeb.USER_SESSION_KEY);
 %>
-<script type='text/javascript' src='/dwr/interface/commentService.js'></script>
-<script type='text/javascript' src='/dwr/engine.js'></script>
-<script type='text/javascript' src='/dwr/util.js'></script>
+<script type='text/javascript' src='/servlet/dwr/interface/commentService.js'></script>
+<script type='text/javascript' src='/servlet/dwr/engine.js'></script>
+<script type='text/javascript' src='/servlet/dwr/util.js'></script>
 <script type='text/javascript' src='/app/comment/comment.js'></script>
 <script type='text/javascript'>
 	// 아래 구문이 없으면 DWR util.js과 충돌 되어 jquery를 사용 할 수 없다.

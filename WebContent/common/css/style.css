@@ -189,10 +189,10 @@ padding: 0 0 10px 0;
 	padding: 30px;
 	margin-top: 35px;
 	background-color: #D3ECD6;	
-	-moz-border-radius: 21px; /*모질라*/
-	-webkit-border-radius: 21px; /*웹킷*/
+	-moz-border-radius: 15px; /*모질라*/
+	-webkit-border-radius: 15px; /*웹킷*/
 	/*IE9+,FF4+,chrome,Safari5,+opera*/
-	border-radius: 21px;	
+	border-radius: 15px;	
 }
 
 #commentList .diff_date{
