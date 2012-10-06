@@ -32,8 +32,13 @@ public class LogoutController {
 		String returnUrl = "";
 		returnUrl = StringUtilAd.null2str(returnUrl, "/");
 
-		mav.setViewName("redirect:/user/login.do");
-
+		String referer = request.getHeader("Referer");
+		if (StringUtilAd.isNotEmpty(referer) && referer.contains("/m/")){
+			mav.setViewName("redirect:/m/");
+		}
+		else{
+			mav.setViewName("redirect:/");
+		}
 		return mav;
 	}
 

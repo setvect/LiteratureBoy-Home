@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.setvect.common.util.SerializerUtil;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.user.UserService;
 import com.setvect.literatureboy.vo.user.User;
 import com.setvect.literatureboy.web.ConstraintWeb;
@@ -20,6 +21,9 @@ import com.setvect.literatureboy.web.ConstraintWeb;
  */
 @Controller
 public class LoginController {
+	/** 업로드 기준 URL */
+	private final static int COOKIE_TIME = EnvirmentProperty.getInt("com.setvect.literatureboy.login.cookie_time");
+
 	/**
 	 * 서브 명령어 정의
 	 */
@@ -75,6 +79,7 @@ public class LoginController {
 				user.setPasswd(null);
 
 				String cookieData = SerializerUtil.makeBase64Encode(user);
+				boolean statusSave = StringUtilAd.isNotEmpty(request.getParameter("statusSave"));
 
 				// iis에서는 줄바꿈 문제가 있으면 쿠키가 셋팅이 안된다. 그래서 줄 바꿈을 제거
 				cookieData = cookieData.replaceAll("\r", "");
@@ -82,6 +87,10 @@ public class LoginController {
 
 				Cookie loginCookie = new Cookie(ConstraintWeb.USER_COOKIE_KEY, cookieData);
 				loginCookie.setPath("/");
+				if (statusSave) {
+					loginCookie.setMaxAge(COOKIE_TIME);
+				}
+
 				response.addCookie(loginCookie);
 				String returnUrl = rtnUrl;
 				returnUrl = StringUtilAd.null2str(returnUrl, "/");
@@ -102,5 +111,4 @@ public class LoginController {
 		}
 		return mav;
 	}
-
 }

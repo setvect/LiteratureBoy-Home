@@ -18,12 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.setvect.common.jsp.URLParameter;
 import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.service.board.BoardService;
-import com.setvect.literatureboy.service.comment.CommentService;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.web.board.BoardArticleController;
 import com.setvect.literatureboy.web.board.BoardArticleController.JspPageKey;
 import com.setvect.literatureboy.web.comment.CommentController;
 import com.setvect.literatureboy.web.etc.EmailGetController;
+import com.setvect.literatureboy.web.user.LoginController;
 
 /**
  * 모바일 페이지
@@ -42,6 +42,9 @@ public class MobileController {
 
 	@Autowired
 	private CommentController commentController;
+
+	@Autowired
+	private LoginController loginController;
 
 	/**
 	 * 뷰에 전달할 객체를 가르키는 키
@@ -114,11 +117,10 @@ public class MobileController {
 		}
 		else if (pageName.equals("think")) {
 			// 순간의 생각들
-			ModelAndView mav = commentController.process(request, response);
+			ModelAndView mav = new ModelAndView(ConstraintWeb.MOBILE_LAYOUT);
 			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/app/comment/comment.jsp");
 			MobilePageStatus ps = new MobilePageStatus("순간의 생각", Menu.THINK);
 			mav.addObject(AttributeKey.STATUS.name(), ps);
-			mav.setViewName(ConstraintWeb.MOBILE_LAYOUT);
 			return mav;
 		}
 		// 이메일 주소 알기
@@ -133,6 +135,22 @@ public class MobileController {
 			mav.addObject(AttributeKey.STATUS.name(), ps);
 			mav.setViewName(ConstraintWeb.MOBILE_LAYOUT);
 			mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/" + viewName + ".jsp");
+			return mav;
+		}
+		// 로그인
+		else if (pageName.equals("login")) {
+			ModelAndView mav = loginController.process(request, response);
+
+			String viewName = mav.getViewName();
+			if (viewName.contains("redirect:")) {
+				mav.setViewName("redirect:/m/");
+			}
+			else {
+				mav.setViewName(ConstraintWeb.MOBILE_LAYOUT);
+				mav.addObject(ConstraintWeb.AttributeKey.INCLUDE_PAGE.name(), "/m/app/login/login.jsp");
+				MobilePageStatus ps = new MobilePageStatus("로그인", Menu.ALL);
+				mav.addObject(AttributeKey.STATUS.name(), ps);
+			}
 			return mav;
 		}
 		else {
