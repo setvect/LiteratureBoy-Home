@@ -440,6 +440,9 @@ public class BoardArticleController {
 		Map<String, Object> searchParam = CommonUtil.getSearchMap(pageCondition);
 
 		for (Entry<String, Object> item : searchParam.entrySet()) {
+			if (item.getValue() == null) {
+				continue;
+			}
 			param.put(item.getKey(), item.getValue().toString());
 		}
 
@@ -454,7 +457,7 @@ public class BoardArticleController {
 			param.put("articleSeq", request.getParameter("articleSeq"));
 		}
 
-		String url = param.getParam();
+		String url = param.getParam("&");
 		return url;
 	}
 

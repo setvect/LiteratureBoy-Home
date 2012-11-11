@@ -120,16 +120,18 @@ public class URLParameter {
 		return putOverlap(key, String.valueOf(value));
 	}
 
-	/** 
-	 * 특정 키 값을 제거 
-	 * @param key  키
+	/**
+	 * 특정 키 값을 제거
+	 * 
+	 * @param key
+	 *            키
 	 * @return URLParamter 객체 정보. chain 형식
 	 */
-	public URLParameter clearParam(String key){
+	public URLParameter clearParam(String key) {
 		param.remove(key);
 		return this;
 	}
-	
+
 	/**
 	 * @param url
 	 *            URL
@@ -152,6 +154,15 @@ public class URLParameter {
 	 * @return 파리머터를 포함한 전체 주소
 	 */
 	public String getParam() {
+		return getParam(AMP);
+	}
+
+	/**
+	 * @param seperator
+	 *            보통은 '&'
+	 * @return
+	 */
+	public String getParam(String seperator) {
 		StringBuffer s = new StringBuffer();
 
 		s.append(url);
@@ -172,7 +183,7 @@ public class URLParameter {
 					s.append(key);
 					s.append("=");
 					s.append(URLEncoder.encode(v, encode));
-					s.append(AMP);
+					s.append(seperator);
 				}
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException(e);
@@ -180,8 +191,8 @@ public class URLParameter {
 		}
 		// 맨 끝의 "&amp;"를 삭제한 후 리턴 한다.
 		String rtnParam = s.toString();
-		if (rtnParam.contains(AMP)) {
-			rtnParam = rtnParam.substring(0, rtnParam.length() - AMP.length());
+		if (rtnParam.contains(seperator)) {
+			rtnParam = rtnParam.substring(0, rtnParam.length() - seperator.length());
 		}
 		return rtnParam;
 	}
