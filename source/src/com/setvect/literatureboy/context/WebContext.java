@@ -22,7 +22,7 @@ import com.setvect.literatureboy.web.SessionCheckInterceptor;
 import com.setvect.literatureboy.web.board.BoardTrackbackController;
 
 @Configuration
-@ImportResource({ "classpath:/config/applicationDwr.xml" })
+@ImportResource({ "classpath:/config/applicationWeb.xml" })
 @ComponentScan(basePackages = "com.setvect.literatureboy.web", useDefaultFilters = false, includeFilters = @Filter(type = ANNOTATION, value = Controller.class), excludeFilters = @Filter(type = ANNOTATION, value = Service.class))
 public class WebContext {
 	@Autowired
@@ -72,6 +72,20 @@ public class WebContext {
 		Properties mappings = new Properties();
 		mappings.put("/servlet/tb/*", boardTrackbackController);
 		bean.setMappings(mappings);
+		return bean;
+	}
+
+	@Bean
+	public SimpleUrlHandlerMapping dwrUrlHandlerMapping() {
+		SimpleUrlHandlerMapping bean = new SimpleUrlHandlerMapping();
+		Properties mappings = new Properties();
+		mappings.setProperty("/engine.js", "dwrController");
+		mappings.setProperty("/util.js", "dwrController");
+		mappings.setProperty("/interface/**", "dwrController");
+		mappings.setProperty("/call/**", "dwrController");
+		mappings.setProperty("/*", "dwrController");
+		bean.setMappings(mappings);
+
 		return bean;
 	}
 }
