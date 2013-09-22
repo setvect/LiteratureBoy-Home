@@ -2,12 +2,14 @@ package com.setvect.literatureboy.boot;
 
 import java.net.URL;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 import org.springframework.aop.Advisor;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.setvect.common.log.LogPrinter;
 import com.setvect.literatureboy.config.EnvirmentProperty;
@@ -18,28 +20,30 @@ import com.setvect.literatureboy.service.user.UserService;
  * WAS가 실행되면 어플리케이션에 기본적인 설정값, 로그설정등을 해준다. <br>
  * $Id$
  */
-@SuppressWarnings("serial")
-public class EnvirmentInit extends HttpServlet {
-	private static final String CONFIG_SPRING = "classpath:config/applicationContext.xml";
+public class EnvirmentInit implements ServletContextListener {
 	private static final String CONFIG_LOG4J_XML = "/config/log4j.xml";
 	private static final String CONFIG_CONFIG_PROPERTIES = "/config/config.properties";
 
-	/** 초기화 여부 */
-	private static boolean initialize = false;
-	private static ClassPathXmlApplicationContext springContext;
+	private static WebApplicationContext springContext;
 
 	public EnvirmentInit() {
 	}
 
-	public void init() throws ServletException {
-		super.init();
+	@Override
+	public void contextInitialized(ServletContextEvent paramServletContextEvent) {
+		ServletContext servletContext = paramServletContextEvent.getServletContext();
+		springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 		bootUp();
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent paramServletContextEvent) {
 	}
 
 	/**
 	 * @return the springContext
 	 */
-	public static ClassPathXmlApplicationContext getSpringContext() {
+	public static WebApplicationContext getConfigSpring() {
 		return springContext;
 	}
 
@@ -47,12 +51,6 @@ public class EnvirmentInit extends HttpServlet {
 	 * config propertity, log4j, spring, hibernate 설정 초기화
 	 */
 	public static void bootUp() {
-
-		if (initialize) {
-			return;
-			// throw new IllegalStateException("aready initialized!");
-		}
-
 		URL configUrl = EnvirmentInit.class.getResource(CONFIG_CONFIG_PROPERTIES);
 		EnvirmentProperty.init(configUrl);
 
@@ -63,24 +61,12 @@ public class EnvirmentInit extends HttpServlet {
 		// Jetty 사용에서 발생되는 오류 해결
 		loadForSpringJarFile();
 
-		springContext = new ClassPathXmlApplicationContext(new String[] { CONFIG_SPRING }, false);
-		springContext.refresh();
-
-		LogPrinter.out.info("Spring Initialized");
-		
-		// DB init
-		// H2 데이터 베이스 파일 생성 경로 지정. Spring Initialized 전에 해야됨
-		if (System.getProperty("h2.baseDir") == null) {
-			System.setProperty("h2.baseDir", EnvirmentProperty.getString("com.setvect.literatureboy.db.path"));
-		}
-
 		DBInitializer conn = (DBInitializer) springContext.getBean("db.initializer");
 		conn.init();
 		LogPrinter.out.info("DB Initialized");
 
 		conn.makeTable();
 		LogPrinter.out.info("DB Table Initialized completed");
-		initialize = true;
 
 		// 권한 매핑 정보를 읽어 드림
 		UserService user = (UserService) springContext.getBean("UserService");
@@ -99,12 +85,9 @@ public class EnvirmentInit extends HttpServlet {
 	 * Configuration problem: Unable to locate Spring NamespaceHandler for XML
 	 * schema namespace [http://www.springframework.org/schema/aop]
 	 */
+	@SuppressWarnings("unused")
 	private static void loadForSpringJarFile() {
 		Class<Advisor> aop = Advisor.class;
 		Class<TransactionStatus> tx = TransactionStatus.class;
-	}
-
-	public void destroy() {
-		super.destroy();
 	}
 }

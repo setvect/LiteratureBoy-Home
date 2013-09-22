@@ -117,7 +117,7 @@ public class Comment {
 		if (StringUtilAd.isEmpty(userId)) {
 			return null;
 		}
-		UserService service = (UserService) EnvirmentInit.getSpringContext().getBean("UserService");
+		UserService service = (UserService) EnvirmentInit.getConfigSpring().getBean("UserService");
 		return service.getUser(userId);
 	}
 }

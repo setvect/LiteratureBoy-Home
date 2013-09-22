@@ -26,7 +26,7 @@ public class CommentDwrService {
 	/**
 	 * 주의: Spring configuration이 초기화 된 후에 해당 클래스가 접근 되어야 초기화를 할 수 있음
 	 */
-	private CommentService commentService = (CommentService) EnvirmentInit.getSpringContext().getBean("CommentService");
+	private CommentService commentService = (CommentService) EnvirmentInit.getConfigSpring().getBean("CommentService");
 
 	/**
 	 * @param moduleName

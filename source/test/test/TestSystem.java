@@ -1,8 +1,5 @@
 package test;
 
-import java.io.File;
-import java.net.URL;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;

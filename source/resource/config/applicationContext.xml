@@ -11,23 +11,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans   
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
        "
        default-lazy-init="true"
        >
 
-	<aop:aspectj-autoproxy />
-	<context:component-scan  base-package="com.setvect.literatureboy">
-		<!-- DB가 2가지 이상 사용시 사용 안할 DB DAO 패스 지정  -->
-		<!-- <context:exclude-filter type="aspectj" expression="com.setvect.literatureboy.db.h2.*"/> -->
-	</context:component-scan>	
-	       
 	<!--  Message Resources -->
 	<bean id="messageSource" 
 		class="org.springframework.context.support.ResourceBundleMessageSource">	
@@ -44,73 +36,7 @@
 
   <bean id="messageSourceAccessorHolder" class="com.setvect.literatureboy.util.DateDiff" autowire="byName" lazy-init="false"/>
   
-	<!-- DB Connection -->
-
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
-		lazy-init="true">
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.connection.driver_class">org.h2.Driver</prop>
-				<prop key="hibernate.connection.url">jdbc:h2:literatureboy</prop>
-				<prop key="hibernate.connection.username">sa</prop>
-				<prop key="hibernate.connection.password"></prop>
-				<prop key="hibernate.connection.poolsize">20</prop>
-				
-				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
-				<prop key="current_session_context_class">thread</prop>  
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.connection.shutdown">true</prop>
-			</props>
-		</property>
-		<property name="annotatedClasses">
-			<list>
-				<value>com.setvect.literatureboy.vo.Memo</value>
-				<value>com.setvect.literatureboy.vo.board.Board</value>
-				<value>com.setvect.literatureboy.vo.board.BoardArticle</value>
-				<value>com.setvect.literatureboy.vo.board.BoardAttachFile</value>
-				<value>com.setvect.literatureboy.vo.board.BoardComment</value>
-				<value>com.setvect.literatureboy.vo.board.BoardTrackback</value>
-				<value>com.setvect.literatureboy.vo.user.User</value>
-				<value>com.setvect.literatureboy.vo.user.Auth</value>
-				<value>com.setvect.literatureboy.vo.user.AuthMap</value>
-				<value>com.setvect.literatureboy.vo.Comment</value>
-			</list>
-		</property>
-		<property name="packagesToScan">
-			<list>
-				<!-- Add new Packages to scan here -->
-			</list>
-		</property>
-	</bean>
-
- 	
- 	<bean id="hibernateTemplate"
-    class="org.springframework.orm.hibernate3.HibernateTemplate"
-    p:sessionFactory-ref="sessionFactory" />	
-	
-	<!-- Transaction -->	
-	<bean id="hibernateTxManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	
-	<bean id="handlerMapping"
-		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="order" value="1" />
-		<property name="alwaysUseFullPath" value="true" />
-		<property name="mappings">
-			<props>
-				<prop key="/servlet/tb/*">trackbackController</prop>
-			</props>
-		</property>
-	</bean>
-	
-	<bean name="trackbackController"
-		class="com.setvect.literatureboy.web.board.BoardTrackbackController"/>
-	
+	<!-- Transaction -->
 	<tx:advice id="hibernateTxAdvice" transaction-manager="hibernateTxManager">
 		<tx:attributes>
 			<tx:method name="*" rollback-for="Exception" propagation="REQUIRED"/>
@@ -126,34 +52,4 @@
 		<aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="serivce" />
 		<!-- <aop:advisor advice-ref="hibernateTxAdvice" order="2" pointcut-ref="controller" /> -->
 	</aop:config>	
-
-	<!-- DataBase DAO -->
-	
-	<!-- Login Check Interceptor -->
-	<bean id="loginCheckInterceptor" class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>
-	
-
-	<!-- =============================== -->
-	<!-- ======  WEB MVC Mapping ======= -->
-	<!-- =============================== -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
-		<property name="interceptors">
-			<list><ref bean="loginCheckInterceptor"/></list>
-		</property>
-	</bean>
-	
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/"/>
-		<property name="suffix" value=".jsp"/>
-	</bean>
-
-	<!-- multipart resolver -->
-	<bean id="multipartResolver" class="com.setvect.common.http.MultiFileCommonsMultipartResolver">
-		<property name="maxUploadSize">
-			<value>1000000</value>
-		</property>
-	</bean>
-
-
 </beans>

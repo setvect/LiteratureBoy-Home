@@ -32,6 +32,7 @@ import com.setvect.common.util.FileUtil;
 import com.setvect.common.util.GenericPage;
 import com.setvect.common.util.StringEncrypt;
 import com.setvect.common.util.StringUtilAd;
+import com.setvect.literatureboy.ProjectConstant;
 import com.setvect.literatureboy.boot.ApplicationException;
 import com.setvect.literatureboy.service.board.BoardArticleSearch;
 import com.setvect.literatureboy.service.board.BoardService;
@@ -398,7 +399,7 @@ public class BoardArticleController {
 	 */
 	private void saveAttachFile(HttpServletRequest request, BoardArticle article) throws IOException,
 			FileNotFoundException {
-		String destDir = request.getSession().getServletContext().getRealPath(BoardService.SAVE_PATH);
+		String destDir = request.getSession().getServletContext().getRealPath(ProjectConstant.SAVE_PATH);
 
 		File saveDir = new File(destDir, article.getBoardCode());
 		if (!saveDir.exists()) {

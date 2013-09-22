@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.setvect.common.util.GenericPage;
-import com.setvect.literatureboy.config.EnvirmentProperty;
 import com.setvect.literatureboy.db.BoardDao;
 import com.setvect.literatureboy.vo.board.Board;
 import com.setvect.literatureboy.vo.board.BoardArticle;
@@ -19,9 +18,6 @@ import com.setvect.literatureboy.vo.board.BoardTrackback;
  */
 @Service("BoardService")
 public class BoardService {
-	/** 웹 루트를 기준으로 저장 경로 */
-	public static final String SAVE_PATH = EnvirmentProperty
-			.getString("com.setvect.literatureboy.board.file_upload_dir");
 
 	@Autowired
 	private BoardDao boardDao;
@@ -223,16 +219,20 @@ public class BoardService {
 	}
 
 	/**
-	 * 트래백 등록  
-	 * @param trackback 트래백 정보  
+	 * 트래백 등록
+	 * 
+	 * @param trackback
+	 *            트래백 정보
 	 */
 	public void createTrackback(BoardTrackback trackback) {
 		boardDao.createTrackback(trackback);
 	}
-	
+
 	/**
-	 * 트래백 삭제 
-	 * @param seq 트래백 번호 
+	 * 트래백 삭제
+	 * 
+	 * @param seq
+	 *            트래백 번호
 	 */
 	public void removeTrackback(int seq) {
 		boardDao.removeTrackback(seq);
