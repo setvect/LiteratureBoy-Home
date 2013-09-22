@@ -4,7 +4,7 @@
   <groupId>setvect</groupId>
   <artifactId>literatureboy</artifactId>
   <packaging>war</packaging>
-  <version>1.6-SNAPSHOT(s)</version>
+  <version>1.7-SNAPSHOT(l)</version>
   <name>literatureboy Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <build>
