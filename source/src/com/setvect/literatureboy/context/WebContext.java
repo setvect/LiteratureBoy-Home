@@ -22,7 +22,7 @@ import com.setvect.literatureboy.web.SessionCheckInterceptor;
 import com.setvect.literatureboy.web.board.BoardTrackbackController;
 
 @Configuration
-@ImportResource({ "classpath:/config/applicationWeb.xml" })
+@ImportResource({ "classpath:/config/applicationDwr.xml" })
 @ComponentScan(basePackages = "com.setvect.literatureboy.web", useDefaultFilters = false, includeFilters = @Filter(type = ANNOTATION, value = Controller.class), excludeFilters = @Filter(type = ANNOTATION, value = Service.class))
 public class WebContext {
 	@Autowired
