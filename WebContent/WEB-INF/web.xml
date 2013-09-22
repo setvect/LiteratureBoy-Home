@@ -56,7 +56,15 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:/config/applicationDwr.xml</param-value>
-		</init-param>		
+		</init-param>
+		<init-param>
+			<param-name>contextClass</param-name>
+	 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>com.setvect.literatureboy.context.WebContext</param-value>
+		</init-param>
 	</servlet>	
 	
 	<servlet>
