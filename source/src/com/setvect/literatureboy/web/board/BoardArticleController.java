@@ -386,6 +386,9 @@ public class BoardArticleController {
 			article.setContent(StringEncrypt.encodeJ(article.getContent(), encode));
 			article.setEncodeF(true);
 		}
+		else{
+			article.setEncodeF(false);
+		}
 	}
 
 	/**
