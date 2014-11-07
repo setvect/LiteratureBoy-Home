@@ -152,4 +152,14 @@ public class LapTimeChecker {
 		this.totalCount = totalCount;
 	}
 
+	/**
+	 * * 현재 진행 시간 대비 전체 카운트를 계산하여 총 예상 시간을 구함
+	 * 
+	 * @return the totalCount
+	 */
+	public int getTotalCount(){
+		return totalCount;
+	}
+	
+
 }
