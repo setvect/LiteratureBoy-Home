@@ -151,6 +151,28 @@
 			<query>ALTER TABLE TBBE_BOARD_TRACKBACK ADD FOREIGN KEY (ARTICLE_SEQ) REFERENCES TBBB_BOARD_ARTICLE(ARTICLE_SEQ)</query>
 		</defaultValue>		
 	</table>
+	
+	<table name="TBCA_CTMEMO">
+		<creation>
+			CREATE TABLE TBCA_CTMEMO (
+					CTMEMO_SEQ				int NOT NULL,
+					CONTENT	      varchar(4000) NOT NULL,
+					FONT_CSS    	varchar(20) NOT NULL,
+					BG_CSS      	varchar(20) NOT NULL,
+					Z_INDEX       int NOT NULL,
+					WIDTH         int NOT NULL,
+					HEIGHT        int NOT NULL,
+					POSITION_X    int NOT NULL,
+					POSITION_Y    int NOT NULL,
+					UPT_DATE      datetime NOT NULL,
+					REG_DATE      datetime NOT NULL,
+					DELETE_F      varchar(1) NOT NULL,
+			  PRIMARY KEY  (CTMEMO_SEQ)
+			)		
+		</creation>
+		<defaultValue>
+		</defaultValue>		
+	</table>	
 
 	<table name="TBGA_COMMENT">
 		<creation>

@@ -27,6 +27,7 @@ import com.setvect.literatureboy.vo.board.BoardArticle;
 import com.setvect.literatureboy.vo.board.BoardAttachFile;
 import com.setvect.literatureboy.vo.board.BoardComment;
 import com.setvect.literatureboy.vo.board.BoardTrackback;
+import com.setvect.literatureboy.vo.ctmemo.CtmemoVo;
 import com.setvect.literatureboy.vo.user.Auth;
 import com.setvect.literatureboy.vo.user.AuthMap;
 import com.setvect.literatureboy.vo.user.AuthMapKey;
@@ -80,7 +81,7 @@ public class AppContext {
 
 		@SuppressWarnings("rawtypes")
 		Class[] vo = new Class[] { Comment.class, Memo.class, Board.class, BoardArticle.class, BoardAttachFile.class,
-				BoardComment.class, BoardTrackback.class, Auth.class, AuthMap.class, AuthMapKey.class, User.class };
+				BoardComment.class, BoardTrackback.class, Auth.class, AuthMap.class, AuthMapKey.class, User.class, CtmemoVo.class };
 
 		sessionFactory.setAnnotatedClasses(vo);
 
