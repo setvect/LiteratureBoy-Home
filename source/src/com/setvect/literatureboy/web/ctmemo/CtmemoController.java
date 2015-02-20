@@ -37,7 +37,7 @@ public class CtmemoController {
 		return "/app/ctmemo/mobile";
 	}
 
-	@RequestMapping(value = "/ctmemo/listAllCtmemo.json")
+	@RequestMapping(value = "/ctmemo/listAllCtmemo.do")
 	@ResponseBody
 	public List<CtmemoVo> listAllCtmemo() {
 		// init();
@@ -45,7 +45,7 @@ public class CtmemoController {
 		return result;
 	}
 
-	@RequestMapping("/ctmemo/newMemo.json")
+	@RequestMapping("/ctmemo/newMemo.do")
 	@ResponseBody
 	public CtmemoVo newMemo() {
 		return ctmemoService.newMemo();
@@ -78,11 +78,11 @@ public class CtmemoController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/ctmemo/undelete.json")
+	@RequestMapping("/ctmemo/undelete.do")
 	@ResponseBody
 	public CtmemoVo undelete(ServletRequest request) {
-		int ctmemoSeq = Integer.parseInt(request.getParameter("ctmemoSeq"));
-		CtmemoVo memo = ctmemoService.undeleteCtmemo(ctmemoSeq);
+		int seq = Integer.parseInt(request.getParameter("ctmemoSeq"));
+		CtmemoVo memo = ctmemoService.undeleteCtmemo(seq);
 		return memo;
 	}
 
@@ -92,7 +92,7 @@ public class CtmemoController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/ctmemo/listUsagestyle.json")
+	@RequestMapping("/ctmemo/listUsagestyle.do")
 	@ResponseBody
 	public Map<String, List<String>> listUsagestyle() {
 		Map<String, List<String>> m = new HashMap<String, List<String>>();

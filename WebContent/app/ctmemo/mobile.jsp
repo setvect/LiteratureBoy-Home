@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>작업.</title>
+<title>복슬 메모장</title>
 <link rel="stylesheet" href="/common/css/jquery.mobile-1.4.5.css">
 <link rel="stylesheet" href="/common/css/theme-classic.css">
 
@@ -66,7 +66,7 @@
 		
 		// 전체 메모장을 불러온다.
 		this.loadAllMemo = function(){
-			$.get(instance.contextRoot + "/ctmemo/listAllCtmemo.json", function(memoList) {
+			$.get(instance.contextRoot + "/ctmemo/listAllCtmemo.do", function(memoList) {
 				$("._list").html("");
 				$.each(memoList, function() {
 					instance.memoMap[this.ctmemoSeq] = this;
@@ -108,7 +108,7 @@
 
 		// 새로운 메모를 생성한다.
 		this.newMemo = function(){
-			$.get(instance.contextRoot + "/ctmemo/newMemo.json", function(memo) {
+			$.get(instance.contextRoot + "/ctmemo/newMemo.do", function(memo) {
 				instance.memoMap[memo.ctmemoSeq] = memo;
 				instance.currentMemoSeq = memo.ctmemoSeq;
 				instance.editMemo();
@@ -145,7 +145,7 @@
 		// 마지막 삭제 취소
 		this.undeleteMemo = function(){
 			var seq = instance.deleteQueue.pop();
-			$.post(instance.contextRoot + "/ctmemo/undelete.json", {ctmemoSeq: seq}, function( memo ) {
+			$.post(instance.contextRoot + "/ctmemo/undelete.do", {ctmemoSeq: seq}, function( memo ) {
 				instance.loadAllMemo();
 				instance.undeleteDisplay();
 			});	
@@ -171,7 +171,7 @@
 </script>
 </head>
 <body>
-	<div data-role="page" data-title="작업."	data-url="panel-fixed-page1" id="list_page" data-theme="b">
+	<div data-role="page" data-title="복슬 메모장" data-url="panel-fixed-page1" id="list_page" data-theme="b">
 		<div data-role="header" data-position="fixed">
 			<h1>메모목록</h1>
 			<a href="#add-form" data-icon="plus" data-iconpos="notext" class="_new">Add</a>
