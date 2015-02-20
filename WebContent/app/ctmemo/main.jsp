@@ -64,7 +64,7 @@
 				instance.applyPalette(this);
 			});		
 			
-			$.get(instance.contextRoot + "/listUsagestyle.json", function(styleList) {
+			$.get(instance.contextRoot + "/ctmemo/listUsagestyle.json", function(styleList) {
 				instance.styleListAll = styleList;
 				instance.loadPalette(styleList);
 			});
@@ -99,7 +99,7 @@
 		
 		// 새로운 메모를 생성한다.
 		this.newMemo = function(){
-			$.get(instance.contextRoot + "/newMemo.json", function(memo) {
+			$.get(instance.contextRoot + "/ctmemo/newMemo.json", function(memo) {
 				instance.displayMemo(memo);
 				var newElement = $("._item[data-ctmemo_seq='"+memo.ctmemoSeq+"']")
 				instance.editMemo(newElement);
@@ -108,7 +108,7 @@
 
 		// 전체 메모장을 불러온다.
 		this.loadAllMemo = function(){
-			$.get(instance.contextRoot + "/listAllCtmemo.json", function(memoList) {
+			$.get(instance.contextRoot + "/ctmemo/listAllCtmemo.json", function(memoList) {
 				$.each(memoList, function() {
 					instance.displayMemo(this);
 				});
@@ -170,7 +170,7 @@
 			data["fontCss"] = element.attr("data-font_css");
 			data["regDate"] = element.attr("data-reg_date");
 			
-			$.post(instance.contextRoot + "/saveMemo.do", data, function( zIndex ) {
+			$.post(instance.contextRoot + "/ctmemo/saveMemo.do", data, function( zIndex ) {
 				element.css("z-index", zIndex)
 			});
 		}
@@ -211,7 +211,7 @@
 		// 메모 삭제
 		this.deleteMemo = function(deleteElement){
 			var seq = deleteElement.attr("data-ctmemo_seq");
-			$.post(instance.contextRoot + "/deleteMemo.do", {ctmemoSeq: seq}, function( data ) {
+			$.post(instance.contextRoot + "/ctmemo/deleteMemo.do", {ctmemoSeq: seq}, function( data ) {
 				instance.deleteQueue.push(seq);
 				deleteElement.remove();
 				instance.undeleteDisplay();
@@ -257,7 +257,7 @@
 		// 마지막 삭제 취소
 		this.undeleteMemo = function(){
 			var seq = instance.deleteQueue.pop();
-			$.post(instance.contextRoot + "/undelete.json", {ctmemoSeq: seq}, function( memo ) {
+			$.post(instance.contextRoot + "/ctmemo/undelete.json", {ctmemoSeq: seq}, function( memo ) {
 				instance.displayMemo(memo);
 				instance.undeleteDisplay();
 			});	

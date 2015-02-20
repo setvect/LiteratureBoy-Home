@@ -31,5 +31,9 @@
 		</dwr:remote>
 	</bean>
 	<mvc:annotation-driven/>
+	
+	<mvc:interceptors>
+		<bean class="com.setvect.literatureboy.web.SessionCheckInterceptor"/>
+	</mvc:interceptors>	
 
 </beans>

@@ -45,13 +45,13 @@ public class CtmemoService {
 	 */
 	public CtmemoVo newMemo() {
 		CtmemoVo ctmemo = new CtmemoVo();
-		ctmemo.setContent(" ");
+		ctmemo.setContent("");
 		ctmemo.setBgCss(CtmemoConstant.Style.BGSTYLE_1);
 		ctmemo.setFontCss(CtmemoConstant.Style.FONTSTYLE_1);
 		ctmemo.setWidth(150);
 		ctmemo.setHeight(150);
-		ctmemo.setPositionX(1);
-		ctmemo.setPositionY(1);
+		ctmemo.setPositionX(30);
+		ctmemo.setPositionY(30);
 		ctmemo.setzIndex(getMaxZindex());
 		Date date = new Date();
 		ctmemo.setRegDate(date);
